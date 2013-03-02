@@ -1,0 +1,23 @@
+Root node of each tree is always a dac~
+
+Connections are created moving 'up' the patch from sink (dac~) to source (adc~ or sfplay~). Therefore, on patch creation, 
+we first connect an object to a dac~, then for every inlet that object has we create a new object to connect to it. When the 
+tree depth is large enough, we may force only terminals (audio sources) to be used to connect to objects.
+
+Connections are made between a patch's root and it's children nodes. Therefore, a patch's connection list provides
+information containing each connection made from one of the patch's children to its root including the child's outlet
+number, the root's inlet number, and the type of connection. During GA ops, it is important for syntactic correctness that
+we are able to get a patch's output types and its input types (so we know where we can cross or what restraints there are on 
+mutation). To get a patch's output types, one only need to ask every child what its root's output type is (since we only
+allow one output type). To get a patch's input types, we need to ask every child what its possible root input types are (the
+difference here being that each inlet may accept multiple types and all should be considered). The 'actual' connection types
+are not important because once a connection is severed in a patch it may be the case that a different connection type will
+replace it.
+
+----------
+Currently it is possible to mutate and simply swap the same object as we do not check what 'was' there before connection was cut. 
+For everything but sfplay, this will result in something different since loadmess will get a new argument.
+
+----------
+Where I am:
+I'm not sure the create patch is updating the broken subpatch correctly, nor am I sure the best way to update the full patch.
