@@ -3,6 +3,8 @@ import numpy as np
 import rpy2.robjects.numpy2ri
 from rpy2.robjects.packages import importr
 
+rpy2.robjects.numpy2ri.activate()
+
 # Set up our R namespaces
 R = rpy2.robjects.r
 DTW = importr('dtw')
