@@ -21,3 +21,7 @@ For everything but sfplay, this will result in something different since loadmes
 ----------
 Where I am:
 I'm not sure the create patch is updating the broken subpatch correctly, nor am I sure the best way to update the full patch.
+
+TODO: 
+1. update create patch to handle full, grow, and ramped half and half
+2. determine how dynamic tree depth limits are actually increased over time
