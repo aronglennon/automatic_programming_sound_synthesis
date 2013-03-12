@@ -41,7 +41,7 @@ def split_selected_into_cross_and_mutation(selected, cross_prob, mut_prob):
 
 def create_next_generation(crossover_patches, mutation_patches, max_num_levels, all_objects):
     print 'create next gen'
-    mutation_patches = mutate(mutation_patches, max_num_levels, all_objects)
+    mutation_patches = subtree_mutate(mutation_patches, max_num_levels, all_objects)
     crossover_patches = crossover(crossover_patches, max_num_levels, all_objects)
     next_generation = []
     for m in mutation_patches:
@@ -50,7 +50,7 @@ def create_next_generation(crossover_patches, mutation_patches, max_num_levels, 
         next_generation.append(copy.deepcopy(c))
     return next_generation
 
-def mutate(patches, max_num_levels, objects):
+def subtree_mutate(patches, max_num_levels, objects):
     print 'mutating patches'
     for i in range(0, len(patches)):
         numConnections = get_num_connections(patches[i])
@@ -60,7 +60,97 @@ def mutate(patches, max_num_levels, objects):
         [dummy_connections, cut_patch, inlet_index, depth, dummy_count_reduction] = cut_subpatch_at_location(patches[i], cut_location) 
         # create sub patch randomly (look at create patch under max_patch) and attach to child in place
         cut_patch = create_patch(max_num_levels, objects, cut_patch, depth, [inlet_index])
-    # return mutated patches
+    # return subtree_mutated patches
+    return patches
+
+# find the node at node_location and return its inlet and outlet connection types (both types and number) in lists
+def get_node_connection_types(patch, node_location):
+    child_index = 0
+    for c in patch.connections:
+        # returns inlets and outlets only if they've been found...otherwise, simply updates the connection num so we can track the node_location
+        [inlets, outlets, current_connection_num] = get_subpatch_at_connection(patch.children[child_index],desired_connection_num,current_connection_num)
+        # check to see if we've already found inlets/outlets and now just need to bubble up - note that inlets may be empty if we are changing a terminal
+        if outlets != []:
+            return inlets, outlets, current_connection_num
+        # if we get to the appropriate connection number, return the (sub)patch we want
+        if current_connection_num == desired_connection_num:
+            # the subpatch that we've found's root is the node we want to replace...it's connections refer to inlets and this connection to its outlet connection
+            outlets = c.type
+            node = patch.children[child_index]
+            inlets = []
+            for nc in node.connections:
+                inlets.extend(nc.type)
+            return inlets, outlets, current_connection_num
+        # otherwise, increment the current_connection_num as we have just passed over another connection
+        else:
+            current_connection_num += 1
+        child_index += 1
+    return [], [], current_connection_num
+
+# return list of objects that could take the appropriate inlet connections and provide appropriate output
+# that is not not_object
+def get_objects_with_interface(objects, inlets, outlets, not_object = []):
+    objects_with_interface = []
+    for o in objects:
+        # don't include not_object
+        if o == not_object:
+            continue
+        # check to make sure the object has the appropriate number of inlets and outlets
+        if len(o.outlets) == len(outlets) and len(o.inlets) == len(inlets):
+            # step through outlets and make sure the types are equivalent
+            passed_test = True
+            for i in range(0, len(outlets)-1):
+                if o.outlets[i] != outlets[i]:
+                    passed_test = False
+            if passed_test:
+                # step through inlets and make sure each inlet in inlets can be represented in o.inlets
+                for i in range(0, len(inlets) - 1):
+                    if inlets[i] not in o.inlets[i].inletTypes:
+                        passed_test = false
+            # if we've passed all tests it means this object has the same # of ins and outs as passed in interface, the outlet types are consistent with interface, and the inlets can
+            # be involved in the connections specified by the interface.
+            if passed_test:
+                objects_with_interface.exnted(o)
+    return objects_with_interface
+
+# swap the node in patch at node_location with the object having
+def swap_node(patch, node_location, object):
+    print 'needs to be implemented'
+
+def point_mutate(patches, objects):
+    # TODO: swap a random node for another with the same type and number of inlets...if one doesn't exist, select another random node
+    for i in range(0, len(patches)):
+        numConnections = get_num_connections(patches[i])
+        # find node location that is not the dac connecton (which is the LAST connection when going through cut_subpatch_at_location
+        node_location = random.randint(0,numConnections-2)
+        nodes_tried = [node_location]
+        # determine signature of patch at node_location
+        [object_chosen, inlets, outlets] = get_node_connection_types(patches[i], node_location)
+        # determine if other nodes exist with that interface
+        objects_with_interface = get_objects_with_interface(objects, inlets, outlets, object_chosen)
+        # if there is at least 2 nodes with this interface, there is at least one node to swap with, otherwise, find new node
+        while len(objects_with_interface) <= 1 and len(nodes_tried) != patches[i].count:
+            node_location = random.randint(0,numConnections-2)
+            # keep trying until we get a node we haven't tried yet
+            while node_location in nodes_tried:
+                node_location = random.randint(0,numConnections-2)
+            nodes_tried.extend(node_location)
+            # determine signature of patch at node_location
+            [object_chosen, inlets, outlets] = get_node_connection_types(patches[i], node_location)
+            # determine if other nodes exist with that interface
+            objects_with_interface = get_objects_with_interface(objects, inlets, outlets, object_chosen)
+        if len(objects_with_interface) > 1:
+            object_num = random.randint(0,len(objects_with_interface)-2)
+            swap_node(patches[i], node_location, objects_with_interface[object_num])
+        # this means we couldn't find a node to swap
+        else:
+            print 'couldn\'t find node to swap...just passing through'
+    # return point mutated patches
+    return patches
+
+# this is currently a simple pass through method, but there are instances where this could be implemented with some structure and therefore a placeholder is here for that reason.
+# Either way it models an actual no-op which is conceptually useful for now.
+def recombination(patches):
     return patches
 
 # count the number of connections you pass while traversing the tree and output the result
@@ -107,72 +197,6 @@ def cut_subpatch_at_location(patch, cut_location, depth = 1, connections = 0):
     # if we don't find cut_location, keep moving along, but decrease depth by 1 since we are popping out a recursive cal
     return connections, cut_patch, 0, depth - 1, 0
 
-'''
-// make cut, delete everything below it to free memory, and add new object at cut...return the address of this 'patch'
-// which is what we pass in to create patch...
-MaxPatch* makeCut(MaxPatch& patch, int cutLocation, vector<MaxObject>& objectVector, 
-                  vector< vector<MaxObject> >& outputObjectVectors,
-                  vector<MaxObject>& terminals)
-{
-    // search for cut and return patch below cut to cutBelow
-    MaxPatch* cutBelow;
-    int inlet, count(0);
-    // find cut location and put patch in 'cutBelow' and inlet in 'inlet'
-    findCut(patch, cutBelow, inlet, cutLocation, count, false);
-    
-    // delete appropriate patch by releasing all memory on heap.
-    // erase called the destructor, which takes care of this.
-    cutBelow->objects.erase(cutBelow->objects.begin() + inlet);
-    // erase connection (no memory on heap, so this is simple)
-    cutBelow->connections.erase(cutBelow->connections.begin() + inlet);
-        
-    // add patch with no children to cut location
-    MaxPatch* cutReplace = new MaxPatch;
-    // create connection to this patch
-    MaxConnection connect;    
-    connect.inlet = inlet;
-    connect.outlet = 0;
-    // select a random root for this new patch
-    cutReplace->root = getRandomObjectWithConnection(objectVector, cutBelow->root->typeOfInputConnections[inlet], connect.outlet, connect.type);
-    // if it is a loadmess give it an argument
-    if (cutReplace->root->name == "loadmess")
-    {
-        cutReplace->attachRandomArgument(cutBelow->root->typeOfInputConnections[inlet].inletLowVal, cutBelow->root->typeOfInputConnections[inlet].inletHighVal);
-    }
-    
-    // add our new patch to where the cut was made from our original patch to mutate
-    cutBelow->objects.push_back(cutReplace);
-    cutReplace->parent = cutBelow;
-    cutBelow->connections.push_back(connect);
-    return cutReplace;
-}
-
-// find the cut specified by cutLocation - save as findCutWithType, but now we increase count no matter what
-// the connection is - recursive
-void findCut(MaxPatch& patch, MaxPatch*& cutBelow, int& inlet, int cutLocation, int& count, bool done)
-{
-    // done is used as end condition in recursion to do nothing when popping out of recursion
-    if (!done) 
-    {
-        // for every connection to the root
-        for (int i = 0; i < patch.objects.size(); i++) 
-        {
-            // increment count by 1
-            count++;
-            // when we get to the desired cut location, place the inlet involved in 'inlet' and
-            // the address of the patch below into 'cutBelow'
-            if (count == cutLocation)
-            {
-                inlet = i;
-                cutBelow = &patch;
-                done = true;
-            }
-            // if we haven't gotten to the cutLocation yet, dig deeper to find it using recursion
-            findCut(*(patch.objects[i]), cutBelow, inlet, cutLocation, count, done);
-        }
-    }
-}
-'''    
 def crossover(patches, max_num_levels, objects):
     print 'crossover patches'
     # transfer patches from crossover_patches into already_used and when complete, transfer all of these back to crossover_patches

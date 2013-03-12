@@ -42,7 +42,7 @@ class MaxPatch():
         
         
 
-def create_patch_from_scratch(maxBranchLength, objectsToUse):
+def create_patch_from_scratch(maxBranchLength, objectsToUse, type = "full"):
     currentDepth = 0
     count = 0
     objects = objectsToUse
@@ -50,12 +50,12 @@ def create_patch_from_scratch(maxBranchLength, objectsToUse):
     currentDepth += 1
     count += 1
     dacPatch = MaxPatch(objects[0], None, [], [], currentDepth, count, 0.0)
-    return create_patch(maxBranchLength, objects, dacPatch, dacPatch.depth)
+    return create_patch(maxBranchLength, objects, dacPatch, dacPatch.depth, type)
 
 # used recursively to generate subpatches of size 1 and build from there
 # note: cut inlets may be provided if a partial patch is sent in and only some inlets need to be filled out.
 # an empty list for cut_inlets means this patch is 'pure' and therefore all inlets need to be treated.
-def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, cut_inlets = []):
+def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, cut_inlets = [], type = "full"):
     # if the patch's root has no inlets (i.e. is a terminal), we can't add on
     if patch.root.isTerminal:
         return

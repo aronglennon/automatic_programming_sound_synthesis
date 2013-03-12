@@ -122,7 +122,7 @@ class mysql_object():
     '''
     def lookup_parameter_set(self,parameter_id):
         if self.connected:
-            statement = "SELECT * FROM parameter WHERE id = %d" % parameter_id
+            statement = "SELECT * FROM parameters WHERE parameter_set_id = %d" % parameter_id
             values = self.query(statement)
             return values
         else:

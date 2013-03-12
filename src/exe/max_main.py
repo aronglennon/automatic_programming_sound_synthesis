@@ -21,21 +21,26 @@ OBJ_LIST_FILE = '/etc/max/object_list.txt'
 SAMP_MFCC_FILE = '/var/data/max/output.wav'
 TARG_MFCC_FILE = '/var/data/max/results_target.wav'
 NUM_GENERATIONS = 100
-CROSSOVER_PROB = 0.8
-MUTATION_PROB = 1.0 - CROSSOVER_PROB
-NUM_PATCHES = 10
-MAX_NUM_LEVELS = 5
+
+POPULATION_SIZE = 10    # population size
+INIT_MAX_TREE_DEPTH = 5 # init limit on any one individuals depth
+INIT_RESOURCE_LIMITATION = 500 # init number of nodes + terminals in population allowed (if RLGP used)
 
 def main():
     # get all options
     parser = OptionParser()
     parser.add_option("--similarity", action="store", dest="similarity", help="The similarity method to use")
     parser.add_option("--features", action="store", dest="features", help="The features to use")
+    parser.add_option("--init_type", action="store", dest="init_type", help="The initialization type to use - full, grow, or rhh", default="full")
+    parser.add_option("--tree_depth_type", action="store", dest="tree_depth_type", help="The type of tree depth limitation - static or dynamic")
+    parser.add_option("--resource_limitation_type", action="store", dest="resource_limitation_type", help="The type of overall resource limitation used - none, static, dynamic")
+    # NOTE: this must be specified so we can determine what genops to use and their probs
+    parser.add_option("--genops", action="store", dest="genops", help="string of concatenated gen ops used with probabilities following them")
     
     (options, args) = parser.parse_args()
     # file containing state information during run
     run_start = datetime.utcnow()
-    CURRENT_STATE_FILE = '/var/data/max/state-s-%s-f-%s-r-%s' % (options.similarity, options.features, run_start.strftime("%Y%m%d"))
+    CURRENT_STATE_FILE = '/var/data/max/state-r-%s' % (run_start.strftime("%Y%m%d"))
     # file containing all objects to be used
     object_list_file = open(OBJ_LIST_FILE, 'r')
     # file containing mfccs of audio output from target
@@ -53,8 +58,15 @@ def main():
     # create initial population of max objects
     population = []
     current_state = {}
-    for i in range (0, NUM_PATCHES):
-        auto_gen_patch = create_patch_from_scratch(MAX_NUM_LEVELS, all_objects)
+    current_state['similarity'] = options.similarity
+    current_state['features'] = options.features
+    current_state['initialization type'] = options.init_type
+    current_state['genops'] = options.genops
+    current_state['tree depth type'] = options.tree_depth_type
+    current_state['resource limitation type'] = options.resource_limitation_type
+    max_tree_depth = INIT_MAX_TREE_DEPTH
+    for i in range (0, POPULATION_SIZE):
+        auto_gen_patch = create_patch_from_scratch(max_tree_depth, all_objects, options.init_type)
         #auto_gen_patch.pretty_print()
         population.append(auto_gen_patch)
     # get features for target file - NOTE: should be 2D numpy array
@@ -62,6 +74,7 @@ def main():
     target_features_file.close()
     # --- MAIN LOOP ---
     for i in range(0, NUM_GENERATIONS):
+        max_tree_depth = get_max_tree_depth(INIT_MAX_TREE_DEPTH, NUM_GENERATIONS, options.tree_depth_type)
         for j in range(0, len(population)):
             this_patch = population[j]
             # populate this_patch.data with features from specified file
@@ -69,7 +82,7 @@ def main():
             this_patch.fitness = get_similarity(target_features,this_patch.data, options.similarity)
             # if nan, create new random patch, calculate fitness, if not nan, use to  replace
             while (np.isnan(this_patch.fitness)):
-                auto_gen_patch = create_patch_from_scratch(MAX_NUM_LEVELS, all_objects)
+                auto_gen_patch = create_patch_from_scratch(max_tree_depth, all_objects)
                 auto_gen_patch.start_max_processing(SAMP_MFCC_FILE,options.features)
                 auto_gen_patch.fitness = get_similarity(target_features,auto_gen_patch.data, options.similarity)
                 loc = population.index(this_patch)
@@ -98,13 +111,20 @@ def main():
         # (fills crossover and mutation vectors from selected vector)
         [crossover, mutation] = split_selected_into_cross_and_mutation(selected, CROSSOVER_PROB, MUTATION_PROB)           
         # create next generation of patches and place them in allPatches
-        population = create_next_generation(crossover, mutation, MAX_NUM_LEVELS, all_objects)
+        population = create_next_generation(crossover, mutation, max_tree_depth, all_objects)
     # save off best of run
 
 def store_state(current_state, state_filename):
     state_file = open(state_filename, 'w')
     pickle.dump(current_state,state_file)
     state_file.close()
+
+# resource limitations methods
+def get_max_tree_depth(init_depth, num_generations, type):
+    if type == "static":
+        return init_depth
+    elif type == "dynamic":
+        return (int(num_generations / 10) + init_depth)
 
 if __name__ == "__main__":
     main() 
