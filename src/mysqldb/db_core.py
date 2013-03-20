@@ -7,7 +7,7 @@ if platform.python_implementation()=='CPython':
 else:
     import numpypy as np
 import datetime
-from config import Config 
+from db_config import Config 
 
 def getDBname():
     cfghost = Config.dbinfo().copy()['host']

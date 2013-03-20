@@ -7,8 +7,7 @@ DEFAULT_DATABASE = 'localhost'
 
 class Config():   
     def __init__(self):
-        self.dblist = 
-        {
+        self.dblist = {
          'localhost' : 
                 {
                 'host'                  : 'localhost',

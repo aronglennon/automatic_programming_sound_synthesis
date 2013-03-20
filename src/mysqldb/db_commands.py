@@ -10,9 +10,9 @@ else:
     import numpypy as np
 import datetime, time
 from datetime import timedelta
-from config import Config
+from mysqldb.db_config import Config
 from mysql.connector.errors import InterfaceError
-import general_db
+from mysqldb import db_core
 import sys
 import string
             
@@ -28,8 +28,8 @@ class mysql_connection_thread (threading.Thread):
         while count <= 64:
             try:
                 # create connection to host and post given
-                self.mysql_object.dbConnection = mysql.connector.Connect(**(self.mysql_object.config))
-                general_db.update(self.epgObject.dbConnection,"SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED")
+                self.mysql_object.dbConnection = mysql.connector.connect(**(self.mysql_object.config))
+                db_core.update(self.epgObject.dbConnection,"SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED")
                 # access test database instance
                 self.mysql_object.connected = True
                 break
@@ -39,8 +39,8 @@ class mysql_connection_thread (threading.Thread):
         while self.mysql_object.connected == False:
             try:
                 # create connection to host and post given
-                self.mysql_object.dbConnection = mysql.connector.Connect(**self.mysql_object.config)
-                general_db.update(self.mysql_object.dbConnection,"SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED")
+                self.mysql_object.dbConnection = mysql.connector.connect(**self.mysql_object.config)
+                db_core.update(self.mysql_object.dbConnection,"SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED")
                 # access test database instance
                 self.mysql_object.connected = True
                 break
@@ -74,8 +74,8 @@ class mysql_object():
                     while count <= 64:
                         try:
                             # create connection to host and post given
-                            self.dbConnection = mysql.connector.Connect(**self.config)
-                            general_db.update(self.dbConnection,"SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED")
+                            self.dbConnection = mysql.connector.connect(**self.config)
+                            db_core.update(self.dbConnection,"SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED")
                             # access test database instance
                             self.connected = True
                             break
@@ -85,8 +85,8 @@ class mysql_object():
                     while self.connected == False:
                         try:
                             # create connection to host and post given
-                            self.dbConnection = mysql.connector.Connect(**self.config)
-                            general_db.update(self.dbConnection,"SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED")
+                            self.dbConnection = mysql.connector.connect(**self.config)
+                            db_core.update(self.dbConnection,"SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED")
                             # access test database instance
                             self.connected = True
                             break
@@ -95,8 +95,8 @@ class mysql_object():
         else:
             try:
                 # create connection to host and post given
-                self.dbConnection = mysql.connector.Connect(**self.config)
-                general_db.update(self.dbConnection,"SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED")
+                self.dbConnection = mysql.connector.connect(**self.config)
+                db_core.update(self.dbConnection,"SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED")
                 # access test database instance
                 self.connected = True
                 return True
@@ -105,13 +105,13 @@ class mysql_object():
                     
     def query(self, statement):
         try:
-            values = general_db.select(self.dbConnection,statement)
+            values = db_core.select(self.dbConnection,statement)
         except Exception, e:
             self.__del__()
             self.connect()
             if self.connected:
                 try:
-                    values = general_db.select(self.dbConnection,statement)
+                    values = db_core.select(self.dbConnection,statement)
                 except:
                     self.__del__()
                     return []
