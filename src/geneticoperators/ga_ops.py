@@ -3,7 +3,7 @@ import copy
 from maxclasses.max_patch import create_patch
 import numpy as np
 
-def select_patches_by_fitness(patches):
+def select_patches_by_fitness(patches, selection_type):
     print 'return a set of selected patches based on fitness probability distribution'
     cum_sum = [patches[0].fitness]
     selected_patches = []
@@ -39,7 +39,10 @@ def split_selected_into_cross_and_mutation(selected, cross_prob, mut_prob):
         mut_patches.append(copy.deepcopy(selected[-1]))
     return [cross_patches, mut_patches]
 
-def create_next_generation(crossover_patches, mutation_patches, max_num_levels, all_objects):
+def create_next_generation(selected, gen_ops, max_num_levels, all_objects):
+    # put even # of vecs in crossover and rest in mutation based on respective probabilities for those operations
+    # (fills crossover and mutation vectors from selected vector)
+    [crossover_patches, mutation_patches] = split_selected_into_cross_and_mutation(selected, gen_ops[0][1], gen_ops[1][1])
     print 'create next gen'
     mutation_patches = subtree_mutate(mutation_patches, max_num_levels, all_objects)
     crossover_patches = crossover(crossover_patches, max_num_levels, all_objects)
