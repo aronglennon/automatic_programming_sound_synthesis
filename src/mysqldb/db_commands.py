@@ -127,6 +127,30 @@ class mysql_object():
             return values
         else:
             return []
+        
+    def new_test_run(self, time):
+        if self.connected:
+            statement = "INSERT INTO testrun (start_time) VALUES ('%s')" % time
+            values = db_core.insert(self.dbConnection, statement)
+            return values
+        else:
+            return []
+        
+    def close_test_run(self, testrun_id, run_end):
+        if self.connected:
+            statement = "UPDATE testrun SET end_time = '%s' WHERE id = %s" % (run_end, testrun_id)
+            values = db_core.update(self.dbConnection, statement)
+            return values
+        else:
+            return []
+        
+    def insert_test_data(self, testrun_id, generation_number, individual, fitness):
+        if self.connected:
+            statement = "INSERT INTO testdata (tetsrun_id, generation, individual, fitness) VALUES (%d, %d, '%s', %0.8f)" % (testrun_id, generation_number, individual, fitness)
+            values = db_core.insert(self.dbConnection, statement)
+            return values
+        else:
+            return []
     
 def main():
     usage = "usage: %prog"
