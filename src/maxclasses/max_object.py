@@ -9,10 +9,13 @@ class MaxObject():
         self.arguments = arguments
         self.isTerminal = isTerminal
         self.isRoot = isRoot
+    
     def selectRandomOutlet(self,connectionType):
         print ''
+    
     def selectInletsRandomType(self,inlet):
         print ''
+    
     def attach_random_argument(self,lowValue,highValue):
         rawRandom = random.random()
         self.arguments.append(rawRandom*(highValue-lowValue) + lowValue)

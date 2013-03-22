@@ -14,16 +14,20 @@ class MaxPatch():
         self.depth = depth
         self.count = count
         self.fitness = fitness    
-    def pretty_print(self):
+    
+    def patch_to_string(self):
+        string = ''
         if self.root.name == 'dac~':
-            print '|dac~'
+            string += '|dac~|'
         else:
-            print "%s->%s" % (self.parent.root.name, self.root.name)
+            string += "|%s->%s|" % (self.parent.root.name, self.root.name)
         for i in range(0,len(self.children)):
             if self.children[i] != []:
-                self.children[i].pretty_print()
+                string += self.children[i].patch_to_string()
             else:
-                print "%s->dangling connection" % (self.root.name)
+                string += "|%s->dangling connection|" % (self.root.name)
+        return string
+    
     def start_max_processing(self, filename,feature_type):
         # generate JS file
         fill_JS_file(self)
@@ -32,6 +36,7 @@ class MaxPatch():
         # clear file contents - no need for wave.open here since we are just clearing out
         sample_features_file = open(filename, 'w')
         sample_features_file.close()
+    
     def get_output(self, filename, feature_type):
         while os.path.getsize(filename) == 0:
             continue
