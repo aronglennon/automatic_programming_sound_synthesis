@@ -6,7 +6,7 @@ TOOD: MAX LOGGING??? CAN WE PRE-EMPTIVELY KNOW AUDIO ISN'T FLOWING IN MAX AND TR
 from maxclasses.max_patch import create_patch_from_scratch
 from maxclasses.max_object import get_max_objects_from_file
 from geneticoperators.fitness import change_fitness_to_probability
-from geneticoperators.ga_ops import *
+from geneticoperators.ga_ops import create_next_generation, select_patches_by_fitness
 from features.features_functions import get_features
 from similarity.similarity_calc import get_similarity
 from resource_limitations.resource_limitations import get_max_tree_depth
@@ -15,6 +15,7 @@ import wave
 from optparse import OptionParser
 import sys
 from datetime import datetime
+import numpy as np
 
 # TODO: turn into config params
 DEBUG = False
@@ -32,7 +33,7 @@ def main():
     parser = OptionParser()
     parser.add_option("--parameter_set", action="store", dest="parameter_set", help="The id of the parameter set to use")
     
-    (options, args) = parser.parse_args()
+    (options, []) = parser.parse_args()
     
     # create DB object to track/log results
     mysql_obj = mysql_object(sameThread = True)
@@ -92,7 +93,16 @@ def main():
     population = []
     max_tree_depth = INIT_MAX_TREE_DEPTH
     for i in range (0, POPULATION_SIZE):
-        auto_gen_patch = create_patch_from_scratch(max_tree_depth, all_objects, init_method)
+        if init_method == 'ramped_half_and_half':
+            if i % 2 == 0:
+                this_init = 'grow'
+            else:
+                this_init = 'full'
+            # the following keeps the average init tree depth the same, which likely maintains a similar initial resource allotment
+            this_max_tree_depth = int(max_tree_depth/2 + i*max_tree_depth/POPULATION_SIZE)
+            auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, this_init)
+        else:
+            auto_gen_patch = create_patch_from_scratch(max_tree_depth, all_objects, init_method)
         #print auto_gen_patch.patch_to_string()
         population.append(auto_gen_patch)
     # get features for target file - NOTE: should be 2D numpy array

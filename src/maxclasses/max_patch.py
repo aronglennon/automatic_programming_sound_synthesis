@@ -69,23 +69,32 @@ def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, cut_inlets 
             continue
         connectionOutlet = 0
         connectionInlet = i
-        # if we are about to reach the max length, make the root of the new subpatch patch a terminal
+        # if we are about to reach the max length, make the root of the new subpatch patch a terminal...no matter what method we use
         if maxBranchLength - currentDepth == 1:
             objectList = []
             for o in objectsToUse:
                 if o.isTerminal:
                     objectList.append(o)
             subpatchRoot = get_random_object_with_connection(objectList,patch.root.inlets[i].inletTypes)
-        # if the current root is a dac~, we must avoid the trivial situation by picking an object that is not a terminal
+        # if the current root is a dac~, we must avoid the trivial situation by picking an object that is not a terminal...no matter what method we use
         elif currentDepth == 1 and patch.root.name == 'dac~':
             objectList = []
             for o in objectsToUse:
                 if not o.isTerminal:
                     objectList.append(o)
             subpatchRoot = get_random_object_with_connection(objectList,patch.root.inlets[i].inletTypes)
-        # otherwise, select any object
+        # otherwise
         else:
-            subpatchRoot = get_random_object_with_connection(objectsToUse,patch.root.inlets[i].inletTypes)
+            # if we use the grow method, select any object
+            if type == "grow":
+                subpatchRoot = get_random_object_with_connection(objectsToUse,patch.root.inlets[i].inletTypes)
+            # if we use the full method and we are not at the max depth, pick a non-terminal
+            elif type == "full":
+                objectList = []
+                for o in objectsToUse:
+                    if not o.isTerminal:
+                        objectList.append(o)
+                subpatchRoot = get_random_object_with_connection(objectList,patch.root.inlets[i].inletTypes)
         # if the loadmess maxobj, generate a random argument
         if subpatchRoot.name == 'loadmess':
             subpatchRoot.attach_random_argument(patch.root.inlets[i].lowVal, patch.root.inlets[i].highVal)
