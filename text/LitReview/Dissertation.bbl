@@ -169,33 +169,6 @@ Aucouturier, J\BHBI J.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-Aucouturier%
-, Pachet%
-\BCBL{}\ \BBA{} Sandler%
-}{%
-Aucouturier%
-\ \protect\BOthers{.}}{%
-{\protect\APACyear{2005}}%
-}]{%
-Aucouturier:2005lh}%
-\APACinsertmetastar{%
-Aucouturier:2005lh}%
-Aucouturier, J\BHBI J.%
-, Pachet, F.%
-\BCBL{}\ \BBA{} Sandler, M.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2005}{}{}.
-\newblock
-\BBOQ{}\APACrefatitle{"The Way it Sounds": Timbre Models for Analysis and
-  Retrieval of Music Signals}{"the way it sounds": Timbre models for analysis
-  and retrieval of music signals}.\BBCQ{}
-\newblock
-\APACjournalVolNumPages{IEEE Transactions on Multimedia}{7}{6}{1-8}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
 Baumann%
 \ \BBA{} Halloran%
 }{%
@@ -461,33 +434,6 @@ Chafe, C.%
   u.s.a.}\BBCQ{}
 \newblock
 \APACjournalVolNumPages{Creativity and the Composer}{}{}{}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-Chowning%
-}{%
-Chowning%
-}{%
-{\protect\APACyear{2000}}%
-}]{%
-Chowning:2000ve}%
-\APACinsertmetastar{%
-Chowning:2000ve}%
-Chowning, J\BPBI M.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2000}{December}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Digital Sound Synthesis, Acoustics, and Perception: A
-  Rich Intersection}{Digital sound synthesis, acoustics, and perception: A rich
-  intersection}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{Proceedings of the COST G-6 Conference on Digital Audio
-  Effects (DAFX-00).}{Proceedings of the cost g-6 conference on digital audio
-  effects (dafx-00).}
-\newblock
-\APACaddressPublisher{Verona, Italy}{}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
@@ -2240,29 +2186,6 @@ Park, T\BPBI H.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-Parnas%
-}{%
-Parnas%
-}{%
-{\protect\APACyear{1985}}%
-}]{%
-Parnas:1985dp}%
-\APACinsertmetastar{%
-Parnas:1985dp}%
-Parnas, D\BPBI L.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{1985}{December}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Software Aspects of Strategic Defense Systems}{Software
-  aspects of strategic defense systems}.\BBCQ{}
-\newblock
-\APACjournalVolNumPages{Communications of the Association for Computing
-  Machinery}{28}{12}{1326-1335}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
 Paulus%
 \ \BBA{} Klapuri%
 }{%
@@ -3010,32 +2933,6 @@ Spector, L.%
 \BIn{} \APACrefbtitle{Proceedings of the IJCAI-95 Workshop on Artificial
   Intelligence and Music.}{Proceedings of the ijcai-95 workshop on artificial
   intelligence and music.}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-Spector%
-, Klein%
-\BCBL{}\ \BBA{} Harrington%
-}{%
-Spector%
-\ \protect\BOthers{.}}{%
-{\protect\APACyear{2005}}%
-}]{%
-Spector:2005zv}%
-\APACinsertmetastar{%
-Spector:2005zv}%
-Spector, L.%
-, Klein, J.%
-\BCBL{}\ \BBA{} Harrington, K.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2005}{May}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Selection Songs: Evolutionary Music
-  Computation}{Selection songs: Evolutionary music computation}.\BBCQ{}
-\newblock
-\APACjournalVolNumPages{YLEM Journal}{}{}{24-26}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%

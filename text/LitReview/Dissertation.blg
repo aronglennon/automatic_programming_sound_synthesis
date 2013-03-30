@@ -3,7 +3,7 @@ The top-level auxiliary file: Dissertation.aux
 The style file: apacite.bst
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
-Database file #1: mybib.bib
+Database file #1: mybib.bib.bib
 Reallocated field_info (elt_size=4) to 10016 items from 5000.
 apacite.bst [2009/03/01 v4.05 APA bibliography style]
 Warning--No publisher in Alcazar:1996la
@@ -18,7 +18,6 @@ Warning--No address in Baumann:2004qz
 Warning--No publisher in Bello:NoRead
 Warning--No address in Bello:NoRead
 Warning--No publisher in Bernardini:2001kc
-Warning--No publisher in Chowning:2000ve
 Warning--No address in Cook:NotRead
 Warning--No publisher in Costelloe:2007bv
 Warning--No publisher in Flexer:2005sw
@@ -113,45 +112,45 @@ Warning--No publisher in Zhang:2006jo
 Warning--No address in Zhang:2006jo
 Warning--No publisher in Zhu:2004mc
 Warning--No publisher in Zils:2001bd
-You've used 141 entries,
+You've used 137 entries,
             6361 wiz_defined-function locations,
-            1968 strings with 33586 characters,
-and the built_in function-call counts, 282881 in all, are:
-= -- 36745
-> -- 2139
-< -- 13498
-+ -- 13497
-- -- 285
-* -- 17560
-:= -- 50455
-add.period$ -- 701
-call.type$ -- 141
-change.case$ -- 890
+            1944 strings with 32968 characters,
+and the built_in function-call counts, 275334 in all, are:
+= -- 35819
+> -- 2081
+< -- 13116
++ -- 13126
+- -- 277
+* -- 17063
+:= -- 49051
+add.period$ -- 683
+call.type$ -- 137
+change.case$ -- 863
 chr.to.int$ -- 0
-cite$ -- 389
-duplicate$ -- 6892
-empty$ -- 10447
-format.name$ -- 3381
-if$ -- 54144
+cite$ -- 380
+duplicate$ -- 6697
+empty$ -- 10148
+format.name$ -- 3289
+if$ -- 52728
 int.to.chr$ -- 0
-int.to.str$ -- 286
+int.to.str$ -- 278
 missing$ -- 0
-newline$ -- 3365
-num.names$ -- 1132
-pop$ -- 6701
+newline$ -- 3271
+num.names$ -- 1100
+pop$ -- 6566
 preamble$ -- 1
-purify$ -- 680
+purify$ -- 658
 quote$ -- 0
-skip$ -- 18130
+skip$ -- 17651
 stack$ -- 0
-substring$ -- 14963
-swap$ -- 3754
-text.length$ -- 497
+substring$ -- 14559
+swap$ -- 3642
+text.length$ -- 483
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 16656
-warning$ -- 107
-while$ -- 1305
+type$ -- 16272
+warning$ -- 106
+while$ -- 1265
 width$ -- 0
-write$ -- 4139
-(There were 107 warnings)
+write$ -- 4023
+(There were 106 warnings)
