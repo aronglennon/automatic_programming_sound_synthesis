@@ -56,6 +56,14 @@
 \contentsline {figure}{\numberline {3.31}{\ignorespaces Point mutation with the root (i.e. dac\texttildelow {} below the terminals).}}{157}
 \contentsline {figure}{\numberline {3.32}{\ignorespaces Reproduction with the root (i.e. dac\texttildelow {} below the terminals).}}{158}
 \contentsline {figure}{\numberline {3.33}{\ignorespaces Delay Feedback AM Max Patch}}{161}
-\contentsline {figure}{\numberline {3.34}{\ignorespaces Adaptive Degrade Max Patch}}{162}
-\contentsline {figure}{\numberline {3.35}{\ignorespaces Clipping Reverb Sawtooth Max Patch}}{163}
-\contentsline {figure}{\numberline {3.36}{\ignorespaces Fitness-proportionate selection}}{171}
+\contentsline {figure}{\numberline {3.34}{\ignorespaces Delay Feedback AM Time-Frequency Representation}}{162}
+\contentsline {figure}{\numberline {3.35}{\ignorespaces Adaptive Downsampling Max Patch}}{163}
+\contentsline {figure}{\numberline {3.36}{\ignorespaces Adaptive Downsampling Time-Frequency Representation}}{164}
+\contentsline {figure}{\numberline {3.37}{\ignorespaces Clipping Reverb Sawtooth Max Patch}}{165}
+\contentsline {figure}{\numberline {3.38}{\ignorespaces Clipping Reverb Sawtooth Time-Frequency Representation}}{166}
+\contentsline {figure}{\numberline {3.39}{\ignorespaces Fitness-proportionate selection}}{173}
+\contentsline {figure}{\numberline {3.40}{\ignorespaces Adaptive Downsampling Time-Frequency Representation}}{184}
+\contentsline {figure}{\numberline {3.41}{\ignorespaces Adaptive Downsampling Time-Frequency Representation}}{185}
+\contentsline {figure}{\numberline {3.42}{\ignorespaces Adaptive Downsampling Time-Frequency Representation}}{186}
+\contentsline {figure}{\numberline {3.43}{\ignorespaces Adaptive Downsampling Time-Frequency Representation}}{187}
+\contentsline {figure}{\numberline {3.44}{\ignorespaces Adaptive Downsampling Time-Frequency Representation}}{188}

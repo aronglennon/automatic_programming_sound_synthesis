@@ -21,9 +21,9 @@
 \contentsline {subsubsection}{Timbre Similarity}{125}
 \contentsline {subsection}{\numberline {3.2.2}Genetic Operator Variations}{153}
 \contentsline {subsection}{\numberline {3.2.3}Target Sound Selection}{159}
-\contentsline {subsection}{\numberline {3.2.4}Limiting Code Bloat and Promoting Parsimony}{165}
-\contentsline {subsection}{\numberline {3.2.5}Initial Conditions and Selection Methods}{168}
-\contentsline {subsubsection}{Non-standard Selection Methods}{175}
-\contentsline {subsection}{\numberline {3.2.6}Expanding/Restricting the Searchable Region of Input Space}{179}
-\contentsline {subsection}{\numberline {3.2.7}Generalization}{181}
-\contentsline {chapter}{References}{183}
+\contentsline {subsection}{\numberline {3.2.4}Limiting Code Bloat and Promoting Parsimony}{167}
+\contentsline {subsection}{\numberline {3.2.5}Initial Conditions and Selection Methods}{170}
+\contentsline {subsubsection}{Non-standard Selection Methods}{177}
+\contentsline {subsection}{\numberline {3.2.6}Expanding/Restricting the Searchable Region of Input Space}{181}
+\contentsline {subsection}{\numberline {3.2.7}Generalization}{183}
+\contentsline {chapter}{References}{189}

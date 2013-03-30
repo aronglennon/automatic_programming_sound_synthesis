@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2007.5.18)  30 MAR 2013 14:07
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2007.5.18)  30 MAR 2013 18:08
 entering extended mode
 \write18 enabled.
  %&-line parsing enabled.
@@ -851,11 +851,19 @@ File: Reproduction.pdf Graphic file (type pdf)
 File: DelayFeedbackAM.pdf Graphic file (type pdf)
 
 <use DelayFeedbackAM.pdf>
-<AdaptiveDegrade.pdf, id=2101, 298.11375pt x 315.1775pt>
+<FeedbackDelayAMTarget.pdf, id=2101, 1139.25626pt x 991.705pt>
+File: FeedbackDelayAMTarget.pdf Graphic file (type pdf)
+
+<use FeedbackDelayAMTarget.pdf>
+<AdaptiveDegrade.pdf, id=2102, 298.11375pt x 315.1775pt>
 File: AdaptiveDegrade.pdf Graphic file (type pdf)
 
 <use AdaptiveDegrade.pdf>
-<ClippingReverbSaw.pdf, id=2102, 342.27875pt x 416.55624pt>
+<AdaptiveDownsamplingTarget.pdf, id=2103, 1226.5825pt x 996.72375pt>
+File: AdaptiveDownsamplingTarget.pdf Graphic file (type pdf)
+
+<use AdaptiveDownsamplingTarget.pdf>
+<ClippingReverbSaw.pdf, id=2104, 342.27875pt x 416.55624pt>
 File: ClippingReverbSaw.pdf Graphic file (type pdf)
 
 <use ClippingReverbSaw.pdf>
@@ -865,29 +873,79 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+[160]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[160] [161 <./DelayFeedbackAM.pdf>] [162 <./AdaptiveDegrade.pdf>] [163 <./Clipp
-ingReverbSaw.pdf>] [164] [165] [166] [167] [168] [169]
-<PieChartSelection.jpg, id=2167, 432.61626pt x 434.62375pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<ClippingReverbTarget.pdf, id=2108, 1200.485pt x 983.675pt>
+File: ClippingReverbTarget.pdf Graphic file (type pdf)
+
+<use ClippingReverbTarget.pdf> [161 <./DelayFeedbackAM.pdf>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[162 <./FeedbackDelayAMTarget.pdf>] [163 <./AdaptiveDegrade.pdf>] [164 <./Adapt
+iveDownsamplingTarget.pdf>] [165 <./ClippingReverbSaw.pdf>] [166 <./ClippingRev
+erbTarget.pdf>] [167] [168] [169] [170] [171]
+<PieChartSelection.jpg, id=2210, 432.61626pt x 434.62375pt>
 File: PieChartSelection.jpg Graphic file (type jpg)
 
-<use PieChartSelection.jpg> [170] [171 <./PieChartSelection.jpg>] [172]
-[173] [174] [175] [176] [177] [178] [179] [180] [181] [182] (./Dissertation.bbl
-[183
+<use PieChartSelection.jpg> [172] [173 <./PieChartSelection.jpg>] [174]
+[175] [176] [177] [178] [179] [180] [181] [182] [183]
+<EvolvingLionRoar.pdf, id=2249, 1169.36874pt x 983.675pt>
+File: EvolvingLionRoar.pdf Graphic file (type pdf)
 
-] [184] [185] [186] [187] [188] [189] [190] [191] [192] [193] [194]
-[195] [196] [197] [198] [199] [200]) [201] (./Dissertation.aux)
+<use EvolvingLionRoar.pdf>
+<EvolvingFreightTrain.pdf, id=2250, 1171.37625pt x 991.705pt>
+File: EvolvingFreightTrain.pdf Graphic file (type pdf)
+
+<use EvolvingFreightTrain.pdf>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<EvolvingMetalGong.pdf, id=2251, 1149.29375pt x 984.67876pt>
+File: EvolvingMetalGong.pdf Graphic file (type pdf)
+
+<use EvolvingMetalGong.pdf> [184 <./EvolvingLionRoar.pdf>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<EvolvingMetallicSynth.pdf, id=2266, 1166.3575pt x 982.67125pt>
+File: EvolvingMetallicSynth.pdf Graphic file (type pdf)
+
+<use EvolvingMetallicSynth.pdf>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[185 <./EvolvingFreightTrain.pdf>]
+<RandomAnalogLFOReverb.pdf, id=2281, 1148.29pt x 970.62625pt>
+File: RandomAnalogLFOReverb.pdf Graphic file (type pdf)
+
+<use RandomAnalogLFOReverb.pdf>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[186 <./EvolvingMetalGong.pdf>] [187 <./EvolvingMetallicSynth.pdf>]
+(./Dissertation.bbl [188 <./RandomAnalogLFOReverb.pdf>] [189
+
+] [190] [191]
+[192] [193] [194] [195] [196] [197] [198] [199] [200] [201] [202] [203]
+[204] [205] [206]) [207] (./Dissertation.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 3617 strings out of 94073
- 53359 string characters out of 1162984
+ 3657 strings out of 94073
+ 54481 string characters out of 1162984
  102089 words of memory out of 1500000
- 6796 multiletter control sequences out of 10000+50000
+ 6828 multiletter control sequences out of 10000+50000
  26403 words of font info for 58 fonts, out of 1200000 for 2000
  645 hyphenation exceptions out of 8191
  33i,12n,23p,3228b,502s stack positions out of 5000i,500n,6000p,200000b,5000s
@@ -911,9 +969,9 @@ xlive/2007/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/20
 ist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2007/texmf-dist/fonts
 /type1/urw/times/utmr8a.pfb></usr/local/texlive/2007/texmf-dist/fonts/type1/urw
 /times/utmri8a.pfb>
-Output written on Dissertation.pdf (212 pages, 4160170 bytes).
+Output written on Dissertation.pdf (218 pages, 8560624 bytes).
 PDF statistics:
- 2326 PDF objects out of 2487 (max. 8388607)
+ 2444 PDF objects out of 2487 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
- 296 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 336 words of extra memory for PDF output out of 10000 (max. 10000000)
 
