@@ -493,7 +493,7 @@ A number of GP enhancements have already been described. For example, the GP/SA 
 
 Another enhancement to the proposed system is the ability for basic function elements to handle vectors as a native data type. The inability to, for example multiply a stream of numbers by a scalar, is cited by Holladay and Robbins as a major deterrent to Automatic Programming systems that require such operations (2007, p. 1). If such simple operations on vectors are not possible, then the loop structures underlying their execution would have to be evolved separately.
 
-When applying methods to restrict the search space, one must be careful not to restrict the space within a region that does \emph{not} include the optimal solution. A popular way to naturally restrict the search space (without the possibility of omitting the optimal solution) is to use strongly-typed GP (STGP), which enforces data type constraints, so that only syntactically correct structures are searched (Harris, 1997); (Vanneschi, 2004); (Pachet \& Roy, 2007). Basic GP does not enforce such rules and so it is possible that topologies will be searched that are invalid. Enforcing data type constraints during search is a simple way to disregard such topologies and make the search much more efficient. An example of a syntactically-correct Max patch and a syntactically-incorrect Max patch are shown in figure 22.
+When applying methods to restrict the search space, one must be careful not to restrict the space within a region that does \emph{not} include the optimal solution. A popular way to naturally restrict the search space (without the possibility of omitting the optimal solution) is to use strongly-typed GP (STGP), which enforces data type constraints, so that only syntactically correct structures are searched (Harris, 1997); (Vanneschi, 2004); (Pachet \& Roy, 2007). Basic GP does not enforce such rules and so it is possible that topologies will be searched that are invalid. Enforcing data type constraints during search is a simple way to disregard such topologies and make the search much more efficient. An example of a syntactically-correct Max patch and a syntactically-incorrect Max patch are shown in Figure 2.22.
 \\
 \begin{figure}[h!]
 \begin{center}
@@ -522,7 +522,7 @@ In order to further restrict the search space, one can also develop heuristics a
 A method used to improve the ability of GP to find optimal solutions that is directed at the fitness function definition is presented by McDermott et al. (2006). By defining a set of ``increasingly discriminating fitness functions (IFFs)'' one is able to reward minor progress at each stage of the search in a way not possible using a statically defined fitness function (p. 15). The basic idea is to reshape the fitness landscape throughout the search so that the optimal solution becomes more and more difficult to obtain as the search progresses. Early on in the search when individuals in the population perform poorly, the grading mechanism is more lenient and differences between extremely poor solutions and only slightly better solutions is magnified. As the mean fitness over the population increases, the fitness function can grow to become more and more difficult to satisfy. In effect, one is manually evolving the fitness function along with the population.
 
 It is our belief that the research discussed above along with improved measures of timbral similarity can combine to push synthesis topology evolution past a point of only being able to generate simple, ``toy-example'' topologies. By utilizing a meta-synthesis software environment like Max, that was specifically designed to provide synthesis building blocks with the exact level of abstraction required by an efficient GP system, we expect our results to contribute greatly to this area of research.
-\newpage
+
 \vspace*{\QuarterPage}
 \chapter{Methods} % * suppresses heading numbers	
 \section{System Design}
@@ -962,6 +962,8 @@ We then progressively distort our target in way that produces sounds that we wou
 \end{itemize}
 In these cases, we want the amount of distortion severity to be inversely proportional to the similarity calculated. We therefore measure how the similarity calculated changes as a function of increased distortion severity. For example, we look at the rate at which the similarity measure decreases as the introduction of new timbal content increases from $10-50\%$ of the file length.
 
+The sounds we distort are the same sounds that we use as real-world targets as discussed in section 3.2.7.
+
 \subsection{Genetic Operator Variations}
 In order to implement a genetic algorithm within an automatic programming framework, one needs to develop an appropriate representation of each program, which we have done in section 3.1.2. This representation allows us to represent all programs as a set of trees. However, this is not enough to define an input space. In order for a set to become a space, a topological ordering must be placed on the elements. This ordering will inform the shape of the objective landscape (i.e. fitness function) and therefore directly influence the difficulty of search through the space for some desired solution. In algorithm space, such orderings are typically not made explicit due to its complexity. Instead, implicit orderings are acquired via the operators used to search the space (da Silva, 2008, p. 102). Thus, using different operators will result in different input-space orderings. The goal is to find the input-space ordering that makes the objective landscape as ‘searchable’ as possible. This can be measured via the negative slope coefficient (NSC), developed by Vanneschi (2004, p. 54).
 
@@ -1025,19 +1027,50 @@ We have decided to use the following combinations of genetic operators (and prop
 \item 25\% Crossover, 50\% Subtree Mutation, 25\% Reproduction
 \end{itemize}
 As previously mentioned, each of these tests will consist of generating $1000$ patches using the Metrpolis-Hastings sampling technique and selecting one neighbor for each of these patches from the winner of a Tournament Selection process involving $10$ randomly generated neighbors in a manner consistent with the combinations listed above.
+
+The targets used to calculate fitness from are the same as those used in and discussed in section 3.2.7.
+
 \subsection{Target Sound Selection}
 
 The previous discussion has provided a means to develop an appropriate fitness function for our problem and an input space that makes its corresponding fitness surface (given the pre-defined fitness function) as easily-searchable as possible within the GP framework. Going forward, we want to make sure that what we are testing is the appropriateness of our search technique over this space and corresponding fitness surface and not the appropriateness of or ability for sounds to to actually be realized in Max. For example, there may be time-varying timbres that require tens of thousands of Max objects to replicate perfectly.
 
 As Mitchell and Creasey point out in their work on sound matching via evolutionary methods, the difficulties in obtaining an optimal solution to a complex search problem are based on several factors, only one of which is the search algorithm itself (2007, p. 1). They recommended using a `contrived' target in order to test only the efficacy of the search. In our problem domain, a contrived target refers to one that was generated by a known synthesizer (i.e. Max patch). Mitchell and Creasey suggest randomly generating contrived targets using points uniformly spread out in the input-space (p. 2). If the search algorithm is able to match all of the contrived targets with a good spread in the input space, it is suggested that one can then assume it will be able to match any target (p. 2). This assumes however that a uniformly spread set of points in the input space will map to a large area of the timbre space, which is not necessarily the case.
 
-We therefore have chosen to test the search algorithm on three contrived targets with varying degrees of complexity in order to attain an understanding of the limitations of the search algorithm (see Figure 3.33). Since these contrived targets are realizable in the Max environment, they should be found given an intelligent enough search. While it is important that these targets are sufficiently spread out in the input space in order to promote some sense of generalization of the search technique through this space, we later test the search technique using non-contrived targets in order to provide a more resounding argument for this (as is discussed in 3.2.7).
+We therefore have chosen to test the search algorithm on three contrived targets with varying degrees of complexity and timbal content in order to attain an understanding of the limitations of the search algorithm (see Figures 3.33, 3.34, and 3.35). 
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.8]{DelayFeedbackAM}
+\caption[Delay Feedback AM Max Patch]{A Max patch that generates audio by downsampling a $300$ Hz sine wave, passing it through a $500$ ms feedback delay line with feedback varied by a $10$ Hz sine wave, and then amplitude modulating it with a sine wave whose frequency is varying between $0 - 20$ Hz.}
+\end{center}
+\end{figure}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.8]{AdaptiveDegrade}
+\caption[Adaptive Degrade Max Patch]{A Max patch that generates audio by downsampling a $400$ Hz, $8$-bit sine wave by an amount that is proportional to the amplitude of an amplitude modulated $200 Hz$ sine wave by a $1$ Hz sawtooth modulator.}
+\end{center}
+\end{figure}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.8]{ClippingReverbSaw}
+\caption[Clipping Reverb Sawtooth Max Patch]{A Max patch that generates audio by adding a $50$ Hz sawtooth wave with a sawtooth wave passed through a reverberator with a $3$ s reverb time whose frequency is varied by another reverberated sawtooth wave with a reverb time of $500$ ms and a frequency of $5$ Hz.}
+\end{center}
+\end{figure}
+\\
+In Figure 3.33, we present a Max patch that processes a sine wave through a feedback delay unit and modulates the result with a frequency-varying sine wave LFO, which produces a smooth and quick pulsation effect. We refer to this patch as the Feedback-Delay-AM target going forward.
+
+In Figure 3.34, we present a Max patch that down samples an 8-bit sine wave by an amount proportional to the amplitude of a sine wave modulated by a sawtooth. The result sounds like a harsh bandpass filter sweeping over an abrupt impulse with a constant drone in the background. We refer to this patch as the Adaptive-Downsampling target going forward.
+
+Figure 3.35 shows a Max patch that regularly clips, but within those hard clips exists a reverberant sound similar to waves crashing in succession. The three patches chosen produce three very different timbres with differing amounts of temporal complexity. We refer to this patch as the Clipping-Reverb target going forward.
+
+Since these contrived targets are realizable in the Max environment, they should be found given an intelligent enough search. While it is important that these targets are sufficiently spread out in the input space in order to promote some sense of generalization of the search technique through this space, we later test the search technique using non-contrived targets in order to provide a more resounding argument for this (as is discussed in 3.2.7).
 
 We are able to measure success in two different ways when using contrived targets and will speak to both in the results section whenever our tests involve them:
 \begin{enumerate}
 \item We are able to compare the topographies of the contrived-target patch and the best-of-run patch that is generated during the search process. If the topographies are exact matches, we must consider this an outright success. However, if different, the topologies provide intuition about how code bloat enters the search, how well the topologies of local optima mirror the target topology (i.e. if there is a correlation between timbre and topology space), and how well different topologies can mimic the timbre produced by a contrived-target topology (i.e. how realizable is the target timbre given topologies that differ from the topology that generated the target).
 \item We are able to measure the best-of-run fitness and determine how well our search is able to achieve its goal of finding a patch that can produce the target timbre.
 \end{enumerate}
+
+It should be emphasized that during the tests involving contrived targets, the function/object sets provided to the algorithm will contain only the necessary objects and will enforce tight parameter restrictions on each object in order to give the algorithm the best chance at reaching them. We later look at how the quality of our best-of-run patches and the speed at which we find them changes as we expand our function sets and parameter ranges.
 
 \subsection{Limiting Code Bloat and Promoting Parsimony}
 
@@ -1079,7 +1112,7 @@ The three initialization flavors we study are Full, Grow, and Ramped Half-and-Ha
 
 The four selection methods we have chosen are known as Fitness-Proportionate, Ranking, Tournament, and Double Tournament. A brief description of each of these methods follows:
 \begin{description}
-\item [Fitness-Proportionate Selection] - Individuals from one generation are chosen to populate the next generation with probability proportional to their fitness. Thus, the more fit an individual is, the more likely it will be chosen to breed new individuals for the next generation. In figure 34, the top row of squares represent the individuals in a population and the pie chart below represents their respective fitnesses as fractions of the sum of all fitnesses in the population. In other words, for fitness-proportionate selection, the pie chart illustrates the probability with which each individual will be selected to breed the next population. Note in the figure that the red and green individuals from this example are chosen twice due to their high fitnesses (i.e. probabilities of selection), while the yellow is not chosen due to its low fitness.
+\item [Fitness-Proportionate Selection] - Individuals from one generation are chosen to populate the next generation with probability proportional to their fitness. Thus, the more fit an individual is, the more likely it will be chosen to breed new individuals for the next generation. In Figure 3.36, the top row of squares represent the individuals in a population and the pie chart below represents their respective fitnesses as fractions of the sum of all fitnesses in the population. In other words, for fitness-proportionate selection, the pie chart illustrates the probability with which each individual will be selected to breed the next population. Note in the figure that the red and green individuals from this example are chosen twice due to their high fitnesses (i.e. probabilities of selection), while the yellow is not chosen due to its low fitness.
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale = 0.7]{PieChartSelection}
@@ -1144,18 +1177,18 @@ where the similarity is calculated between any two vectors in the sequences $Z^1
 After the controlled experiments from above - meant to compare variations of each GP mechanism against one another - have been performed, it is appropriate to move away from the perfectly contrived examples we have used so far. Stepping away from these tests towards a `real-world' scenario involves two steps:
 
 \begin{enumerate}
-\item We will both expand and contract the object and parameter (by discretizing with greater and less resolution) sets used to generate Max patches when searching for our contrived targets. By looking at how well (or how quickly) our solutions approach the contrived Max patches, we will be able to show how robust our system is to starting with an inappropriate resource set (i.e. one with objects that are not involved in the optimal solution and/or with necessary objects in the optimal solution not present). Even if the system is given a timbre that was produced (or is easily producible) by a Max patch, it is likely any object set we choose for our system to source from will not contain all of the objects (and only the objects) necessary to build the target. Since a `real-world' timbre may not even be realizable with 100\% percent accuracy in the Max environment, these tests are not enough to show how well our system will generalize to all timbres. However, they are a good first step towards that goal and provide us with more information (namely, the patch topologies of both the target and the solution to compare) to use to assess the robustness described.
+\item We will both expand and contract the object and parameter sets used to generate Max patches when searching for our contrived targets. By looking at how well (or how quickly) our solutions approach the contrived Max patches, we will be able to show how robust our system is to starting with an inappropriate resource set (i.e. one with objects that are not involved in the optimal solution and/or with necessary objects in the optimal solution not present). Even if the system is given a timbre that was produced (or is easily producible) by a Max patch, it is likely any object set we choose for our system to source from will not contain all of the objects (and only the objects) necessary to build the target. Since a `real-world' timbre may not even be realizable with 100\% percent accuracy in the Max environment, these tests are not enough to show how well our system will generalize to all timbres. However, they are a good first step towards that goal and provide us with more information (namely, the patch topologies of both the target and the solution to compare) to use to assess the robustness described.
 \item The final step towards showing system generalization over all timbres involves using timbres that are not contrived. This is discussed in the next section (3.2.7 Generalization).
 \end{enumerate}
 
-In order to test how well our system performs given object and parameter sets that are either not sufficient or over-complete, we look at how well our performance drops off as we restrict or expand our object and parameter sets over our contrived examples. We have chosen to use the following sets for each example in our tests:
+In order to test how well our system performs given object and parameter sets that are either not sufficient or over-complete, we look at how well our performance drops off as we restrict or expand our object and parameter sets over our contrived examples. For example, the Feedback-Delay-AM target requires an object set that includes: cycle\texttildelow{} (with a frequency range between $0-400$), degrade\texttildelow{} (with a downsample range between $0.4 - 0.6$ and no ability to reduce the bit-depth), *\texttildelow{}, loadmess, and a feedback delay unit with a $500$ ms delay. We reduce this function set by removing degrade\texttildelow{} and disallowing a variable feedback amount to the delay. We expand the function set by adding objects that are not in the target, including a saw\texttildelow{} object, a /\texttildelow{}, +\texttildelow{}, and delta\texttildelow{} and increase the parameter ranges to allow the cycle\texttildelow{}  to take on more typical values between $0-5000$ Hz and to allow degrade\texttildelow{}  to take downsample values between $0.1-0.9$ (where 1.0 means no downsampling) and to accept bit-depth changes so as to quantize its input into a $2$-bit, $4$-bit, $8$-bit, or $16$-bit signal. 
 
-The important data we gather from tests include how the best-or-run patches' fitnesses decrease as we change the cardinality of the function set away from only containing necessary functions and as we change the possible parameter values that functions may take, as well as recording how the iteration count required to reach a best-of-run patch varies given changes in these variables.
+We will specify exactly how each function and parameter range has been extended or limited when comparing the results found in Chapter 4. The important data we gather from tests include how the best-or-run patches' fitnesses decrease as we change the cardinality of the function set away from only containing necessary functions and as we change the possible parameter values that functions may take, as well as recording how the iteration count required to reach a best-of-run patch varies given changes in these variables.
 
 \subsection{Generalization}
 It is necessary to test this system on a number of real-world sounds in order to gauge its ability to generalize to sounds that are not contrived. As Riionheimo and Valimaki note, ``the quality of resynthesis of real recordings is more difficult to measure as there are no known correct parameter values'' nor synthesis topologies (2003, p. 13). In genetic programming research where a known target algorithm does not exist, the performance of the system is usually measured using the fitness level at which the system converges and how long it takes to converge to that level. We do not have a known topology for such real-world examples and therefore must only use this measure to determine how successful our search method is. In order to determine how well our search generalizes over all real-world sounds, we have chosen five different target sounds ranging from those generated by music instruments to those generated in nature. A brief description of the timbres we have chosen follows:
 \begin{itemize}
-\item
+\item 
 \item
 \item
 \item

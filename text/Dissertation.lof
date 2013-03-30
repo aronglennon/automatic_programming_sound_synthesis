@@ -23,36 +23,39 @@
 \contentsline {figure}{\numberline {2.21}{\ignorespaces An example of a univariate Gaussian Mixture Model (GMM) taken from (Schwardt, 2005).}}{71}
 \contentsline {figure}{\numberline {2.22}{\ignorespaces A syntactically correct Max patch that would be included in a STGP search space and a syntactically incorrect one that would not be (due to the labeled disallowed connection).}}{86}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Generating a Max patch given a parse-tree}}{97}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Writing audio output from a Max patch to a wav file that is then read and processed by Python code.}}{97}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces An example Max patch represented as a directed tree with the audio signal flowing from patch's terminals towards its root.}}{99}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces A Max patch and its corresponding representation as a set of DAGs}}{101}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces The same \emph {degrade\texttildelow {}} object in two Max patches (one with arguments and one with load mess objects).}}{102}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces The original Max patch from Figure 3.4 replaced by its equivalent patch without send\texttildelow {} or receive\texttildelow {} objects.}}{104}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces The single DAG representation of the reduced patch in Figure 3.6.}}{105}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces A single DAG representation of a Max patch with two \emph {dac\texttildelow {}} objects.}}{106}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces A simple Max patch whose DAG representation has crossed paths and therefore is not a tree.}}{107}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces The same Max patch with crossed paths from Figure 3.9 and its equivalent Max patch with a tree representation.}}{108}
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Example of the object\_list.txt file that contains syntax information for the various objects used to generate patches with our system.}}{109}
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Flow diagram of our GP system with components labeled by the section numbers they are discussed in.}}{113}
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Nearest-neighbor vs. k-nearest neighbor classifier}}{118}
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Pairwise CNN Architecture}}{123}
-\contentsline {figure}{\numberline {3.15}{\ignorespaces kNN accuracy for NLSE, PCA, and LLE}}{124}
-\contentsline {figure}{\numberline {3.16}{\ignorespaces NLSE vs. PCA vs. LLE Instrument Clusters}}{125}
-\contentsline {figure}{\numberline {3.17}{\ignorespaces Timbre Distance Between Centers}}{126}
-\contentsline {figure}{\numberline {3.18}{\ignorespaces Timbre Distance Between Curves}}{127}
-\contentsline {figure}{\numberline {3.19}{\ignorespaces Timbre Distance Between Time-Shifted Curves}}{129}
-\contentsline {figure}{\numberline {3.20}{\ignorespaces Timbre Distance Between Time-Warped Curves}}{129}
-\contentsline {figure}{\numberline {3.21}{\ignorespaces Timbre Distance Between Time-Warped Curves}}{131}
-\contentsline {figure}{\numberline {3.22}{\ignorespaces Symmetric Greedy Removal After Matching}}{135}
-\contentsline {figure}{\numberline {3.23}{\ignorespaces Asymmetric Greedy Removal After Matching}}{137}
-\contentsline {figure}{\numberline {3.24}{\ignorespaces Asymmetric Greedy Removal After Matching Reverse}}{138}
-\contentsline {figure}{\numberline {3.25}{\ignorespaces Finding Optimal Subsequence}}{146}
-\contentsline {figure}{\numberline {3.26}{\ignorespaces Removing Optimal Subsequence}}{147}
-\contentsline {figure}{\numberline {3.27}{\ignorespaces Penalizing Swaps}}{149}
-\contentsline {figure}{\numberline {3.28}{\ignorespaces Penalizing Swaps}}{150}
-\contentsline {figure}{\numberline {3.29}{\ignorespaces Tree crossover with the root (i.e. dac\texttildelow {} below the terminals).}}{157}
-\contentsline {figure}{\numberline {3.30}{\ignorespaces Subtree mutation with the root (i.e. dac\texttildelow {} below the terminals).}}{158}
-\contentsline {figure}{\numberline {3.31}{\ignorespaces Point mutation with the root (i.e. dac\texttildelow {} below the terminals).}}{158}
-\contentsline {figure}{\numberline {3.32}{\ignorespaces Reproduction with the root (i.e. dac\texttildelow {} below the terminals).}}{159}
-\contentsline {figure}{\numberline {3.33}{\ignorespaces Fitness-proportionate selection}}{169}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Generating a Max patch given a parse-tree}}{96}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Writing audio output from a Max patch to a wav file that is then read and processed by Python code.}}{96}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces An example Max patch represented as a directed tree with the audio signal flowing from patch's terminals towards its root.}}{98}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces A Max patch and its corresponding representation as a set of DAGs}}{100}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces The same \emph {degrade\texttildelow {}} object in two Max patches (one with arguments and one with load mess objects).}}{101}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces The original Max patch from Figure 3.4 replaced by its equivalent patch without send\texttildelow {} or receive\texttildelow {} objects.}}{103}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces The single DAG representation of the reduced patch in Figure 3.6.}}{104}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces A single DAG representation of a Max patch with two \emph {dac\texttildelow {}} objects.}}{105}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces A simple Max patch whose DAG representation has crossed paths and therefore is not a tree.}}{106}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces The same Max patch with crossed paths from Figure 3.9 and its equivalent Max patch with a tree representation.}}{107}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Example of the object\_list.txt file that contains syntax information for the various objects used to generate patches with our system.}}{108}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Flow diagram of our GP system with components labeled by the section numbers they are discussed in.}}{112}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Nearest-neighbor vs. k-nearest neighbor classifier}}{117}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Pairwise CNN Architecture}}{122}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces kNN accuracy for NLSE, PCA, and LLE}}{123}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces NLSE vs. PCA vs. LLE Instrument Clusters}}{124}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Timbre Distance Between Centers}}{125}
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Timbre Distance Between Curves}}{126}
+\contentsline {figure}{\numberline {3.19}{\ignorespaces Timbre Distance Between Time-Shifted Curves}}{128}
+\contentsline {figure}{\numberline {3.20}{\ignorespaces Timbre Distance Between Time-Warped Curves}}{128}
+\contentsline {figure}{\numberline {3.21}{\ignorespaces Timbre Distance Between Time-Warped Curves}}{130}
+\contentsline {figure}{\numberline {3.22}{\ignorespaces Symmetric Greedy Removal After Matching}}{134}
+\contentsline {figure}{\numberline {3.23}{\ignorespaces Asymmetric Greedy Removal After Matching}}{136}
+\contentsline {figure}{\numberline {3.24}{\ignorespaces Asymmetric Greedy Removal After Matching Reverse}}{137}
+\contentsline {figure}{\numberline {3.25}{\ignorespaces Finding Optimal Subsequence}}{145}
+\contentsline {figure}{\numberline {3.26}{\ignorespaces Removing Optimal Subsequence}}{146}
+\contentsline {figure}{\numberline {3.27}{\ignorespaces Penalizing Swaps}}{148}
+\contentsline {figure}{\numberline {3.28}{\ignorespaces Penalizing Swaps}}{149}
+\contentsline {figure}{\numberline {3.29}{\ignorespaces Tree crossover with the root (i.e. dac\texttildelow {} below the terminals).}}{156}
+\contentsline {figure}{\numberline {3.30}{\ignorespaces Subtree mutation with the root (i.e. dac\texttildelow {} below the terminals).}}{157}
+\contentsline {figure}{\numberline {3.31}{\ignorespaces Point mutation with the root (i.e. dac\texttildelow {} below the terminals).}}{157}
+\contentsline {figure}{\numberline {3.32}{\ignorespaces Reproduction with the root (i.e. dac\texttildelow {} below the terminals).}}{158}
+\contentsline {figure}{\numberline {3.33}{\ignorespaces Delay Feedback AM Max Patch}}{161}
+\contentsline {figure}{\numberline {3.34}{\ignorespaces Adaptive Degrade Max Patch}}{162}
+\contentsline {figure}{\numberline {3.35}{\ignorespaces Clipping Reverb Sawtooth Max Patch}}{163}
+\contentsline {figure}{\numberline {3.36}{\ignorespaces Fitness-proportionate selection}}{171}
