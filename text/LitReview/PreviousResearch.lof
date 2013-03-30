@@ -1,0 +1,17 @@
+\contentsline {figure}{\numberline {1}{\ignorespaces Parse-tree Max patch representation}}{82}
+\contentsline {figure}{\numberline {2}{\ignorespaces Generating a Max patch given a parse-tree}}{84}
+\contentsline {figure}{\numberline {3}{\ignorespaces Synthesis Algorithm Space}}{84}
+\contentsline {figure}{\numberline {4}{\ignorespaces Calculating the negative slope coefficient}}{86}
+\contentsline {figure}{\numberline {5}{\ignorespaces Tree crossover}}{87}
+\contentsline {figure}{\numberline {6}{\ignorespaces Subtree mutation}}{87}
+\contentsline {figure}{\numberline {7}{\ignorespaces Fitness error vs. algorithm complexity}}{90}
+\contentsline {figure}{\numberline {8}{\ignorespaces Fitness-proportionate selection}}{91}
+\contentsline {figure}{\numberline {9}{\ignorespaces Average fitness error for various building block restrictions}}{92}
+\contentsline {figure}{\numberline {10}{\ignorespaces Convergence times for various building block restrictions}}{93}
+\contentsline {figure}{\numberline {11}{\ignorespaces Classic GP vs GP/SA efficiency}}{94}
+\contentsline {figure}{\numberline {12}{\ignorespaces Nearest-neighbor vs. k-nearest neighbor classifier}}{95}
+\contentsline {figure}{\numberline {13}{\ignorespaces Average model error for level 1 (mild) distortions}}{98}
+\contentsline {figure}{\numberline {14}{\ignorespaces FastDTW}}{98}
+\contentsline {figure}{\numberline {15}{\ignorespaces Target Max patch for sample study}}{100}
+\contentsline {figure}{\numberline {16}{\ignorespaces Sample study results}}{103}
+\contentsline {figure}{\numberline {17}{\ignorespaces Best-of-sample-run Max patch}}{105}
