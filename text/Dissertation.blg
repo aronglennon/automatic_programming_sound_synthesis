@@ -1,0 +1,153 @@
+This is BibTeX, Version 0.99c (Web2C 7.5.6)
+The top-level auxiliary file: Dissertation.aux
+The style file: apacite.bst
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Database file #1: mybib.bib.bib
+Reallocated field_info (elt_size=4) to 10016 items from 5000.
+apacite.bst [2009/03/01 v4.05 APA bibliography style]
+Warning--No publisher in Alcazar:1996la
+Warning--No publisher in Allamanche:2002yo
+Warning--No address in Allamanche:2002yo
+Warning--No publisher in Aucouturier:2002gf
+Warning--No address in Aucouturier:2002gf
+Warning--No publisher in Aucouturier:2004qo
+Warning--No address in Aucouturier:2004qo
+Warning--No publisher in Baumann:2004qz
+Warning--No address in Baumann:2004qz
+Warning--No publisher in Bello:NoRead
+Warning--No address in Bello:NoRead
+Warning--No publisher in Bernardini:2001kc
+Warning--No address in Cook:NotRead
+Warning--No publisher in Costelloe:2007bv
+Warning--No publisher in Flexer:2005sw
+Warning--No publisher in Garcia:2000th
+Warning--No publisher in Garcia:2002cq
+Warning--No publisher in Glennon:2010fc
+Warning--No address in Glennon:2010fc
+Warning--No address in Grey:NoRead
+Warning--No publisher in Haas:2009mw
+Warning--No address in Haas:2009mw
+Warning--No publisher in Heise:2009sp
+Warning--No publisher in Holladay:2007ct
+Warning--No address in Holladay:2007ct
+Warning--No publisher in Humphrey:2000th
+Warning--No publisher in III:1991hc
+Warning--No publisher in Jensen:2006dw
+Warning--No address in Johanson:1997gf
+Warning--No publisher in Johnson:1998sh
+Warning--No address in Johnson:1998sh
+Warning--No publisher in Johnson:2006pi
+Warning--No publisher in Kobayashi:2009la
+Warning--No address in Kobayashi:2009la
+Warning--No address in Koza:1992gp
+Warning--No publisher in Lazzarini:2004qf
+Warning--No publisher in Logan:2003cr
+Warning--No address in Logan:2003cr
+Warning--No publisher in Loureiro:2000wq
+Warning--No address in Loureiro:2000wq
+Warning--No publisher in Loviscach:2009mi
+Warning--No address in Loviscach:2009mi
+Warning--No publisher in Malloch:2006jb
+Warning--No publisher in Martens:2009lo
+Warning--No publisher in McDermott:2009ss
+Warning--No publisher in Meng:2005fx
+Warning--No address in Meng:2005fx
+Warning--No publisher in Miller:1998zr
+Warning--No address in Miller:1998zr
+Warning--No publisher in Misra:2009km
+Warning--No address in Misra:2009km
+Warning--No publisher in Mitchell:2007fe
+Warning--No publisher in Mitchell:2005ez
+Warning--No publisher in Moreno:2005bs
+Warning--No publisher in Nicol:2004ij
+Warning--No publisher in Orboril:2000qf
+Warning--No publisher in Pachet:2007if
+Warning--No publisher in Pampalk:2005ix
+Warning--No address in Pampalk:2005ix
+Warning--No publisher in Paulus:2002ec
+Warning--No address in Paulus:2002ec
+Warning--No publisher in Pazos:1998xz
+Warning--No address in Pazos:1998xz
+Warning--No publisher in Polito:1997ly
+Warning--No address in Polito:1997ly
+Warning--No address in Powell:NoRead
+Warning--No publisher in Puckette:2004zp
+Warning--No address in Puckette:2004zp
+Warning--No publisher in Puente:2002sw
+Warning--No address in Roads:NotRead
+Warning--No publisher in Robel:1998zc
+Warning--No publisher in Robel:2003vh
+Warning--No publisher in Robel:2010dp
+Warning--No address in Rowe:NoRead
+Warning--No address in Russell:2009ai
+Warning--No publisher in Schwarz:2006gr
+Warning--No address in Schwarz:2006gr
+Warning--No publisher in Seago:2008ya
+Warning--No publisher in Seyerlehner:2009hs
+Warning--No publisher in Seyerlehner:2008tw
+Warning--No publisher in Sharman:1995bs
+Warning--No publisher in Spector:1995fy
+Warning--No address in Spector:1995fy
+Warning--No publisher in Stepanek:2006zv
+Warning--No publisher in Stowell:2008qf
+Warning--No publisher in Stowell:2010xr
+Warning--No address in Stowell:2010xr
+Warning--No publisher in Stroppa:2000lc
+Warning--No publisher in Sung:2008ya
+Warning--No address in Sung:2008ya
+Warning--No publisher in Terasawa:2005rq
+Warning--No address in Terasawa:2005rq
+Warning--No publisher in Timoney:2004ff
+Warning--No address in Todd:1998tg
+Warning--No address in Tolonen:1998bh
+Warning--No publisher in Verfaille:2006fe
+Warning--No publisher in Villers:2000ul
+Warning--No address in Villers:2000ul
+Warning--No publisher in Wehn:1998bh
+Warning--No publisher in Zhang:2006jo
+Warning--No address in Zhang:2006jo
+Warning--No publisher in Zhu:2004mc
+Warning--No publisher in Zils:2001bd
+You've used 132 entries,
+            6361 wiz_defined-function locations,
+            1922 strings with 32282 characters,
+and the built_in function-call counts, 265785 in all, are:
+= -- 34568
+> -- 2005
+< -- 12682
++ -- 12647
+- -- 267
+* -- 16498
+:= -- 47424
+add.period$ -- 662
+call.type$ -- 132
+change.case$ -- 835
+chr.to.int$ -- 0
+cite$ -- 367
+duplicate$ -- 6420
+empty$ -- 9800
+format.name$ -- 3157
+if$ -- 50881
+int.to.chr$ -- 0
+int.to.str$ -- 268
+missing$ -- 0
+newline$ -- 3156
+num.names$ -- 1060
+pop$ -- 6359
+preamble$ -- 1
+purify$ -- 636
+quote$ -- 0
+skip$ -- 17022
+stack$ -- 0
+substring$ -- 14018
+swap$ -- 3509
+text.length$ -- 471
+text.prefix$ -- 0
+top$ -- 1
+type$ -- 15744
+warning$ -- 103
+while$ -- 1212
+width$ -- 0
+write$ -- 3880
+(There were 103 warnings)
