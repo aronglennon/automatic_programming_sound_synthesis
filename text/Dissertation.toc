@@ -22,8 +22,8 @@
 \contentsline {subsection}{\numberline {3.2.2}Genetic Operator Variations}{153}
 \contentsline {subsection}{\numberline {3.2.3}Target Sound Selection}{159}
 \contentsline {subsection}{\numberline {3.2.4}Limiting Code Bloat and Promoting Parsimony}{167}
-\contentsline {subsection}{\numberline {3.2.5}Initial Conditions and Selection Methods}{170}
-\contentsline {subsubsection}{Non-standard Selection Methods}{177}
-\contentsline {subsection}{\numberline {3.2.6}Expanding/Restricting the Searchable Region of Input Space}{181}
-\contentsline {subsection}{\numberline {3.2.7}Generalization}{183}
-\contentsline {chapter}{References}{189}
+\contentsline {subsection}{\numberline {3.2.5}Initial Conditions and Selection Methods}{171}
+\contentsline {subsubsection}{Non-standard Selection Methods}{180}
+\contentsline {subsection}{\numberline {3.2.6}Expanding/Restricting the Searchable Region of Input Space}{184}
+\contentsline {subsection}{\numberline {3.2.7}Generalization}{186}
+\contentsline {chapter}{References}{192}

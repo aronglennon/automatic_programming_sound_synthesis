@@ -1,40 +1,40 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Visual representations of (a) subtractive and (b) additive definitions of timbre.}}{12}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Subtractive vs. Additive Timbre Definitions}}{12}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Sampling Synthesis}}{21}
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Granular Synthesis}}{23}
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Additive Synthesis}}{24}
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Subtractive Synthesis}}{25}
 \contentsline {figure}{\numberline {2.6}{\ignorespaces FM Synthesis}}{26}
 \contentsline {figure}{\numberline {2.7}{\ignorespaces Digital Waveguide Synthesis}}{27}
-\contentsline {figure}{\numberline {2.8}{\ignorespaces The Task of Producing a Target Timbre}}{30}
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Re-synthesis Approach}}{31}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Producing a Target Timbre}}{30}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Re-synthesis}}{31}
 \contentsline {figure}{\numberline {2.10}{\ignorespaces Concatenative Synthesis}}{32}
-\contentsline {figure}{\numberline {2.11}{\ignorespaces Filter-bank Implementation of the Phase Vocoder}}{35}
-\contentsline {figure}{\numberline {2.12}{\ignorespaces Spectral Modeling Synthesis (SMS)}}{37}
-\contentsline {figure}{\numberline {2.13}{\ignorespaces Adaptive FM using Genetic Algorithms}}{39}
-\contentsline {figure}{\numberline {2.14}{\ignorespaces The Meta-Synthesis problem}}{42}
-\contentsline {figure}{\numberline {2.15}{\ignorespaces Finding the closest parameter mappings in a partially canvassed objective timbre space.}}{45}
-\contentsline {figure}{\numberline {2.16}{\ignorespaces Approximating a complex timbre using a linear combination of orchestral instrumentation.}}{48}
-\contentsline {figure}{\numberline {2.17}{\ignorespaces An objective function/surface sitting above synthesis space with its global maximum shown.}}{51}
-\contentsline {figure}{\numberline {2.18}{\ignorespaces Three different fitness surfaces: (a) unimodal and smooth, (b) multimodal, but relatively smooth and with a clear global maximum, and (c) multimodal and rough with no clear global maximum.}}{52}
-\contentsline {figure}{\numberline {2.19}{\ignorespaces A GA population after: (a) 1, (b) 10 (c) 100, and (d) 1000 iterations (and optimal solution notated by large red dot).}}{54}
-\contentsline {figure}{\numberline {2.20}{\ignorespaces The common Genetic Programming (GP) setup, where a point in algorithm space is represented by a tree.}}{58}
-\contentsline {figure}{\numberline {2.21}{\ignorespaces An example of a univariate Gaussian Mixture Model (GMM) taken from (Schwardt, 2005).}}{71}
-\contentsline {figure}{\numberline {2.22}{\ignorespaces A syntactically correct Max patch that would be included in a STGP search space and a syntactically incorrect one that would not be (due to the labeled disallowed connection).}}{86}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Phase Vocoder}}{35}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces SMS}}{37}
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Adaptive FM}}{39}
+\contentsline {figure}{\numberline {2.14}{\ignorespaces The Meta-Synthesis Problem}}{42}
+\contentsline {figure}{\numberline {2.15}{\ignorespaces Mapping Timbre to Parameters}}{45}
+\contentsline {figure}{\numberline {2.16}{\ignorespaces Searching for an Appropriate Linear Combination of Orchestral Instruments}}{48}
+\contentsline {figure}{\numberline {2.17}{\ignorespaces Fitness Function}}{51}
+\contentsline {figure}{\numberline {2.18}{\ignorespaces Fitness Surface Topologies}}{52}
+\contentsline {figure}{\numberline {2.19}{\ignorespaces GA Example}}{54}
+\contentsline {figure}{\numberline {2.20}{\ignorespaces The Genetic Programming Paradigm}}{58}
+\contentsline {figure}{\numberline {2.21}{\ignorespaces Gaussian Mixture Models}}{71}
+\contentsline {figure}{\numberline {2.22}{\ignorespaces Strongly-Typed Genetic Programming}}{86}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Generating a Max patch given a parse-tree}}{96}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Writing audio output from a Max patch to a wav file that is then read and processed by Python code.}}{96}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces An example Max patch represented as a directed tree with the audio signal flowing from patch's terminals towards its root.}}{98}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces A Max patch and its corresponding representation as a set of DAGs}}{100}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces The same \emph {degrade\texttildelow {}} object in two Max patches (one with arguments and one with load mess objects).}}{101}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces The original Max patch from Figure 3.4 replaced by its equivalent patch without send\texttildelow {} or receive\texttildelow {} objects.}}{103}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces The single DAG representation of the reduced patch in Figure 3.6.}}{104}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces A single DAG representation of a Max patch with two \emph {dac\texttildelow {}} objects.}}{105}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces A simple Max patch whose DAG representation has crossed paths and therefore is not a tree.}}{106}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces The same Max patch with crossed paths from Figure 3.9 and its equivalent Max patch with a tree representation.}}{107}
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Example of the object\_list.txt file that contains syntax information for the various objects used to generate patches with our system.}}{108}
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Flow diagram of our GP system with components labeled by the section numbers they are discussed in.}}{112}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces FromMax to Python}}{96}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces A Max Patch as a Directed Tree}}{98}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces A Max patch as a set of DAGs}}{100}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Using loadmess Objects to Provide Parameters to Max}}{101}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Removing send\texttildelow {} and receive\texttildelow {} Objects}}{103}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Reducing a Set of DAGs to a Single DAG}}{104}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces A Single DAG with Two\emph {dac\texttildelow {}} Objects}}{105}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces A DAG with Crossed Paths}}{106}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Uncrossing Paths to Form a Tree}}{107}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Object List File}}{108}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Flow Diagram of Overall GP System}}{112}
 \contentsline {figure}{\numberline {3.13}{\ignorespaces Nearest-neighbor vs. k-nearest neighbor classifier}}{117}
 \contentsline {figure}{\numberline {3.14}{\ignorespaces Pairwise CNN Architecture}}{122}
 \contentsline {figure}{\numberline {3.15}{\ignorespaces kNN accuracy for NLSE, PCA, and LLE}}{123}
@@ -50,20 +50,23 @@
 \contentsline {figure}{\numberline {3.25}{\ignorespaces Finding Optimal Subsequence}}{145}
 \contentsline {figure}{\numberline {3.26}{\ignorespaces Removing Optimal Subsequence}}{146}
 \contentsline {figure}{\numberline {3.27}{\ignorespaces Penalizing Swaps}}{148}
-\contentsline {figure}{\numberline {3.28}{\ignorespaces Penalizing Swaps}}{149}
-\contentsline {figure}{\numberline {3.29}{\ignorespaces Tree crossover with the root (i.e. dac\texttildelow {} below the terminals).}}{156}
-\contentsline {figure}{\numberline {3.30}{\ignorespaces Subtree mutation with the root (i.e. dac\texttildelow {} below the terminals).}}{157}
-\contentsline {figure}{\numberline {3.31}{\ignorespaces Point mutation with the root (i.e. dac\texttildelow {} below the terminals).}}{157}
-\contentsline {figure}{\numberline {3.32}{\ignorespaces Reproduction with the root (i.e. dac\texttildelow {} below the terminals).}}{158}
+\contentsline {figure}{\numberline {3.28}{\ignorespaces Penalizing Overlaps and Gaps}}{149}
+\contentsline {figure}{\numberline {3.29}{\ignorespaces Crossover}}{156}
+\contentsline {figure}{\numberline {3.30}{\ignorespaces Subtree Mutation}}{157}
+\contentsline {figure}{\numberline {3.31}{\ignorespaces Point Mutation}}{157}
+\contentsline {figure}{\numberline {3.32}{\ignorespaces Reproduction}}{158}
 \contentsline {figure}{\numberline {3.33}{\ignorespaces Delay Feedback AM Max Patch}}{161}
 \contentsline {figure}{\numberline {3.34}{\ignorespaces Delay Feedback AM Time-Frequency Representation}}{162}
 \contentsline {figure}{\numberline {3.35}{\ignorespaces Adaptive Downsampling Max Patch}}{163}
 \contentsline {figure}{\numberline {3.36}{\ignorespaces Adaptive Downsampling Time-Frequency Representation}}{164}
 \contentsline {figure}{\numberline {3.37}{\ignorespaces Clipping Reverb Sawtooth Max Patch}}{165}
 \contentsline {figure}{\numberline {3.38}{\ignorespaces Clipping Reverb Sawtooth Time-Frequency Representation}}{166}
-\contentsline {figure}{\numberline {3.39}{\ignorespaces Fitness-proportionate selection}}{173}
-\contentsline {figure}{\numberline {3.40}{\ignorespaces Adaptive Downsampling Time-Frequency Representation}}{184}
-\contentsline {figure}{\numberline {3.41}{\ignorespaces Adaptive Downsampling Time-Frequency Representation}}{185}
-\contentsline {figure}{\numberline {3.42}{\ignorespaces Adaptive Downsampling Time-Frequency Representation}}{186}
-\contentsline {figure}{\numberline {3.43}{\ignorespaces Adaptive Downsampling Time-Frequency Representation}}{187}
-\contentsline {figure}{\numberline {3.44}{\ignorespaces Adaptive Downsampling Time-Frequency Representation}}{188}
+\contentsline {figure}{\numberline {3.39}{\ignorespaces Fitness-proportionate Selection}}{174}
+\contentsline {figure}{\numberline {3.40}{\ignorespaces Ranking Selection}}{175}
+\contentsline {figure}{\numberline {3.41}{\ignorespaces Tournament Selection}}{176}
+\contentsline {figure}{\numberline {3.42}{\ignorespaces Tournament Selection}}{178}
+\contentsline {figure}{\numberline {3.43}{\ignorespaces Evolving Lion Roar Time-Frequency Representation}}{187}
+\contentsline {figure}{\numberline {3.44}{\ignorespaces Evolving Freight Train Time-Frequency Representation}}{188}
+\contentsline {figure}{\numberline {3.45}{\ignorespaces Evolving Metal Gong Time-Frequency Representation}}{189}
+\contentsline {figure}{\numberline {3.46}{\ignorespaces Evolving Metallic Synth Time-Frequency Representation}}{190}
+\contentsline {figure}{\numberline {3.47}{\ignorespaces Random Analog LFO Reverb Time-Frequency Representation}}{191}
