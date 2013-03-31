@@ -12,61 +12,61 @@
 \contentsline {figure}{\numberline {2.10}{\ignorespaces Concatenative Synthesis}}{32}
 \contentsline {figure}{\numberline {2.11}{\ignorespaces Phase Vocoder}}{35}
 \contentsline {figure}{\numberline {2.12}{\ignorespaces SMS}}{37}
-\contentsline {figure}{\numberline {2.13}{\ignorespaces Adaptive FM}}{39}
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Adaptive FM}}{40}
 \contentsline {figure}{\numberline {2.14}{\ignorespaces The Meta-Synthesis Problem}}{42}
 \contentsline {figure}{\numberline {2.15}{\ignorespaces Mapping Timbre to Parameters}}{45}
 \contentsline {figure}{\numberline {2.16}{\ignorespaces Searching for an Appropriate Linear Combination of Orchestral Instruments}}{48}
 \contentsline {figure}{\numberline {2.17}{\ignorespaces Fitness Function}}{51}
 \contentsline {figure}{\numberline {2.18}{\ignorespaces Fitness Surface Topologies}}{52}
-\contentsline {figure}{\numberline {2.19}{\ignorespaces GA Example}}{54}
-\contentsline {figure}{\numberline {2.20}{\ignorespaces The Genetic Programming Paradigm}}{58}
-\contentsline {figure}{\numberline {2.21}{\ignorespaces Gaussian Mixture Models}}{71}
+\contentsline {figure}{\numberline {2.19}{\ignorespaces GA Example}}{55}
+\contentsline {figure}{\numberline {2.20}{\ignorespaces The Genetic Programming Paradigm}}{59}
+\contentsline {figure}{\numberline {2.21}{\ignorespaces Gaussian Mixture Models}}{72}
 \contentsline {figure}{\numberline {2.22}{\ignorespaces Strongly-Typed Genetic Programming}}{86}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Generating a Max patch given a parse-tree}}{96}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces FromMax to Python}}{96}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces A Max Patch as a Directed Tree}}{98}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces A Max patch as a set of DAGs}}{100}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Using loadmess Objects to Provide Parameters to Max}}{101}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Removing send\texttildelow {} and receive\texttildelow {} Objects}}{103}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Reducing a Set of DAGs to a Single DAG}}{104}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces A Single DAG with Two\emph {dac\texttildelow {}} Objects}}{105}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces A DAG with Crossed Paths}}{106}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Uncrossing Paths to Form a Tree}}{107}
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Object List File}}{108}
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Flow Diagram of Overall GP System}}{112}
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Nearest-neighbor vs. k-nearest neighbor classifier}}{117}
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Pairwise CNN Architecture}}{122}
-\contentsline {figure}{\numberline {3.15}{\ignorespaces kNN accuracy for NLSE, PCA, and LLE}}{123}
-\contentsline {figure}{\numberline {3.16}{\ignorespaces NLSE vs. PCA vs. LLE Instrument Clusters}}{124}
-\contentsline {figure}{\numberline {3.17}{\ignorespaces Timbre Distance Between Centers}}{125}
-\contentsline {figure}{\numberline {3.18}{\ignorespaces Timbre Distance Between Curves}}{126}
-\contentsline {figure}{\numberline {3.19}{\ignorespaces Timbre Distance Between Time-Shifted Curves}}{128}
-\contentsline {figure}{\numberline {3.20}{\ignorespaces Timbre Distance Between Time-Warped Curves}}{128}
-\contentsline {figure}{\numberline {3.21}{\ignorespaces Timbre Distance Between Time-Warped Curves}}{130}
-\contentsline {figure}{\numberline {3.22}{\ignorespaces Symmetric Greedy Removal After Matching}}{134}
-\contentsline {figure}{\numberline {3.23}{\ignorespaces Asymmetric Greedy Removal After Matching}}{136}
-\contentsline {figure}{\numberline {3.24}{\ignorespaces Asymmetric Greedy Removal After Matching Reverse}}{137}
-\contentsline {figure}{\numberline {3.25}{\ignorespaces Finding Optimal Subsequence}}{145}
-\contentsline {figure}{\numberline {3.26}{\ignorespaces Removing Optimal Subsequence}}{146}
-\contentsline {figure}{\numberline {3.27}{\ignorespaces Penalizing Swaps}}{148}
-\contentsline {figure}{\numberline {3.28}{\ignorespaces Penalizing Overlaps and Gaps}}{149}
-\contentsline {figure}{\numberline {3.29}{\ignorespaces Crossover}}{156}
-\contentsline {figure}{\numberline {3.30}{\ignorespaces Subtree Mutation}}{157}
-\contentsline {figure}{\numberline {3.31}{\ignorespaces Point Mutation}}{157}
-\contentsline {figure}{\numberline {3.32}{\ignorespaces Reproduction}}{158}
-\contentsline {figure}{\numberline {3.33}{\ignorespaces Delay Feedback AM Max Patch}}{161}
-\contentsline {figure}{\numberline {3.34}{\ignorespaces Delay Feedback AM Time-Frequency Representation}}{162}
-\contentsline {figure}{\numberline {3.35}{\ignorespaces Adaptive Downsampling Max Patch}}{163}
-\contentsline {figure}{\numberline {3.36}{\ignorespaces Adaptive Downsampling Time-Frequency Representation}}{164}
-\contentsline {figure}{\numberline {3.37}{\ignorespaces Clipping Reverb Sawtooth Max Patch}}{165}
-\contentsline {figure}{\numberline {3.38}{\ignorespaces Clipping Reverb Sawtooth Time-Frequency Representation}}{166}
-\contentsline {figure}{\numberline {3.39}{\ignorespaces Fitness-proportionate Selection}}{174}
-\contentsline {figure}{\numberline {3.40}{\ignorespaces Ranking Selection}}{175}
-\contentsline {figure}{\numberline {3.41}{\ignorespaces Tournament Selection}}{176}
-\contentsline {figure}{\numberline {3.42}{\ignorespaces Tournament Selection}}{178}
-\contentsline {figure}{\numberline {3.43}{\ignorespaces Evolving Lion Roar Time-Frequency Representation}}{187}
-\contentsline {figure}{\numberline {3.44}{\ignorespaces Evolving Freight Train Time-Frequency Representation}}{188}
-\contentsline {figure}{\numberline {3.45}{\ignorespaces Evolving Metal Gong Time-Frequency Representation}}{189}
-\contentsline {figure}{\numberline {3.46}{\ignorespaces Evolving Metallic Synth Time-Frequency Representation}}{190}
-\contentsline {figure}{\numberline {3.47}{\ignorespaces Random Analog LFO Reverb Time-Frequency Representation}}{191}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Generating a Max patch given a parse-tree}}{97}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces FromMax to Python}}{97}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces A Max Patch as a Directed Tree}}{99}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces A Max patch as a set of DAGs}}{101}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Using loadmess Objects to Provide Parameters to Max}}{102}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Removing send\texttildelow {} and receive\texttildelow {} Objects}}{104}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Reducing a Set of DAGs to a Single DAG}}{105}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces A Single DAG with Two \emph {dac\texttildelow {}} Objects}}{106}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces A DAG with Crossed Paths}}{107}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Uncrossing Paths to Form a Tree}}{108}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Object List File}}{109}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Flow Diagram of Overall GP System}}{113}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Nearest-neighbor vs. k-nearest neighbor classifier}}{118}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Pairwise CNN Architecture}}{123}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces kNN accuracy for NLSE, PCA, and LLE}}{124}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces NLSE vs. PCA vs. LLE Instrument Clusters}}{125}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Timbre Distance Between Centers}}{126}
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Timbre Distance Between Curves}}{127}
+\contentsline {figure}{\numberline {3.19}{\ignorespaces Timbre Distance Between Time-Shifted Curves}}{129}
+\contentsline {figure}{\numberline {3.20}{\ignorespaces Timbre Distance Between Time-Warped Curves}}{129}
+\contentsline {figure}{\numberline {3.21}{\ignorespaces Timbre Distance Between Time-Warped Curves}}{131}
+\contentsline {figure}{\numberline {3.22}{\ignorespaces Symmetric Greedy Removal After Matching}}{135}
+\contentsline {figure}{\numberline {3.23}{\ignorespaces Asymmetric Greedy Removal After Matching}}{137}
+\contentsline {figure}{\numberline {3.24}{\ignorespaces Asymmetric Greedy Removal After Matching Reverse}}{138}
+\contentsline {figure}{\numberline {3.25}{\ignorespaces Finding Optimal Subsequence}}{146}
+\contentsline {figure}{\numberline {3.26}{\ignorespaces Removing Optimal Subsequence}}{147}
+\contentsline {figure}{\numberline {3.27}{\ignorespaces Penalizing Swaps}}{149}
+\contentsline {figure}{\numberline {3.28}{\ignorespaces Penalizing Overlaps and Gaps}}{150}
+\contentsline {figure}{\numberline {3.29}{\ignorespaces Crossover}}{157}
+\contentsline {figure}{\numberline {3.30}{\ignorespaces Subtree Mutation}}{158}
+\contentsline {figure}{\numberline {3.31}{\ignorespaces Point Mutation}}{158}
+\contentsline {figure}{\numberline {3.32}{\ignorespaces Reproduction}}{159}
+\contentsline {figure}{\numberline {3.33}{\ignorespaces Delay Feedback AM Max Patch}}{162}
+\contentsline {figure}{\numberline {3.34}{\ignorespaces Delay Feedback AM Time-Frequency Representation}}{163}
+\contentsline {figure}{\numberline {3.35}{\ignorespaces Adaptive Downsampling Max Patch}}{164}
+\contentsline {figure}{\numberline {3.36}{\ignorespaces Adaptive Downsampling Time-Frequency Representation}}{165}
+\contentsline {figure}{\numberline {3.37}{\ignorespaces Clipping Reverb Sawtooth Max Patch}}{166}
+\contentsline {figure}{\numberline {3.38}{\ignorespaces Clipping Reverb Sawtooth Time-Frequency Representation}}{167}
+\contentsline {figure}{\numberline {3.39}{\ignorespaces Fitness-proportionate Selection}}{175}
+\contentsline {figure}{\numberline {3.40}{\ignorespaces Ranking Selection}}{176}
+\contentsline {figure}{\numberline {3.41}{\ignorespaces Tournament Selection}}{177}
+\contentsline {figure}{\numberline {3.42}{\ignorespaces Tournament Selection}}{179}
+\contentsline {figure}{\numberline {3.43}{\ignorespaces Evolving Lion Roar Time-Frequency Representation}}{188}
+\contentsline {figure}{\numberline {3.44}{\ignorespaces Evolving Freight Train Time-Frequency Representation}}{189}
+\contentsline {figure}{\numberline {3.45}{\ignorespaces Evolving Metal Gong Time-Frequency Representation}}{190}
+\contentsline {figure}{\numberline {3.46}{\ignorespaces Evolving Metallic Synth Time-Frequency Representation}}{191}
+\contentsline {figure}{\numberline {3.47}{\ignorespaces Random Analog LFO Reverb Time-Frequency Representation}}{192}

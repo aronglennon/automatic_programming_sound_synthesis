@@ -122,7 +122,7 @@ Aucouturier%
 \ \BBA{} Pachet%
 }{%
 {\protect\APACyear{2004}}%
-{\protect\APACexlab{{\protect\BCnt{1}}}}}]{%
+}]{%
 Aucouturier:2003gs}%
 \APACinsertmetastar{%
 Aucouturier:2003gs}%
@@ -131,69 +131,13 @@ Aucouturier, J\BHBI J.%
 %
 \unskip\
 \newblock
-\APACrefYearMonthDay{2004{\protect\BCnt{1}}}{}{}.
+\APACrefYearMonthDay{2004}{}{}.
 \newblock
 \BBOQ{}\APACrefatitle{Improving Timbre Similarity: How High's the
   Sky?}{Improving timbre similarity: How high's the sky?}\BBCQ{}
 \newblock
 \APACjournalVolNumPages{Journal of Negative Results in Speech and Audio
   Sciences}{1}{1}{}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-Aucouturier%
-\ \BBA{} Pachet%
-}{%
-Aucouturier%
-\ \BBA{} Pachet%
-}{%
-{\protect\APACyear{2004}}%
-{\protect\APACexlab{{\protect\BCnt{2}}}}}]{%
-Aucouturier:2004qo}%
-\APACinsertmetastar{%
-Aucouturier:2004qo}%
-Aucouturier, J\BHBI J.%
-\BCBT{}\ \BBA{} Pachet, F.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2004{\protect\BCnt{2}}}{}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Tools and Architecture for the Evaluation of Similarity
-  Measures: Case Study of Timbre Similarity}{Tools and architecture for the
-  evaluation of similarity measures: Case study of timbre similarity}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{Proceedings of the 5th International Conference on Music
-  Information Retrieval (ISMIR 2004).}{Proceedings of the 5th international
-  conference on music information retrieval (ismir 2004).}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-Baumann%
-\ \BBA{} Halloran%
-}{%
-Baumann%
-\ \BBA{} Halloran%
-}{%
-{\protect\APACyear{2004}}%
-}]{%
-Baumann:2004qz}%
-\APACinsertmetastar{%
-Baumann:2004qz}%
-Baumann, S.%
-\BCBT{}\ \BBA{} Halloran, J.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2004}{}{}.
-\newblock
-\BBOQ{}\APACrefatitle{An Ecological Approach to Multimodal Subjective Music
-  Similarity Perception}{An ecological approach to multimodal subjective music
-  similarity perception}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{Proceedings of the Conference on Interdisciplinary
-  Musicology (CIM04).}{Proceedings of the conference on interdisciplinary
-  musicology (cim04).}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
@@ -333,33 +277,6 @@ Caclin, A.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-Campbell%
-, Jones%
-\BCBL{}\ \BBA{} Glavin%
-}{%
-Campbell%
-\ \protect\BOthers{.}}{%
-{\protect\APACyear{2009}}%
-}]{%
-Campbell:2009wb}%
-\APACinsertmetastar{%
-Campbell:2009wb}%
-Campbell, D.%
-, Jones, E.%
-\BCBL{}\ \BBA{} Glavin, M.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2009}{}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Audio Quality Assessment Techniques - A Review, and
-  Recent Developments}{Audio quality assessment techniques - a review, and
-  recent developments}.\BBCQ{}
-\newblock
-\APACjournalVolNumPages{Signal Processing}{89}{}{1489-1500}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
 Carpentier%
 , Tardieu%
 , Harvey%
@@ -389,28 +306,6 @@ Carpentier, C.%
   orchestration}.\BBCQ{}
 \newblock
 \APACjournalVolNumPages{Journal of New Music Research}{39}{1}{47-61}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-Casey%
-}{%
-Casey%
-}{%
-{\protect\APACyear{2001}}%
-}]{%
-Casey:2001zh}%
-\APACinsertmetastar{%
-Casey:2001zh}%
-Casey, M.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2001}{}{}.
-\newblock
-\BBOQ{}\APACrefatitle{General Sound Classification and Similarity in
-  MPEG-7}{General sound classification and similarity in mpeg-7}.\BBCQ{}
-\newblock
-\APACjournalVolNumPages{Organized Sound}{}{}{}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
@@ -797,6 +692,34 @@ Haas, W\BPBI B. de%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
+Hadsell%
+, Chopra%
+\BCBL{}\ \BBA{} LeCun%
+}{%
+Hadsell%
+\ \protect\BOthers{.}}{%
+{\protect\APACyear{2006}}%
+}]{%
+hadsell2006dimensionality}%
+\APACinsertmetastar{%
+hadsell2006dimensionality}%
+Hadsell, R.%
+, Chopra, S.%
+\BCBL{}\ \BBA{} LeCun, Y.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2006}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{Dimensionality reduction by learning an invariant
+  mapping}{Dimensionality reduction by learning an invariant mapping}.\BBCQ{}
+\newblock
+\BIn{} \APACrefbtitle{Computer vision and pattern recognition, 2006 IEEE
+  computer society conference on}{Computer vision and pattern recognition, 2006
+  ieee computer society conference on}\ (\BVOL~2, \BPGS\ 1735--1742).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
 Harris%
 }{%
 Harris%
@@ -1159,29 +1082,6 @@ Johnson, C\BPBI G.%
 
 \bibitem[\protect\citeauthoryear{%
 Johnson%
-}{%
-Johnson%
-}{%
-{\protect\APACyear{2003}}%
-}]{%
-Johnson:1998ss}%
-\APACinsertmetastar{%
-Johnson:1998ss}%
-Johnson, C\BPBI G.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2003}{}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Exploring Sound-Space with Interactive Genetic
-  Algorithms}{Exploring sound-space with interactive genetic
-  algorithms}.\BBCQ{}
-\newblock
-\APACjournalVolNumPages{Leonardo}{36}{1}{51-54}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-Johnson%
 \ \BBA{} Gounaropoulos%
 }{%
 Johnson%
@@ -1339,28 +1239,6 @@ Lazzarini, V.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-Leap%
-}{%
-Leap%
-}{%
-{\protect\APACyear{2008}}%
-}]{%
-:qy}%
-\APACinsertmetastar{%
-:qy}%
-Leap, N\BPBI J.%
-%
-\unskip\
-\newblock
-\APACrefYear{2008}.
-\newblock
-\APACrefbtitle{A Confidence Paradigm for Classification Systems}{A confidence
-  paradigm for classification systems}.
-\newblock
-\BUPhD, Air Force Institute of Technology.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
 Logan%
 , Ellis%
 \BCBL{}\ \BBA{} Berenzweig%
@@ -1438,6 +1316,32 @@ Loviscach, J.%
 \BIn{} \APACrefbtitle{Proceedings of the New Interfaces for Musical Expression
   Conference (NIME 2008).}{Proceedings of the new interfaces for musical
   expression conference (nime 2008).}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Luke%
+\ \BBA{} Panait%
+}{%
+Luke%
+\ \BBA{} Panait%
+}{%
+{\protect\APACyear{2006}}%
+}]{%
+luke2006comparison}%
+\APACinsertmetastar{%
+luke2006comparison}%
+Luke, S.%
+\BCBT{}\ \BBA{} Panait, L.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2006}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{A comparison of bloat control methods for genetic
+  programming}{A comparison of bloat control methods for genetic
+  programming}.\BBCQ{}
+\newblock
+\APACjournalVolNumPages{Evolutionary Computation}{14}{3}{309--344}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
@@ -1533,11 +1437,11 @@ Martens, W\BPBI L.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-J.~McDermott%
+McDermott%
 , Griffith%
 \BCBL{}\ \BBA{} O'Neill%
 }{%
-J.~McDermott%
+McDermott%
 \ \protect\BOthers{.}}{%
 {\protect\APACyear{2003}}%
 }]{%
@@ -1560,11 +1464,11 @@ McDermott, J.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-J.~McDermott%
+McDermott%
 , Griffith%
 \BCBL{}\ \BBA{} O'Neill%
 }{%
-J.~McDermott%
+McDermott%
 \ \protect\BOthers{.}}{%
 {\protect\APACyear{2007}}%
 }]{%
@@ -1586,11 +1490,11 @@ McDermott, J.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-J.~McDermott%
+McDermott%
 , Griffith%
 \BCBL{}\ \BBA{} O'Neill%
 }{%
-J.~McDermott%
+McDermott%
 \ \protect\BOthers{.}}{%
 {\protect\APACyear{2008}}%
 }]{%
@@ -1609,36 +1513,6 @@ McDermott, J.%
   Synthesis}{Evolutionary computation applied to sound synthesis}.\BBCQ{}
 \newblock
 \APACjournalVolNumPages{The Art of Artificial Evolution}{}{81-101}{}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-J\BPBI H.~McDermott%
-, Oxenham%
-\BCBL{}\ \BBA{} Simoncelli%
-}{%
-J\BPBI H.~McDermott%
-\ \protect\BOthers{.}}{%
-{\protect\APACyear{2009}}%
-}]{%
-McDermott:2009ss}%
-\APACinsertmetastar{%
-McDermott:2009ss}%
-McDermott, J\BPBI H.%
-, Oxenham, A\BPBI J.%
-\BCBL{}\ \BBA{} Simoncelli, E\BPBI P.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2009}{October}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Sound Texture Synthesis via Filter Statistics}{Sound
-  texture synthesis via filter statistics}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{2009 {IEEE} Workshop on Applications of Signal Processing
-  to Audio and Acoustics.}{2009 {IEEE} workshop on applications of signal
-  processing to audio and acoustics.}
-\newblock
-\APACaddressPublisher{New Paltz, New York}{}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
@@ -1875,40 +1749,9 @@ Moroni, A.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-C.~Nicol%
-, Brewster%
-\BCBL{}\ \BBA{} Gray%
+Nicol%
 }{%
-C.~Nicol%
-\ \protect\BOthers{.}}{%
-{\protect\APACyear{2004}}%
-}]{%
-Nicol:2004ij}%
-\APACinsertmetastar{%
-Nicol:2004ij}%
-Nicol, C.%
-, Brewster, S.%
-\BCBL{}\ \BBA{} Gray, P.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2004}{July}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Designing Sound: Towards a System for Designing Audio
-  Interfaces using Timbre Spaces}{Designing sound: Towards a system for
-  designing audio interfaces using timbre spaces}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{Proceedings of ICAD 04-Tenth Meeting of the International
-  Conference on Auditory Display.}{Proceedings of icad 04-tenth meeting of the
-  international conference on auditory display.}
-\newblock
-\APACaddressPublisher{Australia}{}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-C\BPBI A.~Nicol%
-}{%
-C\BPBI A.~Nicol%
+Nicol%
 }{%
 {\protect\APACyear{2005}}%
 }]{%
@@ -1926,42 +1769,6 @@ Nicol, C\BPBI A.%
   audio}.
 \newblock
 \BUPhD, University of Glasgow.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-Orboril%
-, Balik%
-, Schimmel%
-, Smekal%
-\BCBL{}\ \BBA{} Krkavec%
-}{%
-Orboril%
-\ \protect\BOthers{.}}{%
-{\protect\APACyear{2000}}%
-}]{%
-Orboril:2000qf}%
-\APACinsertmetastar{%
-Orboril:2000qf}%
-Orboril, D.%
-, Balik, M.%
-, Schimmel, J.%
-, Smekal, Z.%
-\BCBL{}\ \BBA{} Krkavec, P.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2000}{December}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Modelling Digital Musical Effects for Signal Processors,
-  Based on Real Effect Manifestation Analysis}{Modelling digital musical
-  effects for signal processors, based on real effect manifestation
-  analysis}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{Proceedings of the COST G-6 Conference on Digital Audio
-  Effects (DAFX-00).}{Proceedings of the cost g-6 conference on digital audio
-  effects (dafx-00).}
-\newblock
-\APACaddressPublisher{Verona, Italy}{}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
@@ -2116,36 +1923,6 @@ Paulus, J.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-Pazos%
-, Riego%
-, Dorado%
-\BCBL{}\ \BBA{} Cardalda%
-}{%
-Pazos%
-\ \protect\BOthers{.}}{%
-{\protect\APACyear{1999}}%
-}]{%
-Pazos:1998xz}%
-\APACinsertmetastar{%
-Pazos:1998xz}%
-Pazos, A.%
-, Riego, A\BPBI S. del%
-, Dorado, J.%
-\BCBL{}\ \BBA{} Cardalda, J\BPBI R.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{1999}{}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Adaptive Aspects of Rhythmic Composition: Genetic
-  Music}{Adaptive aspects of rhythmic composition: Genetic music}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{Proceedings of the Genetic and Evolutionary Computation
-  Conference}{Proceedings of the genetic and evolutionary computation
-  conference}\ (\BVOL~2, \BPG~1794).
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
 Polito%
 , Daida%
 \BCBL{}\ \BBA{} Bersano-Begey%
@@ -2273,9 +2050,9 @@ Puckette%
 }{%
 {\protect\APACyear{2007}}%
 }]{%
-Puckette:NoRead}%
+Puckette:2007ai}%
 \APACinsertmetastar{%
-Puckette:NoRead}%
+Puckette:2007ai}%
 Puckette, M.%
 %
 \unskip\
@@ -2285,36 +2062,7 @@ Puckette, M.%
 \APACrefbtitle{The Theory and Technique of Electronic Music}{The theory and
   technique of electronic music}.
 \newblock
-\APACaddressPublisher{Singapore}{World Scientific Press}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-Puente%
-, Alfonso%
-\BCBL{}\ \BBA{} Moreno%
-}{%
-Puente%
-\ \protect\BOthers{.}}{%
-{\protect\APACyear{2002}}%
-}]{%
-Puente:2002sw}%
-\APACinsertmetastar{%
-Puente:2002sw}%
-Puente, A\BPBI O. de~la%
-, Alfonso, R\BPBI S.%
-\BCBL{}\ \BBA{} Moreno, M\BPBI A.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2002}{}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Automatic Composition of Music by Means of Grammatical
-  Evolution}{Automatic composition of music by means of grammatical
-  evolution}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{Proceedings of APL'2002.}{Proceedings of apl'2002.}
-\newblock
-\APACaddressPublisher{Madrid, Spain}{}.
+\APACaddressPublisher{}{World Scientific Publishing Co. Pte. Ltd.}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
@@ -2595,32 +2343,40 @@ Seago, A.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-Serra%
+J.~Serra%
+, G{\'o}mez%
+, Herrera%
+\BCBL{}\ \BBA{} Serra%
 }{%
-Serra%
-}{%
-{\protect\APACyear{2003}}%
+J.~Serra%
+\ \protect\BOthers{.}}{%
+{\protect\APACyear{2008}}%
 }]{%
-Serra:ow}%
+serra2008chroma}%
 \APACinsertmetastar{%
-Serra:ow}%
-Serra, X.%
+serra2008chroma}%
+Serra, J.%
+, G{\'o}mez, E.%
+, Herrera, P.%
+\BCBL{}\ \BBA{} Serra, X.%
 %
 \unskip\
 \newblock
-\APACrefYearMonthDay{2003}{}{}.
+\APACrefYearMonthDay{2008}{}{}.
 \newblock
-\APACrefbtitle{Spectral Modeling Synthesis: Past and Present.}{Spectral
-  modeling synthesis: Past and present.}
+\BBOQ{}\APACrefatitle{Chroma binary similarity and local alignment applied to
+  cover song identification}{Chroma binary similarity and local alignment
+  applied to cover song identification}.\BBCQ{}
 \newblock
-\APACrefnote{Slides from University of Pompeu Fabra}
+\APACjournalVolNumPages{Audio, Speech, and Language Processing, IEEE
+  Transactions on}{16}{6}{1138--1151}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-Serra%
+X.~Serra%
 \ \BBA{} III%
 }{%
-Serra%
+X.~Serra%
 \ \BBA{} III%
 }{%
 {\protect\APACyear{1990}}%
@@ -2783,6 +2539,32 @@ Silva, S\BPBI G\BPBI O. da.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
+Smith%
+\ \BBA{} Waterman%
+}{%
+Smith%
+\ \BBA{} Waterman%
+}{%
+{\protect\APACyear{1981}}%
+}]{%
+smith1981textordfeminineidentification}%
+\APACinsertmetastar{%
+smith1981textordfeminineidentification}%
+Smith, T.%
+\BCBT{}\ \BBA{} Waterman, M.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1981}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{{\textordfeminine}Identification of Common Molecular
+  Subsequences, {\textordmasculine} J}{{\textordfeminine}identification of
+  common molecular subsequences, {\textordmasculine} j}.\BBCQ{}
+\newblock
+\APACjournalVolNumPages{Molecular Biology}{147}{}{195--197}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
 Spector%
 \ \BBA{} Alpern%
 }{%
@@ -2811,59 +2593,6 @@ Spector, L.%
 \newblock
 \APACaddressPublisher{Menlo Park, CA and Cambridge, MA}{AAAI Press/The MIT
   Press}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-Spector%
-\ \BBA{} Alpern%
-}{%
-Spector%
-\ \BBA{} Alpern%
-}{%
-{\protect\APACyear{1995}}%
-}]{%
-Spector:1995fy}%
-\APACinsertmetastar{%
-Spector:1995fy}%
-Spector, L.%
-\BCBT{}\ \BBA{} Alpern, A.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{1995}{}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Induction and Recapitulation of Deep Musical
-  Structure}{Induction and recapitulation of deep musical structure}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{Proceedings of the IJCAI-95 Workshop on Artificial
-  Intelligence and Music.}{Proceedings of the ijcai-95 workshop on artificial
-  intelligence and music.}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-Stepanek%
-}{%
-Stepanek%
-}{%
-{\protect\APACyear{2006}}%
-}]{%
-Stepanek:2006zv}%
-\APACinsertmetastar{%
-Stepanek:2006zv}%
-Stepanek, J.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2006}{September}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Musical Sound Timbre: Verbal Description and
-  Dimensions}{Musical sound timbre: Verbal description and dimensions}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{Proceedings of the 9th Conference on Digital Audio
-  Effects (DAFx-06).}{Proceedings of the 9th conference on digital audio
-  effects (dafx-06).}
-\newblock
-\APACaddressPublisher{Montreal, Canada}{}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
@@ -2897,87 +2626,6 @@ Stowell, D.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-Stowell%
-\ \BBA{} Plumbley%
-}{%
-Stowell%
-\ \BBA{} Plumbley%
-}{%
-{\protect\APACyear{2010}}%
-}]{%
-Stowell:2010xr}%
-\APACinsertmetastar{%
-Stowell:2010xr}%
-Stowell, D.%
-\BCBT{}\ \BBA{} Plumbley, M\BPBI D.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2010}{}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Timbre Remapping through a Regression-Tree
-  Technique}{Timbre remapping through a regression-tree technique}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{Sound and Music Computing Conference.}{Sound and music
-  computing conference.}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-Stroppa%
-}{%
-Stroppa%
-}{%
-{\protect\APACyear{2000}}%
-}]{%
-Stroppa:2000lc}%
-\APACinsertmetastar{%
-Stroppa:2000lc}%
-Stroppa, M.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2000}{2000}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Paradigms for the High-Level Musical Control of Digital
-  Signal Processing}{Paradigms for the high-level musical control of digital
-  signal processing}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{Proceedings of the COST G-6 Conference on Digital Audio
-  Effects (DAFX-00).}{Proceedings of the cost g-6 conference on digital audio
-  effects (dafx-00).}
-\newblock
-\APACaddressPublisher{Verona, Italy}{}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-Sung%
-\ \protect\BOthers{.}}{%
-Sung%
-\ \protect\BOthers{.}}{%
-{\protect\APACyear{2008}}%
-}]{%
-Sung:2008ya}%
-\APACinsertmetastar{%
-Sung:2008ya}%
-Sung, B.%
-, Jung, M.%
-, Ham, J.%
-, Kim, J.%
-, Park, J.%
-\BCBL{}\ \BBA{} Ko, I.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2008}{February}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Feture Based Same Audio Perception method for Filtering
-  of Illegal Music Contents}{Feture based same audio perception method for
-  filtering of illegal music contents}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{Proceedings of ICACT 2008.}{Proceedings of icact 2008.}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
 Teller%
 }{%
 Teller%
@@ -2998,57 +2646,6 @@ Teller, A.%
   understanding}.
 \newblock
 \BUPhD, Carnegie Mellon University, Pittsburgh, PA.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-Tenkanen%
-}{%
-Tenkanen%
-}{%
-{\protect\APACyear{2009}}%
-}]{%
-Tenkanen:2009px}%
-\APACinsertmetastar{%
-Tenkanen:2009px}%
-Tenkanen, A.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2009}{November}{}.
-\newblock
-\APACrefbtitle{Searching for Better Measures: Generating Similarity Functions
-  for Abstract Musical Objects.}{Searching for better measures: Generating
-  similarity functions for abstract musical objects.}
-\newblock
-\APACrefnote{ICIS2009 Lecture Slides}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-Terasawa%
-, Slaney%
-\BCBL{}\ \BBA{} Berger%
-}{%
-Terasawa%
-\ \protect\BOthers{.}}{%
-{\protect\APACyear{2005}}%
-}]{%
-Terasawa:2005rq}%
-\APACinsertmetastar{%
-Terasawa:2005rq}%
-Terasawa, H.%
-, Slaney, M.%
-\BCBL{}\ \BBA{} Berger, J.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2005}{}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Perceptual Distance in Timbre Space}{Perceptual distance
-  in timbre space}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{Proceedings of ICAD 05-Eleventh Meeting of the
-  International Conference on Auditory Display.}{Proceedings of icad
-  05-eleventh meeting of the international conference on auditory display.}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
@@ -3274,65 +2871,6 @@ Vercoe, B\BPBI L.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-Verfaille%
-\ \BBA{} Guastavino%
-}{%
-Verfaille%
-\ \BBA{} Guastavino%
-}{%
-{\protect\APACyear{2006}}%
-}]{%
-Verfaille:2006fe}%
-\APACinsertmetastar{%
-Verfaille:2006fe}%
-Verfaille, V.%
-\BCBT{}\ \BBA{} Guastavino, C.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2006}{September}{}.
-\newblock
-\BBOQ{}\APACrefatitle{An Interdisciplinary Approach to Audio Effect
-  Classification}{An interdisciplinary approach to audio effect
-  classification}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{Proceedings of the 9th Conference on Digital Audio
-  Effects (DAFx-06).}{Proceedings of the 9th conference on digital audio
-  effects (dafx-06).}
-\newblock
-\APACaddressPublisher{Montreal, Canada}{}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-Villers%
-\ \BBA{} Preez%
-}{%
-Villers%
-\ \BBA{} Preez%
-}{%
-{\protect\APACyear{2000}}%
-}]{%
-Villers:2000ul}%
-\APACinsertmetastar{%
-Villers:2000ul}%
-Villers, E. de%
-\BCBT{}\ \BBA{} Preez, J\BPBI A. du.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2000}{}{}.
-\newblock
-\BBOQ{}\APACrefatitle{The Advantage of Using Higher Order HMM's for Segmenting
-  Acoustic Files}{The advantage of using higher order hmm's for segmenting
-  acoustic files}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{Proceedings of the 12th International Symposium of the
-  Pattern Recognition Association of South Africa}{Proceedings of the 12th
-  international symposium of the pattern recognition association of south
-  africa}\ (\BPG~120-122).
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
 Wehn%
 }{%
 Wehn%
@@ -3431,35 +2969,6 @@ Zhang, X.%
 \BIn{} \APACrefbtitle{Proceedings of the International Conference on Multimedia
   and Ubiquitous Engineering.}{Proceedings of the international conference on
   multimedia and ubiquitous engineering.}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-Zhu%
-\ \BBA{} Wyse%
-}{%
-Zhu%
-\ \BBA{} Wyse%
-}{%
-{\protect\APACyear{2004}}%
-}]{%
-Zhu:2004mc}%
-\APACinsertmetastar{%
-Zhu:2004mc}%
-Zhu, X.%
-\BCBT{}\ \BBA{} Wyse, L.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2004}{October}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Sound Texture Modelling and Time-Frequency LPC}{Sound
-  texture modelling and time-frequency lpc}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{Proceedings of the 7th International Conference on
-  Digital Audio Effects (DAFx'04).}{Proceedings of the 7th international
-  conference on digital audio effects (dafx'04).}
-\newblock
-\APACaddressPublisher{Naples, Italy}{}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%

@@ -1,3 +1,7 @@
+\contentsline {subsection}{Abstract}{i}
+\contentsline {subsection}{Acknowledgements}{ii}
+\contentsline {subsection}{Figures}{v}
+\contentsline {subsection}{Tables}{ix}
 \contentsline {chapter}{\numberline {1}Introduction}{1}
 \contentsline {section}{\numberline {1.1}Motivations}{4}
 \contentsline {section}{\numberline {1.2}Overview}{6}
@@ -6,24 +10,24 @@
 \contentsline {section}{\numberline {2.2}Sound Synthesis}{16}
 \contentsline {section}{\numberline {2.3}Parameter Estimation}{29}
 \contentsline {section}{\numberline {2.4}Meta-synthesis}{39}
-\contentsline {section}{\numberline {2.5}Artificially Intelligent Music Systems}{49}
-\contentsline {section}{\numberline {2.6}Audio-Implementation Systems}{66}
-\contentsline {section}{\numberline {2.7}Timbral Similarity}{67}
+\contentsline {section}{\numberline {2.5}Artificially Intelligent Music Systems}{50}
+\contentsline {section}{\numberline {2.6}Audio-Implementation Systems}{67}
+\contentsline {section}{\numberline {2.7}Timbral Similarity}{68}
 \contentsline {section}{\numberline {2.8}State-of-the-Art Genetic Programming}{83}
-\contentsline {chapter}{\numberline {3}Methods}{93}
-\contentsline {section}{\numberline {3.1}System Design}{93}
-\contentsline {subsection}{\numberline {3.1.1}Languages and Interoperability}{93}
-\contentsline {subsection}{\numberline {3.1.2}Framing as a Genetic Programming Problem}{97}
-\contentsline {subsection}{\numberline {3.1.3}Genetic Programming System Overview}{109}
-\contentsline {section}{\numberline {3.2}Experiment Design}{113}
-\contentsline {subsection}{\numberline {3.2.1}The Fitness Function}{114}
-\contentsline {subsubsection}{Timbre Feature Extraction}{114}
-\contentsline {subsubsection}{Timbre Similarity}{125}
-\contentsline {subsection}{\numberline {3.2.2}Genetic Operator Variations}{153}
-\contentsline {subsection}{\numberline {3.2.3}Target Sound Selection}{159}
-\contentsline {subsection}{\numberline {3.2.4}Limiting Code Bloat and Promoting Parsimony}{167}
-\contentsline {subsection}{\numberline {3.2.5}Initial Conditions and Selection Methods}{171}
-\contentsline {subsubsection}{Non-standard Selection Methods}{180}
-\contentsline {subsection}{\numberline {3.2.6}Expanding/Restricting the Searchable Region of Input Space}{184}
-\contentsline {subsection}{\numberline {3.2.7}Generalization}{186}
-\contentsline {chapter}{References}{192}
+\contentsline {chapter}{\numberline {3}Methods}{94}
+\contentsline {section}{\numberline {3.1}System Design}{94}
+\contentsline {subsection}{\numberline {3.1.1}Languages and Interoperability}{94}
+\contentsline {subsection}{\numberline {3.1.2}Framing as a Genetic Programming Problem}{98}
+\contentsline {subsection}{\numberline {3.1.3}Genetic Programming System Overview}{110}
+\contentsline {section}{\numberline {3.2}Experiment Design}{114}
+\contentsline {subsection}{\numberline {3.2.1}The Fitness Function}{115}
+\contentsline {subsubsection}{Timbre Feature Extraction}{115}
+\contentsline {subsubsection}{Timbre Similarity}{126}
+\contentsline {subsection}{\numberline {3.2.2}Genetic Operator Variations}{154}
+\contentsline {subsection}{\numberline {3.2.3}Target Sound Selection}{160}
+\contentsline {subsection}{\numberline {3.2.4}Limiting Code Bloat and Promoting Parsimony}{168}
+\contentsline {subsection}{\numberline {3.2.5}Initial Conditions and Selection Methods}{172}
+\contentsline {subsubsection}{Non-standard Selection Methods}{181}
+\contentsline {subsection}{\numberline {3.2.6}Expanding/Restricting the Searchable Region of Input Space}{185}
+\contentsline {subsection}{\numberline {3.2.7}Generalization}{187}
+\contentsline {chapter}{References}{193}
