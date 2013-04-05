@@ -871,31 +871,37 @@ If we considered some boundary distance $\epsilon$ a distance from one timbre fe
 \begin{equation}
 s(Z_i^1, Z_j^2) = 1.0-\frac{\sqrt{\sum_{k=1}^{N}(Z_{ik}^1 - Z_{jk}^2)^2}}{\sqrt{3}}
 \end{equation}
-If we apply this formula to all pairs of timbre feature vectors in the two sequences $Z^1$ and $Z^2$ and place the resultant $s(Z_i^1, Z_j^2)$ values into the elements $s_{ij}$ of a similarity matrix $S$, we can input this to the Smith-Waterman algorithm to find the best local subsequence alignment within the two sequences.
+If we apply this formula to all pairs of timbre feature vectors in the two sequences $Z^1$ and $Z^2$ and place the resultant $s(Z_i^1, Z_j^2)$ values into the elements $s_{ij}$ of a similarity matrix $S$, we can input this to the Smith-Waterman algorithm to find the best local subsequence alignment within the two sequences. We call this the Continuous Smith-Waterman (CSW) variation going forward.
 
-The Smith-Waterman algorithm builds an alignment matrix, often labelled $H$ \cite{smith1981textordfeminineidentification}. We follow Serr\'a et al. in using a common variation of Smith-Waterman that applies `gap penalties' in constructing the alignment matrix, which allows for subsequence alignment even when there are small gaps or extensions in that alignment \cite{serra2008chroma}. These gap penalties are important in our problem domain, because we want to be tolerant of short insertions or deletions of timbal content in comparing the timbre similarity of two sequences, but this tolerance comes at a price (i.e. applies a penalty of allowance), so that it is limited during alignment. The alignment matrix elements can be calculated in the following manner \cite{serra2008chroma}:
+The Smith-Waterman algorithm builds an alignment matrix, often labelled $H$ \cite{smith1981textordfeminineidentification}. We follow Serr\'a et al. in using a common variation of Smith-Waterman in how it applies `gap penalties' in constructing the alignment matrix. The use of gap penalties allows for subsequence alignment even when there are small gaps in that alignment, but discourage them by penalizing the alignment values where they occur \cite{serra2008chroma}. These gap penalties are important in our problem domain, because we want to be tolerant of limited insertions or deletions of timbal content in comparing the timbre similarity of two sequences. The alignment matrix elements can be calculated in the following manner \cite{serra2008chroma}:
 \begin{equation}
-H_{ij} = max\left\{ 
+H_{i,j} = max\left\{ 
   \begin{array}{l l}
-    H_{i-1,j-1}+S_{i-1,j-1}-\delta(S_{i-2,j-2},S_{i-1,j-1})\\
-    H_{i-1,j-1}+S_{i-1,j-1}-\delta(S_{i-3,j-2},S_{i-1,j-1})\\
-    H_{i-1,j-1}+S_{i-1,j-1}-\delta(S_{i-2,j-3},S_{i-1,j-1})\\
+    H_{i-1,j-1}+S_{i,j}-\delta(S_{i,j},S_{i-1,j-1})\\
+    H_{i-1,j}+S_{i,j}-\delta(S_{i,j},S_{i-1,j})\\
+    H_{i,j-1}+S_{i,j}-\delta(S_{i,j},S_{i,j-1})\\
     0
    \end{array} \right.
 \end{equation}
 \\
-where:
+\vspace{10 mm}
+where $\delta(a,b)$ is the gap penalty function (defined below).
+
+Note that the H matrix elements are built by looking to the left, down, and down-and-to-the-left to determine which direction the strongest alignment is coming from (after gap penalties are applied) and adding that alignment value to the similarity value from the matrix S at the element in question to mark the strongest possible alignment path to it. As a detail, note that the first row and column of H cannot be calculated due to the gap penalty arguments and therefore are set to $0$.
+
+Gap penalties are typically applied differently depending on whether the element marks the beginning of a gap (`gap opening') or a continuation of a gap (`gap extension'). In the standard binary Smith-Waterman formulation, gaps are marked by $S_{i,j}$ containing a dissimilar value (recall the binary values represent either a similar or dissimilar vector pair). Therefore, gaps begin in an alignment when $S_{i,j}$ contains the dissimilar value and the S element that corresponds to the direction of best alignment contains the similar value, and gaps are extended when both $S_{i,j}$ and the S element corresponding to the direction of best alignment contain the dissimilar value. The binary nature of the similarity matrix input, S, makes the detection of gaps and their boundaries simple given the above rules. However, with a continuous-valued input matrix, gaps are not easily recognizable. In fact, the concept of a `gap' in our formulation is not entirely valid unless we specify a similarity threshold above which vectors are truly aligned and below which we have a gap in alignment. Such a threshold would only be applied in order to fit the problem to the Smith-Waterman algorithm, which we do not believe is a good enough reason to enforce it. Therefore, we have chosen to look at exactly what the gap penalties achieve and develop penalties in our CSW implementation that achieve the same purpose, but without any artificial binary transformation within it. 
+
+The gap penalties in the standard SW implementation are commonly discrete constants that act to further decrease $H_{i,j}$ when it represents an alignment path through a gap (determined by the value of $S_{i,j}$ and its neighbors as described above). These penalties allow paths to move through $H_{i,j}$, but penalize any that do. In CSW, the values of $S_{i,j}$ can range from $-1.0$ to $1.0$ and represent a continuous spectrum of timbre similarity. Instead of direct alignments or gaps occurring in the continuous space, we have vector pairs whose similarity scores are higher or lower than their neighbors. In other words, an alignment path will be moving through pairs that are more or less similar over time. What we want to penalize is any alignment path that is moving through pairs that are less and less similar as it progresses. One can think of a gap opening as the moment the path moves through a pair of vectors whose similarity is less than the previous pair in the alignment and a gap extension as the continuation of this trend. However, applying constant penalties to these occurrences is not appropriate. By doing so, we would be treating an alignment path that varies around a very high similarity similarly to one that varies around a very low similarity. For example, a path that moves through pairs of vectors whose similarity scores fall from $1.0$ to $0.95$ would incur the same penalty as pairs whose similarity scores fall from $-0.2$ to $-0.5$. A slight variation in the high similarity range should not be penalized as much as a large variation in the low similarity range, so we adjust our penalty both on the raw similarity score of the vectors in the downward trend and the magnitude of the downward trend. We choose to not differentiate between `gap openings' and `gap extensions' as the choice of the penalty amount being scaled by the raw score already weighs extension penalties more heavily than openings due to the trend of the raw score to decrease over the gap. Our `gap penalty' function is therefore defined as:
 \begin{equation}
 \delta(a,b)=\left\{
   \begin{array}{l l}
-    0 & \quad \text{if $b>0$}\\
-    c_1 & \quad \text{if $b \leq 0$ and $a > b$}\\
-    c_2 & \quad \text{if $b \leq 0$ and $a \leq b$}
+    0 & \quad \text{if $a \geq b$}\\
+    \frac{(b-a)(1-a)}{4} & \quad \text{if $a < b$}\\
    \end{array} \right.
 \end{equation}
 \\
 \vspace{10 mm}
-Note that $\delta(a,b)$ is $0$ when $S_{i-1,j-1}$ is positive. In the similarity matrix, this refers to the previous two vectors in our sequences being relatively similar, so that there is no gap in similarity. Therefore, no penalty is added. Gap openings and extensions result in two different penalty values ($c_1$ and $c_2$, respectively), so that we can vary those independently to penalize one over the other more. Serr\'a et al. found that their system evaluation measures were relatively constant when both $c_1$ and $c_2$ were between $0.3$ and $1.0$, so we will adopt their choices of $c_1 = 0.5$ and $c_2 = 0.7$. As a detail, note that the first three rows and columns of H cannot be calculated due to the gap penalty arguments and therefore are set to $0$.
+Note that the gap penalty is proportional to the similarity decrease when one occurs (otherwise, there is no penalty) and also proportional to the additive inverse of the similarity score. The maximum penalty incurred would occur for a similarity value between successive pairs of vectors in the alignment that drops from $1.0$ to $-1.0$. In this case, the penalty would be $(2*2)/4 = 1$. A less severe drop from $0.0$ to $-1.0$ would incur a penalty of $(1*2)/4 = 0.5$ while the same magnitude drop from $1.0$ to $0.0$ would incur a smaller penalty of $(1*1)/4 = 0.25$. This penalty function therefore has all of the characteristics we desire and has an upper bound that is equivalent to the lowest possible similarity score (meaning at worst the penalty will double the decrease in our alignment score based on a negative similarity value for $S_{i,j}$). This latter characteristic is in line with typical binary penalty values for gap openings and extensions.
 
 In order to find the best local alignment within $H$, we simply:
 \begin{enumerate}

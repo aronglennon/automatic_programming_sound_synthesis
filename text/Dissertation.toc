@@ -23,11 +23,11 @@
 \contentsline {subsection}{\numberline {3.2.1}The Fitness Function}{115}
 \contentsline {subsubsection}{Timbre Feature Extraction}{115}
 \contentsline {subsubsection}{Timbre Similarity}{126}
-\contentsline {subsection}{\numberline {3.2.2}Genetic Operator Variations}{154}
-\contentsline {subsection}{\numberline {3.2.3}Target Sound Selection}{160}
-\contentsline {subsection}{\numberline {3.2.4}Limiting Code Bloat and Promoting Parsimony}{168}
-\contentsline {subsection}{\numberline {3.2.5}Initial Conditions and Selection Methods}{172}
-\contentsline {subsubsection}{Non-standard Selection Methods}{181}
-\contentsline {subsection}{\numberline {3.2.6}Expanding/Restricting the Searchable Region of Input Space}{185}
-\contentsline {subsection}{\numberline {3.2.7}Generalization}{187}
-\contentsline {chapter}{References}{193}
+\contentsline {subsection}{\numberline {3.2.2}Genetic Operator Variations}{157}
+\contentsline {subsection}{\numberline {3.2.3}Target Sound Selection}{163}
+\contentsline {subsection}{\numberline {3.2.4}Limiting Code Bloat and Promoting Parsimony}{171}
+\contentsline {subsection}{\numberline {3.2.5}Initial Conditions and Selection Methods}{174}
+\contentsline {subsubsection}{Non-standard Selection Methods}{183}
+\contentsline {subsection}{\numberline {3.2.6}Expanding/Restricting the Searchable Region of Input Space}{187}
+\contentsline {subsection}{\numberline {3.2.7}Generalization}{189}
+\contentsline {chapter}{References}{196}
