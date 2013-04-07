@@ -114,7 +114,7 @@ def main():
         for j in range(0, len(population)):
             this_patch = population[j]
             # populate this_patch.data with features from specified file
-            this_patch.start_max_processing(SAMP_MFCC_FILE, feature_type)
+            this_patch.start_max_processing(SAMP_MFCC_FILE, feature_type) ######################## MAKE WORK WITH MULTIPLE CONCURRENT PATCHES
             this_patch.fitness = get_similarity(target_features,this_patch.data, similarity_measure)
             # if nan, create new random patch, calculate fitness, if not nan, use to  replace
             while (np.isnan(this_patch.fitness)):

@@ -1,4 +1,5 @@
 import numpy as np
+from matplotlib import pylab as pl
 
 def get_similarity(features1, features2, similarity_type):
     print 'calculating similarity'
@@ -9,7 +10,9 @@ def get_similarity(features1, features2, similarity_type):
     elif similarity_type == 'DTW':
         print 'WARNING: DTW not implemented yet'
         return 0
-    # option 3: what else?
+    # option 3: SI-CSW
+    elif similarity_type == 'SIC-DPLA':
+        return get_SIC_DPLA(features1, features2)
 
 def get_euclidean(features1, features2):
     # make sure both matrices are the same size...if not truncate the larger one
@@ -21,6 +24,86 @@ def get_euclidean(features1, features2):
     for i in range(0, features1.shape[0]):
         dist += np.linalg.norm(features1[i][:]-features2[i][:])
     return dist
+
+def get_SIC_DPLA(features1, features2):
+    similarity = 0.0
+    ICDPLA_left = 0.0
+    ICDPLA_right = 0.0
+    max_sequence_length = max(len(features1), len(features2))
+    # create similarity matrix as input to Smith Waterman
+    similarity_matrix = np.zeros(shape=(len(features1),len(features2)))
+    for i in range(0, len(features1)):
+        for j in range(0, len(features2)):
+            similarity_matrix[i][j] = np.linalg.norm(features1[i][:]-features2[j][:])
+    # generate Smith-Waterman H matrix
+    alignment_matrix = np.zeros(shape=(len(features1),len(features2)))
+    # generate corresponding path matrix P (to track the alignment path to any index i,j)
+    path_trace_matrix = np.zeros(shape=(len(features1),len(features2)))
+    # generate corresponding warp extension matrix (to track how far a warping is being extended)
+    warp_extension_matrix = np.zeros(shape=(len(features1),len(features2)))
+    # each element is generated with info from elements to its left, diagonal-down-left, and below it AND
+    # elements in the similarity matrix from its diagonal-down-left, left, and below
+    # --- calculate first elements
+    for i in range(0, len(features1)-1):
+        # j is zero
+        alignment_matrix[i][0] = max(similarity_matrix[i][0], 0)
+        path_trace_matrix[i][0] = [-1,-1]
+    for j in range(1, len(features2)-1):
+        # i is zero
+        alignment_matrix[0][j] = max(similarity_matrix[0][j], 0)
+        path_trace_matrix[0][j] = [-1,-1]
+    # --- calculate the rest of the matrices
+    for i in range(1, len(features1)-1):
+        for j in range(1, len(features2)-1):
+            diagonal = alignment_matrix[i-1][j-1]+similarity_matrix[i][j]
+            left = alignment_matrix[i][j-1]+similarity_matrix[i][j] - delta(warp_extension_matrix[i][j-1], max_sequence_length)
+            right = alignment_matrix[i-1][j]+similarity_matrix[i][j] - delta(warp_extension_matrix[i-1][j], max_sequence_length)
+            alignment_matrix[i][j] = max(diagonal, left, right, 0)
+            max_index = [diagonal, left, right, 0].index(alignment_matrix[i][j])
+            # diagonal was chosen
+            if max_index == 0:
+                warp_extension_matrix[i][j] = 0
+                path_trace_matrix[i][j] = [i-1,j-1]
+            # left was chosen
+            elif max_index == 1:
+                warp_extension_matrix[i][j] = warp_extension_matrix[i][j-1] + 1
+                path_trace_matrix[i][j] = [i,j-1]
+            # right was chosen
+            elif max_index == 2:
+                warp_extension_matrix[i][j] = warp_extension_matrix[i-1][j] + 1
+                path_trace_matrix[i][j] = [i-1,j]
+            # zero was chosen (meaning no alignment path is allowed)
+            else:
+                warp_extension_matrix[i][j] = 0
+                # sentinel meaning (not traceable - i.e. if you reach this, it is the start of a local alignment)
+                path_trace_matrix[i][j] = [-1,-1] 
+    ICDPLA_left = ICDPLA(alignment_matrix, path_trace_matrix, features1, features2)
+    ICDPLA_right = ICDPLA(alignment_matrix, path_trace_matrix, features2, features1)
+    return 2.0 / (ICDPLA_left + ICDPLA_right)
+
+def ICDPLA(alignment_matrix, path_trace_matrix, superior, inferior):
+    # find max in Smith-Waterman matrix
+    max_index = pl.unravel_index(alignment_matrix.argmax(), alignment_matrix.shape)
+    # calculate distance over alignment path
+    local_distance = 0.0
+    # the start index will be where the alignment begins (necessary to remove submatrix)
+    start_x = 0
+    # these indices trace path backwards
+    x_index = max_index[0]
+    y_index = max_index[1]
+    while (x_index != -1):
+        start_x = x_index
+        local_distance += np.linalg.norm(superior[x_index][:]-inferior[y_index][:]) 
+        [x_index, y_index] = path_trace_matrix[x_index][y_index]
+    # remove appropriate rows from sequence1 and split into two matrices to be involved in the same process
+    alignment_top_submatrix = alignment_matrix[:start_x,:]
+    alignment_bottom_submatrix = alignment_matrix[max_index[0]:, :]
+    return local_distance + ICDPLA(alignment_top_submatrix, path_trace_matrix, superior, inferior) + ICDPLA(alignment_bottom_submatrix, path_trace_matrix, superior, inferior)
+    
+# warping penalty - note that this is before the length is increased at i,j, which is appropriate, because
+# this formula assumes a warping opening has a length of 0
+def delta(warp_length, max_sequence_length):
+    return 0.5*(1.0 + warp_length/max_sequence_length)
 
 '''
     // perform DTW and place best path in 'path' and warped distance in 'similarity'
