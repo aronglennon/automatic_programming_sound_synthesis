@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2007.5.18)  4 APR 2013 17:55
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2007.5.18)  7 APR 2013 11:11
 entering extended mode
 \write18 enabled.
  %&-line parsing enabled.
@@ -809,78 +809,80 @@ LaTeX Warning: Text page 137 contains only floats.
 LaTeX Warning: Text page 138 contains only floats.
 
 [138 <./GreedyMatching3.pdf>] [139] [140] [141] [142] [143] [144] [145]
-[146] <SICSW_1.pdf, id=1923, 474.77374pt x 566.115pt>
-File: SICSW_1.pdf Graphic file (type pdf)
- <use SICSW_1.pdf>
+[146] [147] [148] <SIC-DPLA_1.pdf, id=1930, 474.77374pt x 566.115pt>
+File: SIC-DPLA_1.pdf Graphic file (type pdf)
+
+<use SIC-DPLA_1.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[147]
+[149]
 
-LaTeX Warning: Text page 148 contains only floats.
+LaTeX Warning: Text page 150 contains only floats.
 
-[148 <./SICSW_1.pdf>] <SICSW_2.pdf, id=1948, 468.75125pt x 225.84375pt>
-File: SICSW_2.pdf Graphic file (type pdf)
+[150 <./SIC-DPLA_1.pdf>] <SIC-DPLA_2.pdf, id=1954, 468.75125pt x 225.84375pt>
+File: SIC-DPLA_2.pdf Graphic file (type pdf)
 
-<use SICSW_2.pdf> [149 <./SICSW_2.pdf>]
-<Penalty_1.pdf, id=1962, 512.91624pt x 678.535pt>
+<use SIC-DPLA_2.pdf> [151 <./SIC-DPLA_2.pdf>]
+<Penalty_1.pdf, id=1968, 512.91624pt x 678.535pt>
 File: Penalty_1.pdf Graphic file (type pdf)
- <use Penalty_1.pdf> [150]
+ <use Penalty_1.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Penalty_2.pdf, id=1967, 509.905pt x 474.77374pt>
+[152]
+
+LaTeX Warning: Text page 153 contains only floats.
+
+[153 <./Penalty_1.pdf>] <Penalty_2.pdf, id=1987, 509.905pt x 474.77374pt>
 File: Penalty_2.pdf Graphic file (type pdf)
- <use Penalty_2.pdf>
+
+<use Penalty_2.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[151]
-
-LaTeX Warning: Text page 152 contains only floats.
-
-[152 <./Penalty_1.pdf>] [153 <./Penalty_2.pdf>] [154] [155]
+[154] [155 <./Penalty_2.pdf>] [156] [157]
 Missing character: There is no Ô in font ptmr7t!
 Missing character: There is no Õ in font ptmr7t!
- [156] [157]
-[158] <Crossover.pdf, id=2020, 589.20125pt x 398.48875pt>
+ [158] [159] [160]
+<Crossover.pdf, id=2027, 589.20125pt x 398.48875pt>
 File: Crossover.pdf Graphic file (type pdf)
  <use Crossover.pdf>
-[159] <SubtreeMutation.pdf, id=2025, 575.14874pt x 233.87375pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<SubtreeMutation.pdf, id=2028, 575.14874pt x 233.87375pt>
 File: SubtreeMutation.pdf Graphic file (type pdf)
 
-<use SubtreeMutation.pdf>
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<PointMutation.pdf, id=2026, 597.23125pt x 190.7125pt>
+<use SubtreeMutation.pdf> [161]
+<PointMutation.pdf, id=2032, 597.23125pt x 190.7125pt>
 File: PointMutation.pdf Graphic file (type pdf)
  <use PointMutation.pdf>
-[160 <./Crossover.pdf>] <Reproduction.pdf, id=2047, 597.23125pt x 190.7125pt>
+[162 <./Crossover.pdf> <./SubtreeMutation.pdf>]
+<Reproduction.pdf, id=2070, 597.23125pt x 190.7125pt>
 File: Reproduction.pdf Graphic file (type pdf)
-
-<use Reproduction.pdf>
+ <use Reproduction.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[161 <./SubtreeMutation.pdf> <./PointMutation.pdf>] [162 <./Reproduction.pdf>]
-[163] <DelayFeedbackAM.pdf, id=2108, 473.77pt x 338.26375pt>
+[163 <./PointMutation.pdf>] [164 <./Reproduction.pdf>] [165]
+<DelayFeedbackAM.pdf, id=2115, 473.77pt x 338.26375pt>
 File: DelayFeedbackAM.pdf Graphic file (type pdf)
 
 <use DelayFeedbackAM.pdf>
-<FeedbackDelayAMTarget.pdf, id=2109, 1139.25626pt x 991.705pt>
+<FeedbackDelayAMTarget.pdf, id=2116, 1139.25626pt x 991.705pt>
 File: FeedbackDelayAMTarget.pdf Graphic file (type pdf)
 
 <use FeedbackDelayAMTarget.pdf>
-<AdaptiveDegrade.pdf, id=2110, 298.11375pt x 315.1775pt>
+<AdaptiveDegrade.pdf, id=2117, 298.11375pt x 315.1775pt>
 File: AdaptiveDegrade.pdf Graphic file (type pdf)
 
 <use AdaptiveDegrade.pdf>
-<AdaptiveDownsamplingTarget.pdf, id=2111, 1226.5825pt x 996.72375pt>
+<AdaptiveDownsamplingTarget.pdf, id=2118, 1226.5825pt x 996.72375pt>
 File: AdaptiveDownsamplingTarget.pdf Graphic file (type pdf)
 
 <use AdaptiveDownsamplingTarget.pdf>
-<ClippingReverbSaw.pdf, id=2112, 342.27875pt x 416.55624pt>
+<ClippingReverbSaw.pdf, id=2119, 342.27875pt x 416.55624pt>
 File: ClippingReverbSaw.pdf Graphic file (type pdf)
 
 <use ClippingReverbSaw.pdf>
@@ -893,92 +895,92 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[164]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+[166]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<ClippingReverbTarget.pdf, id=2116, 1200.485pt x 983.675pt>
+<ClippingReverbTarget.pdf, id=2123, 1200.485pt x 983.675pt>
 File: ClippingReverbTarget.pdf Graphic file (type pdf)
 
 <use ClippingReverbTarget.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[165 <./DelayFeedbackAM.pdf>] [166 <./FeedbackDelayAMTarget.pdf>] [167 <./Adapt
-iveDegrade.pdf>] [168 <./AdaptiveDownsamplingTarget.pdf>] [169 <./ClippingRever
-bSaw.pdf>] [170 <./ClippingReverbTarget.pdf>] [171] [172] [173] [174] [175]
-<PieChartSelection.jpg, id=2218, 432.61626pt x 434.62375pt>
+[167 <./DelayFeedbackAM.pdf>] [168 <./FeedbackDelayAMTarget.pdf>] [169 <./Adapt
+iveDegrade.pdf>] [170 <./AdaptiveDownsamplingTarget.pdf>] [171 <./ClippingRever
+bSaw.pdf>] [172 <./ClippingReverbTarget.pdf>] [173] [174] [175] [176] [177]
+<PieChartSelection.jpg, id=2225, 432.61626pt x 434.62375pt>
 File: PieChartSelection.jpg Graphic file (type jpg)
 
-<use PieChartSelection.jpg> [176]
-<RankSelection.pdf, id=2222, 436.63126pt x 572.1375pt>
+<use PieChartSelection.jpg> [178]
+<RankSelection.pdf, id=2229, 436.63126pt x 572.1375pt>
 File: RankSelection.pdf Graphic file (type pdf)
  <use RankSelection.pdf>
-[177 <./PieChartSelection.jpg>]
+[179 <./PieChartSelection.jpg>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<TournamentSelection.pdf, id=2227, 592.2125pt x 553.06625pt>
+<TournamentSelection.pdf, id=2233, 592.2125pt x 553.06625pt>
 File: TournamentSelection.pdf Graphic file (type pdf)
 
 <use TournamentSelection.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<DoubleTournamentSelection.pdf, id=2228, 458.71375pt x 556.0775pt>
+<DoubleTournamentSelection.pdf, id=2234, 458.71375pt x 556.0775pt>
 File: DoubleTournamentSelection.pdf Graphic file (type pdf)
 
-<use DoubleTournamentSelection.pdf> [178] [179 <./RankSelection.pdf>]
+<use DoubleTournamentSelection.pdf> [180] [181 <./RankSelection.pdf>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[180 <./TournamentSelection.pdf>] [181 <./DoubleTournamentSelection.pdf>]
-[182] [183] [184] [185] [186] [187] [188] [189]
-<EvolvingLionRoar.pdf, id=2322, 1169.36874pt x 983.675pt>
+[182 <./TournamentSelection.pdf>] [183 <./DoubleTournamentSelection.pdf>]
+[184] [185] [186] [187] [188] [189] [190] [191]
+<EvolvingLionRoar.pdf, id=2328, 1169.36874pt x 983.675pt>
 File: EvolvingLionRoar.pdf Graphic file (type pdf)
 
 <use EvolvingLionRoar.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<EvolvingFreightTrain.pdf, id=2323, 1171.37625pt x 991.705pt>
+<EvolvingFreightTrain.pdf, id=2329, 1171.37625pt x 991.705pt>
 File: EvolvingFreightTrain.pdf Graphic file (type pdf)
 
 <use EvolvingFreightTrain.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<EvolvingMetalGong.pdf, id=2324, 1149.29375pt x 984.67876pt>
+<EvolvingMetalGong.pdf, id=2330, 1149.29375pt x 984.67876pt>
 File: EvolvingMetalGong.pdf Graphic file (type pdf)
 
-<use EvolvingMetalGong.pdf> [190]
+<use EvolvingMetalGong.pdf> [192]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<EvolvingMetallicSynth.pdf, id=2328, 1166.3575pt x 982.67125pt>
+<EvolvingMetallicSynth.pdf, id=2334, 1166.3575pt x 982.67125pt>
 File: EvolvingMetallicSynth.pdf Graphic file (type pdf)
 
 <use EvolvingMetallicSynth.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[191 <./EvolvingLionRoar.pdf>]
-<RandomAnalogLFOReverb.pdf, id=2343, 1148.29pt x 970.62625pt>
+[193 <./EvolvingLionRoar.pdf>]
+<RandomAnalogLFOReverb.pdf, id=2349, 1148.29pt x 970.62625pt>
 File: RandomAnalogLFOReverb.pdf Graphic file (type pdf)
 
 <use RandomAnalogLFOReverb.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[192 <./EvolvingFreightTrain.pdf>] [193 <./EvolvingMetalGong.pdf>]
-(./Dissertation.bbl [194 <./EvolvingMetallicSynth.pdf>] [195 <./RandomAnalogLFO
-Reverb.pdf>] [196
+[194 <./EvolvingFreightTrain.pdf>] [195 <./EvolvingMetalGong.pdf>]
+(./Dissertation.bbl [196 <./EvolvingMetallicSynth.pdf>] [197 <./RandomAnalogLFO
+Reverb.pdf>] [198
 
-] [197] [198] [199] [200] [201] [202] [203] [204] [205]
-[206] [207] [208] [209] [210]) [211] (./Dissertation.aux)
+] [199] [200] [201] [202] [203] [204] [205] [206] [207]
+[208] [209] [210] [211] [212]) [213] (./Dissertation.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -988,7 +990,7 @@ LaTeX Warning: There were undefined references.
  ) 
 Here is how much of TeX's memory you used:
  3658 strings out of 94073
- 54931 string characters out of 1162984
+ 54961 string characters out of 1162984
  101211 words of memory out of 1500000
  6833 multiletter control sequences out of 10000+50000
  21861 words of font info for 48 fonts, out of 1200000 for 2000
@@ -1013,9 +1015,9 @@ xlive/2007/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2007
 /texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2007/texmf-di
 st/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2007/texmf-dist/fonts/t
 ype1/urw/times/utmri8a.pfb>
-Output written on Dissertation.pdf (221 pages, 8603298 bytes).
+Output written on Dissertation.pdf (223 pages, 8606374 bytes).
 PDF statistics:
- 2507 PDF objects out of 2984 (max. 8388607)
+ 2514 PDF objects out of 2984 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  351 words of extra memory for PDF output out of 10000 (max. 10000000)
 
