@@ -892,8 +892,8 @@ Note that instead of allowing gaps and deletions, their method allows repetition
 H_{i,j} = max\left\{ 
   \begin{array}{l l}
     H_{i-1,j-1}+S_{i,j}\\
-    H_{i-1,j}+S_{i,j}-\delta(w_L)\\
-    H_{i,j-1}+S_{i,j}-\delta(w_L)\\
+    H_{i-1,j}+S_{i,j}-\delta(w_L(i-1,j))\\
+    H_{i,j-1}+S_{i,j}-\delta(w_L(i,j-1))\\
     0
    \end{array} \right.
 \end{equation}
