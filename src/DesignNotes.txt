@@ -27,7 +27,4 @@ TODO:
 2. determine how dynamic tree depth limits are actually increased over time
 3. Make max portion work with multiple concurrent patches (in the same parent patcher)
 4. disallow sfplay~...is this given special treatment in js??? if so, change if synthesis flag switched on
-5. SIC-DPLA calculation - implement penalty calculation and application to distances (requires storing and passing penalty variables along the way)
-...
-Need to keep track of: 
-alignments: [4-7]->[2-4], [1-3]->[6-9], etc. --- allows us to determine Pswap, flag repetitions, determine PO/G, the num of subsequences aligned, so we can calc Prep
+5. look at nonrealtime thing Adam sent

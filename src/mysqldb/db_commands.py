@@ -144,7 +144,7 @@ class mysql_object():
         else:
             return []
         
-    def insert_test_data(self, testrun_id, generation_number, individual, fitness):
+    def insert_full_test_data(self, testrun_id, generation_number, individual, fitness):
         if self.connected:
             statement = "INSERT INTO testdata (tetsrun_id, generation, individual, fitness) VALUES (%d, %d, '%s', %0.8f)" % (testrun_id, generation_number, individual, fitness)
             values = db_core.insert(self.dbConnection, statement)

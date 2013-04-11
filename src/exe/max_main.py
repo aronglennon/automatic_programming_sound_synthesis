@@ -150,7 +150,7 @@ def main():
 
 def store_state(mysql_obj, testrun_id, generation_number, population_data):
     for p in population_data:
-        if (mysql_obj.insert_test_data(testrun_id, generation_number, p.patch_to_string(), p.fitness) == []):
+        if (mysql_obj.insert_full_test_data(testrun_id, generation_number, p.patch_to_string(), p.fitness) == []):
             print 'test data not inserted for unknown reason'
 
 if __name__ == "__main__":
