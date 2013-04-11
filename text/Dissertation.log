@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2007.5.18)  9 APR 2013 20:29
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2007.5.18)  10 APR 2013 22:13
 entering extended mode
 \write18 enabled.
  %&-line parsing enabled.
@@ -273,33 +273,39 @@ File: english.apc 2005/06/01
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 52.
 
-[1] [2]
+[1]
+Overfull \hbox (37.30357pt too wide) in paragraph at lines 92--93
+[]\OT1/ptm/m/n/12 Most im-por-tantly, my wife Lau-ren, and my chil-dren Henry, 
+Jack, and Emily/Charles.
+ []
+
+[2] [3]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24.88> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 82.
- (./Dissertation.toc [3
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 109.
+ (./Dissertation.toc [4
 
 ])
 \tf@toc=\write3
 \openout3 = `Dissertation.toc'.
 
- [4] (./Dissertation.lof [5
+ [5] (./Dissertation.lof [6
 
 ]
 LaTeX Font Info:    Try loading font information for TS1+ptm on input line 31.
 
 (/usr/local/texlive/2007/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [6] [7])
+) [7] [8])
 \tf@lof=\write4
 \openout4 = `Dissertation.lof'.
 
 
-[8] (./Dissertation.lot)
+[9] (./Dissertation.lot)
 \tf@lot=\write5
 \openout5 = `Dissertation.lot'.
 
 \QuarterPage=\skip53
- [9
+ [10
 
 ]
 Chapter 1.
@@ -307,31 +313,31 @@ Chapter 1.
 
 ] [2]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 118.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 145.
  [3] [4] [5] [6] [7] [8]
 Chapter 2.
 [9
 
-] [10] <SubtractiveVsAdditive.pdf, id=68, 776.9025pt x 313.17pt>
+] [10] <SubtractiveVsAdditive.pdf, id=71, 776.9025pt x 313.17pt>
 File: SubtractiveVsAdditive.pdf Graphic file (type pdf)
 
 <use SubtractiveVsAdditive.pdf> [11] [12 <./SubtractiveVsAdditive.pdf>]
 
-LaTeX Warning: Citation `Seago:2008y' undefined on input line 172.
+LaTeX Warning: Citation `Seago:2008y' undefined on input line 199.
 
 [13] [14] [15]
 
-LaTeX Warning: Citation `Malloch' undefined on input line 181.
+LaTeX Warning: Citation `Malloch' undefined on input line 208.
 
 Missing character: There is no Ô in font ptmr7t!
 Missing character: There is no Ð in font ptmr7t!
 Missing character: There is no Õ in font ptmr7t!
 [16] [17] [18]
-<SynthesisTechniqueTaxonomy.pdf, id=111, 572.1375pt x 309.155pt>
+<SynthesisTechniqueTaxonomy.pdf, id=114, 572.1375pt x 309.155pt>
 File: SynthesisTechniqueTaxonomy.pdf Graphic file (type pdf)
 
 <use SynthesisTechniqueTaxonomy.pdf>
-Overfull \hbox (19.79564pt too wide) in paragraph at lines 191--192
+Overfull \hbox (19.79564pt too wide) in paragraph at lines 218--219
  [] 
  []
 
@@ -340,18 +346,18 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 Missing character: There is no Õ in font ptmr7t!
 [19] [20 <./SynthesisTechniqueTaxonomy.pdf>]
-<SamplingSynthesis.pdf, id=129, 343.2825pt x 154.5775pt>
+<SamplingSynthesis.pdf, id=133, 343.2825pt x 154.5775pt>
 File: SamplingSynthesis.pdf Graphic file (type pdf)
 
 <use SamplingSynthesis.pdf> [21 <./SamplingSynthesis.pdf>]
-<GranularSynthesis.pdf, id=177, 381.425pt x 318.18875pt>
+<GranularSynthesis.pdf, id=180, 381.425pt x 318.18875pt>
 File: GranularSynthesis.pdf Graphic file (type pdf)
 
 <use GranularSynthesis.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[22] <AdditiveSynthesis.pdf, id=181, 361.35pt x 182.6825pt>
+[22] <AdditiveSynthesis.pdf, id=184, 361.35pt x 182.6825pt>
 File: AdditiveSynthesis.pdf Graphic file (type pdf)
 
 <use AdditiveSynthesis.pdf>
@@ -359,7 +365,7 @@ File: AdditiveSynthesis.pdf Graphic file (type pdf)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [23 <./GranularSynthesis.pdf>]
-<SubtractiveSynthesis.pdf, id=214, 451.6875pt x 208.78pt>
+<SubtractiveSynthesis.pdf, id=217, 451.6875pt x 208.78pt>
 File: SubtractiveSynthesis.pdf Graphic file (type pdf)
 
 <use SubtractiveSynthesis.pdf>
@@ -368,31 +374,31 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 Missing character: There is no Õ in font ptmr7t!
 [24 <./AdditiveSynthesis.pdf>] [25 <./SubtractiveSynthesis.pdf>]
-<FMSynthesis.pdf, id=276, 575.14874pt x 170.6375pt>
+<FMSynthesis.pdf, id=279, 575.14874pt x 170.6375pt>
 File: FMSynthesis.pdf Graphic file (type pdf)
  <use FMSynthesis.pdf>
 [26 <./FMSynthesis.pdf>]
-<DigitalWaveguideSynthesis.pdf, id=304, 723.70375pt x 476.78125pt>
+<DigitalWaveguideSynthesis.pdf, id=308, 723.70375pt x 476.78125pt>
 File: DigitalWaveguideSynthesis.pdf Graphic file (type pdf)
 
 <use DigitalWaveguideSynthesis.pdf>
-Overfull \hbox (17.34041pt too wide) in paragraph at lines 239--240
+Overfull \hbox (17.34041pt too wide) in paragraph at lines 266--267
  [] 
  []
 
 [27 <./DigitalWaveguideSynthesis.pdf>] [28]
-<ResynthesisProblem.pdf, id=336, 419.5675pt x 273.02pt>
+<ResynthesisProblem.pdf, id=339, 419.5675pt x 273.02pt>
 File: ResynthesisProblem.pdf Graphic file (type pdf)
 
 <use ResynthesisProblem.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[29] <ResynthesisIdea.pdf, id=340, 772.8875pt x 293.095pt>
+[29] <ResynthesisIdea.pdf, id=343, 772.8875pt x 293.095pt>
 File: ResynthesisIdea.pdf Graphic file (type pdf)
 
 <use ResynthesisIdea.pdf>
-Overfull \hbox (5.74492pt too wide) in paragraph at lines 260--261
+Overfull \hbox (5.74492pt too wide) in paragraph at lines 287--288
  [] 
  []
 
@@ -400,10 +406,10 @@ Overfull \hbox (5.74492pt too wide) in paragraph at lines 260--261
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [30 <./ResynthesisProblem.pdf>]
-<ConcatSynth.pdf, id=372, 760.8425pt x 637.38126pt>
+<ConcatSynth.pdf, id=375, 760.8425pt x 637.38126pt>
 File: ConcatSynth.pdf Graphic file (type pdf)
  <use ConcatSynth.pdf>
-Overfull \hbox (37.76678pt too wide) in paragraph at lines 270--271
+Overfull \hbox (37.76678pt too wide) in paragraph at lines 297--298
  [] 
  []
 
@@ -411,29 +417,29 @@ Overfull \hbox (37.76678pt too wide) in paragraph at lines 270--271
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [31 <./ResynthesisIdea.pdf>] [32 <./ConcatSynth.pdf>] [33]
-<PhaseVocoder.pdf, id=453, 929.4725pt x 494.84875pt>
+<PhaseVocoder.pdf, id=456, 929.4725pt x 494.84875pt>
 File: PhaseVocoder.pdf Graphic file (type pdf)
  <use PhaseVocoder.pdf>
-Overfull \hbox (37.5609pt too wide) in paragraph at lines 286--287
+Overfull \hbox (37.5609pt too wide) in paragraph at lines 313--314
  [] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[34] [35 <./PhaseVocoder.pdf>] <SMS.pdf, id=491, 741.77126pt x 429.605pt>
+[34] [35 <./PhaseVocoder.pdf>] <SMS.pdf, id=494, 741.77126pt x 429.605pt>
 File: SMS.pdf Graphic file (type pdf)
 
 <use SMS.pdf>
-Overfull \hbox (27.27759pt too wide) in paragraph at lines 306--307
+Overfull \hbox (27.27759pt too wide) in paragraph at lines 333--334
  [] 
  []
 
-[36] [37 <./SMS.pdf>] [38] <AdaptiveFM.pdf, id=532, 809.0225pt x 575.14874pt>
+[36] [37 <./SMS.pdf>] [38] <AdaptiveFM.pdf, id=536, 809.0225pt x 575.14874pt>
 File: AdaptiveFM.pdf Graphic file (type pdf)
 
 <use AdaptiveFM.pdf>
-Overfull \hbox (23.8124pt too wide) in paragraph at lines 318--319
+Overfull \hbox (23.8124pt too wide) in paragraph at lines 345--346
  [] 
  []
 
@@ -441,7 +447,7 @@ Overfull \hbox (23.8124pt too wide) in paragraph at lines 318--319
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [39] [40 <./AdaptiveFM.pdf>]
-<MetaSynthesis1.pdf, id=571, 454.69875pt x 638.385pt>
+<MetaSynthesis1.pdf, id=574, 454.69875pt x 638.385pt>
 File: MetaSynthesis1.pdf Graphic file (type pdf)
  <use MetaSynthesis1.pdf>
 
@@ -452,7 +458,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 LaTeX Warning: Text page 42 contains only floats.
 
 [42 <./MetaSynthesis1.pdf>] [43]
-<PucketteMetaSynthesis.pdf, id=602, 413.545pt x 621.32124pt>
+<PucketteMetaSynthesis.pdf, id=605, 413.545pt x 621.32124pt>
 File: PucketteMetaSynthesis.pdf Graphic file (type pdf)
 
 <use PucketteMetaSynthesis.pdf>
@@ -464,23 +470,23 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 LaTeX Warning: Text page 45 contains only floats.
 
 [45 <./PucketteMetaSynthesis.pdf>] [46] [47]
-<OrchestralMetaSynthesis.pdf, id=651, 797.98125pt x 638.385pt>
+<OrchestralMetaSynthesis.pdf, id=654, 797.98125pt x 638.385pt>
 File: OrchestralMetaSynthesis.pdf Graphic file (type pdf)
 
 <use OrchestralMetaSynthesis.pdf>
-Overfull \hbox (58.19316pt too wide) in paragraph at lines 349--350
+Overfull \hbox (58.19316pt too wide) in paragraph at lines 376--377
  [] 
  []
 
 [48 <./OrchestralMetaSynthesis.pdf>] [49]
-<FitnessFunction.pdf, id=746, 413.545pt x 475.7775pt>
+<FitnessFunction.pdf, id=749, 413.545pt x 475.7775pt>
 File: FitnessFunction.pdf Graphic file (type pdf)
 
 <use FitnessFunction.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<DifferentTopologies.pdf, id=747, 628.3475pt x 196.735pt>
+<DifferentTopologies.pdf, id=750, 628.3475pt x 196.735pt>
 File: DifferentTopologies.pdf Graphic file (type pdf)
 
 <use DifferentTopologies.pdf>
@@ -488,13 +494,13 @@ File: DifferentTopologies.pdf Graphic file (type pdf)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-LaTeX Warning: Citation `2003ov' undefined on input line 373.
+LaTeX Warning: Citation `2003ov' undefined on input line 400.
 
 [50] [51 <./FitnessFunction.pdf>] [52 <./DifferentTopologies.pdf>] [53]
-<GASearch.pdf, id=806, 768.8725pt x 972.63374pt>
+<GASearch.pdf, id=809, 768.8725pt x 972.63374pt>
 File: GASearch.pdf Graphic file (type pdf)
  <use GASearch.pdf>
-Overfull \hbox (3.73743pt too wide) in paragraph at lines 379--380
+Overfull \hbox (3.73743pt too wide) in paragraph at lines 406--407
  [] 
  []
 
@@ -511,9 +517,9 @@ Overfull \vbox (1.54172pt too high) has occurred while \output is active []
 
 [55 <./GASearch.pdf>]
 
-LaTeX Warning: Citation `Koza:1992g' undefined on input line 387.
+LaTeX Warning: Citation `Koza:1992g' undefined on input line 414.
 
-[56] [57] <GraphAsPoint.pdf, id=837, 401.5pt x 480.79625pt>
+[56] [57] <GraphAsPoint.pdf, id=840, 401.5pt x 480.79625pt>
 File: GraphAsPoint.pdf Graphic file (type pdf)
 
 <use GraphAsPoint.pdf>
@@ -521,20 +527,20 @@ File: GraphAsPoint.pdf Graphic file (type pdf)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-LaTeX Warning: Citation `Todd:1998t' undefined on input line 397.
+LaTeX Warning: Citation `Todd:1998t' undefined on input line 424.
 
 [58] [59 <./GraphAsPoint.pdf>]
 
-LaTeX Warning: Citation `Conrads:1998w' undefined on input line 403.
+LaTeX Warning: Citation `Conrads:1998w' undefined on input line 430.
 
 
-LaTeX Warning: Citation `Dahlstedt:2001d' undefined on input line 409.
+LaTeX Warning: Citation `Dahlstedt:2001d' undefined on input line 436.
 
 [60] [61] [62] [63] [64] [65] [66]
 Missing character: There is no Ô in font ptmr7t!
 Missing character: There is no Õ in font ptmr7t!
  [67] [68] [69] [70]
-<GMM.pdf, id=896, 499.8675pt x 283.0575pt>
+<GMM.pdf, id=899, 499.8675pt x 283.0575pt>
 File: GMM.pdf Graphic file (type pdf)
  <use GMM.pdf>
 
@@ -554,36 +560,36 @@ Missing character: There is no Õ in font ptmr7t!
 [83]
 Missing character: There is no Ô in font ptmr7t!
 Missing character: There is no Õ in font ptmr7t!
- [84] [85] <SyntacticCorrectness.pdf, id=968, 602.25pt x 370.38374pt>
+ [84] [85] <SyntacticCorrectness.pdf, id=971, 602.25pt x 370.38374pt>
 File: SyntacticCorrectness.pdf Graphic file (type pdf)
 
 <use SyntacticCorrectness.pdf>
-Overfull \hbox (40.87424pt too wide) in paragraph at lines 526--527
+Overfull \hbox (40.87424pt too wide) in paragraph at lines 553--554
  [] 
  []
 
 [86 <./SyntacticCorrectness.pdf>] [87] [88] [89] [90] [91]
 
-LaTeX Warning: Citation `2006ud' undefined on input line 548.
+LaTeX Warning: Citation `2006ud' undefined on input line 575.
 
 [92] [93]
 Chapter 3.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 555.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 582.
 [94
 
-] [95] <JSTranslation.pdf, id=1028, 1010.77625pt x 401.5pt>
+] [95] <JSTranslation.pdf, id=1031, 1010.77625pt x 401.5pt>
 File: JSTranslation.pdf Graphic file (type pdf)
 
 <use JSTranslation.pdf>
-Overfull \hbox (23.60545pt too wide) in paragraph at lines 570--571
+Overfull \hbox (23.60545pt too wide) in paragraph at lines 597--598
  [] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<MaxAudioToPython.pdf, id=1029, 929.4725pt x 401.5pt>
+<MaxAudioToPython.pdf, id=1032, 929.4725pt x 401.5pt>
 File: MaxAudioToPython.pdf Graphic file (type pdf)
 
 <use MaxAudioToPython.pdf>
@@ -591,43 +597,43 @@ File: MaxAudioToPython.pdf Graphic file (type pdf)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [96] [97 <./JSTranslation.pdf> <./MaxAudioToPython.pdf>]
-<RootTree.pdf, id=1092, 517.935pt x 563.10374pt>
+<RootTree.pdf, id=1095, 517.935pt x 563.10374pt>
 File: RootTree.pdf Graphic file (type pdf)
  <use RootTree.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[98] [99 <./RootTree.pdf>] <MaxDAGs.pdf, id=1117, 581.17125pt x 575.14874pt>
+[98] [99 <./RootTree.pdf>] <MaxDAGs.pdf, id=1120, 581.17125pt x 575.14874pt>
 File: MaxDAGs.pdf Graphic file (type pdf)
 
 <use MaxDAGs.pdf>
-Overfull \hbox (26.11922pt too wide) in paragraph at lines 604--605
+Overfull \hbox (26.11922pt too wide) in paragraph at lines 631--632
  [] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<MaxDAGsLoadmess.pdf, id=1118, 567.11874pt x 530.98375pt>
+<MaxDAGsLoadmess.pdf, id=1121, 567.11874pt x 530.98375pt>
 File: MaxDAGsLoadmess.pdf Graphic file (type pdf)
 
 <use MaxDAGsLoadmess.pdf>
-Overfull \hbox (16.28253pt too wide) in paragraph at lines 612--613
+Overfull \hbox (16.28253pt too wide) in paragraph at lines 639--640
  [] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<MaxDAGsSendReceive1.pdf, id=1119, 562.1pt x 632.3625pt>
+<MaxDAGsSendReceive1.pdf, id=1122, 562.1pt x 632.3625pt>
 File: MaxDAGsSendReceive1.pdf Graphic file (type pdf)
 
 <use MaxDAGsSendReceive1.pdf>
-Overfull \hbox (40.8761pt too wide) in paragraph at lines 620--621
+Overfull \hbox (40.8761pt too wide) in paragraph at lines 647--648
  [] 
  []
 
-<MaxDAGsSendReceive2.pdf, id=1120, 299.1175pt x 417.56pt>
+<MaxDAGsSendReceive2.pdf, id=1123, 299.1175pt x 417.56pt>
 File: MaxDAGsSendReceive2.pdf Graphic file (type pdf)
 
 <use MaxDAGsSendReceive2.pdf> [100] [101 <./MaxDAGs.pdf>] [102 <./MaxDAGsLoadme
@@ -638,17 +644,17 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<MaxDAGs2DACs.pdf, id=1179, 592.2125pt x 467.7475pt>
+<MaxDAGs2DACs.pdf, id=1182, 592.2125pt x 467.7475pt>
 File: MaxDAGs2DACs.pdf Graphic file (type pdf)
  <use MaxDAGs2DACs.pdf>
-Overfull \hbox (33.84804pt too wide) in paragraph at lines 634--635
+Overfull \hbox (33.84804pt too wide) in paragraph at lines 661--662
  [] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<MaxDAGsCrossedPaths.pdf, id=1180, 255.95625pt x 495.8525pt>
+<MaxDAGsCrossedPaths.pdf, id=1183, 255.95625pt x 495.8525pt>
 File: MaxDAGsCrossedPaths.pdf Graphic file (type pdf)
 
 <use MaxDAGsCrossedPaths.pdf> [103]
@@ -659,11 +665,11 @@ LaTeX Warning: Text page 104 contains only floats.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<MaxDAGsCrossedPaths2.pdf, id=1214, 496.85625pt x 494.84875pt>
+<MaxDAGsCrossedPaths2.pdf, id=1218, 496.85625pt x 494.84875pt>
 File: MaxDAGsCrossedPaths2.pdf Graphic file (type pdf)
 
 <use MaxDAGsCrossedPaths2.pdf>
-Overfull \hbox (16.78766pt too wide) in paragraph at lines 650--651
+Overfull \hbox (16.78766pt too wide) in paragraph at lines 677--678
  [] 
  []
 
@@ -671,13 +677,13 @@ Overfull \hbox (16.78766pt too wide) in paragraph at lines 650--651
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [105 <./MaxDAGsSendReceive2.pdf>] [106 <./MaxDAGs2DACs.pdf>] [107 <./MaxDAGsCro
-ssedPaths.pdf>] <SyntaxInfo.pdf, id=1291, 379.4175pt x 168.63pt>
+ssedPaths.pdf>] <SyntaxInfo.pdf, id=1294, 379.4175pt x 168.63pt>
 File: SyntaxInfo.pdf Graphic file (type pdf)
 
 <use SyntaxInfo.pdf> [108 <./MaxDAGsCrossedPaths2.pdf>]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 669.
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 669.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 696.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 696.
 
 
 (/usr/local/texlive/2007/texmf-dist/tex/latex/psnfss/omsptm.fd
@@ -686,15 +692,15 @@ File: omsptm.fd
 
 LaTeX Font Warning: Font shape `OMS/ptm/bx/it' undefined
 (Font)              using `OMS/ptm/m/n' instead
-(Font)              for symbol `textbar' on input line 669.
+(Font)              for symbol `textbar' on input line 696.
 
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 669.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 696.
 [109 <./SyntaxInfo.pdf>] [110]
-<OverallGPSystem.pdf, id=1345, 811.03pt x 786.94pt>
+<OverallGPSystem.pdf, id=1349, 811.03pt x 786.94pt>
 File: OverallGPSystem.pdf Graphic file (type pdf)
  <use OverallGPSystem.pdf>
-Overfull \hbox (24.81613pt too wide) in paragraph at lines 683--684
+Overfull \hbox (24.81613pt too wide) in paragraph at lines 710--711
  [] 
  []
 
@@ -713,7 +719,7 @@ Missing character: There is no Õ in font ptmr7t!
 Missing character: There is no Ô in font ptmr7t!
 Missing character: There is no Õ in font ptmr7t!
 
-<NearestNeighbor.jpg, id=1399, 508.90125pt x 311.1625pt>
+<NearestNeighbor.jpg, id=1403, 508.90125pt x 311.1625pt>
 File: NearestNeighbor.jpg Graphic file (type jpg)
 
 <use NearestNeighbor.jpg>
@@ -721,56 +727,56 @@ File: NearestNeighbor.jpg Graphic file (type jpg)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [117] [118 <./NearestNeighbor.jpg>] [119] [120] [121]
-<PairwiseCNN.pdf, id=1418, 451.6875pt x 266.9975pt>
+<PairwiseCNN.pdf, id=1421, 451.6875pt x 266.9975pt>
 File: PairwiseCNN.pdf Graphic file (type pdf)
  <use PairwiseCNN.pdf>
-Overfull \hbox (48.4028pt too wide) in paragraph at lines 747--748
+Overfull \hbox (48.4028pt too wide) in paragraph at lines 774--775
  [] 
  []
 
-[122] <CNN_kNN.pdf, id=1424, 451.6875pt x 373.395pt>
+[122] <CNN_kNN.pdf, id=1428, 451.6875pt x 373.395pt>
 File: CNN_kNN.pdf Graphic file (type pdf)
  <use CNN_kNN.pdf>
-Overfull \hbox (3.2383pt too wide) in paragraph at lines 755--756
+Overfull \hbox (3.2383pt too wide) in paragraph at lines 782--783
  [] 
  []
 
-[123 <./PairwiseCNN.pdf>] <NLSECluster.pdf, id=1573, 831.105pt x 772.8875pt>
+[123 <./PairwiseCNN.pdf>] <NLSECluster.pdf, id=1576, 831.105pt x 772.8875pt>
 File: NLSECluster.pdf Graphic file (type pdf)
 
 <use NLSECluster.pdf>
-Overfull \hbox (76.41129pt too wide) in paragraph at lines 763--764
+Overfull \hbox (76.41129pt too wide) in paragraph at lines 790--791
  [] 
  []
 
-[124 <./CNN_kNN.pdf>] <TimbreDistance1.pdf, id=1606, 402.50375pt x 303.1325pt>
+[124 <./CNN_kNN.pdf>] <TimbreDistance1.pdf, id=1609, 402.50375pt x 303.1325pt>
 File: TimbreDistance1.pdf Graphic file (type pdf)
 
 <use TimbreDistance1.pdf> [125 <./NLSECluster.pdf>]
-<TimbreDistance2.pdf, id=1696, 402.50375pt x 303.1325pt>
+<TimbreDistance2.pdf, id=1699, 402.50375pt x 303.1325pt>
 File: TimbreDistance2.pdf Graphic file (type pdf)
 
 <use TimbreDistance2.pdf> [126 <./TimbreDistance1.pdf>] [127 <./TimbreDistance2
-.pdf>] <TimbreDistance3.pdf, id=1741, 637.38126pt x 227.85126pt>
+.pdf>] <TimbreDistance3.pdf, id=1744, 637.38126pt x 227.85126pt>
 File: TimbreDistance3.pdf Graphic file (type pdf)
 
 <use TimbreDistance3.pdf>
-Overfull \hbox (1.73383pt too wide) in paragraph at lines 795--796
+Overfull \hbox (1.73383pt too wide) in paragraph at lines 822--823
  [] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<TimbreDistance4.pdf, id=1742, 637.38126pt x 227.85126pt>
+<TimbreDistance4.pdf, id=1745, 637.38126pt x 227.85126pt>
 File: TimbreDistance4.pdf Graphic file (type pdf)
 
 <use TimbreDistance4.pdf>
-Overfull \hbox (1.73383pt too wide) in paragraph at lines 803--804
+Overfull \hbox (1.73383pt too wide) in paragraph at lines 830--831
  [] 
  []
 
-[128] <DTWExample.pdf, id=1746, 701.62125pt x 713.66624pt>
+[128] <DTWExample.pdf, id=1750, 701.62125pt x 713.66624pt>
 File: DTWExample.pdf Graphic file (type pdf)
 
 <use DTWExample.pdf> [129 <./TimbreDistance3.pdf> <./TimbreDistance4.pdf>]
@@ -778,22 +784,22 @@ File: DTWExample.pdf Graphic file (type pdf)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [130] [131 <./DTWExample.pdf>] [132] [133]
-<GreedyMatching1.pdf, id=1814, 514.92375pt x 717.68124pt>
+<GreedyMatching1.pdf, id=1817, 514.92375pt x 717.68124pt>
 File: GreedyMatching1.pdf Graphic file (type pdf)
 
 <use GreedyMatching1.pdf>
 
-LaTeX Warning: Float too large for page by 3.8381pt on input line 832.
+LaTeX Warning: Float too large for page by 3.8381pt on input line 859.
 
 [134] [135 <./GreedyMatching1.pdf>]
-<GreedyMatching2.pdf, id=1843, 516.93124pt x 679.53876pt>
+<GreedyMatching2.pdf, id=1846, 516.93124pt x 679.53876pt>
 File: GreedyMatching2.pdf Graphic file (type pdf)
 
 <use GreedyMatching2.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<GreedyMatching3.pdf, id=1844, 516.93124pt x 679.53876pt>
+<GreedyMatching3.pdf, id=1847, 516.93124pt x 679.53876pt>
 File: GreedyMatching3.pdf Graphic file (type pdf)
 
 <use GreedyMatching3.pdf>
@@ -809,7 +815,7 @@ LaTeX Warning: Text page 137 contains only floats.
 LaTeX Warning: Text page 138 contains only floats.
 
 [138 <./GreedyMatching3.pdf>] [139] [140] [141] [142] [143] [144] [145]
-[146] [147] [148] <SIC-DPLA_1.pdf, id=1930, 474.77374pt x 566.115pt>
+[146] [147] [148] <SIC-DPLA_1.pdf, id=1933, 474.77374pt x 566.115pt>
 File: SIC-DPLA_1.pdf Graphic file (type pdf)
 
 <use SIC-DPLA_1.pdf>
@@ -820,11 +826,11 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: Text page 150 contains only floats.
 
-[150 <./SIC-DPLA_1.pdf>] <SIC-DPLA_2.pdf, id=1954, 468.75125pt x 225.84375pt>
+[150 <./SIC-DPLA_1.pdf>] <SIC-DPLA_2.pdf, id=1957, 468.75125pt x 225.84375pt>
 File: SIC-DPLA_2.pdf Graphic file (type pdf)
 
 <use SIC-DPLA_2.pdf> [151 <./SIC-DPLA_2.pdf>]
-<Penalty_1.pdf, id=1968, 512.91624pt x 678.535pt>
+<Penalty_1.pdf, id=1971, 512.91624pt x 678.535pt>
 File: Penalty_1.pdf Graphic file (type pdf)
  <use Penalty_1.pdf>
 
@@ -834,7 +840,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: Text page 153 contains only floats.
 
-[153 <./Penalty_1.pdf>] <Penalty_2.pdf, id=1987, 509.905pt x 474.77374pt>
+[153 <./Penalty_1.pdf>] <Penalty_2.pdf, id=1990, 509.905pt x 474.77374pt>
 File: Penalty_2.pdf Graphic file (type pdf)
 
 <use Penalty_2.pdf>
@@ -845,44 +851,44 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 Missing character: There is no Ô in font ptmr7t!
 Missing character: There is no Õ in font ptmr7t!
  [158] [159] [160]
-<Crossover.pdf, id=2027, 589.20125pt x 398.48875pt>
+<Crossover.pdf, id=2030, 589.20125pt x 398.48875pt>
 File: Crossover.pdf Graphic file (type pdf)
  <use Crossover.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<SubtreeMutation.pdf, id=2028, 575.14874pt x 233.87375pt>
+<SubtreeMutation.pdf, id=2031, 575.14874pt x 233.87375pt>
 File: SubtreeMutation.pdf Graphic file (type pdf)
 
 <use SubtreeMutation.pdf> [161]
-<PointMutation.pdf, id=2032, 597.23125pt x 190.7125pt>
+<PointMutation.pdf, id=2035, 597.23125pt x 190.7125pt>
 File: PointMutation.pdf Graphic file (type pdf)
  <use PointMutation.pdf>
 [162 <./Crossover.pdf> <./SubtreeMutation.pdf>]
-<Reproduction.pdf, id=2070, 597.23125pt x 190.7125pt>
+<Reproduction.pdf, id=2073, 597.23125pt x 190.7125pt>
 File: Reproduction.pdf Graphic file (type pdf)
  <use Reproduction.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [163 <./PointMutation.pdf>] [164 <./Reproduction.pdf>] [165]
-<DelayFeedbackAM.pdf, id=2115, 473.77pt x 338.26375pt>
+<DelayFeedbackAM.pdf, id=2118, 473.77pt x 338.26375pt>
 File: DelayFeedbackAM.pdf Graphic file (type pdf)
 
 <use DelayFeedbackAM.pdf>
-<FeedbackDelayAMTarget.pdf, id=2116, 1139.25626pt x 991.705pt>
+<FeedbackDelayAMTarget.pdf, id=2119, 1139.25626pt x 991.705pt>
 File: FeedbackDelayAMTarget.pdf Graphic file (type pdf)
 
 <use FeedbackDelayAMTarget.pdf>
-<AdaptiveDegrade.pdf, id=2117, 298.11375pt x 315.1775pt>
+<AdaptiveDegrade.pdf, id=2120, 298.11375pt x 315.1775pt>
 File: AdaptiveDegrade.pdf Graphic file (type pdf)
 
 <use AdaptiveDegrade.pdf>
-<AdaptiveDownsamplingTarget.pdf, id=2118, 1226.5825pt x 996.72375pt>
+<AdaptiveDownsamplingTarget.pdf, id=2121, 1226.5825pt x 996.72375pt>
 File: AdaptiveDownsamplingTarget.pdf Graphic file (type pdf)
 
 <use AdaptiveDownsamplingTarget.pdf>
-<ClippingReverbSaw.pdf, id=2119, 342.27875pt x 416.55624pt>
+<ClippingReverbSaw.pdf, id=2122, 342.27875pt x 416.55624pt>
 File: ClippingReverbSaw.pdf Graphic file (type pdf)
 
 <use ClippingReverbSaw.pdf>
@@ -902,7 +908,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<ClippingReverbTarget.pdf, id=2123, 1200.485pt x 983.675pt>
+<ClippingReverbTarget.pdf, id=2126, 1200.485pt x 983.675pt>
 File: ClippingReverbTarget.pdf Graphic file (type pdf)
 
 <use ClippingReverbTarget.pdf>
@@ -912,25 +918,25 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [167 <./DelayFeedbackAM.pdf>] [168 <./FeedbackDelayAMTarget.pdf>] [169 <./Adapt
 iveDegrade.pdf>] [170 <./AdaptiveDownsamplingTarget.pdf>] [171 <./ClippingRever
 bSaw.pdf>] [172 <./ClippingReverbTarget.pdf>] [173] [174] [175] [176] [177]
-<PieChartSelection.jpg, id=2225, 432.61626pt x 434.62375pt>
+<PieChartSelection.jpg, id=2228, 432.61626pt x 434.62375pt>
 File: PieChartSelection.jpg Graphic file (type jpg)
 
 <use PieChartSelection.jpg> [178]
-<RankSelection.pdf, id=2229, 436.63126pt x 572.1375pt>
+<RankSelection.pdf, id=2232, 436.63126pt x 572.1375pt>
 File: RankSelection.pdf Graphic file (type pdf)
  <use RankSelection.pdf>
 [179 <./PieChartSelection.jpg>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<TournamentSelection.pdf, id=2233, 592.2125pt x 553.06625pt>
+<TournamentSelection.pdf, id=2236, 592.2125pt x 553.06625pt>
 File: TournamentSelection.pdf Graphic file (type pdf)
 
 <use TournamentSelection.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<DoubleTournamentSelection.pdf, id=2234, 458.71375pt x 556.0775pt>
+<DoubleTournamentSelection.pdf, id=2237, 458.71375pt x 556.0775pt>
 File: DoubleTournamentSelection.pdf Graphic file (type pdf)
 
 <use DoubleTournamentSelection.pdf> [180] [181 <./RankSelection.pdf>]
@@ -939,28 +945,28 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [182 <./TournamentSelection.pdf>] [183 <./DoubleTournamentSelection.pdf>]
 [184] [185] [186] [187] [188] [189] [190] [191]
-<EvolvingLionRoar.pdf, id=2328, 1169.36874pt x 983.675pt>
+<EvolvingLionRoar.pdf, id=2331, 1169.36874pt x 983.675pt>
 File: EvolvingLionRoar.pdf Graphic file (type pdf)
 
 <use EvolvingLionRoar.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<EvolvingFreightTrain.pdf, id=2329, 1171.37625pt x 991.705pt>
+<EvolvingFreightTrain.pdf, id=2332, 1171.37625pt x 991.705pt>
 File: EvolvingFreightTrain.pdf Graphic file (type pdf)
 
 <use EvolvingFreightTrain.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<EvolvingMetalGong.pdf, id=2330, 1149.29375pt x 984.67876pt>
+<EvolvingMetalGong.pdf, id=2333, 1149.29375pt x 984.67876pt>
 File: EvolvingMetalGong.pdf Graphic file (type pdf)
 
 <use EvolvingMetalGong.pdf> [192]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<EvolvingMetallicSynth.pdf, id=2334, 1166.3575pt x 982.67125pt>
+<EvolvingMetallicSynth.pdf, id=2337, 1166.3575pt x 982.67125pt>
 File: EvolvingMetallicSynth.pdf Graphic file (type pdf)
 
 <use EvolvingMetallicSynth.pdf>
@@ -968,7 +974,7 @@ File: EvolvingMetallicSynth.pdf Graphic file (type pdf)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [193 <./EvolvingLionRoar.pdf>]
-<RandomAnalogLFOReverb.pdf, id=2349, 1148.29pt x 970.62625pt>
+<RandomAnalogLFOReverb.pdf, id=2352, 1148.29pt x 970.62625pt>
 File: RandomAnalogLFOReverb.pdf Graphic file (type pdf)
 
 <use RandomAnalogLFOReverb.pdf>
@@ -1015,9 +1021,9 @@ xlive/2007/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2007
 /texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2007/texmf-di
 st/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2007/texmf-dist/fonts/t
 ype1/urw/times/utmri8a.pfb>
-Output written on Dissertation.pdf (223 pages, 8606439 bytes).
+Output written on Dissertation.pdf (224 pages, 8608771 bytes).
 PDF statistics:
- 2514 PDF objects out of 2984 (max. 8388607)
+ 2517 PDF objects out of 2984 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  351 words of extra memory for PDF output out of 10000 (max. 10000000)
 

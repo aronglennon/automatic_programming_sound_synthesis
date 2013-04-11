@@ -1,7 +1,7 @@
 \contentsline {subsection}{Abstract}{i}
 \contentsline {subsection}{Acknowledgements}{ii}
-\contentsline {subsection}{Figures}{v}
-\contentsline {subsection}{Tables}{ix}
+\contentsline {subsection}{Figures}{vi}
+\contentsline {subsection}{Tables}{x}
 \contentsline {chapter}{\numberline {1}Introduction}{1}
 \contentsline {section}{\numberline {1.1}Motivations}{4}
 \contentsline {section}{\numberline {1.2}Overview}{6}
