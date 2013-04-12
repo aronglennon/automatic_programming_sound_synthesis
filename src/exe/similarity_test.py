@@ -24,6 +24,31 @@ DEBUG = False
 WAVE_FILE_DIRECTORY = ""
 NUM_TESTS = 100
 
+'''
+NOTES:
+- Must compare aligned-Euclidean, global DTW, DPLA (just use version of SIC-DPLA - talk about this in dissertation), SIC-DPLA
+- N experiments each of:
+-- Slight global time scaling (rand between 2-5%) combined with time shifting (rand between 100-500ms)
+-------------- params: easy, test_run, file, time_scale_and_stretch, scale_percent, shift_amount (ms)
+-- Local time warping (rand selected such that warping path does not diverge from diagonal by more than 5 frames)
+-------------- params: easy, test_run, file, time_warping, threshold on max warp divergence, record entire path(?)
+-- Random sample deletion (random select segments of various sizes no more than 2-5% of total content)
+-------------- params: easy, test_run, file, segment_deletion, deleted content, num_segments, max_segment, min_segment, average_segment
+-- Range extension of stable timbral content randomly selected and totalling between 2-5% of all content (will have to find places where timbre is stable in test files)
+-------------- params: easy, test_run, file, stable_content_extension, total_extension, num_extension, max_extension, min_extension, average_extension
+
+-- introduce new timbral content (from other files?) between 10-50% of file length, while randomly deleting other content
+-------------- params: severe, test_run, file, introduce_content, total_percent_indtroduction, total_percent_deletion, introduction_from_where, num_introduction, num_deletion, max/min/avg introduction and deletion
+-- re-order rand sequences within content (choosing subseqs between 10-20% of file length and swapping out of order up to 5 times)
+-------------- params: severe, test_run, file, re-order, number swaps, max_size, min_size, total_size, average_size
+-- random insertion of repetitions paired with random deleting of non-repetitive segments (by choosing subseqs between 10-20% file length and repeating up to 3 times)
+-------------- params: severe, test_run, file, insert_repetition, number unique repetitions, max_reps for unique, min_reps for unique, total reps, average reps, total_length reps, total_length deletes, num segment deletes, max delete, min delete, max rep length, min rep length, avg_rep_length, avg_delete_length
+-- applying severe temporal warpings (rand selected such taht warping path diverges at least more than 10 frames once during length of file)
+-------------- params: severe, test_run, file, time warping, threshold on min warp divergence, record entire path(?)
+
+Given different params to keep track of, each test will have a different table to record those into...we'll just go through random test runs and insert rows.
+'''
+
 def main():
     # get all options
     parser = OptionParser()
