@@ -13,18 +13,3 @@ allow one output type). To get a patch's input types, we need to ask every child
 difference here being that each inlet may accept multiple types and all should be considered). The 'actual' connection types
 are not important because once a connection is severed in a patch it may be the case that a different connection type will
 replace it.
-
-----------
-Currently it is possible to mutate and simply swap the same object as we do not check what 'was' there before connection was cut. 
-For everything but sfplay, this will result in something different since loadmess will get a new argument.
-
-----------
-Where I am:
-I'm not sure the create patch is updating the broken subpatch correctly, nor am I sure the best way to update the full patch.
-
-TODO: 
-1. update create patch to handle full, grow, and ramped half and half --> make sure that when we call this duration subpatch creation during mutation, we select grow...right?
-2. determine how dynamic tree depth limits are actually increased over time
-3. Make max portion work with multiple concurrent patches (in the same parent patcher)
-4. disallow sfplay~...is this given special treatment in js??? if so, change if synthesis flag switched on
-5. look at nonrealtime thing Adam sent

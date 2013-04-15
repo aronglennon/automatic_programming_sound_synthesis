@@ -8,13 +8,14 @@ from maxclasses.max_patch import create_patch_from_scratch
 from maxclasses.max_object import get_max_objects_from_file
 from geneticoperators.fitness import change_fitness_to_probability
 from geneticoperators.ga_ops import create_next_generation, select_patches_by_fitness
-from features.features_functions import get_features
+from features.features_functions import *
+from distortions.distortions import *
 from similarity.similarity_calc import get_similarity
 from resource_limitations.resource_limitations import get_max_tree_depth
 from mysqldb.db_commands import mysql_object
-import wave
+import wave, struct
 from optparse import OptionParser
-import sys
+import sys, random, os, re
 from datetime import datetime
 import numpy as np
 
@@ -22,34 +23,18 @@ import numpy as np
 # TODO: write distortion functions
 DEBUG = False
 WAVE_FILE_DIRECTORY = ""
+SAVE_DIR = ""   # dir to save all distorted files
 NUM_TESTS = 100
+MAX_WARP = 5
+MIN_WARP = 10
 
 '''
 NOTES:
 - Must compare aligned-Euclidean, global DTW, DPLA (just use version of SIC-DPLA - talk about this in dissertation), SIC-DPLA
-- N experiments each of:
--- Slight global time scaling (rand between 2-5%) combined with time shifting (rand between 100-500ms)
--------------- params: easy, test_run, file, time_scale_and_stretch, scale_percent, shift_amount (ms)
--- Local time warping (rand selected such that warping path does not diverge from diagonal by more than 5 frames)
--------------- params: easy, test_run, file, time_warping, threshold on max warp divergence, record entire path(?)
--- Random sample deletion (random select segments of various sizes no more than 2-5% of total content)
--------------- params: easy, test_run, file, segment_deletion, deleted content, num_segments, max_segment, min_segment, average_segment
--- Range extension of stable timbral content randomly selected and totalling between 2-5% of all content (will have to find places where timbre is stable in test files)
--------------- params: easy, test_run, file, stable_content_extension, total_extension, num_extension, max_extension, min_extension, average_extension
-
--- introduce new timbral content (from other files?) between 10-50% of file length, while randomly deleting other content
--------------- params: severe, test_run, file, introduce_content, total_percent_indtroduction, total_percent_deletion, introduction_from_where, num_introduction, num_deletion, max/min/avg introduction and deletion
--- re-order rand sequences within content (choosing subseqs between 10-20% of file length and swapping out of order up to 5 times)
--------------- params: severe, test_run, file, re-order, number swaps, max_size, min_size, total_size, average_size
--- random insertion of repetitions paired with random deleting of non-repetitive segments (by choosing subseqs between 10-20% file length and repeating up to 3 times)
--------------- params: severe, test_run, file, insert_repetition, number unique repetitions, max_reps for unique, min_reps for unique, total reps, average reps, total_length reps, total_length deletes, num segment deletes, max delete, min delete, max rep length, min rep length, avg_rep_length, avg_delete_length
--- applying severe temporal warpings (rand selected such taht warping path diverges at least more than 10 frames once during length of file)
--------------- params: severe, test_run, file, time warping, threshold on min warp divergence, record entire path(?)
-
-Given different params to keep track of, each test will have a different table to record those into...we'll just go through random test runs and insert rows.
 '''
 
 def main():
+    random.seed()
     # get all options
     parser = OptionParser()
     parser.add_option("--parameter_set", action="store", dest="parameter_set", help="The id of the parameter set to use")
@@ -70,15 +55,263 @@ def main():
     testrun_id = mysql_obj.new_test_run(run_start)
     if testrun_id == []:
         sys.exit(0)
+    for i in range(0, NUM_TESTS-1):
+        # light distortions (one for every file in WAVE_FILE_DIRECTORY
+        run_tsts_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
+        run_tw_tests(WAVE_FILE_DIRECTORY, testrun_id, i, None, MAX_WARP, mysql_obj)
+        run_sampdel_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
+        run_stableextension_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
+        # heavy distortion
+        run_contentintro_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
+        run_reorder_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
+        run_repinsert_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
+        run_tw_tests(WAVE_FILE_DIRECTORY, testrun_id, i, MIN_WARP, None, mysql_obj)
+        
     # generate distortion for file in WAVE_FILE_DIRECTORY
     # test using all similarity measures for apples-to-apples comparison
     # store (file_name, distortion_type, distortion_severity, similarity_measure, similarity_score)
     run_end = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
     mysql_obj.close_test_run(testrun_id, run_end)
 
-def store_state(mysql_obj, testrun_id, file_name, distortion_type, distortion_severity, similarity_measure, similarity_score):
-    if (mysql_obj.insert_similarity_test_data(testrun_id, file_name, distortion_type, distortion_severity, similarity_measure, similarity_score) == []):
-        print 'similarity test data not inserted for unknown reason'
+'''
+-- Slight global time scaling (rand between 2-5%) combined with time shifting (rand between 100-500ms) (tsts)
+-------------- params: easy, test_run, file, time_scale_and_stretch, scale_percent, shift_amount (ms)
+'''
+def run_tsts_tests(directory, test_run, test_case, mysql_obj):
+    scale_percent = random.uniform(2.0, 5.0)       # percent of file length
+    shift_amount = random.uniform(100.0, 500.0)    # ms
+    # for each file in directory, scale, shift - run through all sim measures - insert each result into db
+    if os.path.isdir(directory):
+        for dirname, dirnames, filenames in os.walk(directory):
+            for filename in filenames:   
+                wavefile = re.compile('(.*\.wav$)')
+                if wavefile.match(filename):
+                    test_audio_file = wave.open(filename, 'r')
+                    # get test audio
+                    test_audio = get_audio(test_audio_file)
+                    # extract features
+                    test_features = get_features(test_audio_file, 'nlse')
+                    # distort test audio
+                    scaled_audio = scale_audio(test_audio, scale_percent)
+                    scaled_and_shifted_audio = shift_audio(scaled_audio, shift_amount)
+                    # save distorted audio
+                    distorted_file = wave.open(SAVE_DIR + "/" + test_run + "/" + test_case + "/tsts.wav", 'w')
+                    distorted_file.writeframes(scaled_and_shifted_audio)
+                    distorted_file.close()
+                    # get distorted features
+                    scaled_and_shifted_features = get_features_from_data(scaled_and_shifted_audio, 'nlse')
+                    # calc all similarity values
+                    euc_sim = get_similarity(test_features, scaled_and_shifted_features, 'euclidean')
+                    dtw_sim = get_similarity(test_features, scaled_and_shifted_features, 'dtw')
+                    dpla_sim = get_similarity(test_features, scaled_and_shifted_features, 'dpla')
+                    sic_dpla_sim = get_similarity(test_features, scaled_and_shifted_features, 'sic_dpla')
+                    # store results in db
+                    mysql_obj.insert_tsts_test_data(test_run, test_case, filename, scale_percent, shift_amount, 'euclidean', euc_sim)
+                    mysql_obj.insert_tsts_test_data(test_run, test_case, filename, scale_percent, shift_amount, 'dtw', dtw_sim)
+                    mysql_obj.insert_tsts_test_data(test_run, test_case, filename, scale_percent, shift_amount, 'dpla', dpla_sim)
+    return []
+
+'''
+-- Local time warping (rand selected such that warping path does not diverge from diagonal by more than 5 frames for easy and where path diverges at least
+once by more than 10 frames for severe)
+-------------- params: easy, test_run, file, time_warping, threshold on max warp divergence, record entire path(?)
+'''
+def run_tw_tests(directory, test_run, test_case, min_warping_threshold, max_warping_threshold, mysql_obj):
+    # for each file in directory, scale, shift - run through all sim measures - insert each result into db
+    if os.path.isdir(directory):
+        for dirname, dirnames, filenames in os.walk(directory):
+            for filename in filenames:   
+                wavefile = re.compile('(.*\.wav$)')
+                if wavefile.match(filename):
+                    test_audio_file = wave.open(filename, 'r')
+                    # get test audio
+                    test_audio = get_audio(test_audio_file)
+                    # extract features
+                    test_features = get_features(test_audio_file, 'nlse')
+                    # distort test audio
+                    [time_warped_audio, warping_path] = time_warp_audio(test_audio, min_warping_threshold, max_warping_threshold)
+                    # save distorted audio
+                    distorted_file = wave.open(SAVE_DIR + "/" + test_run + "/" + test_case + "/tw.wav", 'w')
+                    distorted_file.writeframes(time_warped_audio)
+                    distorted_file.close()
+                    # get distorted features
+                    time_warped_features = get_features_from_data(time_warped_audio, 'nlse')
+                    # calc all similarity values
+                    euc_sim = get_similarity(test_features, time_warped_features, 'euclidean')
+                    dtw_sim = get_similarity(test_features, time_warped_features, 'dtw')
+                    dpla_sim = get_similarity(test_features, time_warped_features, 'dpla')
+                    sic_dpla_sim = get_similarity(test_features, time_warped_features, 'sic_dpla')
+                    # store results in db
+                    mysql_obj.insert_tw_test_data(test_run, test_case, filename, min_warping_threshold, max_warping_threshold, warping_path, 'euclidean', euc_sim)
+    return []
+
+'''
+-- Random sample deletion (random select segments of various sizes no more than 2-5% of total content)
+-------------- params: easy, test_run, file, segment_deletion, total amount of deleted content, num_segments, max_segment, min_segment, average_segment
+'''
+def run_sampdel_tests(directory, test_run, test_case, mysql_obj):
+    total_deleted_content = random.uniform(2.0, 5.0)       # percent of file length
+    # for each file in directory, scale, shift - run through all sim measures - insert each result into db
+    if os.path.isdir(directory):
+        for dirname, dirnames, filenames in os.walk(directory):
+            for filename in filenames:   
+                wavefile = re.compile('(.*\.wav$)')
+                if wavefile.match(filename):
+                    test_audio_file = wave.open(filename, 'r')
+                    # get test audio
+                    test_audio = get_audio(test_audio_file)
+                    # extract features
+                    test_features = get_features(test_audio_file, 'nlse')
+                    # distort test audio
+                    [deleted_sample_audio, num_segments, max_segment, min_segment, avg_segment] = delete_samples(test_audio, total_deleted_content)
+                    # save distorted audio
+                    distorted_file = wave.open(SAVE_DIR + "/" + test_run + "/" + test_case + "/sampdel.wav", 'w')
+                    distorted_file.writeframes(deleted_sample_audio)
+                    distorted_file.close()
+                    # get distorted features
+                    deleted_samples_features = get_features_from_data(deleted_sample_audio, 'nlse')
+                    # calc all similarity values
+                    euc_sim = get_similarity(test_features, deleted_samples_features, 'euclidean')
+                    dtw_sim = get_similarity(test_features, deleted_samples_features, 'dtw')
+                    dpla_sim = get_similarity(test_features, deleted_samples_features, 'dpla')
+                    sic_dpla_sim = get_similarity(test_features, deleted_samples_features, 'sic_dpla')
+                    # store results in db
+    return []
+
+'''
+- Range extension of stable timbral content randomly selected and totalling between 2-5% of all content (will have to find places where timbre is stable in test files)
+-------------- params: easy, test_run, file, stable_content_extension, total_extension, num_extension, max_extension, min_extension, average_extension
+'''
+def run_stableextension_tests(directory, test_run, test_case, mysql_obj):
+    total_content_extended = random.uniform(2.0, 5.0)       # percent of file length
+    # for each file in directory, scale, shift - run through all sim measures - insert each result into db
+    if os.path.isdir(directory):
+        for dirname, dirnames, filenames in os.walk(directory):
+            for filename in filenames:   
+                wavefile = re.compile('(.*\.wav$)')
+                if wavefile.match(filename):
+                    test_audio_file = wave.open(filename, 'r')
+                    # get test audio
+                    test_audio = get_audio(test_audio_file)
+                    # extract features
+                    test_features = get_features(test_audio_file, 'nlse')
+                    # distort test audio
+                    [stable_extension_audio, num_segments, max_segment, min_segment, avg_segment] = stable_extension(test_audio, total_content_extended)
+                    # save distorted audio
+                    distorted_file = wave.open(SAVE_DIR + "/" + test_run + "/" + test_case + "/stableextension.wav", 'w')
+                    distorted_file.writeframes(stable_extension_audio)
+                    distorted_file.close()
+                    # get distorted features
+                    stable_extension_features = get_features_from_data(stable_extension_audio, 'nlse')
+                    # calc all similarity values
+                    euc_sim = get_similarity(test_features, stable_extension_features, 'euclidean')
+                    dtw_sim = get_similarity(test_features, stable_extension_features, 'dtw')
+                    dpla_sim = get_similarity(test_features, stable_extension_features, 'dpla')
+                    sic_dpla_sim = get_similarity(test_features, stable_extension_features, 'sic_dpla')
+                    # store results in db
+    return []
+ 
+'''      
+-- introduce new timbral content (from other files?) between 10-50% of file length, while randomly deleting other content
+-------------- params: severe, test_run, file, introduce_content, total_percent_indtroduction, total_percent_deletion, introduction_from_where, num_introduction, num_deletion, max/min/avg introduction and deletion
+'''
+def run_contentintro_tests(directory, test_run, test_case, mysql_obj):
+    total_percent_introduction = random.uniform(10.0, 50.0)                         # percent of file length
+    total_percent_deletion = total_percent_introduction*random.uniform(0.8, 1.2)    # delete somewhere in the vicinity of the same amount of content as was introduced 
+    # for each file in directory, scale, shift - run through all sim measures - insert each result into db
+    if os.path.isdir(directory):
+        for dirname, dirnames, filenames in os.walk(directory):
+            for filename in filenames:   
+                wavefile = re.compile('(.*\.wav$)')
+                if wavefile.match(filename):
+                    test_audio_file = wave.open(filename, 'r')
+                    # get test audio
+                    test_audio = get_audio(test_audio_file)
+                    # extract features
+                    test_features = get_features(test_audio_file, 'nlse')
+                    # distort test audio
+                    [content_introduction_audio, file_introduced, num_introduction, max_introduction, min_introduction, avg_introduction, num_deletion, max_deletion, min_deletion, avg_deletion] = introduce_content(test_audio, total_percent_introduction, total_percent_deletion, directory)
+                    # save distorted audio
+                    distorted_file = wave.open(SAVE_DIR + "/" + test_run + "/" + test_case + "/contentintro.wav", 'w')
+                    distorted_file.writeframes(content_introduction_audio)
+                    distorted_file.close()
+                    # get distorted features
+                    content_introduction_features = get_features_from_data(content_introduction_audio, 'nlse')
+                    # calc all similarity values
+                    euc_sim = get_similarity(test_features, content_introduction_features, 'euclidean')
+                    dtw_sim = get_similarity(test_features, content_introduction_features, 'dtw')
+                    dpla_sim = get_similarity(test_features, content_introduction_features, 'dpla')
+                    sic_dpla_sim = get_similarity(test_features, content_introduction_features, 'sic_dpla')
+                    # store results in db
+    return []
+
+'''
+-- re-order rand sequences within content (choosing subseqs between 10-20% of file length and swapping out of order up to 5 times)
+-------------- params: severe, test_run, file, re-order, number swaps, max_size, min_size, total_size, average_size
+'''
+def run_reorder_tests(directory, test_run, test_case, mysql_obj):
+    num_swaps = random.randrange(1, 5)
+    # for each file in directory, scale, shift - run through all sim measures - insert each result into db
+    if os.path.isdir(directory):
+        for dirname, dirnames, filenames in os.walk(directory):
+            for filename in filenames:   
+                wavefile = re.compile('(.*\.wav$)')
+                if wavefile.match(filename):
+                    test_audio_file = wave.open(filename, 'r')
+                    # get test audio
+                    test_audio = get_audio(test_audio_file)
+                    # extract features
+                    test_features = get_features(test_audio_file, 'nlse')
+                    # distort test audio
+                    [reordered_audio, max_size, min_size, total_size, avg_size] = reorder_segments(test_audio, num_swaps)
+                    # save distorted audio
+                    distorted_file = wave.open(SAVE_DIR + "/" + test_run + "/" + test_case + "/reorder.wav", 'w')
+                    distorted_file.writeframes(reordered_audio)
+                    distorted_file.close()
+                    # get distorted features
+                    reordered_features = get_features_from_data(reordered_audio, 'nlse')
+                    # calc all similarity values
+                    euc_sim = get_similarity(test_features, reordered_features, 'euclidean')
+                    dtw_sim = get_similarity(test_features, reordered_features, 'dtw')
+                    dpla_sim = get_similarity(test_features, reordered_features, 'dpla')
+                    sic_dpla_sim = get_similarity(test_features, reordered_features, 'sic_dpla')
+                    # store results in db
+                    
+    return []
+
+'''
+-- random insertion of repetitions paired with random deleting of non-repetitive segments (by choosing subseqs between 10-20% file length and repeating up to 3 times)
+-------------- params: severe, test_run, file, insert_repetition, number unique repetitions, max_reps for unique, min_reps for unique, total reps, average reps, total_length reps, total_length deletes, num segment deletes, max delete, min delete, max rep length, min rep length, avg_rep_length, avg_delete_length
+'''
+def run_repinsert_tests(directory, test_run, test_case, mysql_obj):
+    num_reps = random.randrange(1, 3)
+    # if greater than 1, determine if they should be same content or not
+    # for each file in directory, scale, shift - run through all sim measures - insert each result into db
+    if os.path.isdir(directory):
+        for dirname, dirnames, filenames in os.walk(directory):
+            for filename in filenames:   
+                wavefile = re.compile('(.*\.wav$)')
+                if wavefile.match(filename):
+                    test_audio_file = wave.open(filename, 'r')
+                    # get test audio
+                    test_audio = get_audio(test_audio_file)
+                    # extract features
+                    test_features = get_features(test_audio_file, 'nlse')
+                    # distort test audio
+                    [repetitive_insertion_audio, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length] = insert_repetitions(test_audio, num_reps)
+                    # save distorted audio
+                    distorted_file = wave.open(SAVE_DIR + "/" + test_run + "/" + test_case + "/repinsert.wav", 'w')
+                    distorted_file.writeframes(repetitive_insertion_audio)
+                    distorted_file.close()
+                    # get distorted features
+                    repetitive_insert_features = get_features_from_data(repetitive_insertion_audio, 'nlse')
+                    # calc all similarity values
+                    euc_sim = get_similarity(test_features, repetitive_insert_features, 'euclidean')
+                    dtw_sim = get_similarity(test_features, repetitive_insert_features, 'dtw')
+                    dpla_sim = get_similarity(test_features, repetitive_insert_features, 'dpla')
+                    sic_dpla_sim = get_similarity(test_features, repetitive_insert_features, 'sic_dpla')
+                    # store results in db
+    return []
 
 if __name__ == "__main__":
     main() 
