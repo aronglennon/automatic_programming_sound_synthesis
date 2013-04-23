@@ -102,13 +102,15 @@ def run_tsts_tests(directory, test_run, test_case, mysql_obj):
                     scaled_and_shifted_features = get_features_from_data(scaled_and_shifted_audio, 'nlse')
                     # calc all similarity values
                     euc_sim = get_similarity(test_features, scaled_and_shifted_features, 'euclidean')
-                    dtw_sim = get_similarity(test_features, scaled_and_shifted_features, 'dtw')
-                    dpla_sim = get_similarity(test_features, scaled_and_shifted_features, 'dpla')
-                    sic_dpla_sim = get_similarity(test_features, scaled_and_shifted_features, 'sic_dpla')
+                    dtw_sim = get_similarity(test_features, scaled_and_shifted_features, 'DTW')
+                    dpla_sim = get_similarity(test_features, scaled_and_shifted_features, 'DPLA')
+                    sic_dpla_sim = get_similarity(test_features, scaled_and_shifted_features, 'SIC-DPLA')
                     # store results in db
                     mysql_obj.insert_tsts_test_data(test_run, test_case, filename, scale_percent, shift_amount, 'euclidean', euc_sim)
-                    mysql_obj.insert_tsts_test_data(test_run, test_case, filename, scale_percent, shift_amount, 'dtw', dtw_sim)
-                    mysql_obj.insert_tsts_test_data(test_run, test_case, filename, scale_percent, shift_amount, 'dpla', dpla_sim)
+                    mysql_obj.insert_tsts_test_data(test_run, test_case, filename, scale_percent, shift_amount, 'DTW', dtw_sim)
+                    mysql_obj.insert_tsts_test_data(test_run, test_case, filename, scale_percent, shift_amount, 'DPLA', dpla_sim)
+                    mysql_obj.insert_tsts_test_data(test_run, test_case, filename, scale_percent, shift_amount, 'SIC-DPLA', dpla_sim)
+
     return []
 
 '''
@@ -138,11 +140,15 @@ def run_tw_tests(directory, test_run, test_case, min_warping_threshold, max_warp
                     time_warped_features = get_features_from_data(time_warped_audio, 'nlse')
                     # calc all similarity values
                     euc_sim = get_similarity(test_features, time_warped_features, 'euclidean')
-                    dtw_sim = get_similarity(test_features, time_warped_features, 'dtw')
-                    dpla_sim = get_similarity(test_features, time_warped_features, 'dpla')
-                    sic_dpla_sim = get_similarity(test_features, time_warped_features, 'sic_dpla')
+                    dtw_sim = get_similarity(test_features, time_warped_features, 'DTW')
+                    dpla_sim = get_similarity(test_features, time_warped_features, 'DPLA')
+                    sic_dpla_sim = get_similarity(test_features, time_warped_features, 'SIC-DPLA')
                     # store results in db
                     mysql_obj.insert_tw_test_data(test_run, test_case, filename, min_warping_threshold, max_warping_threshold, warping_path, 'euclidean', euc_sim)
+                    mysql_obj.insert_tw_test_data(test_run, test_case, filename, min_warping_threshold, max_warping_threshold, warping_path, 'DTW', dtw_sim)
+                    mysql_obj.insert_tw_test_data(test_run, test_case, filename, min_warping_threshold, max_warping_threshold, warping_path, 'DPLA', dpla_sim)
+                    mysql_obj.insert_tw_test_data(test_run, test_case, filename, min_warping_threshold, max_warping_threshold, warping_path, 'SIC-DPLA', sic_dpla_sim)
+
     return []
 
 '''
@@ -172,10 +178,16 @@ def run_sampdel_tests(directory, test_run, test_case, mysql_obj):
                     deleted_samples_features = get_features_from_data(deleted_sample_audio, 'nlse')
                     # calc all similarity values
                     euc_sim = get_similarity(test_features, deleted_samples_features, 'euclidean')
-                    dtw_sim = get_similarity(test_features, deleted_samples_features, 'dtw')
-                    dpla_sim = get_similarity(test_features, deleted_samples_features, 'dpla')
-                    sic_dpla_sim = get_similarity(test_features, deleted_samples_features, 'sic_dpla')
+                    dtw_sim = get_similarity(test_features, deleted_samples_features, 'DTW')
+                    dpla_sim = get_similarity(test_features, deleted_samples_features, 'DPLA')
+                    sic_dpla_sim = get_similarity(test_features, deleted_samples_features, 'SIC-DPLA')
                     # store results in db
+                    mysql_obj.insert_sampdel_test_data(test_run, test_case, filename, total_deleted_content, num_segments, max_segment, min_segment, avg_segment, 'euclidean', euc_sim)
+                    mysql_obj.insert_sampdel_test_data(test_run, test_case, filename, total_deleted_content, num_segments, max_segment, min_segment, avg_segment, 'DTW', dtw_sim)
+                    mysql_obj.insert_sampdel_test_data(test_run, test_case, filename, total_deleted_content, num_segments, max_segment, min_segment, avg_segment, 'DPLA', dpla_sim)
+                    mysql_obj.insert_sampdel_test_data(test_run, test_case, filename, total_deleted_content, num_segments, max_segment, min_segment, avg_segment, 'SIC-DPLA', sic_dpla_sim)
+
+
     return []
 
 '''
@@ -205,10 +217,14 @@ def run_stableextension_tests(directory, test_run, test_case, mysql_obj):
                     stable_extension_features = get_features_from_data(stable_extension_audio, 'nlse')
                     # calc all similarity values
                     euc_sim = get_similarity(test_features, stable_extension_features, 'euclidean')
-                    dtw_sim = get_similarity(test_features, stable_extension_features, 'dtw')
-                    dpla_sim = get_similarity(test_features, stable_extension_features, 'dpla')
-                    sic_dpla_sim = get_similarity(test_features, stable_extension_features, 'sic_dpla')
+                    dtw_sim = get_similarity(test_features, stable_extension_features, 'DTW')
+                    dpla_sim = get_similarity(test_features, stable_extension_features, 'DPLA')
+                    sic_dpla_sim = get_similarity(test_features, stable_extension_features, 'SIC-DPLA')
                     # store results in db
+                    mysql_obj.insert_stableextension_test_data(test_run, test_case, filename, total_content_extended, num_segments, max_segment, min_segment, avg_segment, 'euclidean', euc_sim)
+                    mysql_obj.insert_stableextension_test_data(test_run, test_case, filename, total_content_extended, num_segments, max_segment, min_segment, avg_segment, 'DTW', dtw_sim)
+                    mysql_obj.insert_stableextension_test_data(test_run, test_case, filename, total_content_extended, num_segments, max_segment, min_segment, avg_segment, 'DPLA', dpla_sim)
+                    mysql_obj.insert_stableextension_test_data(test_run, test_case, filename, total_content_extended, num_segments, max_segment, min_segment, avg_segment, 'SIC-DPLA', sic_dpla_sim)
     return []
  
 '''      
@@ -243,6 +259,10 @@ def run_contentintro_tests(directory, test_run, test_case, mysql_obj):
                     dpla_sim = get_similarity(test_features, content_introduction_features, 'dpla')
                     sic_dpla_sim = get_similarity(test_features, content_introduction_features, 'sic_dpla')
                     # store results in db
+                    mysql_obj.insert_contentintro_test_data(test_run, test_case, filename, total_percent_introduction, total_percent_deletion, file_introduced, num_introduction, max_introduction, min_introduction, avg_introduction, num_deletion, max_deletion, min_deletion, avg_deletion, 'euclidean', euc_sim)
+                    mysql_obj.insert_contentintro_test_data(test_run, test_case, filename, total_percent_introduction, total_percent_deletion, file_introduced, num_introduction, max_introduction, min_introduction, avg_introduction, num_deletion, max_deletion, min_deletion, avg_deletion, 'DTW', dtw_sim)
+                    mysql_obj.insert_contentintro_test_data(test_run, test_case, filename, total_percent_introduction, total_percent_deletion, file_introduced, num_introduction, max_introduction, min_introduction, avg_introduction, num_deletion, max_deletion, min_deletion, avg_deletion, 'DPLA', dpla_sim)
+                    mysql_obj.insert_contentintro_test_data(test_run, test_case, filename, total_percent_introduction, total_percent_deletion, file_introduced, num_introduction, max_introduction, min_introduction, avg_introduction, num_deletion, max_deletion, min_deletion, avg_deletion, 'SIC-DPLA', sic_dpla_sim)
     return []
 
 '''
@@ -276,7 +296,10 @@ def run_reorder_tests(directory, test_run, test_case, mysql_obj):
                     dpla_sim = get_similarity(test_features, reordered_features, 'dpla')
                     sic_dpla_sim = get_similarity(test_features, reordered_features, 'sic_dpla')
                     # store results in db
-                    
+                    mysql_obj.insert_reorder_test_data(test_run, test_case, filename, num_swaps, max_size, min_size, total_size, avg_size, 'euclidean', euc_sim)
+                    mysql_obj.insert_reorder_test_data(test_run, test_case, filename, num_swaps, max_size, min_size, total_size, avg_size, 'DTW', dtw_sim)
+                    mysql_obj.insert_reorder_test_data(test_run, test_case, filename, num_swaps, max_size, min_size, total_size, avg_size, 'DPLA', dpla_sim)
+                    mysql_obj.insert_reorder_test_data(test_run, test_case, filename, num_swaps, max_size, min_size, total_size, avg_size, 'SIC-DPLA', sic_dpla_sim)                    
     return []
 
 '''
@@ -311,6 +334,10 @@ def run_repinsert_tests(directory, test_run, test_case, mysql_obj):
                     dpla_sim = get_similarity(test_features, repetitive_insert_features, 'dpla')
                     sic_dpla_sim = get_similarity(test_features, repetitive_insert_features, 'sic_dpla')
                     # store results in db
+                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_reps, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'euclidean', euc_sim)
+                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_reps, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'DTW', dtw_sim)
+                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_reps, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'DPLA', dpla_sim)
+                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_reps, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'SIC-DPLA', sic_dpla_sim)
     return []
 
 if __name__ == "__main__":
