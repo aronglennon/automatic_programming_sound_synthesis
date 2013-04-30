@@ -4,10 +4,7 @@ import threading
 import mysql.connector
 from mysql.connector.errors import OperationalError
 import platform
-if platform.python_implementation()=='CPython':
-    import numpy as np
-else:
-    import numpypy as np
+import numpy as np
 import datetime, time
 from datetime import timedelta
 from mysqldb.db_config import Config
@@ -174,7 +171,7 @@ class mysql_object():
     def insert_sampdel_test_data(self, test_run, test_case, filename, total_deleted_content, num_segments, max_segment, min_segment, avg_segment, sim_type, sim_val):
         if self.connected:
             statement = "INSERT INTO testdata_similarity_sampdel (tetsrun_id, testcase_id, filename, num_segments, max_segment_length, min_segment_length, average_segment_length, total_deleted_content, sim_type, sim_val) \
-            VALUES (%d, %d, '%s', %d, %d, %d, %0.8f, %d, '%s', %0.8f)" % (test_run, test_case, filename, num_segments, max_segment, min_segment, avg_segment, total_deleted_content, sim_type, sim_val)
+            VALUES (%d, %d, '%s', %d, %d, %d, %0.8f, %0.8f, '%s', %0.8f)" % (test_run, test_case, filename, num_segments, max_segment, min_segment, avg_segment, total_deleted_content, sim_type, sim_val)
             values = db_core.insert(self.dbConnection, statement)
             return values
         else:
@@ -183,7 +180,7 @@ class mysql_object():
     def insert_stableextension_test_data(self, test_run, test_case, filename, total_content_extended, num_segments, max_segment, min_segment, avg_segment, sim_type, sim_val):
         if self.connected:
             statement = "INSERT INTO testdata_similarity_stableextension (tetsrun_id, testcase_id, filename, total_content_extended, num_segments, max_segment, min_segment, avg_segment, sim_type, sim_val) \
-            VALUES (%d, %d, '%s', %d, %d, %d, %d, %0.8f, '%s', %0.8f)" % (test_run, test_case, filename, total_content_extended, num_segments, max_segment, min_segment, avg_segment, sim_type, sim_val)
+            VALUES (%d, %d, '%s', %0.8f, %d, %d, %d, %0.8f, '%s', %0.8f)" % (test_run, test_case, filename, total_content_extended, num_segments, max_segment, min_segment, avg_segment, sim_type, sim_val)
             values = db_core.insert(self.dbConnection, statement)
             return values
         else:

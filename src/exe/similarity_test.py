@@ -186,8 +186,6 @@ def run_sampdel_tests(directory, test_run, test_case, mysql_obj):
                     mysql_obj.insert_sampdel_test_data(test_run, test_case, filename, total_deleted_content, num_segments, max_segment, min_segment, avg_segment, 'DTW', dtw_sim)
                     mysql_obj.insert_sampdel_test_data(test_run, test_case, filename, total_deleted_content, num_segments, max_segment, min_segment, avg_segment, 'DPLA', dpla_sim)
                     mysql_obj.insert_sampdel_test_data(test_run, test_case, filename, total_deleted_content, num_segments, max_segment, min_segment, avg_segment, 'SIC-DPLA', sic_dpla_sim)
-
-
     return []
 
 '''
