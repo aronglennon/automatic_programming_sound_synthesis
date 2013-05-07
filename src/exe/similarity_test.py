@@ -76,6 +76,8 @@ def main():
 '''
 -- Slight global time scaling (rand between 2-5%) combined with time shifting (rand between 100-500ms) (tsts)
 -------------- params: easy, test_run, file, time_scale_and_stretch, scale_percent, shift_amount (ms)
+
+NOTE: scaling should be performed on features so as to not change timbral content via pitch shifting
 '''
 def run_tsts_tests(directory, test_run, test_case, mysql_obj):
     scale_percent = random.uniform(2.0, 5.0)       # percent of file length
@@ -92,14 +94,10 @@ def run_tsts_tests(directory, test_run, test_case, mysql_obj):
                     # extract features
                     test_features = get_features(test_audio_file, 'nlse')
                     # distort test audio
-                    scaled_audio = scale_audio(test_audio, scale_percent)
-                    scaled_and_shifted_audio = shift_audio(scaled_audio, shift_amount)
-                    # save distorted audio
-                    distorted_file = wave.open(SAVE_DIR + "/" + test_run + "/" + test_case + "/tsts.wav", 'w')
-                    distorted_file.writeframes(scaled_and_shifted_audio)
-                    distorted_file.close()
+                    shifted_audio = shift_audio(test_audio, shift_amount/1000.0*test_audio_file.getframerate)
                     # get distorted features
-                    scaled_and_shifted_features = get_features_from_data(scaled_and_shifted_audio, 'nlse')
+                    shifted_features = get_features_from_data(shifted_audio, 'nlse')
+                    scaled_and_shifted_features = scale_features(shifted_features, scale_percent)
                     # calc all similarity values
                     euc_sim = get_similarity(test_features, scaled_and_shifted_features, 'euclidean')
                     dtw_sim = get_similarity(test_features, scaled_and_shifted_features, 'DTW')
@@ -117,6 +115,8 @@ def run_tsts_tests(directory, test_run, test_case, mysql_obj):
 -- Local time warping (rand selected such that warping path does not diverge from diagonal by more than 5 frames for easy and where path diverges at least
 once by more than 10 frames for severe)
 -------------- params: easy, test_run, file, time_warping, threshold on max warp divergence, record entire path(?)
+
+NOTE: should be performed on features so as to not change timbral content via pitch shifting
 '''
 def run_tw_tests(directory, test_run, test_case, min_warping_threshold, max_warping_threshold, mysql_obj):
     # for each file in directory, scale, shift - run through all sim measures - insert each result into db
@@ -126,18 +126,10 @@ def run_tw_tests(directory, test_run, test_case, min_warping_threshold, max_warp
                 wavefile = re.compile('(.*\.wav$)')
                 if wavefile.match(filename):
                     test_audio_file = wave.open(filename, 'r')
-                    # get test audio
-                    test_audio = get_audio(test_audio_file)
                     # extract features
                     test_features = get_features(test_audio_file, 'nlse')
-                    # distort test audio
-                    [time_warped_audio, warping_path] = time_warp_audio(test_audio, min_warping_threshold, max_warping_threshold)
-                    # save distorted audio
-                    distorted_file = wave.open(SAVE_DIR + "/" + test_run + "/" + test_case + "/tw.wav", 'w')
-                    distorted_file.writeframes(time_warped_audio)
-                    distorted_file.close()
-                    # get distorted features
-                    time_warped_features = get_features_from_data(time_warped_audio, 'nlse')
+                    # distort test features
+                    [time_warped_features, warping_path] = time_warp_features(test_features, min_warping_threshold, max_warping_threshold)
                     # calc all similarity values
                     euc_sim = get_similarity(test_features, time_warped_features, 'euclidean')
                     dtw_sim = get_similarity(test_features, time_warped_features, 'DTW')
@@ -148,7 +140,6 @@ def run_tw_tests(directory, test_run, test_case, min_warping_threshold, max_warp
                     mysql_obj.insert_tw_test_data(test_run, test_case, filename, min_warping_threshold, max_warping_threshold, warping_path, 'DTW', dtw_sim)
                     mysql_obj.insert_tw_test_data(test_run, test_case, filename, min_warping_threshold, max_warping_threshold, warping_path, 'DPLA', dpla_sim)
                     mysql_obj.insert_tw_test_data(test_run, test_case, filename, min_warping_threshold, max_warping_threshold, warping_path, 'SIC-DPLA', sic_dpla_sim)
-
     return []
 
 '''
