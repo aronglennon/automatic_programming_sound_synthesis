@@ -235,7 +235,7 @@ def run_contentintro_tests(directory, test_run, test_case, mysql_obj):
                     # extract features
                     test_features = get_features(test_audio_file, 'nlse')
                     # distort test audio
-                    [content_introduction_audio, file_introduced, num_introduction, max_introduction, min_introduction, avg_introduction, num_deletion, max_deletion, min_deletion, avg_deletion] = introduce_content(test_audio, total_percent_introduction, total_percent_deletion, directory)
+                    [content_introduction_audio, file_introduced, num_introduction, max_introduction, min_introduction, avg_introduction, num_deletion, max_deletion, min_deletion, avg_deletion] = introduce_content(test_audio, total_percent_introduction, total_percent_deletion, filenames)
                     # save distorted audio
                     distorted_file = wave.open(SAVE_DIR + "/" + test_run + "/" + test_case + "/contentintro.wav", 'w')
                     distorted_file.writeframes(content_introduction_audio)
@@ -259,7 +259,7 @@ def run_contentintro_tests(directory, test_run, test_case, mysql_obj):
 -------------- params: severe, test_run, file, re-order, number swaps, max_size, min_size, total_size, average_size
 '''
 def run_reorder_tests(directory, test_run, test_case, mysql_obj):
-    num_swaps = random.randrange(1, 5)
+    num_swaps = random.randint(1, 5)
     # for each file in directory, scale, shift - run through all sim measures - insert each result into db
     if os.path.isdir(directory):
         for dirname, dirnames, filenames in os.walk(directory):
@@ -296,7 +296,7 @@ def run_reorder_tests(directory, test_run, test_case, mysql_obj):
 -------------- params: severe, test_run, file, insert_repetition, number unique repetitions, max_reps for unique, min_reps for unique, total reps, average reps, total_length reps, total_length deletes, num segment deletes, max delete, min delete, max rep length, min rep length, avg_rep_length, avg_delete_length
 '''
 def run_repinsert_tests(directory, test_run, test_case, mysql_obj):
-    num_reps = random.randrange(1, 3)
+    num_subsequences = random.randint(1, 3)
     # if greater than 1, determine if they should be same content or not
     # for each file in directory, scale, shift - run through all sim measures - insert each result into db
     if os.path.isdir(directory):
@@ -310,7 +310,7 @@ def run_repinsert_tests(directory, test_run, test_case, mysql_obj):
                     # extract features
                     test_features = get_features(test_audio_file, 'nlse')
                     # distort test audio
-                    [repetitive_insertion_audio, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length] = insert_repetitions(test_audio, num_reps)
+                    [repetitive_insertion_audio, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length] = insert_repetitions(test_audio, num_subsequences)
                     # save distorted audio
                     distorted_file = wave.open(SAVE_DIR + "/" + test_run + "/" + test_case + "/repinsert.wav", 'w')
                     distorted_file.writeframes(repetitive_insertion_audio)
