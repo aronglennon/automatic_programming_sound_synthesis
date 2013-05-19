@@ -19,4 +19,6 @@ def get_features_from_data(audio_data, feature_type):
 
 def get_audio(filename):
     fileContents = filename.readframes(MAX_LENGTH)
-    return struct.unpack("<%uh" % (len(fileContents) / 2), fileContents)
+    fileContents = struct.unpack("<%uh" % (len(fileContents) / 2), fileContents)
+    fileContents  = np.array(fileContents)/float(np.power(2,16))
+    return fileContents

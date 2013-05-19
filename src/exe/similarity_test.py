@@ -94,7 +94,7 @@ def run_tsts_tests(directory, test_run, test_case, mysql_obj):
                     # extract features
                     test_features = get_features(test_audio_file, 'nlse')
                     # distort test audio
-                    shifted_audio = shift_audio(test_audio, shift_amount/1000.0*test_audio_file.getframerate)
+                    shifted_audio = shift_audio(test_audio, shift_amount/1000.0*test_audio_file.getframerate())
                     # get distorted features
                     shifted_features = get_features_from_data(shifted_audio, 'nlse')
                     scaled_and_shifted_features = scale_features(shifted_features, scale_percent)

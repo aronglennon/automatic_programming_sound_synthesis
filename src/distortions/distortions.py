@@ -8,13 +8,13 @@ import random
 import sys
 import numpy as np
 import wave
-from features.features_functions import get_audio
+from features.features_functions import get_audio, get_features
 
 # scale feature list via multi-D resampling
 def scale_features(features, scale_percent):
     # constant time warping is the same thing as time stretching. here, we simply resample features since phase is not our concern.  
     # resample SHOULD work since it should just treat each column as a different 'channel' to resample
-    return resample(features, scale_percent/100.0, 'sinc_best')
+    return resample(features, (scale_percent+100.0)/100.0, 'sinc_best')
 
 # shift audio by shift_amount samples
 def shift_audio(audio, shift_amount):
@@ -97,7 +97,7 @@ def time_warp_features(features, min_threshold, max_threshold):
         # is ahead
         biasTowardsX = True
         while x < original_length and y < original_length:
-            warp_path.append(x,y)
+            warp_path.append([x,y])
             xMoved = False
             yMoved = False
             '''
@@ -110,23 +110,26 @@ def time_warp_features(features, min_threshold, max_threshold):
             '''
             # check if x < original_length/2
             if x <= original_length/2 and y-x < min_threshold:
+                #********
+                # CHECK THAT prob_y * prob_x is in fact 0.25
+                #********
                 '''
-                 we want  ahigh prob that y is moved so it can get to min_threshold
+                 we want  a high prob that y is moved so it can get to min_threshold
                  specifically we would like y to outpace x by 'roughly' min_threshold over original_length/2
                  thus, we want x to have taken original_length/2 steps and y original_length/2 + min_threshold steps
                  the math would be dirt simple if EITHER x OR y moved on each iteration, but we have a probability of both
                  moving. If we want to keep the prob of a diagonal move the same, we simply require prob_y * prob_x = 0.5^2=0.25.
-                 In other words, we want 25% of all iterations to produce a move in y and x. This would mean around (original_length+min_threshold)*0.25.
+                 In other words, we want 25% of all iterations to produce a move in y and x. This would mean around (original_length+min_threshold-M)*0.25.
                  Let's call this M iterations. If y needs to get to y original_length/2 + min_threshold and x to original_length/2 and we have M iterations
                  where both move, then the total number of iterations will be original_length+min_threshold-M.
                  The prob of y movement would then need to be (original_length/2+min_threshold) / (original_length+min_threshold-M)
                 '''
-                prob_y = (original_length/2+min_threshold) / 0.75*(original_length+min_threshold)
+                prob_y = (original_length/2+min_threshold) / (0.75*(original_length+min_threshold))
                 '''
-                 since the prob of x moving * prob of y moving is M/((original_length+min_threshold-M)) and the prob of y moving is above,
-                 the prob of x moving should be M / (original_length/2+min_threshold)
+                 since the prob of x moving * prob of y moving is 0.25 and the prob of y moving is above,
+                 the prob of x moving should be 0.25*(0.75*(original_length+min_threshold)) / (original_length/2+min_threshold)
                 '''
-                prob_x = ((original_length+min_threshold)*0.25) / (original_length/2+min_threshold)
+                prob_x = ((original_length+min_threshold)*0.25*0.75) / (original_length/2+min_threshold)
                 if (random.random() < prob_y):
                     y +=1
                     yMoved = True
@@ -172,16 +175,18 @@ def time_warp_features(features, min_threshold, max_threshold):
     y = 0
     time_warped_features = [features[0]]
     for w in warp_path:
-        # if the y coordinate is not stalled, add it to the time_warped_features
+        # if the y coordinate changes, add the corresponding x coordinate to the time_warped_features
         if w[1] != y:
-            time_warped_features.append(features[w[1]])
+            time_warped_features.append(features[w[0]])
+            y = w[1]
+    time_warped_features = np.asarray(time_warped_features)
     return time_warped_features, warp_path
 
 # [deleted_sample_audio, num_segments, max_segment, min_segment, avg_segment] = delete_samples(test_audio, total_deleted_content)
 def delete_samples(audio, total_percent_to_delete):
     distorted_audio = []
     num_segments = random.randint(1,10)
-    amount_to_delete = round(len(audio)*total_percent_to_delete)
+    amount_to_delete = round(len(audio)*total_percent_to_delete/100.0)
     avg_segment = round(amount_to_delete/num_segments)
     # using length, choose random segments to delete, jumping forward 'around' 1/num_segments and deleting 'around' avg_segment
     avg_jump = round(len(audio)/num_segments)
@@ -226,7 +231,7 @@ def stable_extension(audio, total_percent_to_extended):
     # timbre pattern repetitions
     largest_length = 44100/4.0
     avg_segment = largest_length/2.0
-    amount_to_extend = round(len(audio)*total_percent_to_extended)
+    amount_to_extend = round(len(audio)*total_percent_to_extended/100.0)
     num_segments = round(amount_to_extend/avg_segment)
     avg_jump = round(len(audio)/num_segments)
     current_position = 0
@@ -278,7 +283,7 @@ def introduce_content(audio, total_percent_introduction, total_percent_deletion,
     FIRST DELETE
     '''
     num_deletion = random.randint(1,10)
-    amount_to_delete = round(len(audio)*total_percent_deletion)
+    amount_to_delete = round(len(audio)*total_percent_deletion/100.0)
     avg_deletion = round(amount_to_delete/num_deletion)
     # using length, choose random segments to delete, jumping forward 'around' 1/num_segments and deleting 'around' avg_segment
     avg_jump = round(len(audio)/num_deletion)
@@ -320,7 +325,7 @@ def introduce_content(audio, total_percent_introduction, total_percent_deletion,
     content_introduction_audio = []
     largest_length = 44100/4.0
     avg_introduction = largest_length/2.0
-    amount_to_introduce = round(len(audio)*total_percent_introduction)
+    amount_to_introduce = round(len(audio)*total_percent_introduction/100.0)
     num_introduction = round(amount_to_introduce/avg_introduction)
     avg_jump = round(len(audio)/num_introduction)
     current_position = 0
@@ -479,3 +484,45 @@ def insert_repetitions(audio, num_subsequences):
     # copy all the way to the end after the extension
     repetitive_insertion_audio.append(audio[current_position:])
     return repetitive_insertion_audio, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_length, avg_rep_length, avg_delete_length
+
+# UNIT TESTING
+def main():
+    FILENAME = '/Users/apg250/git/automatic_programming_sound_synthesis/max_patches/sine-downsample-delay-AM-volume.wav'
+    FILENAMES = ['/Users/apg250/git/automatic_programming_sound_synthesis/max_patches/sine-downsample-delay-AM-volume.wav']
+    # open some audio
+    test_audio_file = wave.open(FILENAME, 'r')
+    # get test audio
+    test_audio = get_audio(test_audio_file)
+    # if feature distortion, calculate features    
+    test_features = get_features(test_audio_file, 'mfcc')
+    # apply distortion
+    #
+    shift_amount = random.uniform(100.0, 500.0)    # ms
+    shift_amount = shift_amount/1000.0*test_audio_file.getframerate()
+    shifted_audio = shift_audio(test_audio, shift_amount)
+    #
+    scale_percent = random.uniform(2.0, 5.0)       # percent of file length
+    scaled_features = scale_features(test_features,scale_percent)
+    #
+    tw_features_severe = time_warp_features(test_features, 10, None)
+    tw_features_lax = time_warp_features(test_features, None, 5)
+    #
+    total_deleted_content = random.uniform(2.0, 5.0) 
+    deleted_audio = delete_samples(test_audio, total_deleted_content)
+    # 
+    total_content_extended = random.uniform(2.0, 5.0)
+    stable_extension_audio = stable_extension(test_audio, total_content_extended)
+    #
+    total_percent_introduction = random.uniform(10.0, 50.0)
+    total_percent_deletion = total_percent_introduction*random.uniform(0.8, 1.2)
+    introduce_content_audio = introduce_content(test_audio, total_percent_introduction, total_percent_deletion, FILENAMES)
+    #
+    num_swaps = random.randint(1, 5)
+    reorder_segments_audio = reorder_segments(test_audio, num_swaps)
+    #
+    num_subsequences = random.randint(1, 3)
+    insert_reps_audio = insert_repetitions(test_audio, num_subsequences)
+    return True
+    
+if __name__ == '__main__':
+    main()
