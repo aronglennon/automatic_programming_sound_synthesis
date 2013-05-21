@@ -184,31 +184,26 @@ def time_warp_features(features, min_threshold, max_threshold):
 
 # [deleted_sample_audio, num_segments, max_segment, min_segment, avg_segment] = delete_samples(test_audio, total_deleted_content)
 def delete_samples(audio, total_percent_to_delete):
-    distorted_audio = []
+    distorted_audio = np.empty(shape=(0,0))
     num_segments = random.randint(1,10)
     amount_to_delete = round(len(audio)*total_percent_to_delete/100.0)
     avg_segment = round(amount_to_delete/num_segments)
     # using length, choose random segments to delete, jumping forward 'around' 1/num_segments and deleting 'around' avg_segment
     avg_jump = round(len(audio)/num_segments)
     current_position = 0
-    # first delete amount
-    rand_delete_amount = random.randint(0,avg_segment)
-    # simply by jumping current position forward, we are 'deleting' samples
-    current_position += rand_delete_amount
-    # start accumulating the total delete amount
-    total_delete_amount = rand_delete_amount
+    total_delete_amount = 0
     # setup max and min segment amounts
-    max_segment = rand_delete_amount
-    min_segment = rand_delete_amount
-    for i in range(1, num_segments-2):
-        # jump random distance, but no more than where this jump would end if this was deterministic
-        jump_size = random.randint(0,avg_jump*(i)-current_position)
-        distorted_audio.append(audio[current_position:current_position+jump_size])
-        current_position += jump_size
+    max_segment = 0
+    min_segment = audio.shape[0]
+    for i in range(1, num_segments-1):
         # do not add the following audio up to rand_delete_amount
         rand_delete_amount = random.randint(0,avg_segment*(i)-total_delete_amount)
         current_position += rand_delete_amount
         total_delete_amount += rand_delete_amount
+        # jump random distance, but no more than where this jump would end if this was deterministic
+        jump_size = random.randint(0,avg_jump*(i)-current_position)
+        distorted_audio = np.append(distorted_audio,  audio[current_position:current_position+jump_size])
+        current_position += jump_size
         # update max and min if necessary
         if rand_delete_amount < min_segment:
             min_segment = rand_delete_amount
@@ -216,36 +211,43 @@ def delete_samples(audio, total_percent_to_delete):
             max_segment = rand_delete_amount
     # ...at the end, make sure last segment can delete what is necessary AND make sure avg_segment is maintained
     rand_delete_amount = amount_to_delete - total_delete_amount
+    total_delete_amount += rand_delete_amount
     if rand_delete_amount < min_segment:
         min_segment = rand_delete_amount
     if rand_delete_amount > max_segment:
         max_segment = rand_delete_amount
     current_position += rand_delete_amount
-    distorted_audio.append(audio[current_position:])    
+    distorted_audio = np.append(distorted_audio,  audio[current_position:])    
     return distorted_audio, num_segments, max_segment, min_segment, avg_segment
 
 # [stable_extension_audio, num_segments, max_segment, min_segment, avg_segment] = stable_extension(test_audio, total_content_extended)
 def stable_extension(audio, total_percent_to_extended):
-    stable_extension_audio = []
+    stable_extension_audio = np.empty(shape=(0,0))
     # we don't extend anything beyond 250ms b.c. some of the files used are time-varying at around 1 Hz and we don't want to create
     # timbre pattern repetitions
     largest_length = 44100/4.0
     avg_segment = largest_length/2.0
     amount_to_extend = round(len(audio)*total_percent_to_extended/100.0)
-    num_segments = round(amount_to_extend/avg_segment)
+    if amount_to_extend < avg_segment*2:
+        # we don't even have enough audio to extend in 250ms increments
+        num_segments = random.randint(1,10)
+        # recalc avg segment
+        avg_segment = round(amount_to_extend/num_segments)
+    else:
+        num_segments = round(amount_to_extend/avg_segment)
     avg_jump = round(len(audio)/num_segments)
     current_position = 0
     total_extension_amount = 0    
     max_segment = 0
-    min_segment = len(audio)
-    for i in range(0, num_segments-2):
-        start_extension = random.randint(0,avg_jump*(i+1)-current_position) + current_position
-        rand_extension_amount = random.randint(0,avg_segment*(i+1)-total_extension_amount)
+    min_segment = audio.shape[0]
+    for i in range(1, num_segments-1):
+        start_extension = random.randint(0,avg_jump*(i)-current_position) + current_position
+        rand_extension_amount = random.randint(0,avg_segment*(i)-total_extension_amount)
         end_extension = start_extension + rand_extension_amount
         total_extension_amount += rand_extension_amount
         # copy over audio up to end of first extension, then repeat extension part
-        stable_extension_audio.append(audio[current_position:end_extension])
-        stable_extension_audio.append(audio[start_extension:end_extension])
+        stable_extension_audio = np.append(stable_extension_audio, audio[current_position:end_extension])
+        stable_extension_audio = np.append(stable_extension_audio, audio[start_extension:end_extension])
         # mark current_position as where we left off
         current_position = end_extension
         # update max and min if necessary
@@ -254,17 +256,17 @@ def stable_extension(audio, total_percent_to_extended):
         if rand_extension_amount > max_segment:
             max_segment = rand_extension_amount
     # copy over end
-    start_extension = random.randint(0,avg_jump*(i+1)-current_position) + current_position
+    start_extension = random.randint(0,avg_jump*num_segments-current_position) + current_position
     rand_extension_amount = amount_to_extend - total_extension_amount
     end_extension = start_extension + rand_extension_amount
-    stable_extension_audio.append(audio[current_position:end_extension])
+    stable_extension_audio = np.append(stable_extension_audio, audio[current_position:end_extension])
     # update max and min if necessary
     if rand_extension_amount < min_segment:
         min_segment = rand_extension_amount
     if rand_extension_amount > max_segment:
         max_segment = rand_extension_amount
     # copy all the way to the end after the extension
-    stable_extension_audio.append(audio[start_extension:])
+    stable_extension_audio = np.append(stable_extension_audio, audio[start_extension:])
     return stable_extension_audio, num_segments, max_segment, min_segment, avg_segment
 
 # [content_introduction_audio, file_introduced, num_introduction, max_introduction, min_introduction, avg_introduction, num_deletion, max_deletion, min_deletion, avg_deletion] = introduce_content(test_audio, total_percent_introduction, total_percent_deletion, directory)
@@ -278,34 +280,29 @@ def introduce_content(audio, total_percent_introduction, total_percent_deletion,
     # given percent introduction, determine size of total introduction and of avg introduction, follow steps as in delete_samples
     # follow steps in delete_samples for deletion
     
-    deleted_audio = []
+    deleted_audio = np.empty(shape=(0,0))
     '''
     FIRST DELETE
-    '''
+    '''    
     num_deletion = random.randint(1,10)
     amount_to_delete = round(len(audio)*total_percent_deletion/100.0)
     avg_deletion = round(amount_to_delete/num_deletion)
     # using length, choose random segments to delete, jumping forward 'around' 1/num_segments and deleting 'around' avg_segment
     avg_jump = round(len(audio)/num_deletion)
     current_position = 0
-    # first delete amount
-    rand_delete_amount = random.randint(0,avg_deletion)
-    # simply by jumping current position forward, we are 'deleting' samples
-    current_position += rand_delete_amount
-    # start accumulating the total delete amount
-    total_delete_amount = rand_delete_amount
+    total_delete_amount = 0
     # setup max and min segment amounts
-    max_deletion = rand_delete_amount
-    min_deletion = rand_delete_amount
-    for i in range(1, num_deletion-2):
-        # jump random distance, but no more than where this jump would end if this was deterministic
-        jump_size = random.randint(0,avg_jump*(i)-current_position)
-        deleted_audio.append(audio[current_position:current_position+jump_size])
-        current_position += jump_size
+    max_deletion = 0
+    min_deletion = audio.shape[0]
+    for i in range(1, num_deletion-1):
         # do not add the following audio up to rand_delete_amount
         rand_delete_amount = random.randint(0,avg_deletion*(i)-total_delete_amount)
         current_position += rand_delete_amount
         total_delete_amount += rand_delete_amount
+        # jump random distance, but no more than where this jump would end if this was deterministic
+        jump_size = random.randint(0,avg_jump*(i)-current_position)
+        deleted_audio = np.append(deleted_audio, audio[current_position:current_position+jump_size])
+        current_position += jump_size
         # update max and min if necessary
         if rand_delete_amount < min_deletion:
             min_deletion = rand_delete_amount
@@ -313,33 +310,33 @@ def introduce_content(audio, total_percent_introduction, total_percent_deletion,
             max_deletion = rand_delete_amount
     # ...at the end, make sure last segment can delete what is necessary AND make sure avg_segment is maintained
     rand_delete_amount = amount_to_delete - total_delete_amount
+    total_delete_amount += rand_delete_amount
     if rand_delete_amount < min_deletion:
         min_deletion = rand_delete_amount
     if rand_delete_amount > max_deletion:
         max_deletion = rand_delete_amount
     current_position += rand_delete_amount
-    deleted_audio.append(audio[current_position:])    
+    deleted_audio = np.append(deleted_audio, audio[current_position:])    
     '''
     THEN INTRODUCE
     '''
-    content_introduction_audio = []
-    largest_length = 44100/4.0
-    avg_introduction = largest_length/2.0
+    content_introduction_audio = np.empty(shape=(0,0))
+    num_introduction = random.randint(1,10)
     amount_to_introduce = round(len(audio)*total_percent_introduction/100.0)
-    num_introduction = round(amount_to_introduce/avg_introduction)
+    avg_introduction = round(amount_to_introduce/num_introduction)
     avg_jump = round(len(audio)/num_introduction)
     current_position = 0
     total_introduction_amount = 0    
     max_introduction = 0
-    min_introduction = len(audio)
-    for i in range(0, num_introduction-2):
-        start_introduction = random.randint(0,avg_jump*(i+1)-current_position) + current_position
-        rand_introduction_amount = random.randint(0,avg_introduction*(i+1)-total_introduction_amount)
+    min_introduction = audio.shape[0]
+    for i in range(1, num_introduction-1):
+        start_introduction = random.randint(0,avg_jump*(i)-current_position) + current_position
+        rand_introduction_amount = random.randint(0,avg_introduction*(i)-total_introduction_amount)
         total_introduction_amount += rand_introduction_amount
         # copy over audio up to end of first introduction, then introduce audio
-        content_introduction_audio.append(deleted_audio[current_position:start_introduction])
+        content_introduction_audio = np.append(content_introduction_audio, deleted_audio[current_position:start_introduction])
         intro_start = random.randint(0, len(chosen_file_audio)-rand_introduction_amount-1)
-        content_introduction_audio.append(chosen_file_audio[intro_start:(intro_start+rand_introduction_amount)])
+        content_introduction_audio = np.append(content_introduction_audio, chosen_file_audio[intro_start:(intro_start+rand_introduction_amount)])
         # mark current_position as where we left off
         current_position = start_introduction
         # update max and min if necessary
@@ -348,23 +345,23 @@ def introduce_content(audio, total_percent_introduction, total_percent_deletion,
         if rand_introduction_amount > max_introduction:
             max_introduction = rand_introduction_amount
     # introduce based on what is left
-    start_introduction = random.randint(0,avg_jump*(i+1)-current_position) + current_position
+    start_introduction = random.randint(0,avg_jump*num_introduction-current_position) + current_position
     rand_introduction_amount = amount_to_introduce - total_introduction_amount
-    content_introduction_audio.append(deleted_audio[current_position:start_introduction])
+    content_introduction_audio = np.append(content_introduction_audio, deleted_audio[current_position:start_introduction])
     intro_start = random.randint(0, len(chosen_file_audio)-rand_introduction_amount-1)
-    content_introduction_audio.append(chosen_file_audio[intro_start:(intro_start+rand_introduction_amount)])
+    content_introduction_audio = np.append(content_introduction_audio, chosen_file_audio[intro_start:(intro_start+rand_introduction_amount)])
     # update max and min if necessary
     if rand_introduction_amount < min_introduction:
         min_introduction = rand_introduction_amount
     if rand_introduction_amount > max_introduction:
         max_introduction = rand_introduction_amount
     # copy all the way to the end after the introduction
-    content_introduction_audio.append(chosen_file_audio[start_introduction:])
+    content_introduction_audio = np.append(content_introduction_audio, deleted_audio[start_introduction:])
     return content_introduction_audio, chosen_file, num_introduction, max_introduction, min_introduction, avg_introduction, num_deletion, max_deletion, min_deletion, avg_deletion
 
 # [reordered_audio, max_size, min_size, total_size, avg_size] = reorder_segments(test_audio, num_swaps)
 def reorder_segments(audio, num_swaps):
-    reordered_audio = []
+    reordered_audio = np.empty(shape=(0,0))
     # swap amount between 10%-20% of file length
     random_swap = random.randint(len(audio)*0.10, len(audio)*0.20)
     min_swap = random_swap
@@ -373,10 +370,11 @@ def reorder_segments(audio, num_swaps):
     # choose swap locations that do not overlap (simplest way is to choose first location in first half of audio and second in second)
     location_one = random.randint(0,len(audio)/2-random_swap)
     location_two = random.randint(len(audio)/2, len(audio)-random_swap)
-    location_one_audio = audio[location_one:(location_one+random_swap)]
-    location_two_audio = audio[location_two:(location_two+random_swap)]
-    audio[location_one:(location_one+random_swap)]= location_two_audio
-    audio[location_two:(location_two+random_swap)] = location_one_audio
+    reordered_audio = audio[:location_one]
+    reordered_audio = np.append(reordered_audio, audio[location_two:(location_two+random_swap)])
+    reordered_audio = np.append(reordered_audio, audio[location_one+random_swap+1:location_two])
+    reordered_audio = np.append(reordered_audio, audio[location_one:(location_one+random_swap)])
+    reordered_audio = np.append(reordered_audio, audio[location_two+1:])
     for i in range(1, num_swaps-1):
         random_swap = random.randint(len(audio)*0.10, len(audio)*0.20)
         if random_swap < min_swap:
@@ -387,16 +385,17 @@ def reorder_segments(audio, num_swaps):
         # choose swap locations that do not overlap (simplest way is to choose first location in first half of audio and second in second)
         location_one = random.randint(0,len(audio)/2-random_swap)
         location_two = random.randint(len(audio)/2, len(audio)-random_swap)
-        location_one_audio = audio[location_one:(location_one+random_swap)]
-    location_two_audio = audio[location_two:(location_two+random_swap)]
-    audio[location_one:(location_one+random_swap)]= location_two_audio
-    audio[location_two:(location_two+random_swap)] = location_one_audio
+        reordered_audio = audio[:location_one]
+        reordered_audio = np.append(reordered_audio, audio[location_two:(location_two+random_swap)])
+        reordered_audio = np.append(reordered_audio, audio[location_one+random_swap+1:location_two])
+        reordered_audio = np.append(reordered_audio, audio[location_one:(location_one+random_swap)])
+        reordered_audio = np.append(reordered_audio, audio[location_two+1:])
     average_swap_size = total_swap/num_swaps
     return reordered_audio, max_swap, min_swap, total_swap, average_swap_size
 
 # [repetitive_insertion_audio, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length] = insert_repetitions(test_audio, num_subsequences)
 def insert_repetitions(audio, num_subsequences):
-    repetitive_insertion_audio = []
+    repetitive_insertion_audio = np.empty(shape=(0,0))
     swaps = []
     num_unique_reps = num_subsequences
     total_length_reps = 0
@@ -424,7 +423,7 @@ def insert_repetitions(audio, num_subsequences):
     '''
     FIRST DELETE
     '''
-    deleted_audio = []
+    deleted_audio = np.empty(shape=(0,0))
     amount_to_delete = random.randint(total_length_reps*0.8, total_length_reps*1.2)
     num_segment_deletes = random.randint(1,10)
     avg_delete_length = round(amount_to_delete/num_segment_deletes)
@@ -443,7 +442,7 @@ def insert_repetitions(audio, num_subsequences):
     for i in range(1, num_segment_deletes-2):
         # jump random distance, but no more than where this jump would end if this was deterministic
         jump_size = random.randint(0,avg_jump*(i)-current_position)
-        deleted_audio.append(audio[current_position:current_position+jump_size])
+        deleted_audio = np.append(deleted_audio, audio[current_position:current_position+jump_size])
         current_position += jump_size
         # do not add the following audio up to rand_delete_amount
         rand_delete_amount = random.randint(0,avg_delete_length*(i)-total_length_deletes)
@@ -461,7 +460,7 @@ def insert_repetitions(audio, num_subsequences):
     if rand_delete_amount > max_delete:
         max_delete = rand_delete_amount
     current_position += rand_delete_amount
-    deleted_audio.append(audio[current_position:])  
+    deleted_audio = np.append(deleted_audio, audio[current_position:])  
     
     '''
     THEN REPEAT
@@ -475,20 +474,25 @@ def insert_repetitions(audio, num_subsequences):
         start_repetition = random.randint(0,avg_jump*jump-current_position) + current_position
         end_repetition = start_repetition + s[1]
         # copy over audio up to end of first extension, then repeat extension part
-        repetitive_insertion_audio.append(audio[current_position:end_repetition])
+        repetitive_insertion_audio = np.append(repetitive_insertion_audio, audio[current_position:end_repetition])
         # repeat as many times as necessary
         for i in range(0, s[0]-1):
-            repetitive_insertion_audio.append(audio[start_repetition:end_repetition])
+            repetitive_insertion_audio = np.append(repetitive_insertion_audio, audio[start_repetition:end_repetition])
         # mark current_position as where we left off
         current_position = end_repetition
     # copy all the way to the end after the extension
-    repetitive_insertion_audio.append(audio[current_position:])
+    repetitive_insertion_audio = np.append(repetitive_insertion_audio, audio[current_position:])
     return repetitive_insertion_audio, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_length, avg_rep_length, avg_delete_length
 
 # UNIT TESTING
 def main():
-    FILENAME = '/Users/apg250/git/automatic_programming_sound_synthesis/max_patches/sine-downsample-delay-AM-volume.wav'
-    FILENAMES = ['/Users/apg250/git/automatic_programming_sound_synthesis/max_patches/sine-downsample-delay-AM-volume.wav']
+    FILENAME = '/Users/apg250/git/automatic_programming_sound_synthesis/max_patches/realworld_sounds/for_testing/Metal_Gong-Mono.wav'
+    FILENAMES = ['/Users/apg250/git/automatic_programming_sound_synthesis/max_patches/realworld_sounds/for_testing/Metal_Gong-Mono.wav', 
+                 '/Users/apg250/git/automatic_programming_sound_synthesis/max_patches/realworld_sounds/for_testing/Freight_Train-Mono.wav',
+                 '/Users/apg250/git/automatic_programming_sound_synthesis/max_patches/realworld_sounds/for_testing/Lion-Growling-Mono.wav',
+                 '/Users/apg250/git/automatic_programming_sound_synthesis/max_patches/realworld_sounds/for_testing/RandomAnalogReverb-Ballad-Mono.wav',
+                 '/Users/apg250/git/automatic_programming_sound_synthesis/max_patches/realworld_sounds/for_testing/Synth-Metallic-IDM-Pad-Mono.wav']
+                    
     # open some audio
     test_audio_file = wave.open(FILENAME, 'r')
     # get test audio
@@ -515,7 +519,7 @@ def main():
     #
     total_percent_introduction = random.uniform(10.0, 50.0)
     total_percent_deletion = total_percent_introduction*random.uniform(0.8, 1.2)
-    introduce_content_audio = introduce_content(test_audio, total_percent_introduction, total_percent_deletion, FILENAMES)
+    introduce_content_audio = introduce_content(test_audio, total_percent_introduction, total_percent_deletion, filter(lambda a: a != FILENAME, FILENAMES))
     #
     num_swaps = random.randint(1, 5)
     reorder_segments_audio = reorder_segments(test_audio, num_swaps)

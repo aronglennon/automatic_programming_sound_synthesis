@@ -22,7 +22,7 @@ import numpy as np
 # TODO: turn into config params, so we store EVERYTHING in DB
 # TODO: write distortion functions
 DEBUG = False
-WAVE_FILE_DIRECTORY = ""
+WAVE_FILE_DIRECTORY = "/Users/apg250/git/automatic_programming_sound_synthesis/max_patches/realworld_sounds/for_testing/"
 SAVE_DIR = ""   # dir to save all distorted files
 NUM_TESTS = 100
 MAX_WARP = 5
@@ -235,7 +235,7 @@ def run_contentintro_tests(directory, test_run, test_case, mysql_obj):
                     # extract features
                     test_features = get_features(test_audio_file, 'nlse')
                     # distort test audio
-                    [content_introduction_audio, file_introduced, num_introduction, max_introduction, min_introduction, avg_introduction, num_deletion, max_deletion, min_deletion, avg_deletion] = introduce_content(test_audio, total_percent_introduction, total_percent_deletion, filenames)
+                    [content_introduction_audio, file_introduced, num_introduction, max_introduction, min_introduction, avg_introduction, num_deletion, max_deletion, min_deletion, avg_deletion] = introduce_content(test_audio, total_percent_introduction, total_percent_deletion, filter(lambda a: a != filename, filenames))
                     # save distorted audio
                     distorted_file = wave.open(SAVE_DIR + "/" + test_run + "/" + test_case + "/contentintro.wav", 'w')
                     distorted_file.writeframes(content_introduction_audio)

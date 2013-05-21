@@ -1,7 +1,7 @@
 import numpy as np
 import struct
 from scikits.talkbox.features import mfcc
-MAX_LENGTH = 100000
+MAX_LENGTH = 1000000
 
 # parse features in file written by max into a numpy array
 def get_features(filename,feature_type):
