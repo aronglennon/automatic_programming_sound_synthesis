@@ -52,7 +52,7 @@ def main():
     if parameters[0][6] is None:
         gen_ops[0].append(1.00) # if there is no other gen op, disregard prob, since it must be 1.00
     else:
-        gen_ops[0].aapend(parameters[0][5])
+        gen_ops[0].append(parameters[0][5])
         gen_ops.append([parameters[0][6]])
         if parameters[0][8] is None:
             gen_ops[1].append(1.00 - gen_ops[0][1])

@@ -323,10 +323,10 @@ def run_repinsert_tests(directory, test_run, test_case, mysql_obj):
                     dpla_sim = get_similarity(test_features, repetitive_insert_features, 'dpla')
                     sic_dpla_sim = get_similarity(test_features, repetitive_insert_features, 'sic_dpla')
                     # store results in db
-                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_reps, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'euclidean', euc_sim)
-                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_reps, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'DTW', dtw_sim)
-                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_reps, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'DPLA', dpla_sim)
-                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_reps, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'SIC-DPLA', sic_dpla_sim)
+                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_subsequences, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'euclidean', euc_sim)
+                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_subsequences, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'DTW', dtw_sim)
+                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_subsequences, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'DPLA', dpla_sim)
+                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_subsequences, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'SIC-DPLA', sic_dpla_sim)
     return []
 
 if __name__ == "__main__":
