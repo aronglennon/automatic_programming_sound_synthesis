@@ -213,10 +213,10 @@ class mysql_object():
         else:
             return []
         
-    def insert_genops_test_data(self, test_run, test_case, patch, patch_fitness, neighbor, neighbor_fitness):
+    def insert_genops_test_data(self, test_run, test_case, target_filename, patch, patch_fitness, neighbor, neighbor_fitness):
         if self.connected:
-            statement = "INSERT INTO testdata_gen_ops (tetsrun_id, testcase_id, patch, patch_fitness, neighbor, neighbor_fitness) \
-            VALUES (%d, %d, '%s', %0.8f, '%s', %0.8f" % (test_run, test_case, patch, patch_fitness, neighbor, neighbor_fitness)
+            statement = "INSERT INTO testdata_genops (tetsrun_id, testcase_id, target_file, patch, patch_fitness, neighbor, neighbor_fitness) \
+            VALUES (%d, %d, '%s', %s', %0.8f, '%s', %0.8f" % (test_run, test_case, target_filename, patch, patch_fitness, neighbor, neighbor_fitness)
             values = db_core.insert(self.dbConnection, statement)
             return values
         else:
