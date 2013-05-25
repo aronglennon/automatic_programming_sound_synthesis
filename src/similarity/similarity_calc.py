@@ -16,8 +16,7 @@ def get_similarity(features1, features2, similarity_type):
         return 1.0/get_euclidean(features1, features2)
     # option 2: use DTW - no path constraints, local continuity constraint in place, global alignment, Euclidean distance
     elif similarity_type == 'DTW':
-        print 1.0/get_DTW_dist(features1, features2)
-        return 0
+        return 1.0/get_DTW_dist(features1, features2)
     # option 3 : DPLA
     elif similarity_type == 'DPLA':
         return get_DPLA(features1, features2)
@@ -27,14 +26,33 @@ def get_similarity(features1, features2, similarity_type):
 
 def get_euclidean(features1, features2):
     # make sure both matrices are the same size...if not truncate the larger one
-    dist = 0
+    dist = 0.0
     if len(features1) > len(features2):
-        features1 = features1[:len(features2)]
+        trunc_features1 = features1[:len(features2)]
+        for i in range(0, features2.shape[0]):
+            dist += np.linalg.norm(trunc_features1[i][:]-features2[i][:])
+        # normalize individual distances
+        dist /= np.sqrt(3.0)    
+        # normalize over sum of distances
+        dist /= float(features2.shape[0])
+        return dist
     elif len(features1) < len(features2):
-        features2 = features2[:len(features1)]
-    for i in range(0, features1.shape[0]):
-        dist += np.linalg.norm(features1[i][:]-features2[i][:])
-    return dist
+        trunc_features2 = features2[:len(features1)]
+        for i in range(0, features1.shape[0]):
+            dist += np.linalg.norm(features1[i][:]-trunc_features2[i][:])
+        # normalize individual distances
+        dist /= np.sqrt(3.0)    
+        # normalize over sum of distances
+        dist /= float(features1.shape[0])
+        return dist
+    else:
+        for i in range(0, features1.shape[0]):
+            dist += np.linalg.norm(features1[i][:]-features2[i][:])
+        # normalize individual distances
+        dist /= np.sqrt(3.0)    
+        # normalize over sum of distances
+        dist /= float(features1.shape[0])
+        return dist
 
 # TODO: look into other options and what default is if we don't specify them
 def get_DTW_dist(features1, features2):
@@ -53,23 +71,23 @@ def get_DPLA(features1, features2):
     # generate Smith-Waterman H matrix
     alignment_matrix = np.zeros(shape=(len(features1),len(features2)))
     # generate corresponding path matrix P (to track the alignment path to any index i,j)
-    path_trace_matrix = np.zeros(shape=(len(features1),len(features2)))
+    path_trace_matrix = np.empty(shape=(len(features1),len(features2)), dtype=object)
     # generate corresponding warp extension matrix (to track how far a warping is being extended)
     warp_extension_matrix = np.zeros(shape=(len(features1),len(features2)))
     # each element is generated with info from elements to its left, diagonal-down-left, and below it AND
     # elements in the similarity matrix from its diagonal-down-left, left, and below
     # --- calculate first elements
-    for i in range(0, len(features1)-1):
+    for i in range(0, len(features1)):
         # j is zero
         alignment_matrix[i][0] = max(similarity_matrix[i][0], 0)
         path_trace_matrix[i][0] = [-1,-1]
-    for j in range(1, len(features2)-1):
+    for j in range(1, len(features2)):
         # i is zero
         alignment_matrix[0][j] = max(similarity_matrix[0][j], 0)
         path_trace_matrix[0][j] = [-1,-1]
     # --- calculate the rest of the matrices
-    for i in range(1, len(features1)-1):
-        for j in range(1, len(features2)-1):
+    for i in range(1, len(features1)):
+        for j in range(1, len(features2)):
             diagonal = alignment_matrix[i-1][j-1]+similarity_matrix[i][j]
             left = alignment_matrix[i][j-1]+similarity_matrix[i][j] - delta(warp_extension_matrix[i][j-1], max_sequence_length)
             right = alignment_matrix[i-1][j]+similarity_matrix[i][j] - delta(warp_extension_matrix[i-1][j], max_sequence_length)
@@ -95,7 +113,7 @@ def get_DPLA(features1, features2):
     # return similarity value as 1.0 / DPLA dissimilarity value
     return 1.0/DPLA(alignment_matrix, len(features1), len(features2))
 
-def DPLA(alignment_matrix, path_trace_matrix, superior_length, inferior_length):    
+def DPLA(alignment_matrix, superior_length, inferior_length):    
     # find max in Smith-Waterman matrix and divide sum of lengths by it to get 'dissimilarity' score
     max_value = np.max(alignment_matrix)
     return (superior_length+inferior_length)/max_value
@@ -111,23 +129,23 @@ def get_SIC_DPLA(features1, features2):
     # generate Smith-Waterman H matrix
     alignment_matrix = np.zeros(shape=(len(features1),len(features2)))
     # generate corresponding path matrix P (to track the alignment path to any index i,j)
-    path_trace_matrix = np.zeros(shape=(len(features1),len(features2)))
+    path_trace_matrix = np.empty(shape=(len(features1),len(features2)), dtype=object)
     # generate corresponding warp extension matrix (to track how far a warping is being extended)
     warp_extension_matrix = np.zeros(shape=(len(features1),len(features2)))
     # each element is generated with info from elements to its left, diagonal-down-left, and below it AND
     # elements in the similarity matrix from its diagonal-down-left, left, and below
     # --- calculate first elements
-    for i in range(0, len(features1)-1):
+    for i in range(0, len(features1)):
         # j is zero
         alignment_matrix[i][0] = max(similarity_matrix[i][0], 0)
         path_trace_matrix[i][0] = [-1,-1]
-    for j in range(1, len(features2)-1):
+    for j in range(1, len(features2)):
         # i is zero
         alignment_matrix[0][j] = max(similarity_matrix[0][j], 0)
         path_trace_matrix[0][j] = [-1,-1]
     # --- calculate the rest of the matrices
-    for i in range(1, len(features1)-1):
-        for j in range(1, len(features2)-1):
+    for i in range(1, len(features1)):
+        for j in range(1, len(features2)):
             diagonal = alignment_matrix[i-1][j-1]+similarity_matrix[i][j]
             left = alignment_matrix[i][j-1]+similarity_matrix[i][j] - delta(warp_extension_matrix[i][j-1], max_sequence_length)
             right = alignment_matrix[i-1][j]+similarity_matrix[i][j] - delta(warp_extension_matrix[i-1][j], max_sequence_length)
@@ -158,7 +176,7 @@ def get_SIC_DPLA(features1, features2):
     p_repetitions_left = float(num_repetitions + len(alignments_left))/ len(alignments_left)
     penalties_left = p_swap_left * p_overlap_gap_left * p_repetitions_left
     # preliminary IC-DPLA in opposite direction
-    [ICDPLA_right_prelim, alignments_right] = ICDPLA(alignment_matrix, path_trace_matrix, features2, features1, 0)
+    [ICDPLA_right_prelim, alignments_right] = ICDPLA(alignment_matrix.transpose(), path_trace_matrix.transpose(), features2, features1, 0, True)
     # calc penalties
     [p_swap_right, sorted_alignments_right] = calc_p_swap(alignments_right)
     [p_overlap_gap_right, num_repetitions] = calc_p_overlap_gap(sorted_alignments_right, len(features1))
@@ -219,20 +237,23 @@ def calc_p_overlap_gap(presorted_alignments, inferior_sequence_length):
     return p_overlap_gap, num_repetitions
 
 def calc_p_swap(alignments):
-    [num_swaps, alignments_to_swap] = select_sort(alignments)
-    p_swap = float(num_swaps + len(alignments_to_swap)) / len(alignments_to_swap)
-    return p_swap, alignments_to_swap
+    if len(alignments) == 1:
+        return 1.0, alignments
+    else:
+        [num_swaps, alignments_to_swap] = select_sort(alignments)
+        p_swap = float(num_swaps + len(alignments_to_swap)) / len(alignments_to_swap)
+        return p_swap, alignments_to_swap
 
 def select_sort(alignments):
     num_swaps = 0
     # determine the min number of swaps using selection-sort-like swapping
     # NOTE: if two alignments start in the same y coord, we accept any ordering of them
     alignments_to_swap = alignments
-    for i in range(0,len(alignments_to_swap)-1):
+    for i in range(0,len(alignments_to_swap)):
         # assume this index is the min
         min_index = i
         # search for new min
-        for j in range (i+1, len(alignments_to_swap)-1):
+        for j in range (i+1, len(alignments_to_swap)):
             if alignments_to_swap[j][0][1] < alignments_to_swap[min_index][0][1]:
                 min_index = j
         # if we find a new min, swap
@@ -243,9 +264,9 @@ def select_sort(alignments):
             num_swaps += 1
     return num_swaps, alignments_to_swap
 
-def ICDPLA(alignment_matrix, path_trace_matrix, superior, inferior, row_offset):
-    # stopping condition -> if max value is 0, there are no more alignments, so just return nothing
-    if (np.max(alignment_matrix) == 0):
+def ICDPLA(alignment_matrix, path_trace_matrix, superior, inferior, row_offset, transposed=False):
+    # stopping condition -> if max value is 0, there are no more alignments..or the matrix is empty, so just return nothing 
+    if len(alignment_matrix) == 0 or (np.max(alignment_matrix) == 0):
         return 0, []
     # find max in Smith-Waterman matrix
     max_index = pl.unravel_index(alignment_matrix.argmax(), alignment_matrix.shape)
@@ -261,14 +282,17 @@ def ICDPLA(alignment_matrix, path_trace_matrix, superior, inferior, row_offset):
         start_x = x_index
         start_y = y_index
         local_distance += np.linalg.norm(superior[x_index][:]-inferior[y_index][:]) 
-        [x_index, y_index] = path_trace_matrix[x_index][y_index]
+        if transposed:
+            [y_index, x_index] = path_trace_matrix[x_index][y_index]
+        else:
+            [x_index, y_index] = path_trace_matrix[x_index][y_index]
     # remove appropriate rows from sequence1 and split into two matrices to be involved in the same process
     alignment_top_submatrix = alignment_matrix[:(start_x-row_offset),:]
-    alignment_bottom_submatrix = alignment_matrix[max_index[0]:, :]
-    [distance_top, alignments_top] = ICDPLA(alignment_top_submatrix, path_trace_matrix, superior, inferior, row_offset)
-    [distance_bottom, alignments_bottom] = ICDPLA(alignment_bottom_submatrix, path_trace_matrix, superior, inferior, row_offset+max_index[0])
+    alignment_bottom_submatrix = alignment_matrix[max_index[0]+1:, :]
+    [distance_top, alignments_top] = ICDPLA(alignment_top_submatrix, path_trace_matrix, superior, inferior, row_offset, transposed)
+    [distance_bottom, alignments_bottom] = ICDPLA(alignment_bottom_submatrix, path_trace_matrix, superior, inferior, row_offset+max_index[0], transposed)
     total_distance = distance_top+distance_bottom+local_distance
-    alignments = [[start_x, start_y], [max_index[0]+row_offset, max_index[1]]]
+    alignments = [[[start_x, start_y], [max_index[0]+row_offset, max_index[1]]]]
     alignments.extend(alignments_top)
     alignments.extend(alignments_bottom)
     return total_distance, alignments

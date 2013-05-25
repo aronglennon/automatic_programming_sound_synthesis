@@ -363,7 +363,7 @@ def introduce_content(audio, total_percent_introduction, total_percent_deletion,
 def reorder_segments(audio, num_swaps):
     reordered_audio = np.empty(shape=(0,0))
     # swap amount between 10%-20% of file length
-    random_swap = random.randint(len(audio)*0.10, len(audio)*0.20)
+    random_swap = random.randint(int(len(audio)*0.10), int(len(audio)*0.20))
     min_swap = random_swap
     max_swap = random_swap
     total_swap = random_swap
@@ -498,7 +498,7 @@ def main():
     # get test audio
     test_audio = get_audio(test_audio_file)
     # if feature distortion, calculate features    
-    test_features = get_features(test_audio_file, 'mfcc')
+    test_features = get_features(FILENAME, 'mfcc')
     # apply distortion
     #
     shift_amount = random.uniform(100.0, 500.0)    # ms
