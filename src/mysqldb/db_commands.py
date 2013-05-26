@@ -161,6 +161,10 @@ class mysql_object():
 
     def insert_tw_test_data(self, test_run, test_case, filename, min_warping_threshold, max_warping_threshold, warping_path, sim_type, sim_val):
         if self.connected:
+            if min_warping_threshold is None:
+                min_warping_threshold = 0
+            elif max_warping_threshold is None:
+                max_warping_threshold = 0
             statement = "INSERT INTO testdata_similarity_tw (testrun_id, testcase_id, filename, min_warping_threshold, max_warping_threshold, warping_path, sim_type, sim_val) \
             VALUES (%d, %d, '%s', %d, %d, '%s', '%s', %0.8f)" % (test_run, test_case, filename, min_warping_threshold, max_warping_threshold, warping_path, sim_type, sim_val)
             values = db_core.insert(self.dbConnection, statement)
@@ -188,7 +192,7 @@ class mysql_object():
 
     def insert_contentintro_test_data(self, test_run, test_case, filename, total_percent_introduction, total_percent_deletion, file_introduced, num_introduction, max_introduction, min_introduction, avg_introduction, num_deletion, max_deletion, min_deletion, avg_deletion, sim_type, sim_val):
         if self.connected:
-            statement = "INSERT INTO testdata_similarity_content_intro (testrun_id, testcase_id, filename, intro_filename, total_percent_introduction, total_percent_deletion, num_intro, max_intro, min_intro, avg_intro, num_delete, max_delete, min_delete, avg_delete, sim_type, sim_val) \
+            statement = "INSERT INTO testdata_similarity_contentintro (testrun_id, testcase_id, filename, intro_filename, total_percent_introduction, total_percent_deletion, num_intro, max_intro, min_intro, avg_intro, num_delete, max_delete, min_delete, avg_delete, sim_type, sim_val) \
             VALUES (%d, %d, '%s', '%s', %0.8f, %0.8f, %d, %d, %d, %0.8f, %d, %d, %d, %0.8f, '%s', %0.8f)" % (test_run, test_case, filename, file_introduced, total_percent_introduction, total_percent_deletion, num_introduction, max_introduction, min_introduction, avg_introduction, num_deletion, max_deletion, min_deletion, avg_deletion, sim_type, sim_val)
             values = db_core.insert(self.dbConnection, statement)
             return values
@@ -204,10 +208,10 @@ class mysql_object():
         else:
             return []
         
-    def insert_repinsert_test_data(self, test_run, test_case, filename, num_reps, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, sim_type, sim_val):
+    def insert_repinsert_test_data(self, test_run, test_case, filename, num_reps, num_unique_reps, max_reps_for_unique, min_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, sim_type, sim_val):
         if self.connected:
             statement = "INSERT INTO testdata_similarity_repinsert (testrun_id, testcase_id, filename, num_unique_reps, max_reps_for_unique, min_reps_for_unique, total_reps, avg_reps, total_length_reps, total_length_deletes, num_seg_deletes, max_del, min_del, max_rep, min_rep, avg_rep, avg_del, sim_type, sim_val) \
-            VALUES (%d, %d, '%s', %d, %d, %d, %d, %0.8f, %d, %d, %d, %d, %d, %d, %d, %0.8f, %0.8f, '%s', %0.8f)" % (test_run, test_case, filename, num_unique_reps, max_reps_for_unique, num_reps, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, sim_type, sim_val)
+            VALUES (%d, %d, '%s', %d, %d, %d, %d, %0.8f, %d, %d, %d, %d, %d, %d, %d, %0.8f, %0.8f, '%s', %0.8f)" % (test_run, test_case, filename, num_unique_reps, max_reps_for_unique, min_reps_for_unique, num_reps, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, sim_type, sim_val)
             values = db_core.insert(self.dbConnection, statement)
             return values
         else:

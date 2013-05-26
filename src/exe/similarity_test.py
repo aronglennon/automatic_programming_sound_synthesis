@@ -53,7 +53,7 @@ def main():
     testrun_id = mysql_obj.new_test_run(run_start)
     if testrun_id == []:
         sys.exit(0)
-    for i in range(0, NUM_TESTS-1):
+    for i in range(0, NUM_TESTS):
         # light distortions (one for every file in WAVE_FILE_DIRECTORY
         run_tsts_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
         run_tw_tests(WAVE_FILE_DIRECTORY, testrun_id, i, None, MAX_WARP, mysql_obj)
@@ -99,7 +99,7 @@ def run_tsts_tests(directory, test_run, test_case, mysql_obj):
                     distorted_directory = SAVE_DIR + "/" + str(test_run) + "/" + str(test_case)
                     if not os.path.exists(distorted_directory):
                         os.makedirs(distorted_directory)
-                    distorted_file = wave.open(distorted_directory + "/shift.wav", 'w')
+                    distorted_file = wave.open(distorted_directory + "/" + filename[:-4] + "shift.wav", 'w')
                     distorted_file.setparams((1, 2, 44100, shifted_audio.shape[0], "NONE", "not compressed"))
                     N = shifted_audio.shape[0]
                     shifted_audio = np.asarray(shifted_audio.flatten()*(2.0 ** (8 * 2 - 1)), dtype = int)
@@ -107,7 +107,7 @@ def run_tsts_tests(directory, test_run, test_case, mysql_obj):
                     distorted_file.writeframes(shifted_audio)
                     distorted_file.close()
                     # get distorted features
-                    shifted_features = get_features(distorted_directory + "/shift.wav", 'nlse')
+                    shifted_features = get_features(distorted_directory + "/" + filename[:-4] + "shift.wav", 'nlse')
                     scaled_and_shifted_features = scale_features(shifted_features, scale_percent)
                     # calc all similarity values
                     euc_sim = get_similarity(test_features, scaled_and_shifted_features, 'euclidean')
@@ -168,15 +168,22 @@ def run_sampdel_tests(directory, test_run, test_case, mysql_obj):
                     # get test audio
                     test_audio = get_audio(test_audio_file)
                     # extract features
-                    test_features = get_features(test_audio_file, 'nlse')
+                    test_features = get_features(dirname+filename, 'nlse')
                     # distort test audio
                     [deleted_sample_audio, num_segments, max_segment, min_segment, avg_segment] = delete_samples(test_audio, total_deleted_content)
                     # save distorted audio
-                    distorted_file = wave.open(SAVE_DIR + "/" + test_run + "/" + test_case + "/sampdel.wav", 'w')
-                    distorted_file.writeframes(deleted_sample_audio)
+                    distorted_directory = SAVE_DIR + "/" + str(test_run) + "/" + str(test_case)
+                    if not os.path.exists(distorted_directory):
+                        os.makedirs(distorted_directory)
+                    distorted_file = wave.open(distorted_directory + "/" + filename[:-4] + "sampdel.wav", 'w')
+                    distorted_file.setparams((1, 2, 44100, deleted_sample_audio.shape[0], "NONE", "not compressed"))
+                    N = deleted_sample_audio.shape[0]
+                    shifted_audio = np.asarray(deleted_sample_audio.flatten()*(2.0 ** (8 * 2 - 1)), dtype = int)
+                    shifted_audio = struct.pack('%dh' % N, * shifted_audio)
+                    distorted_file.writeframes(shifted_audio)
                     distorted_file.close()
                     # get distorted features
-                    deleted_samples_features = get_features(SAVE_DIR + "/" + test_run + "/" + test_case + "/sampdel.wav", 'nlse')
+                    deleted_samples_features = get_features(distorted_directory + "/" + filename[:-4] + "sampdel.wav", 'nlse')
                     # calc all similarity values
                     euc_sim = get_similarity(test_features, deleted_samples_features, 'euclidean')
                     dtw_sim = get_similarity(test_features, deleted_samples_features, 'DTW')
@@ -205,15 +212,22 @@ def run_stableextension_tests(directory, test_run, test_case, mysql_obj):
                     # get test audio
                     test_audio = get_audio(test_audio_file)
                     # extract features
-                    test_features = get_features(test_audio_file, 'nlse')
+                    test_features = get_features(dirname+filename, 'nlse')
                     # distort test audio
                     [stable_extension_audio, num_segments, max_segment, min_segment, avg_segment] = stable_extension(test_audio, total_content_extended)
                     # save distorted audio
-                    distorted_file = wave.open(SAVE_DIR + "/" + test_run + "/" + test_case + "/stableextension.wav", 'w')
-                    distorted_file.writeframes(stable_extension_audio)
+                    distorted_directory = SAVE_DIR + "/" + str(test_run) + "/" + str(test_case)
+                    if not os.path.exists(distorted_directory):
+                        os.makedirs(distorted_directory)
+                    distorted_file = wave.open(distorted_directory + "/" + filename[:-4] + "stableextension.wav", 'w')
+                    distorted_file.setparams((1, 2, 44100, stable_extension_audio.shape[0], "NONE", "not compressed"))
+                    N = stable_extension_audio.shape[0]
+                    shifted_audio = np.asarray(stable_extension_audio.flatten()*(2.0 ** (8 * 2 - 1)), dtype = int)
+                    shifted_audio = struct.pack('%dh' % N, * shifted_audio)
+                    distorted_file.writeframes(shifted_audio)
                     distorted_file.close()
                     # get distorted features
-                    stable_extension_features = get_features(SAVE_DIR + "/" + test_run + "/" + test_case + "/stableextension.wav", 'nlse')
+                    stable_extension_features = get_features(distorted_directory + "/" + filename[:-4] + "stableextension.wav", 'nlse')
                     # calc all similarity values
                     euc_sim = get_similarity(test_features, stable_extension_features, 'euclidean')
                     dtw_sim = get_similarity(test_features, stable_extension_features, 'DTW')
@@ -243,20 +257,27 @@ def run_contentintro_tests(directory, test_run, test_case, mysql_obj):
                     # get test audio
                     test_audio = get_audio(test_audio_file)
                     # extract features
-                    test_features = get_features(test_audio_file, 'nlse')
+                    test_features = get_features(dirname+filename, 'nlse')
                     # distort test audio
-                    [content_introduction_audio, file_introduced, num_introduction, max_introduction, min_introduction, avg_introduction, num_deletion, max_deletion, min_deletion, avg_deletion] = introduce_content(test_audio, total_percent_introduction, total_percent_deletion, filter(lambda a: a != filename, filenames))
+                    [content_introduction_audio, file_introduced, num_introduction, max_introduction, min_introduction, avg_introduction, num_deletion, max_deletion, min_deletion, avg_deletion] = introduce_content(test_audio, total_percent_introduction, total_percent_deletion, filter(lambda a: a != filename, filenames), dirname)
                     # save distorted audio
-                    distorted_file = wave.open(SAVE_DIR + "/" + test_run + "/" + test_case + "/contentintro.wav", 'w')
-                    distorted_file.writeframes(content_introduction_audio)
+                    distorted_directory = SAVE_DIR + "/" + str(test_run) + "/" + str(test_case)
+                    if not os.path.exists(distorted_directory):
+                        os.makedirs(distorted_directory)
+                    distorted_file = wave.open(distorted_directory + "/" + filename[:-4] + "contentintro.wav", 'w')
+                    distorted_file.setparams((1, 2, 44100, content_introduction_audio.shape[0], "NONE", "not compressed"))
+                    N = content_introduction_audio.shape[0]
+                    shifted_audio = np.asarray(content_introduction_audio.flatten()*(2.0 ** (8 * 2 - 1)), dtype = int)
+                    shifted_audio = struct.pack('%dh' % N, * shifted_audio)
+                    distorted_file.writeframes(shifted_audio)
                     distorted_file.close()
                     # get distorted features
-                    content_introduction_features = get_features(SAVE_DIR + "/" + test_run + "/" + test_case + "/contentintro.wav", 'nlse')
+                    content_introduction_features = get_features(distorted_directory + "/" + filename[:-4] + "contentintro.wav", 'nlse')
                     # calc all similarity values
                     euc_sim = get_similarity(test_features, content_introduction_features, 'euclidean')
-                    dtw_sim = get_similarity(test_features, content_introduction_features, 'dtw')
-                    dpla_sim = get_similarity(test_features, content_introduction_features, 'dpla')
-                    sic_dpla_sim = get_similarity(test_features, content_introduction_features, 'sic_dpla')
+                    dtw_sim = get_similarity(test_features, content_introduction_features, 'DTW')
+                    dpla_sim = get_similarity(test_features, content_introduction_features, 'DPLA')
+                    sic_dpla_sim = get_similarity(test_features, content_introduction_features, 'SIC-DPLA')
                     # store results in db
                     mysql_obj.insert_contentintro_test_data(test_run, test_case, filename, total_percent_introduction, total_percent_deletion, file_introduced, num_introduction, max_introduction, min_introduction, avg_introduction, num_deletion, max_deletion, min_deletion, avg_deletion, 'euclidean', euc_sim)
                     mysql_obj.insert_contentintro_test_data(test_run, test_case, filename, total_percent_introduction, total_percent_deletion, file_introduced, num_introduction, max_introduction, min_introduction, avg_introduction, num_deletion, max_deletion, min_deletion, avg_deletion, 'DTW', dtw_sim)
@@ -269,7 +290,7 @@ def run_contentintro_tests(directory, test_run, test_case, mysql_obj):
 -------------- params: severe, test_run, file, re-order, number swaps, max_size, min_size, total_size, average_size
 '''
 def run_reorder_tests(directory, test_run, test_case, mysql_obj):
-    num_swaps = random.randint(1, 5)
+    num_swaps = random.randint(2, 5)
     # for each file in directory, scale, shift - run through all sim measures - insert each result into db
     if os.path.isdir(directory):
         for dirname, dirnames, filenames in os.walk(directory):
@@ -280,20 +301,27 @@ def run_reorder_tests(directory, test_run, test_case, mysql_obj):
                     # get test audio
                     test_audio = get_audio(test_audio_file)
                     # extract features
-                    test_features = get_features(test_audio_file, 'nlse')
+                    test_features = get_features(dirname+filename, 'nlse')
                     # distort test audio
                     [reordered_audio, max_size, min_size, total_size, avg_size] = reorder_segments(test_audio, num_swaps)
                     # save distorted audio
-                    distorted_file = wave.open(SAVE_DIR + "/" + test_run + "/" + test_case + "/reorder.wav", 'w')
-                    distorted_file.writeframes(reordered_audio)
+                    distorted_directory = SAVE_DIR + "/" + str(test_run) + "/" + str(test_case)
+                    if not os.path.exists(distorted_directory):
+                        os.makedirs(distorted_directory)
+                    distorted_file = wave.open(distorted_directory + "/" + filename[:-4] + "reorder.wav", 'w')
+                    distorted_file.setparams((1, 2, 44100, reordered_audio.shape[0], "NONE", "not compressed"))
+                    N = reordered_audio.shape[0]
+                    shifted_audio = np.asarray(reordered_audio.flatten()*(2.0 ** (8 * 2 - 1)), dtype = int)
+                    shifted_audio = struct.pack('%dh' % N, * shifted_audio)
+                    distorted_file.writeframes(shifted_audio)
                     distorted_file.close()
                     # get distorted features
-                    reordered_features = get_features(SAVE_DIR + "/" + test_run + "/" + test_case + "/reorder.wav", 'nlse')
+                    reordered_features = get_features(distorted_directory + "/" + filename[:-4] + "reorder.wav", 'nlse')
                     # calc all similarity values
                     euc_sim = get_similarity(test_features, reordered_features, 'euclidean')
-                    dtw_sim = get_similarity(test_features, reordered_features, 'dtw')
-                    dpla_sim = get_similarity(test_features, reordered_features, 'dpla')
-                    sic_dpla_sim = get_similarity(test_features, reordered_features, 'sic_dpla')
+                    dtw_sim = get_similarity(test_features, reordered_features, 'DTW')
+                    dpla_sim = get_similarity(test_features, reordered_features, 'DPLA')
+                    sic_dpla_sim = get_similarity(test_features, reordered_features, 'SIC-DPLA')
                     # store results in db
                     mysql_obj.insert_reorder_test_data(test_run, test_case, filename, num_swaps, max_size, min_size, total_size, avg_size, 'euclidean', euc_sim)
                     mysql_obj.insert_reorder_test_data(test_run, test_case, filename, num_swaps, max_size, min_size, total_size, avg_size, 'DTW', dtw_sim)
@@ -306,7 +334,7 @@ def run_reorder_tests(directory, test_run, test_case, mysql_obj):
 -------------- params: severe, test_run, file, insert_repetition, number unique repetitions, max_reps for unique, min_reps for unique, total reps, average reps, total_length reps, total_length deletes, num segment deletes, max delete, min delete, max rep length, min rep length, avg_rep_length, avg_delete_length
 '''
 def run_repinsert_tests(directory, test_run, test_case, mysql_obj):
-    num_subsequences = random.randint(1, 3)
+    num_subsequences = random.randint(2, 3)
     # if greater than 1, determine if they should be same content or not
     # for each file in directory, scale, shift - run through all sim measures - insert each result into db
     if os.path.isdir(directory):
@@ -318,25 +346,32 @@ def run_repinsert_tests(directory, test_run, test_case, mysql_obj):
                     # get test audio
                     test_audio = get_audio(test_audio_file)
                     # extract features
-                    test_features = get_features(test_audio_file, 'nlse')
+                    test_features = get_features(dirname+filename, 'nlse')
                     # distort test audio
-                    [repetitive_insertion_audio, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length] = insert_repetitions(test_audio, num_subsequences)
+                    [repetitive_insertion_audio, num_unique_reps, max_reps_for_unique, min_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length] = insert_repetitions(test_audio, num_subsequences)
                     # save distorted audio
-                    distorted_file = wave.open(SAVE_DIR + "/" + test_run + "/" + test_case + "/repinsert.wav", 'w')
-                    distorted_file.writeframes(repetitive_insertion_audio)
+                    distorted_directory = SAVE_DIR + "/" + str(test_run) + "/" + str(test_case)
+                    if not os.path.exists(distorted_directory):
+                        os.makedirs(distorted_directory)
+                    distorted_file = wave.open(distorted_directory + "/" + filename[:-4] + "repinsert.wav", 'w')
+                    distorted_file.setparams((1, 2, 44100, repetitive_insertion_audio.shape[0], "NONE", "not compressed"))
+                    N = repetitive_insertion_audio.shape[0]
+                    shifted_audio = np.asarray(repetitive_insertion_audio.flatten()*(2.0 ** (8 * 2 - 1)), dtype = int)
+                    shifted_audio = struct.pack('%dh' % N, * shifted_audio)
+                    distorted_file.writeframes(shifted_audio)
                     distorted_file.close()
                     # get distorted features
-                    repetitive_insert_features = get_features(SAVE_DIR + "/" + test_run + "/" + test_case + "/repinsert.wav", 'nlse')
+                    repetitive_insert_features = get_features(distorted_directory + "/" + filename[:-4] + "repinsert.wav", 'nlse')
                     # calc all similarity values
                     euc_sim = get_similarity(test_features, repetitive_insert_features, 'euclidean')
-                    dtw_sim = get_similarity(test_features, repetitive_insert_features, 'dtw')
-                    dpla_sim = get_similarity(test_features, repetitive_insert_features, 'dpla')
-                    sic_dpla_sim = get_similarity(test_features, repetitive_insert_features, 'sic_dpla')
+                    dtw_sim = get_similarity(test_features, repetitive_insert_features, 'DTW')
+                    dpla_sim = get_similarity(test_features, repetitive_insert_features, 'DPLA')
+                    sic_dpla_sim = get_similarity(test_features, repetitive_insert_features, 'SIC-DPLA')
                     # store results in db
-                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_subsequences, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'euclidean', euc_sim)
-                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_subsequences, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'DTW', dtw_sim)
-                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_subsequences, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'DPLA', dpla_sim)
-                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_subsequences, num_unique_reps, max_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'SIC-DPLA', sic_dpla_sim)
+                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_subsequences, num_unique_reps, max_reps_for_unique, min_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'euclidean', euc_sim)
+                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_subsequences, num_unique_reps, max_reps_for_unique, min_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'DTW', dtw_sim)
+                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_subsequences, num_unique_reps, max_reps_for_unique, min_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'DPLA', dpla_sim)
+                    mysql_obj.insert_repinsert_test_data(test_run, test_case, filename, num_subsequences, num_unique_reps, max_reps_for_unique, min_reps_for_unique, avg_reps, total_length_reps, total_length_deletes, num_segment_deletes, max_delete, min_delete, max_rep_length, min_rep_lenth, avg_rep_length, avg_delete_length, 'SIC-DPLA', sic_dpla_sim)
     return []
 
 if __name__ == "__main__":

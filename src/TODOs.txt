@@ -12,3 +12,8 @@ TODO:
 3. Make max portion work with multiple concurrent patches (in the same parent patcher)
 4. disallow sfplay~...is this given special treatment in js??? if so, change if synthesis flag switched on
 5. look at nonrealtime thing Adam sent
+
+
+SIMILARITY TESTING:
+For baseline, calc distances/similarities between all pairs of different files...since these are 'different', we can normalize by the difference as an extra point of analysis
+when comparing metrics.

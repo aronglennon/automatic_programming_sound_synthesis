@@ -13,10 +13,10 @@ def get_similarity(features1, features2, similarity_type):
     print 'calculating similarity'
     # option 1: calculate euclidean distance and send back multiplicative inverse so that a larger distance has lower fitness
     if similarity_type == 'euclidean':
-        return 1.0/get_euclidean(features1, features2)
+        return 1.0 - get_euclidean(features1, features2)
     # option 2: use DTW - no path constraints, local continuity constraint in place, global alignment, Euclidean distance
     elif similarity_type == 'DTW':
-        return 1.0/get_DTW_dist(features1, features2)
+        return 1.0 - get_DTW_dist(features1, features2)
     # option 3 : DPLA
     elif similarity_type == 'DPLA':
         return get_DPLA(features1, features2)
@@ -30,26 +30,21 @@ def get_euclidean(features1, features2):
     if len(features1) > len(features2):
         trunc_features1 = features1[:len(features2)]
         for i in range(0, features2.shape[0]):
-            dist += np.linalg.norm(trunc_features1[i][:]-features2[i][:])
-        # normalize individual distances
-        dist /= np.sqrt(3.0)    
+            # the nlse features are in 3-space with [-1.0, 1.0] ranges in each dim, so the max distance is sqrt(12) or 2*sqrt(3)...we divide by this to normalize between 0.0 and 1.0
+            dist += np.linalg.norm(trunc_features1[i][:]-features2[i][:]) / (2*np.sqrt(3.0))
         # normalize over sum of distances
         dist /= float(features2.shape[0])
         return dist
     elif len(features1) < len(features2):
         trunc_features2 = features2[:len(features1)]
         for i in range(0, features1.shape[0]):
-            dist += np.linalg.norm(features1[i][:]-trunc_features2[i][:])
-        # normalize individual distances
-        dist /= np.sqrt(3.0)    
+            dist += np.linalg.norm(features1[i][:]-trunc_features2[i][:]) / (2*np.sqrt(3.0))   
         # normalize over sum of distances
         dist /= float(features1.shape[0])
         return dist
     else:
         for i in range(0, features1.shape[0]):
-            dist += np.linalg.norm(features1[i][:]-features2[i][:])
-        # normalize individual distances
-        dist /= np.sqrt(3.0)    
+            dist += np.linalg.norm(features1[i][:]-features2[i][:]) / (2*np.sqrt(3.0))
         # normalize over sum of distances
         dist /= float(features1.shape[0])
         return dist
@@ -57,7 +52,7 @@ def get_euclidean(features1, features2):
 # TODO: look into other options and what default is if we don't specify them
 def get_DTW_dist(features1, features2):
     alignment = R.dtw(features1, features2, keep=True)
-    return alignment.rx('distance')[0][0]
+    return alignment.rx('normalizedDistance')[0][0]
 
 # TODO: Calculate beginning of SIC_DPLA
 def get_DPLA(features1, features2):
