@@ -244,8 +244,8 @@ def stable_extension(audio, total_percent_to_extended):
     total_extension_amount = 0    
     max_segment = 0
     min_segment = audio.shape[0]
-    for i in range(1, num_segments):
-        start_extension = random.randint(0,int(avg_jump*(i)-current_position)) + current_position
+    for i in range(1, num_segments-1):
+        start_extension = random.randint(0,int(avg_jump*i-current_position)) + current_position
         rand_extension_amount = random.randint(0,int(avg_segment*(i)-total_extension_amount))
         end_extension = start_extension + rand_extension_amount
         total_extension_amount += rand_extension_amount
@@ -358,8 +358,11 @@ def introduce_content(audio, total_percent_introduction, total_percent_deletion,
     start_introduction = random.randint(0,avg_jump*num_introduction-current_position) + current_position
     rand_introduction_amount = amount_to_introduce - total_introduction_amount
     content_introduction_audio = np.append(content_introduction_audio, deleted_audio[current_position:start_introduction])
-    if len(chosen_file_audio) < rand_introduction_amount:
-        print 'blah'
+    while len(chosen_file_audio) < rand_introduction_amount:
+        intro_start = 0
+        rand_introduction_amount = len(chosen_file_audio)
+        content_introduction_audio = np.append(content_introduction_audio, chosen_file_audio)
+        rand_introduction_amount = amount_to_introduce - total_introduction_amount
     intro_start = random.randint(0, len(chosen_file_audio)-rand_introduction_amount)
     content_introduction_audio = np.append(content_introduction_audio, chosen_file_audio[intro_start:(intro_start+rand_introduction_amount)])
     # update max and min if necessary
@@ -373,7 +376,6 @@ def introduce_content(audio, total_percent_introduction, total_percent_deletion,
 
 # [reordered_audio, max_size, min_size, total_size, avg_size] = reorder_segments(test_audio, num_swaps)
 def reorder_segments(audio, num_swaps):
-    reordered_audio = np.empty(shape=(0,0))
     # swap amount between 10%-20% of file length
     random_swap = random.randint(int(len(audio)*0.10), int(len(audio)*0.20))
     min_swap = random_swap
@@ -418,7 +420,7 @@ def insert_repetitions(audio, num_subsequences):
     max_rep_length = 0
     min_rep_length = len(audio)
     for i in range(0, num_subsequences):
-        num_reps = random.randint(1, 3)
+        num_reps = random.randint(2, 10)
         total_reps += num_reps
         if num_reps > max_reps_for_unique:
             max_reps_for_unique = num_reps
@@ -484,9 +486,8 @@ def insert_repetitions(audio, num_subsequences):
     '''
     avg_jump = int(len(deleted_audio/num_subsequences))
     current_position = 0
-    total_extension_amount = 0    
     # swaps -> [num_reps, random_rep_length]
-    jump = 0
+    jump = 1
     for s in swaps:
         start_repetition = random.randint(0,avg_jump*jump-current_position) + current_position
         end_repetition = start_repetition + s[1]

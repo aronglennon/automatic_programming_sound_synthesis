@@ -111,7 +111,8 @@ def get_DPLA(features1, features2):
 def DPLA(alignment_matrix, superior_length, inferior_length):    
     # find max in Smith-Waterman matrix and divide sum of lengths by it to get 'dissimilarity' score
     max_value = np.max(alignment_matrix)
-    return (superior_length+inferior_length)/max_value
+    max_length = max(inferior_length, superior_length)
+    return max_length/max_value
 
 def get_SIC_DPLA(features1, features2):
     max_sequence_length = max(len(features1), len(features2))
@@ -181,7 +182,7 @@ def get_SIC_DPLA(features1, features2):
     ICDPLA_left = penalties_left * ICDPLA_left_prelim
     ICDPLA_right = penalties_right * ICDPLA_right_prelim
     # return SIC-DPLA similarity
-    return 2.0 / (ICDPLA_left + ICDPLA_right)
+    return 1.0 - (ICDPLA_left/features1.shape[0] + ICDPLA_right/features2.shape[0])/2.0
 
 # this takes a presorted alignments list
 def calc_p_overlap_gap(presorted_alignments, inferior_sequence_length):
@@ -276,7 +277,7 @@ def ICDPLA(alignment_matrix, path_trace_matrix, superior, inferior, row_offset, 
     while (x_index != -1 and x_index >= row_offset):
         start_x = x_index
         start_y = y_index
-        local_distance += np.linalg.norm(superior[x_index][:]-inferior[y_index][:]) 
+        local_distance += (np.linalg.norm(superior[x_index][:]-inferior[y_index][:]))/(2*np.sqrt(3))
         if transposed:
             [y_index, x_index] = path_trace_matrix[x_index][y_index]
         else:

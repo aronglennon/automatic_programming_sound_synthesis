@@ -24,7 +24,7 @@ import numpy as np
 DEBUG = False
 WAVE_FILE_DIRECTORY = "/Users/apg250/git/automatic_programming_sound_synthesis/max_patches/realworld_sounds/for_testing/"
 SAVE_DIR = "/Users/apg250/git/automatic_programming_sound_synthesis/similarity_test_files/"   # dir to save all distorted files
-NUM_TESTS = 100
+NUM_TESTS = 1000
 MAX_WARP = 5
 MIN_WARP = 10
 
@@ -56,14 +56,16 @@ def main():
     for i in range(0, NUM_TESTS):
         # light distortions (one for every file in WAVE_FILE_DIRECTORY
         run_tsts_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
-        run_tw_tests(WAVE_FILE_DIRECTORY, testrun_id, i, None, MAX_WARP, mysql_obj)
+        max_warp = random.randint(3,5)
+        run_tw_tests(WAVE_FILE_DIRECTORY, testrun_id, i, None, max_warp, mysql_obj)
         run_sampdel_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
         run_stableextension_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
         # heavy distortion
         run_contentintro_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
         run_reorder_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
         run_repinsert_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
-        run_tw_tests(WAVE_FILE_DIRECTORY, testrun_id, i, MIN_WARP, None, mysql_obj)
+        min_warp = random.randint(6,10)
+        run_tw_tests(WAVE_FILE_DIRECTORY, testrun_id, i, min_warp, None, mysql_obj)
         
     # generate distortion for file in WAVE_FILE_DIRECTORY
     # test using all similarity measures for apples-to-apples comparison
@@ -80,7 +82,7 @@ NOTE: scaling should be performed on features so as to not change timbral conten
     
     
 def run_tsts_tests(directory, test_run, test_case, mysql_obj):
-    scale_percent = random.uniform(2.0, 5.0)       # percent of file length
+    scale_percent = random.uniform(2.0, 50.0)       # percent of file length
     shift_amount = random.uniform(100.0, 500.0)    # ms
     # for each file in directory, scale, shift - run through all sim measures - insert each result into db
     if os.path.isdir(directory):
@@ -157,7 +159,7 @@ def run_tw_tests(directory, test_run, test_case, min_warping_threshold, max_warp
 -------------- params: easy, test_run, file, segment_deletion, total amount of deleted content, num_segments, max_segment, min_segment, average_segment
 '''
 def run_sampdel_tests(directory, test_run, test_case, mysql_obj):
-    total_deleted_content = random.uniform(2.0, 5.0)       # percent of file length
+    total_deleted_content = random.uniform(2.0, 50.0)       # percent of file length
     # for each file in directory, scale, shift - run through all sim measures - insert each result into db
     if os.path.isdir(directory):
         for dirname, dirnames, filenames in os.walk(directory):
@@ -201,7 +203,7 @@ def run_sampdel_tests(directory, test_run, test_case, mysql_obj):
 -------------- params: easy, test_run, file, stable_content_extension, total_extension, num_extension, max_extension, min_extension, average_extension
 '''
 def run_stableextension_tests(directory, test_run, test_case, mysql_obj):
-    total_content_extended = random.uniform(2.0, 5.0)       # percent of file length
+    total_content_extended = random.uniform(2.0, 30.0)       # percent of file length
     # for each file in directory, scale, shift - run through all sim measures - insert each result into db
     if os.path.isdir(directory):
         for dirname, dirnames, filenames in os.walk(directory):
@@ -245,7 +247,7 @@ def run_stableextension_tests(directory, test_run, test_case, mysql_obj):
 -------------- params: severe, test_run, file, introduce_content, total_percent_indtroduction, total_percent_deletion, introduction_from_where, num_introduction, num_deletion, max/min/avg introduction and deletion
 '''
 def run_contentintro_tests(directory, test_run, test_case, mysql_obj):
-    total_percent_introduction = random.uniform(10.0, 50.0)                         # percent of file length
+    total_percent_introduction = random.uniform(10.0, 80.0)                         # percent of file length
     total_percent_deletion = total_percent_introduction*random.uniform(0.8, 1.2)    # delete somewhere in the vicinity of the same amount of content as was introduced 
     # for each file in directory, scale, shift - run through all sim measures - insert each result into db
     if os.path.isdir(directory):
@@ -290,7 +292,7 @@ def run_contentintro_tests(directory, test_run, test_case, mysql_obj):
 -------------- params: severe, test_run, file, re-order, number swaps, max_size, min_size, total_size, average_size
 '''
 def run_reorder_tests(directory, test_run, test_case, mysql_obj):
-    num_swaps = random.randint(2, 5)
+    num_swaps = random.randint(2, 20)
     # for each file in directory, scale, shift - run through all sim measures - insert each result into db
     if os.path.isdir(directory):
         for dirname, dirnames, filenames in os.walk(directory):
@@ -334,7 +336,7 @@ def run_reorder_tests(directory, test_run, test_case, mysql_obj):
 -------------- params: severe, test_run, file, insert_repetition, number unique repetitions, max_reps for unique, min_reps for unique, total reps, average reps, total_length reps, total_length deletes, num segment deletes, max delete, min delete, max rep length, min rep length, avg_rep_length, avg_delete_length
 '''
 def run_repinsert_tests(directory, test_run, test_case, mysql_obj):
-    num_subsequences = random.randint(2, 3)
+    num_subsequences = random.randint(1, 3)
     # if greater than 1, determine if they should be same content or not
     # for each file in directory, scale, shift - run through all sim measures - insert each result into db
     if os.path.isdir(directory):
