@@ -226,6 +226,14 @@ class mysql_object():
         else:
             return []
         
+    def get_similarity_test_data(self, table_name, sort_by):
+        if self.connected:
+            statement = "SELECT sim_type, sim_val, %s FROM testdata_similarity_%s WHERE testrun_id = 12" % (sort_by, table_name)
+            values = db_core.select(self.dbConnection, statement)
+            return values
+        else:
+            return []
+        
 def main():
     usage = "usage: %prog"
     
