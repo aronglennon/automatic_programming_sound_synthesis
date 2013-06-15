@@ -13,3 +13,6 @@ allow one output type). To get a patch's input types, we need to ask every child
 difference here being that each inlet may accept multiple types and all should be considered). The 'actual' connection types
 are not important because once a connection is severed in a patch it may be the case that a different connection type will
 replace it.
+
+
+FULL method really isn't FULL since we require syntactic correctness, but it means we only use a terminal when it is absolutely necessary either due to syntactic correctness OR a depth limitation

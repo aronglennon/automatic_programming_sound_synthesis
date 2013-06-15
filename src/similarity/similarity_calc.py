@@ -2,6 +2,7 @@ import numpy as np
 
 import rpy2.robjects.numpy2ri
 from rpy2.robjects.packages import importr
+from features.features_functions import get_features
 
 rpy2.robjects.numpy2ri.activate()
 # Set up our R namespaces
@@ -297,3 +298,17 @@ def ICDPLA(alignment_matrix, path_trace_matrix, superior, inferior, row_offset, 
 # this formula assumes a warping opening has a length of 0
 def delta(warp_length, max_sequence_length):
     return 0.5*(1.0 + warp_length/max_sequence_length)
+
+def main():
+    FILENAMES = ['/Users/apg250/git/automatic_programming_sound_synthesis/max_patches/realworld_sounds/for_testing/Metal_Gong-Mono.wav', 
+                 '/Users/apg250/git/automatic_programming_sound_synthesis/max_patches/realworld_sounds/for_testing/Freight_Train-Mono.wav',
+                 '/Users/apg250/git/automatic_programming_sound_synthesis/max_patches/realworld_sounds/for_testing/Lion-Growling-Mono.wav',
+                 '/Users/apg250/git/automatic_programming_sound_synthesis/max_patches/realworld_sounds/for_testing/RandomAnalogReverb-Ballad-Mono.wav',
+                 '/Users/apg250/git/automatic_programming_sound_synthesis/max_patches/realworld_sounds/for_testing/Synth-Metallic-IDM-Pad-Mono.wav']
+               
+    test1_features = get_features(FILENAMES[0], 'nlse')
+    test2_features = get_features(FILENAMES[1], 'nlse')
+    print get_similarity(test1_features, test2_features, 'euclidean')
+    
+if __name__ == '__main__':
+    main()

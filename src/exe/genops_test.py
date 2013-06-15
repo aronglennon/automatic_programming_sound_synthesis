@@ -13,7 +13,7 @@ from features.features_functions import get_features
 from similarity.similarity_calc import get_similarity
 from resource_limitations.resource_limitations import get_max_tree_depth
 from mysqldb.db_commands import mysql_object
-import wave
+import wave, random
 from optparse import OptionParser
 import sys
 from datetime import datetime
@@ -89,6 +89,7 @@ def main():
     
     # create population of max objects
     max_tree_depth = INIT_MAX_TREE_DEPTH
+    this_max_tree_depth = max_tree_depth
     fitness_threshold = 0
     for i in range (0, POPULATION_SIZE-1):
         new_fitness = False
@@ -105,12 +106,13 @@ def main():
                 this_max_tree_depth = int(max_tree_depth/2 + i*max_tree_depth/POPULATION_SIZE)
                 auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, this_init)
             else:
-                auto_gen_patch = create_patch_from_scratch(max_tree_depth, all_objects, init_method)
+                this_init = init_method
+                auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, this_init)
             auto_gen_patch.start_max_processing(SAMP_MFCC_FILE, feature_type)
             auto_gen_patch.fitness = get_similarity(target_features,auto_gen_patch.data, similarity_measure)
             # if nan, create new random patch, calculate fitness, if not nan, use to  replace
             while (np.isnan(auto_gen_patch.fitness)):
-                auto_gen_patch = create_patch_from_scratch(max_tree_depth, all_objects)
+                auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, this_init)
                 auto_gen_patch.start_max_processing(SAMP_MFCC_FILE, feature_type)
                 auto_gen_patch.fitness = get_similarity(target_features,auto_gen_patch.data, similarity_measure)
             # ratio of this patch's fitness to the last CHOSEN patch's fitness
@@ -122,9 +124,6 @@ def main():
                 fitness_threshold = auto_gen_patch.fitness
         # ------------------------------------------------------
         
-        # insert info on patch
-        if (mysql_obj.insert_genops_test_data(testrun_id, 0, auto_gen_patch.patch_to_string(), auto_gen_patch.fitness) == []):
-            print 'test data not inserted for unknown reason'
         # generate 10 neighbors using genops        
         copies = []
         for i in range (0, TOURNAMENT_SIZE-1):
@@ -133,6 +132,7 @@ def main():
         # sort neighbors by fitness
         for n in neighbors:
             n.fitness = get_similarity(target_features,n.data, similarity_measure)
+            # if similarity fails, generate a new patch
             while (np.isnan(n.fitness)):
                 n = create_next_generation(auto_gen_patch, gen_ops, max_tree_depth, all_objects)
                 n.fitness = get_similarity(target_features,n.data, similarity_measure)

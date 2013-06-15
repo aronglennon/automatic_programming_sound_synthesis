@@ -9,14 +9,27 @@ def main():
     table = 'repinsert'
     sort_by_column = 'total_length_reps'
     values = mysql_obj.get_similarity_test_data(table, sort_by_column)
-    valsToPlot = []
+    DTW_Vals = []
+    DPLA_Vals = []
+    SIC_DPLA_Vals = []
+    Euc_Vals = []
     sortedVals = sorted(values, key=itemgetter(2))
     for v in sortedVals:
-        if v[0] == 'euclidean' and v[2] != 0:
-            valsToPlot.append(v[1])
-    
-    plt.plot(valsToPlot)
+        if v[0] == 'DTW' and v[2] != 0:
+            DTW_Vals.append(1.0-5.0*(1.0-v[1]))
+        elif v[0] == 'DPLA' and v[2] != 0:
+            DPLA_Vals.append(1.0-5.0*(1.0-v[1]))
+        elif v[0] == 'SIC-DPLA' and v[2] != 0:
+            SIC_DPLA_Vals.append(1.0-5.0*(1.0-v[1]))
+        elif v[0] == 'euclidean' and v[2] != 0:
+            Euc_Vals.append(1.0-5.0*(1.0-v[1]))
+    plt.plot(DTW_Vals, hold = True)
+    plt.plot(DPLA_Vals, hold = True)
+    plt.plot(SIC_DPLA_Vals, hold = True)
+    plt.plot(Euc_Vals, hold = True)
+    plt.axis(ymin = 0.0, ymax = 1.0)
+    plt.legend('asdf')
     plt.show()
     
 if __name__ == "__main__":
-    main() 
+    main()
