@@ -345,6 +345,11 @@ def introduce_content(audio, total_percent_introduction, total_percent_deletion,
         total_introduction_amount += rand_introduction_amount
         # copy over audio up to end of first introduction, then introduce audio
         content_introduction_audio = np.append(content_introduction_audio, deleted_audio[current_position:start_introduction])
+        while rand_introduction_amount-1 > len(chosen_file_audio):
+            intro_start = 0
+            content_introduction_audio = np.append(content_introduction_audio, chosen_file_audio)
+            rand_introduction_amount -= len(chosen_file_audio)
+
         intro_start = random.randint(0, len(chosen_file_audio)-rand_introduction_amount-1)
         content_introduction_audio = np.append(content_introduction_audio, chosen_file_audio[intro_start:(intro_start+rand_introduction_amount)])
         # mark current_position as where we left off
@@ -362,6 +367,7 @@ def introduce_content(audio, total_percent_introduction, total_percent_deletion,
         intro_start = 0
         rand_introduction_amount = len(chosen_file_audio)
         content_introduction_audio = np.append(content_introduction_audio, chosen_file_audio)
+        total_introduction_amount += rand_introduction_amount
         rand_introduction_amount = amount_to_introduce - total_introduction_amount
     intro_start = random.randint(0, len(chosen_file_audio)-rand_introduction_amount)
     content_introduction_audio = np.append(content_introduction_audio, chosen_file_audio[intro_start:(intro_start+rand_introduction_amount)])
