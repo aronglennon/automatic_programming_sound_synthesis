@@ -12,7 +12,7 @@ from resource_limitations.resource_limitations import get_max_tree_depth, get_ma
 from mysqldb.db_commands import mysql_object
 import wave
 from optparse import OptionParser
-import sys
+import sys, random, copy
 from datetime import datetime
 import numpy as np
 import threading
@@ -33,6 +33,9 @@ FINAL_MAX_TREE_DEPTH = 10
 INIT_RESOURCE_COUNT = 1000
 FINAL_RESOURCE_COUNT = 5000
 INIT_RESOURCE_LIMITATION = 500 # init number of nodes + terminals in population allowed (if RLGP used)
+SUBGROUPS = 1
+EXCHANGE_FREQUENCY = 10
+EXCHANGE_PROPORTION = 0.10
 
 class calculateFitnessThread (threading.Thread):
     def __init__ (self, threadID, patch, js_filename, test_filename, feature_type, target_features, similarity_measure, population, max_tree_depth, all_objects):
@@ -112,6 +115,11 @@ def main():
     selection_type = parameters[0][15]
     if selection_type is None:
         selection_type = 'fitness-proportionate'
+    atypical_flavor = parameters[0][16]
+    if atypical_flavor == 'PADGP':
+        # update num of subgroups and population size if PADGP
+        SUBGROUPS = 5
+        POPULATION_SIZE /= SUBGROUPS
     
     # log run start time    
     run_start = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
@@ -132,55 +140,88 @@ def main():
     object_list_file.close()
     
     # create initial population of max objects
-    population = []
+    populations = []
     max_tree_depth = INIT_MAX_TREE_DEPTH
-    resource_count = INIT_RESOURCE_COUNT
-    for i in range (0, POPULATION_SIZE):
-        average_resource_count = resource_count / (POPULATION_SIZE - i)
-        if init_method == 'ramped_half_and_half':
-            if i % 2 == 0:
-                this_init = 'grow'
+    resource_count = INIT_RESOURCE_COUNT / SUBGROUPS
+    for i in range(0, SUBGROUPS):
+        population = []
+        for j in range (0, POPULATION_SIZE):
+            average_resource_count = resource_count / (POPULATION_SIZE - j)
+            if init_method == 'ramped_half_and_half':
+                if i % 2 == 0:
+                    this_init = 'grow'
+                else:
+                    this_init = 'full'
+                # the following keeps the average init tree depth the same, which likely maintains a similar initial resource allotment
+                this_max_tree_depth = int(max_tree_depth/2 + j*max_tree_depth/POPULATION_SIZE)
+                auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, init_type = this_init, resources_to_use = average_resource_count)
             else:
-                this_init = 'full'
-            # the following keeps the average init tree depth the same, which likely maintains a similar initial resource allotment
-            this_max_tree_depth = int(max_tree_depth/2 + i*max_tree_depth/POPULATION_SIZE)
-            auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, init_type = this_init, resources_to_use = average_resource_count)
-        else:
-            auto_gen_patch = create_patch_from_scratch(max_tree_depth, all_objects, init_type = init_method, resources_to_use = average_resource_count)
-        #print auto_gen_patch.patch_to_string()
-        resource_count -= auto_gen_patch.count
-        population.append(auto_gen_patch)
+                auto_gen_patch = create_patch_from_scratch(max_tree_depth, all_objects, init_type = init_method, resources_to_use = average_resource_count)
+            #print auto_gen_patch.patch_to_string()
+            resource_count -= auto_gen_patch.count
+            population.append(auto_gen_patch)
+        populations.append(population)
     # get features for target file - NOTE: should be 2D numpy array
     target_features = get_features(TARGET_FILE, feature_type)
     # --- MAIN LOOP ---
     for i in range(0, NUM_GENERATIONS):
-        max_tree_depth = get_max_tree_depth(INIT_MAX_TREE_DEPTH, FINAL_MAX_TREE_DEPTH, NUM_GENERATIONS, tree_depth_type, i)
-        resource_count = get_max_resource_count(INIT_RESOURCE_COUNT, FINAL_RESOURCE_COUNT, NUM_GENERATIONS, resource_limitation_type, i)
-        for j in range(0, len(population)/CONCURRENT_PATCHES):
-            fitnessThreads = []
-            for k in range(0, CONCURRENT_PATCHES):
-                this_patch = population[j*CONCURRENT_PATCHES + k]
-                fitnessThreads.append(calculateFitnessThread(k, this_patch, JS_FILE_ROOT + ('%d' % k) + '.js', TEST_ROOT + ('%d' % k) + '.wav', feature_type, target_features, similarity_measure, population, max_tree_depth, all_objects))
-                fitnessThreads[k].start()
-            [k.join() for k in fitnessThreads]
-        # sort by fitness
-        population.sort(key = lambda x:x.fitness, reverse = True)
-        max_gen_fitness = population[0].fitness
-        min_gen_fitness = population[-1].fitness
-        print 'Max gen fitness %f' % max_gen_fitness
-        print 'Min gen fitness %f' % min_gen_fitness
-        # TODO: store STATE of system in case of crash
-        store_state(mysql_obj, testrun_id, i, population)
-        # first generation
-        if i == 0:
-            best_patch = population[0]
-        # check if this fitness is greater than the last best fitness
-        else:
-            if population[0].fitness > best_patch.fitness:                    
-                best_patch = population[0]
-        selected = select_patches(population, selection_type)                        # fitness proportionate selection
-        # create next generation of patches and place them in allPatches
-        population = create_next_generation(selected, gen_ops, max_tree_depth, all_objects, resource_count)
+        if atypical_flavor == "PADGP":
+            # check if the generation requires exchange
+            if NUM_GENERATIONS % EXCHANGE_FREQUENCY == 0 and NUM_GENERATIONS != 0:
+                # determine who is sending patches to who
+                received = []
+                for i in range(0, SUBGROUPS):
+                    send_to = random.randint(0, SUBGROUPS-1)
+                    while send_to in received or send_to == i:
+                        send_to = random.randint(0, SUBGROUPS-1)
+                    received.append(send_to)
+                # gather groups of the swap_patches
+                swap_amount = int(POPULATION_SIZE * EXCHANGE_PROPORTION)
+                temp_main_populations = []
+                temp_swap_populations = []
+                for population in populations:
+                    temp_main_population = []
+                    temp_swap_population = []
+                    index_list = random.sample(xrange(len(population)), swap_amount)
+                    for i in range(0, len(population)):
+                        if i in index_list:
+                            temp_swap_population.append(copy.deepcopy(population[i]))
+                        else:
+                            temp_main_population.append(copy.deepcopy(population[i]))
+                    temp_main_populations.append(temp_main_population)
+                    temp_swap_populations.append(temp_swap_population)
+                # exchange by extending patch lists
+                for i in range(0, len(received)):
+                    populations[i] = temp_main_populations[i]
+                    populations[i].extend(temp_swap_populations[received[i]])
+        for j in range(0, SUBGROUPS):
+            max_tree_depth = get_max_tree_depth(INIT_MAX_TREE_DEPTH, FINAL_MAX_TREE_DEPTH, NUM_GENERATIONS, tree_depth_type, i)
+            resource_count = get_max_resource_count(INIT_RESOURCE_COUNT, FINAL_RESOURCE_COUNT, NUM_GENERATIONS, resource_limitation_type, i)
+            for k in range(0, len(population)/CONCURRENT_PATCHES):
+                fitnessThreads = []
+                for l in range(0, CONCURRENT_PATCHES):
+                    this_patch = populations[j][k*CONCURRENT_PATCHES + l]
+                    fitnessThreads.append(calculateFitnessThread(l, this_patch, JS_FILE_ROOT + ('%d' % l) + '.js', TEST_ROOT + ('%d' % l) + '.wav', feature_type, target_features, similarity_measure, populations[j], max_tree_depth, all_objects))
+                    fitnessThreads[l].start()
+                [l.join() for l in fitnessThreads]
+            # sort by fitness
+            populations[j].sort(key = lambda x:x.fitness, reverse = True)
+            max_gen_fitness = populations[j][0].fitness
+            min_gen_fitness = populations[j][-1].fitness
+            print 'Max gen fitness %f' % max_gen_fitness
+            print 'Min gen fitness %f' % min_gen_fitness
+            # TODO: store STATE of system in case of crash
+            store_state(mysql_obj, testrun_id, i, populations[j])
+            # first generation
+            if i == 0 and j == 0:
+                best_patch = populations[0][0]
+            # check if this fitness is greater than the last best fitness
+            else:
+                if populations[j][0].fitness > best_patch.fitness:                    
+                    best_patch = populations[j][0]
+            selected = select_patches(populations[j], selection_type)                        # fitness proportionate selection
+            # create next generation of patches and place them in allPatches
+            populations[j] = create_next_generation(selected, gen_ops, max_tree_depth, all_objects, resource_count)
     # save off best of run
     run_end = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
     mysql_obj.close_test_run(testrun_id, run_end)
