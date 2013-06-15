@@ -5,8 +5,7 @@ TOOD: MAX LOGGING??? CAN WE PRE-EMPTIVELY KNOW AUDIO ISN'T FLOWING IN MAX AND TR
 #from maxclasses import predicates
 from maxclasses.max_patch import create_patch_from_scratch
 from maxclasses.max_object import get_max_objects_from_file
-from geneticoperators.fitness import change_fitness_to_probability
-from geneticoperators.ga_ops import create_next_generation, select_patches_by_fitness
+from geneticoperators.ga_ops import create_next_generation, select_patches
 from features.features_functions import get_features
 from similarity.similarity_calc import get_similarity
 from resource_limitations.resource_limitations import get_max_tree_depth, get_max_resource_count
@@ -174,12 +173,12 @@ def main():
         store_state(mysql_obj, testrun_id, i, population)
         # first generation
         if i == 0:
-            best_patch = population[-1]
+            best_patch = population[0]
         # check if this fitness is greater than the last best fitness
         else:
-            if (population[-1].fitness + min_gen_fitness) < best_patch.fitness:                    
-                best_patch = population[-1]
-        selected = select_patches_by_fitness(population, selection_type)                        # fitness proportionate selection
+            if population[0].fitness > best_patch.fitness:                    
+                best_patch = population[0]
+        selected = select_patches(population, selection_type)                        # fitness proportionate selection
         # create next generation of patches and place them in allPatches
         population = create_next_generation(selected, gen_ops, max_tree_depth, all_objects, resource_count)
     # save off best of run

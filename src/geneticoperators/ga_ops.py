@@ -4,13 +4,16 @@ from maxclasses.max_patch import create_patch
 import numpy as np
 from geneticoperators.fitness import change_fitness_to_probability
 
-def select_patches_by_fitness(patches, selection_type):
+TOURNAMENT_SIZE = 7
+PARSIMONY_PROB = 0.7
+PARSIMONY_TOURNAMENT_SIZE = 2
+
+def select_patches(patches, selection_type):
+    selected_patches = []
     if selection_type == 'fitness-proportionate':
-        print 'return a set of selected patches based on fitness probability distribution'
         # perform fitness proportionate selection
-        change_fitness_to_probability(patches, "high")                # "low" tells the function that a lower score is considered better and "high" means higher is better
+        change_fitness_to_probability(patches, 'proportionate', 'high')                # "low" tells the function that a lower score is considered better and "high" means higher is better
         cum_sum = [patches[0].fitness]
-        selected_patches = []
         for p in patches[1:]:
             # add the last cum_sum value to the next fitness value to get the next cum_sum value
             cum_sum.append(p.fitness+cum_sum[-1])
@@ -22,6 +25,45 @@ def select_patches_by_fitness(patches, selection_type):
             if itemindex == -1:
                 itemindex = len(patches)-1
             selected_patches.append(copy.deepcopy(patches[itemindex]))
+    elif selection_type == 'ranking-selection':
+        change_fitness_to_probability(patches, 'ranking', 'high')
+        cum_sum = [patches[0].fitness]
+        for p in patches[1:]:
+            # add the last cum_sum value to the next fitness value to get the next cum_sum value
+            cum_sum.append(p.fitness+cum_sum[-1])
+        for p in patches:
+            rand_num = random.random()
+            # find the first item index in cum_sum where the value is greater than the rand_num
+            itemindex = np.where(np.asarray(cum_sum)>rand_num)[0][0]
+            # the sum may be to a fraction less than 1.0, so just in case we happen to pick that random number, we just set the value to the last index
+            if itemindex == -1:
+                itemindex = len(patches)-1
+            selected_patches.append(copy.deepcopy(patches[itemindex]))
+    elif selection_type == 'tournament-selection':
+        for p in patches:
+            # choose a random subset of patches - the first one will be the one with highest fitness
+            index_list = random.sample(xrange(len(patches)), TOURNAMENT_SIZE)
+            selected_patches.append(copy.deepcopy(patches[index_list[0]]))
+    elif selection_type == 'double-tournament-selection':
+        for p in patches:
+            # run TOURNAMENT_SIZE parsimony tournaments
+            parsimony_winner_patches = []
+            for i in range(0, TOURNAMENT_SIZE):
+                index_list = random.sample(xrange(len(patches)), PARSIMONY_TOURNAMENT_SIZE)
+                most_parsimonious_patch = patches[index_list[0]]
+                for i in index_list:
+                    if patches[i].count < most_parsimonious_patch.count:
+                        most_parsimonious_patch = patches[i].count
+                random_num = random.random()
+                if random_num < PARSIMONY_PROB:
+                    parsimony_winner_patches.append(copy.deepcopy(most_parsimonious_patch))
+                else:
+                    # (1 - PARSIMONY_PROB) of the time just select a patch we would have chosen randomly
+                    index = random.randint(0, len(index_list)-1)
+                    parsimony_winner_patches.append(copy.deepcopy(patches[index_list[index]]))
+            # sort the parsimony winner patches by fitness and choose the best one
+            parsimony_winner_patches.sort(key = lambda x:x.fitness, reverse = True)
+            selected_patches.append(parsimony_winner_patches[0])
     return selected_patches
         
 def split_selected_into_gen_ops(selected, gen_ops):
@@ -89,27 +131,31 @@ def create_next_generation(selected, gen_ops, max_num_levels, all_objects, max_r
 def subtree_mutate(patches, max_num_levels, objects, max_resource_count):
     print 'mutating patches'
     for i in range(0, len(patches)):
+        average_resource_count = max_resource_count / (len(patches) - i)
         numConnections = get_num_connections(patches[i])
         # find cut location that is not the dac connecton (which is the LAST connection when going through cut_subpatch_at_location
         cut_location = random.randint(0,numConnections-2)
         # make cut and alter patch by orphaning appropriate child - return depth of cut (i.e. what level you will start with before adding below the cut) and subpatch
         [dummy_connections, cut_patch, inlet_index, depth, dummy_count_reduction] = cut_subpatch_at_location(patches[i], cut_location) 
+        count_of_cut_patch = cut_patch.count
         # create sub patch randomly (look at create patch under max_patch) and attach to child in place
-        cut_patch = create_patch(max_num_levels, objects, cut_patch, depth, max_resource_count, [inlet_index])
+        cut_patch = create_patch(max_num_levels, objects, cut_patch, depth, average_resource_count - count_of_cut_patch, [inlet_index])
+        # subtract the resources used by the new patch
+        max_resource_count -= cut_patch.count
     # return subtree_mutated patches
     return patches
 
 # find the node at node_location and return its inlet and outlet connection types (both types and number) in lists
-def get_node_connection_types(patch, node_location):
+def get_node_connection_types(patch, node_location, current_connection_number = 0):
     child_index = 0
     for c in patch.connections:
         # returns inlets and outlets only if they've been found...otherwise, simply updates the connection num so we can track the node_location
-        [inlets, outlets, current_connection_num] = get_subpatch_at_connection(patch.children[child_index],desired_connection_num,current_connection_num)
+        [inlets, outlets, current_connection_num] = get_node_connection_types(patch.children[child_index], node_location, current_connection_number)
         # check to see if we've already found inlets/outlets and now just need to bubble up - note that inlets may be empty if we are changing a terminal
         if outlets != []:
             return inlets, outlets, current_connection_num
         # if we get to the appropriate connection number, return the (sub)patch we want
-        if current_connection_num == desired_connection_num:
+        if current_connection_num == node_location:
             # the subpatch that we've found's root is the node we want to replace...it's connections refer to inlets and this connection to its outlet connection
             outlets = c.type
             node = patch.children[child_index]
@@ -142,7 +188,7 @@ def get_objects_with_interface(objects, inlets, outlets, not_object = []):
                 # step through inlets and make sure each inlet in inlets can be represented in o.inlets
                 for i in range(0, len(inlets) - 1):
                     if inlets[i] not in o.inlets[i].inletTypes:
-                        passed_test = false
+                        passed_test = False
             # if we've passed all tests it means this object has the same # of ins and outs as passed in interface, the outlet types are consistent with interface, and the inlets can
             # be involved in the connections specified by the interface.
             if passed_test:
@@ -176,8 +222,12 @@ def point_mutate(patches, objects):
             # determine if other nodes exist with that interface
             objects_with_interface = get_objects_with_interface(objects, inlets, outlets, object_chosen)
         if len(objects_with_interface) > 1:
-            object_num = random.randint(0,len(objects_with_interface)-2)
-            swap_node(patches[i], node_location, objects_with_interface[object_num])
+            objects_to_choose_from = []
+            for o in objects_with_interface:
+                if o != object_chosen:
+                    objects_to_choose_from.append(0)
+            object_num = random.randint(0,len(objects_to_choose_from)-2)
+            swap_node(patches[i], node_location, objects_to_choose_from[object_num])
         # this means we couldn't find a node to swap
         else:
             print 'couldn\'t find node to swap...just passing through'
