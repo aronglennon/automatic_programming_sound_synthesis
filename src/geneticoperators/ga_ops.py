@@ -196,8 +196,24 @@ def get_objects_with_interface(objects, inlets, outlets, not_object = []):
     return objects_with_interface
 
 # swap the node in patch at node_location with the object having
-def swap_node(patch, node_location, object):
-    print 'needs to be implemented'
+def swap_node(patch, node_location, object, current_node_number = 0):
+    child_index = 0
+    for c in patch.connections:
+        # returns inlets and outlets only if they've been found...otherwise, simply updates the connection num so we can track the node_location
+        [swapped, current_connection_num] = swap_node(patch.children[child_index], node_location, object, current_node_number)
+        # check to see if we've already found inlets/outlets and now just need to bubble up - note that inlets may be empty if we are changing a terminal
+        if swapped:
+            return swapped, current_connection_num
+        # if we get to the appropriate node number, swap the node
+        if current_connection_num == node_location:
+            # the subpatch that we've found's root is the node we want to replace
+            patch.children[child_index].root = object
+            return True, current_connection_num
+        # otherwise, increment the current_connection_num as we have just passed over another connection
+        else:
+            current_connection_num += 1
+        child_index += 1
+    return False, current_connection_num
 
 def point_mutate(patches, objects):
     # TODO: swap a random node for another with the same type and number of inlets...if one doesn't exist, select another random node
