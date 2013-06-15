@@ -28,26 +28,24 @@ class MaxPatch():
                 string += "|%s->dangling connection|" % (self.root.name)
         return string
     
-    def start_max_processing(self, filename,feature_type):
+    def start_max_processing(self, js_filename, wav_filename,feature_type, patch_type = 'processing'):
         # generate JS file
-        fill_JS_file(self)
+        fill_JS_file(js_filename, self, patch_type)
         # look for mfccs, when this file is populated, grab data and clear it out
-        self.data = self.get_output(filename, feature_type)
+        self.data = self.get_output(wav_filename, feature_type)
         # clear file contents - no need for wave.open here since we are just clearing out
-        sample_features_file = open(filename, 'w')
+        sample_features_file = open(wav_filename, 'w')
         sample_features_file.close()
     
     def get_output(self, filename, feature_type):
         while os.path.getsize(filename) == 0:
             continue
-        sample_features_file = wave.open(filename, 'r')
-        features = get_features(sample_features_file,feature_type)
-        sample_features_file.close()
+        features = get_features(filename,feature_type)
         return features 
         
         
 
-def create_patch_from_scratch(maxBranchLength, objectsToUse, type = "full"):
+def create_patch_from_scratch(maxBranchLength, objectsToUse, init_type = "grow", max_resource_count):
     currentDepth = 0
     count = 0
     objects = objectsToUse
@@ -55,12 +53,13 @@ def create_patch_from_scratch(maxBranchLength, objectsToUse, type = "full"):
     currentDepth += 1
     count += 1
     dacPatch = MaxPatch(objects[0], None, [], [], currentDepth, count, 0.0)
-    return create_patch(maxBranchLength, objects, dacPatch, dacPatch.depth, type)
+    return create_patch(maxBranchLength, objects, dacPatch, dacPatch.depth, init_type, max_resource_count)
 
 # used recursively to generate subpatches of size 1 and build from there
 # note: cut inlets may be provided if a partial patch is sent in and only some inlets need to be filled out.
 # an empty list for cut_inlets means this patch is 'pure' and therefore all inlets need to be treated.
-def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, cut_inlets = [], type = "full"):
+# NOTE: max_resource_count is not strictly enforced, but once/if it is reached, terminals are added going forward
+def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, init_type = "grow", max_resource_count, cut_inlets = []):
     # if the patch's root has no inlets (i.e. is a terminal), we can't add on
     if patch.root.isTerminal:
         return
@@ -69,8 +68,8 @@ def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, cut_inlets 
             continue
         connectionOutlet = 0
         connectionInlet = i
-        # if we are about to reach the max length, make the root of the new subpatch patch a terminal...no matter what method we use
-        if maxBranchLength - currentDepth == 1:
+        # if we are about to reach the max length or max resource count, make the root of the new subpatch patch a terminal...no matter what method we use
+        if maxBranchLength - currentDepth == 1 or max_resource_count <= 1:
             objectList = []
             for o in objectsToUse:
                 if o.isTerminal:
@@ -86,20 +85,23 @@ def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, cut_inlets 
         # otherwise
         else:
             # if we use the grow method, select any object
-            if type == "grow":
+            if init_type == "grow":
                 subpatchRoot = get_random_object_with_connection(objectsToUse,patch.root.inlets[i].inletTypes)
             # if we use the full method and we are not at the max depth, pick a non-terminal
-            elif type == "full":
+            elif init_type == "full":
                 objectList = []
                 for o in objectsToUse:
                     if not o.isTerminal:
                         objectList.append(o)
                 subpatchRoot = get_random_object_with_connection(objectList,patch.root.inlets[i].inletTypes)
+                # in the case that there are no non-terminals to make a connection we must allow terminals to be used
+                if subpatchRoot == []:
+                    subpatchRoot = get_random_object_with_connection(objectsToUse,patch.root.inlets[i].inletTypes)
         # if the loadmess maxobj, generate a random argument
         if subpatchRoot.name == 'loadmess':
             subpatchRoot.attach_random_argument(patch.root.inlets[i].lowVal, patch.root.inlets[i].highVal)
         subpatch = MaxPatch(subpatchRoot,None,[],[],1,1,0.0)
-        create_patch(maxBranchLength, objectsToUse, subpatch, currentDepth+1)
+        create_patch(maxBranchLength, objectsToUse, subpatch, currentDepth+1, init_type, max_resource_count-patch.count)
         # if this inlet had a previous cut connection, replace the empty child
         if cut_inlets != []:
             patch.children[i] = subpatch
@@ -127,6 +129,8 @@ def get_random_object_with_connection(objects, requiredOutletTypes):
     if len(objectsWithOutletType) == 1:
         return copy.deepcopy(objects[objectsWithOutletType[0]])
     else:
+        if len(objectsWithOutletType) == 0:
+            return []
         return copy.deepcopy(objects[objectsWithOutletType[random.randint(0,len(objectsWithOutletType)-1)]])
 
 

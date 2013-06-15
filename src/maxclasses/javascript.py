@@ -1,9 +1,8 @@
-JS_FILE_NAME = '/etc/max/js_file.js'
 AUDIO_SOURCE = 'sfplay~'
 
-def fill_JS_file(patch):
+def fill_JS_file(filename, patch, patch_type = 'processing'):
     print 'filling JS File'
-    js_file = open(JS_FILE_NAME, 'w')
+    js_file = open(filename, 'w')
     # Set the number of inlets and outlets
     js_file.write('inlets = 1;\n')
     js_file.write('outlets = 2;\n\n')
@@ -23,7 +22,7 @@ def fill_JS_file(patch):
     # Translate all objects in patch to javascript
     translate_objects(js_file, patch, current_level, objects, horizontal)
     # Translate all connections in patch to javascript
-    translate_connections(js_file, patch, objects, memory, amnesia)
+    translate_connections(js_file, patch, objects, memory, amnesia, patch_type)
     
     # send a bang out of the object to start audio input through the patch
     js_file.write(" outlet(1, \"bang\");\n")
@@ -42,7 +41,7 @@ def fill_JS_file(patch):
 # *** RECURSIVE ***
 def translate_objects(js_file,patch,current_level,objects,horizontal):
     # translate the root of this (sub)patch, unless it is a dac~ or sfplay~ because Max deals with them already
-    if (patch.root.name != "dac~" and patch.root.name != "sfplay~"):
+    if (patch.root.name != "dac~" and patch.root.name != AUDIO_SOURCE):
         name = convert_name(patch.root.name)
         objects.append(name)
         # find the number of objects with this name already in 'objects'
@@ -91,8 +90,8 @@ def convert_name(object_name):
         name = 'multiply'
     return name
 
-# *** RECURSIVE *** -----> must determine how amnesia and memory were SUPPOSED to work and go from there
-def translate_connections(js_file,patch,objects,memory,amnesia):
+# *** RECURSIVE ***
+def translate_connections(js_file,patch,objects,memory,amnesia, patch_type):
     # transfer all objects in memory to the amnesia list
     amnesia = list(memory)
     # convert root name to js friendly name
@@ -113,7 +112,7 @@ def translate_connections(js_file,patch,objects,memory,amnesia):
             js_file.write('outlet(0, "script", "connect", "objdac%d", %d, "dac", %d);\n' % (i,patch.connections[i].outlet, patch.connections[i].inlet))
             js_file.write('outlet(0, "script", "connect", "objdac%d", %d, "mfcc", 0);\n' % (i,patch.connections[i].outlet))
         # if the root is sfplay~
-        elif patch.children[i].root.name == "sfplay~":
+        elif patch.children[i].root.name == AUDIO_SOURCE and patch_type == 'processing':
             # Tell thispatcher to name our object 'objadc' with 'i' appended. To get the appropriate object,
             # we find the total number of object's with our name and subtract the number we have found up to 
             # this part in the tree search and then add 1
@@ -124,12 +123,12 @@ def translate_connections(js_file,patch,objects,memory,amnesia):
         else:
             js_file.write('this.patcher.connect(obj%s%d, %d, obj%s%d, %d);\n\n' % (convert_name(patch.children[i].root.name), memory.count(convert_name(patch.children[i].root.name))+1,patch.connections[i].outlet, convert_name(patch.root.name), amnesia.count(convert_name(patch.root.name)),patch.connections[i].inlet))
         # translate connections for every subpatch
-        translate_connections(js_file, patch.children[i], objects, memory, amnesia)
+        translate_connections(js_file, patch.children[i], objects, memory, amnesia, patch_type)
 
 
 def translate_deletions(js_file, patch, objects):
     # leave alone default audio in and out objects, because we don't want to ever delete these
-    if patch.root.name != "dac~" and patch.root.name != "sfplay~":
+    if patch.root.name != "dac~" and patch.root.name != AUDIO_SOURCE:
         # convert the name to a js friendly one
         name = convert_name(patch.root.name)
         # add this object to the object names list
