@@ -9,8 +9,9 @@ rpy2.robjects.numpy2ri.activate()
 R = rpy2.robjects.r
 DTW = importr('dtw')
 from matplotlib import pylab as pl
+import math
 
-def get_similarity(features1, features2, similarity_type):
+def get_similarity(features1, features2, similarity_type, warp_factor = 0.0):
     print 'calculating similarity'
     # option 1: calculate euclidean distance and send back multiplicative inverse so that a larger distance has lower fitness
     if similarity_type == 'euclidean':
@@ -23,7 +24,12 @@ def get_similarity(features1, features2, similarity_type):
         return get_DPLA(features1, features2)
     # option 4: SIC-DPLA
     elif similarity_type == 'SIC-DPLA':
-        return get_SIC_DPLA(features1, features2)
+        # raw value is between 0 and 1
+        raw_value = get_SIC_DPLA(features1, features2)
+        # log function from 0 to 1
+        log_value = math.log(raw_value+1, 2)
+        # warp by mixing log and linear
+        return raw_value * (1.0-warp_factor) + log_value * (warp_factor)
 
 def get_euclidean(features1, features2):
     # make sure both matrices are the same size...if not truncate the larger one

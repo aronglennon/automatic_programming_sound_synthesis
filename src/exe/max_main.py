@@ -5,12 +5,12 @@ TOOD: MAX LOGGING??? CAN WE PRE-EMPTIVELY KNOW AUDIO ISN'T FLOWING IN MAX AND TR
 #from maxclasses import predicates
 from maxclasses.max_patch import create_patch_from_scratch
 from maxclasses.max_object import get_max_objects_from_file
-from geneticoperators.ga_ops import create_next_generation, select_patches
+from geneticoperators.ga_ops import create_next_generation, select_patches, update_all_parameters
 from features.features_functions import get_features
 from similarity.similarity_calc import get_similarity
 from resource_limitations.resource_limitations import get_max_tree_depth, get_max_resource_count
 from mysqldb.db_commands import mysql_object
-import wave
+import math
 from optparse import OptionParser
 import sys, random, copy
 from datetime import datetime
@@ -36,9 +36,11 @@ INIT_RESOURCE_LIMITATION = 500 # init number of nodes + terminals in population 
 SUBGROUPS = 1
 EXCHANGE_FREQUENCY = 10
 EXCHANGE_PROPORTION = 0.10
+SIMULATED_ANNEALING_SIZE = 10
 
 class calculateFitnessThread (threading.Thread):
-    def __init__ (self, threadID, patch, js_filename, test_filename, feature_type, target_features, similarity_measure, population, max_tree_depth, all_objects):
+    def __init__ (self, threadID, patch, js_filename, test_filename, feature_type, target_features, similarity_measure, population, max_tree_depth, all_objects, warp_factor = 1.0, simulated_annealing = False):
+        threading.Thread.__init__ (self)
         self.threadID = threadID
         self.patch = patch
         self.js_filename = js_filename
@@ -49,21 +51,60 @@ class calculateFitnessThread (threading.Thread):
         self.population = population
         self.all_objects = all_objects
         self.max_tree_depth = max_tree_depth
-        threading.Thread.__init__ (self)
-        self.daemon = True
-        self.name = "memcacheConnectionThread"
+        self.warp_factor = warp_factor  # warp factor is necessary for IFFs
+        self.simulated_annealing = simulated_annealing
         
     def run(self):
         self.patch.start_max_processing(self.js_filename, self.test_filename, self.feature_type, PATCH_TYPE) 
-        self.patch.fitness = get_similarity(self.target_features,self.patch.data, self.similarity_measure)
+        self.patch.fitness = get_similarity(self.target_features,self.patch.data, self.similarity_measure, self.warp_factor)
         # if nan, create new random patch, calculate fitness, if not nan, use to  replace
         while (np.isnan(self.patch.fitness)):
             auto_gen_patch = create_patch_from_scratch(self.max_tree_depth, self.all_objects, resources_to_use = self.patch.count)
             auto_gen_patch.start_max_processing(self.js_filename, self.test_filename, self.feature_type)
-            auto_gen_patch.fitness = get_similarity(self.target_features,auto_gen_patch.data, self.similarity_measure)
+            auto_gen_patch.fitness = get_similarity(self.target_features,auto_gen_patch.data, self.similarity_measure, self.warp_factor)
             loc = self.population.index(self.patch)
             self.population[loc] = auto_gen_patch
             self.patch = auto_gen_patch
+        # if there is no simulated annealing, exit
+        if not self.simulated_annealing:
+            return
+        fitness_threshold = 0
+        for i in range (0, SIMULATED_ANNEALING_SIZE):
+            new_fitness = False
+            temperature_value = i + 1
+            # METROPOLIS-HASTINGS SAMPLING FOR NEIGHBORS ------------------------
+            # select a neighbor
+            while not new_fitness:
+                # generate random number to test ratio of this patch's fitness to the last CHOSEN patch's fitness to
+                u = random.uniform(0.0, 1.0)
+                auto_gen_patch = update_all_parameters(self.patch)
+                auto_gen_patch.start_max_processing(self.js_filename, self.test_filename, self.feature_type, PATCH_TYPE)
+                auto_gen_patch.fitness = get_similarity(self.target_features,self.patch.data, self.similarity_measure, self.warp_factor)
+                # if nan, create new random patch, calculate fitness, if not nan, use to  replace
+                while (np.isnan(auto_gen_patch.fitness)):
+                    auto_gen_patch = update_all_parameters(self.patch)
+                    auto_gen_patch.start_max_processing(self.js_filename, self.test_filename, self.feature_type)
+                    auto_gen_patch.fitness = get_similarity(self.target_features,auto_gen_patch.data, self.similarity_measure, self.warp_factor)
+                    loc = self.population.index(self.patch)
+                # ratio of this patch's fitness to the last CHOSEN patch's fitness
+                alpha = np.minimum(1.0, auto_gen_patch.fitness/fitness_threshold)
+                # if a uniformly random number between 0.0 and 1.0 is less than the ratio above, keep this patch and set it's fitness as the new
+                # denominator in the ratio calculated
+                if u <= alpha:
+                    new_fitness = True
+                    fitness_threshold = auto_gen_patch.fitness
+            # if we've made it here, we've successfully found a neighbor meeting the M-H criteria
+            # now, determine if we move in this direction or not
+            if auto_gen_patch.fitness >= self.patch.fitness:
+                self.population[loc] = auto_gen_patch
+                self.patch = auto_gen_patch
+            else:
+                # determine the acceptance probability based on the temperature and the two fitness values
+                probability = math.exp(-(auto_gen_patch.fitness - self.patch.fitness)/temperature_value)
+                random_num = random.random()
+                if random_num < probability:
+                    self.population[loc] = auto_gen_patch
+                    self.patch = auto_gen_patch
 
 def main():
     # get all options
@@ -164,6 +205,7 @@ def main():
     # get features for target file - NOTE: should be 2D numpy array
     target_features = get_features(TARGET_FILE, feature_type)
     # --- MAIN LOOP ---
+    warp_factor = 0.0
     for i in range(0, NUM_GENERATIONS):
         if atypical_flavor == "PADGP":
             # check if the generation requires exchange
@@ -194,6 +236,14 @@ def main():
                 for i in range(0, len(received)):
                     populations[i] = temp_main_populations[i]
                     populations[i].extend(temp_swap_populations[received[i]])
+        elif atypical_flavor == 'IFF':
+            # we start at the most significant warp and slowly wear it off over time
+            warp_factor = float(NUM_GENERATIONS-i)/NUM_GENERATIONS
+        elif atypical_flavor == 'simulated annealing':
+            simulated_annealing = True
+        else:
+            simulated_annealing = False
+            warp_factor = 0.0
         for j in range(0, SUBGROUPS):
             max_tree_depth = get_max_tree_depth(INIT_MAX_TREE_DEPTH, FINAL_MAX_TREE_DEPTH, NUM_GENERATIONS, tree_depth_type, i)
             resource_count = get_max_resource_count(INIT_RESOURCE_COUNT, FINAL_RESOURCE_COUNT, NUM_GENERATIONS, resource_limitation_type, i)
@@ -201,7 +251,7 @@ def main():
                 fitnessThreads = []
                 for l in range(0, CONCURRENT_PATCHES):
                     this_patch = populations[j][k*CONCURRENT_PATCHES + l]
-                    fitnessThreads.append(calculateFitnessThread(l, this_patch, JS_FILE_ROOT + ('%d' % l) + '.js', TEST_ROOT + ('%d' % l) + '.wav', feature_type, target_features, similarity_measure, populations[j], max_tree_depth, all_objects))
+                    fitnessThreads.append(calculateFitnessThread(l, this_patch, JS_FILE_ROOT + ('%d' % l) + '.js', TEST_ROOT + ('%d' % l) + '.wav', feature_type, target_features, similarity_measure, populations[j], max_tree_depth, all_objects, warp_factor, simulated_annealing))
                     fitnessThreads[l].start()
                 [l.join() for l in fitnessThreads]
             # sort by fitness

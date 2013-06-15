@@ -499,46 +499,14 @@ def replace_subpatch_at_connection(patch,subpatch,desired_connection_num, curren
         child_index += 1
     return False, current_connection_num
     
-'''
-#---------------------------------------------------------------------
-// check for whether # connections equals # objects at each level
-bool testForProblems(vector<MaxPatch> patches)
-{
-    for (int i = 0; i < patches.size(); i++)
-    {
-        // there is an issue somewhere
-        if (!doObjectsMatchConnections(patches[i])) 
-        {
-            return true;
-        }
-    }
-    // no problems
-    return false;
-}
-
-bool doObjectsMatchConnections(MaxPatch patch)
-{
-    if (patch.objects.size() == 0) 
-    {
-        return true;
-    }
-    else 
-    {
-        if (patch.objects.size() != patch.connections.size())
-        {
-            return false;
-        }
-        else
-        {
-            for (int i = 0; i < patch.objects.size(); i++) 
-            {
-                if (!doObjectsMatchConnections(*patch.objects[i]))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-    }
-}
-'''
+# walk through all objects and replace any arguments with values that are within 50% of what they are currently
+def update_all_parameters(patch):
+    for a in patch.root.arguments:
+        low_end = a*0.5
+        high_end = a*1.5
+        a = random.random()*(high_end-low_end) + low_end
+    child_index = 0
+    for c in patch.connections:
+        update_all_parameters(patch.children[child_index])
+        child_index += 1
+    return patch
