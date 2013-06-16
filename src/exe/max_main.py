@@ -24,7 +24,7 @@ TARGET_FILE = '/var/data/max/results_target.wav'
 JS_FILE_ROOT =  '/etc/max/js_file'
 TEST_ROOT = '/var/data/max/output'
 NUM_GENERATIONS = 200
-PATCH_TYPE = 'processing'
+PATCH_TYPE = 'synthesis'
 
 POPULATION_SIZE = 10    # population size
 CONCURRENT_PATCHES = 5
@@ -32,7 +32,6 @@ INIT_MAX_TREE_DEPTH = 5 # init limit on any one individuals depth
 FINAL_MAX_TREE_DEPTH = 10
 INIT_RESOURCE_COUNT = 1000
 FINAL_RESOURCE_COUNT = 5000
-INIT_RESOURCE_LIMITATION = 500 # init number of nodes + terminals in population allowed (if RLGP used)
 SUBGROUPS = 1
 EXCHANGE_FREQUENCY = 10
 EXCHANGE_PROPORTION = 0.10
@@ -261,7 +260,7 @@ def main():
             print 'Max gen fitness %f' % max_gen_fitness
             print 'Min gen fitness %f' % min_gen_fitness
             # TODO: store STATE of system in case of crash
-            store_state(mysql_obj, testrun_id, i, populations[j])
+            store_state(mysql_obj, testrun_id, i, populations[j], j, int(options.parameter_set), max_tree_depth, resource_count)
             # first generation
             if i == 0 and j == 0:
                 best_patch = populations[0][0]
@@ -276,9 +275,9 @@ def main():
     run_end = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
     mysql_obj.close_test_run(testrun_id, run_end)
 
-def store_state(mysql_obj, testrun_id, generation_number, population_data):
+def store_state(mysql_obj, testrun_id, generation_number, population_data, subgroup, parameter_set, max_tree_depth, resource_count):
     for p in population_data:
-        if (mysql_obj.insert_full_test_data(testrun_id, generation_number, p.patch_to_string(), p.fitness) == []):
+        if (mysql_obj.insert_full_test_data(testrun_id, generation_number, p.patch_to_string(), p.fitness, subgroup, parameter_set, max_tree_depth, resource_count, PATCH_TYPE, EXCHANGE_FREQUENCY, EXCHANGE_PROPORTION, SIMULATED_ANNEALING_SIZE) == []):
             print 'test data not inserted for unknown reason'
 
 if __name__ == "__main__":

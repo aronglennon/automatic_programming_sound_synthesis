@@ -45,7 +45,7 @@ class MaxPatch():
         
         
 
-def create_patch_from_scratch(maxBranchLength, objectsToUse, init_type = "grow", max_resource_count):
+def create_patch_from_scratch(maxBranchLength, objectsToUse, init_type = "grow", max_resource_count = None):
     currentDepth = 0
     count = 0
     objects = objectsToUse
@@ -59,7 +59,7 @@ def create_patch_from_scratch(maxBranchLength, objectsToUse, init_type = "grow",
 # note: cut inlets may be provided if a partial patch is sent in and only some inlets need to be filled out.
 # an empty list for cut_inlets means this patch is 'pure' and therefore all inlets need to be treated.
 # NOTE: max_resource_count is not strictly enforced, but once/if it is reached, terminals are added going forward
-def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, init_type = "grow", max_resource_count, cut_inlets = []):
+def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, init_type = "grow", max_resource_count = None, cut_inlets = []):
     # if the patch's root has no inlets (i.e. is a terminal), we can't add on
     if patch.root.isTerminal:
         return
@@ -69,7 +69,7 @@ def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, init_type =
         connectionOutlet = 0
         connectionInlet = i
         # if we are about to reach the max length or max resource count, make the root of the new subpatch patch a terminal...no matter what method we use
-        if maxBranchLength - currentDepth == 1 or max_resource_count <= 1:
+        if maxBranchLength - currentDepth == 1 or max_resource_count is not None and max_resource_count <= 1:
             objectList = []
             for o in objectsToUse:
                 if o.isTerminal:
@@ -101,7 +101,10 @@ def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, init_type =
         if subpatchRoot.name == 'loadmess':
             subpatchRoot.attach_random_argument(patch.root.inlets[i].lowVal, patch.root.inlets[i].highVal)
         subpatch = MaxPatch(subpatchRoot,None,[],[],1,1,0.0)
-        create_patch(maxBranchLength, objectsToUse, subpatch, currentDepth+1, init_type, max_resource_count-patch.count)
+        if max_resource_count is not None:
+            create_patch(maxBranchLength, objectsToUse, subpatch, currentDepth+1, init_type, max_resource_count-patch.count)
+        else:
+            create_patch(maxBranchLength, objectsToUse, subpatch, currentDepth+1, init_type)
         # if this inlet had a previous cut connection, replace the empty child
         if cut_inlets != []:
             patch.children[i] = subpatch

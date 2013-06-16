@@ -69,18 +69,18 @@ def select_patches(patches, selection_type):
 def split_selected_into_gen_ops(selected, gen_ops):
     print 'return a set of patches for use in crossover and a set for use in mutation based on probabilities'
     gen_probs = [0]
-    gen_ops_patches = []
+    gen_ops_patches_list = []
     # create cumulative prob list and fill gen_ops_patches with gen op names
     for i in range(0, len(gen_ops)):
         gen_probs.append(gen_ops[i][1]+gen_probs[i])
-        gen_ops_patches.append([gen_ops[i][0]])
-    gen_ops_patches = dict.fromkeys(gen_ops_patches, [])
+        gen_ops_patches_list.append(gen_ops[i][0])
+    gen_ops_patches = {key: list() for key in gen_ops_patches_list}
     # go through all but last selected patch and just assign to cross or mut
     for p in selected[:-1]:
         rand_num = random.random()
-        for i in range(0, gen_probs):
+        for i in range(0, len(gen_probs)):
             if rand_num < gen_probs[i]:
-                gen_ops_patches[gen_ops[i][0]].append(copy.deepcopy(p))
+                gen_ops_patches[gen_ops[i-1][0]].append(copy.deepcopy(p))
                 break
     # if there are an odd number of crossover patches, the last patch MUST go into the crossover list
     # otherwise, the patch MUST go into the mut list (so it doesn't create an odd sized crossover batch)
@@ -91,16 +91,21 @@ def split_selected_into_gen_ops(selected, gen_ops):
         for d in gen_ops_patches.keys():
             if d != 'crossover':
                 gen_ops_patches[d].append(copy.deepcopy(selected[-1]))
+                break
     return gen_ops_patches
 
 # NOTE: only subtree mutation is able to change the number of resources used in the population, so first count
 # all resources used in all other patches, subtract from max_resource_count, and send that number to subtree_mutate
-def create_next_generation(selected, gen_ops, max_num_levels, all_objects, max_resource_count):
+def create_next_generation(selected, gen_ops, max_num_levels, all_objects, max_resource_count = None):
     # put even # of vecs in crossover and rest in mutation based on respective probabilities for those operations
     # (fills crossover and mutation vectors from selected vector)
     separated_patches = split_selected_into_gen_ops(selected, gen_ops)
     print 'create next gen'
     # go through each patch group (except for subtree mutation if it exists) and add up the resources in all the patches
+    crossover_patches = []
+    reproduction_patches = []
+    point_mutation_patches = []
+    subtree_mutation_patches = []
     for patch_group in separated_patches.keys():
         if patch_group == 'crossover':
             crossover_patches = crossover(separated_patches['crossover'], max_num_levels, all_objects)
@@ -119,19 +124,24 @@ def create_next_generation(selected, gen_ops, max_num_levels, all_objects, max_r
     for r in reproduction_patches:
         next_generation.append(copy.deepcopy(r))
         resource_count += r.count
-    resources_left = max_num_levels - resource_count
+    if max_resource_count is not None:
+        resources_left = max_resource_count - resource_count
     # now we can tell the subtree mutation how many resources it may use in generating new subpatches
     if 'subtree_mutation' in separated_patches:
-        subtree_mutation_patches = subtree_mutate(separated_patches['subtree_mutate'], max_num_levels, all_objects, resources_left)
+        if max_resource_count is not None:
+            subtree_mutation_patches = subtree_mutate(separated_patches['subtree_mutation'], max_num_levels, all_objects, resources_left)
+        else:
+            subtree_mutation_patches = subtree_mutate(separated_patches['subtree_mutation'], max_num_levels, all_objects)
     for m in subtree_mutation_patches:
         next_generation.append(copy.deepcopy(m))
         resource_count += m.count
     return next_generation
 
-def subtree_mutate(patches, max_num_levels, objects, max_resource_count):
+def subtree_mutate(patches, max_num_levels, objects, max_resource_count = None):
     print 'mutating patches'
     for i in range(0, len(patches)):
-        average_resource_count = max_resource_count / (len(patches) - i)
+        if max_resource_count is not None:
+            average_resource_count = max_resource_count / (len(patches) - i)
         numConnections = get_num_connections(patches[i])
         # find cut location that is not the dac connecton (which is the LAST connection when going through cut_subpatch_at_location
         cut_location = random.randint(0,numConnections-2)
@@ -139,9 +149,13 @@ def subtree_mutate(patches, max_num_levels, objects, max_resource_count):
         [dummy_connections, cut_patch, inlet_index, depth, dummy_count_reduction] = cut_subpatch_at_location(patches[i], cut_location) 
         count_of_cut_patch = cut_patch.count
         # create sub patch randomly (look at create patch under max_patch) and attach to child in place
-        cut_patch = create_patch(max_num_levels, objects, cut_patch, depth, average_resource_count - count_of_cut_patch, [inlet_index])
+        if max_resource_count is not None:
+            cut_patch = create_patch(max_num_levels, objects, cut_patch, depth, average_resource_count - count_of_cut_patch, [inlet_index])
+        else:
+            cut_patch = create_patch(max_num_levels, objects, cut_patch, depth, cut_inlets = [inlet_index])
         # subtract the resources used by the new patch
-        max_resource_count -= cut_patch.count
+        if max_resource_count is not None:
+            max_resource_count -= cut_patch.count
     # return subtree_mutated patches
     return patches
 
