@@ -141,10 +141,10 @@ class mysql_object():
         else:
             return []
         
-    def insert_full_test_data(self, testrun_id, generation_number, individual, fitness, subgroup, parameter_set, max_tree_depth, resource_count, patch_type, exchange_frequency, exchange_proportion, simulated_annealing_size, obj_list_file, target_file):
+    def insert_full_test_data(self, testrun_id, generation_number, individual, fitness, count, subgroup, parameter_set, max_tree_depth, resource_count, patch_type, exchange_frequency, exchange_proportion, simulated_annealing_size, obj_list_file, target_file):
         if self.connected:
-            statement = "INSERT INTO testdata (testrun_id, generation, individual, fitness, subgroup, parameter_set, max_tree_depth, resource_count, patch_type, exchange_frequency, exchange_proportion, simulated_annealing_size, obj_list_file, target_file) \
-            VALUES (%d, %d, '%s', %0.8f, %d, %d, %d, %d, '%s', %d, %0.8f, %d, '%s', '%s')" % (testrun_id, generation_number, individual, fitness, subgroup, parameter_set, max_tree_depth, resource_count, patch_type, exchange_frequency, exchange_proportion, simulated_annealing_size, obj_list_file, target_file)
+            statement = "INSERT INTO testdata (testrun_id, generation, individual, fitness, count, subgroup, parameter_set, max_tree_depth, resource_count, patch_type, exchange_frequency, exchange_proportion, simulated_annealing_size, obj_list_file, target_file) \
+            VALUES (%d, %d, '%s', %0.8f, %d, %d, %d, %d, %d, '%s', %d, %0.8f, %d, '%s', '%s')" % (testrun_id, generation_number, individual, fitness, count, subgroup, parameter_set, max_tree_depth, resource_count, patch_type, exchange_frequency, exchange_proportion, simulated_annealing_size, obj_list_file, target_file)
             values = db_core.insert(self.dbConnection, statement)
             return values
         else:
@@ -242,6 +242,47 @@ class mysql_object():
         else:
             return []
         
+    def get_best_of_run(self, testrun):
+        if self.connected:
+            statement = "SELECT fitness, generation, individual, count FROM testdata WHERE testrun_id = %d SORT BY fitness DESC LIMIT 1;" % (testrun)
+            values = db_core.select(self.dbConnection, statement)
+            return values
+        else:
+            return []
+        
+    def get_total_num_iterations(self, testrun):
+        if self.connected:
+            statement = "SELECT COUNT(*) FROM testdata WHERE testrun_id = %d" % (testrun)
+            values = db_core.select(self.dbConnection, statement)
+            return values
+        else:
+            return []
+        
+
+    def get_avg_fitness_per_generation(self, testrun):
+        if self.connected:
+            statement = "SELECT AVG(patch_fitness), generation FROM testdata WHERE testrun_id = %d GROUP BY generation" % (testrun)
+            values = db_core.select(self.dbConnection, statement)
+            return values
+        else:
+            return []
+        
+    def get_max_fitness_per_generation(self, testrun):
+        if self.connected:
+            statement = "SELECT MAX(patch_fitness), generation FROM testdata WHERE testrun_id = %d GROUP BY generation" % (testrun)
+            values = db_core.select(self.dbConnection, statement)
+            return values
+        else:
+            return []
+        
+    def get_min_fitness_per_generation(self, testrun):
+        if self.connected:
+            statement = "SELECT MIN(patch_fitness), generation FROM testdata WHERE testrun_id = %d GROUP BY generation" % (testrun)
+            values = db_core.select(self.dbConnection, statement)
+            return values
+        else:
+            return []
+    
 def main():
     usage = "usage: %prog"
     

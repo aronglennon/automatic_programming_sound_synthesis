@@ -38,6 +38,7 @@ class MaxPatch():
         sample_features_file.close()
     
     def get_output(self, filename, feature_type):
+        # empty file is 48 bytes
         while os.path.getsize(filename) == 0:
             continue
         features = get_features(filename,feature_type)
