@@ -20,42 +20,6 @@ class MaxObject():
         rawRandom = random.random()
         self.arguments.append(rawRandom*(highValue-lowValue) + lowValue)
         
-'''
-#include <sstream>
-#include "MaxObject.h"
-
-using namespace std;
-
-// select a random outlet that outputs the given type
-int MaxObject::selectRandomOutlet(string type) const
-{
-    // will contain all outlets that output 'type'
-    vector<int> validOutputHolder;                                            
-    // for every output connection...
-    for (int i = 0; i < typeOfOutputConnections.size(); i++ )
-    {
-        // if the connection is of the type we want, then save it in our container
-        if (typeOfOutputConnections[i] == type)                                
-        {
-            validOutputHolder.push_back(i);
-        }
-    }
-    // choose a random index into our container holding valid outputs
-    int index(rand() % validOutputHolder.size());                            
-    // return the output corresponding to our random index
-    return validOutputHolder[index];                                        
-}
-
-// given a specific inlet, return one of the types it can take
-string MaxObject::selectInletsRandomType(int inlet)
-{
-    // simply choose a random index into the inlet types array corresponding to the passed in inlet
-    int choice;
-    choice = (rand() % typeOfInputConnections[inlet].inletTypes.size());    
-    // return the type of the inlet corresponding to the random index
-    return(typeOfInputConnections[inlet].inletTypes[choice]);                            
-}
-'''
 def get_max_objects_from_file(object_list_file):
     objectList = []
     # TODO: Look into tree data structure in python

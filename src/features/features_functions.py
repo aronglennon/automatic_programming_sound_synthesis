@@ -16,15 +16,6 @@ def get_features(filename,feature_type):
         coeffs = timbrespace(filename)        # default hopsize=3, i.e. 50%, i.e. 150 ms
     return coeffs
 
-'''
-NO LONGER USED
-def get_features_from_data(audio_data, feature_type):
-    if feature_type == 'mfcc':
-        # get mfcc coeffs and don't look at first (corresponds to energy in signal)
-        coeffs = mfcc(audio_data,fs=44100)[0][1:] # [1] is mel coeffs, and [2] is entire FFT data???
-    return coeffs
-'''
-
 def get_audio(filename):
     fileContents = filename.readframes(MAX_LENGTH)
     fileContents = struct.unpack("<%uh" % (len(fileContents) / 2), fileContents)
