@@ -1,0 +1,12 @@
+dac~|signal:0.0:1.0/
+loadmess|/int float bool
+cycle~|signal float:20.0:4000.0/signal
+*~|signal:-1.0:1.0'signal float:-1.0:1.0/signal
+degrade~|signal:-1.0:1.0'float:0.0:1.0'int:2:24/signal
+peakamp~|signal:-1.0:1.0'int:1:1000/signal
+saw~|signal float:0.01:10.0/signal
++~|signal:-1.0:1.0'signal float:-1.0:1.0/signal
+-~|signal:-1.0:1.0'signal float:-1.0:1.0/signal
+/~|signal:-1.0:1.0'signal float:-10.0:10.0/signal
+%~|signal:-1.0:1.0'signal float:0.1:5.0/signal
+lores~|signal:-1.0:1.0'signal float:0.0:10000.0'signal float:0.0:1.0/signal

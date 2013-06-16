@@ -1,0 +1,11 @@
+dac~|signal:0.0:1.0/
+loadmess|/int float bool
+cycle~|signal float:10.0:3000.0/signal
+*~|signal:-1.0:1.0'signal float:-10.0:10.0/signal
+apgdelay|signal:1.0:1.0'int:100:1500'signal float:-0.9:0.9/signal
+degrade~|signal:-1.0:1.0'float:0.0:1.0'int:2:24/signal
++~|signal:-1.0:1.0'signal float:-1.0:1.0/signal
+sah~|signal:-1.0:1.0'signal:-1.0:1.0/signal
+rand~|float:0.01:10000.0/signal
+apgdelay|signal:1.0:1.0'int:100:1500'signal float:-0.9:0.9/signal
+noise~|/signal

@@ -1,0 +1,40 @@
+dac~|signal:0.0:1.0/
+sfplay~|/signal
+loadmess|/int float bool
+noise~|/signal
++~|signal:-1.0:1.0'signal float:-1.0:1.0/signal
+-~|signal:-1.0:1.0'signal float:-1.0:1.0/signal
+*~|signal:-1.0:1.0'signal float:-10.0:10.0/signal
+/~|signal:-1.0:1.0'signal float:-10.0:10.0/signal
+%~|signal:-1.0:1.0'signal float:0.1:5.0/signal
+>~|signal:-1.0:1.0'signal float:-10.0:10.0/signal
+<~|signal:-1.0:1.0'signal float:-10.0:10.0/signal
+apgdelay|signal:1.0:1.0'int:100:1500'signal float:-0.9:0.9/signal
+clip~|signal:-1.0:1.0'float:-1.0:1.0'float:-1.0:1.0/signal 
+cycle~|signal float:0.1:10000.0'signal float:0.0:1.0/signal
+dcblocker~|signal:-1.0:1.0/signal
+degrade~|signal:-1.0:1.0'float:0.0:1.0'int:1:24/signal
+delta~|signal:-1.0:1.0/signal
+downsamp~|signal:-1.0:1.0'float:2.0:128.0/signal
+freqshift~|signal:-1.0:1.0'signal float:-5000.0:5000.0/signal
+kink~|signal:-1.0:1.0'signal float:0.0:10.0/signal
+lores~|signal:-1.0:1.0'signal float:0.0:10000.0'signal float:0.0:1.0/signal
+nw.gverb~|signal:-1.0:1.0'signal float:0.0:1000.0/signal
+overdrive~|signal:-1.0:1.0'signal float:1.0:10.0/signal
+peakamp~|signal:-1.0:1.0'int:1:1000/signal
+peakfollow~|signal:-1.0:1.0/signal
+pong~|signal:-1.0:1.0'signal float:0.05:3.00'signal float:0.05:3.00/signal
+rand~|float:0.01:10000.0/signal
+rect~|signal float:0.01:10000.0/signal
+reson~|signal:-1.0:1.0'signal float:0.01:10.0'signal float:0.001:10000.0'signal float:1.0:100.0/signal
+round~|signal:-1.0:1.0'signal float:0.01:10.0/signal
+sah~|signal:-1.0:1.0'signal:-1.0:1.0/signal
+saw~|signal float:0.01:10000.0/signal
+sig~|float:0.01:100.0/signal
+slide~|signal:-1.0:1.0'float:0.01:20000.0'float:0.01:20000.0/signal
+sqrt~|signal:-1.0:1.0/signal
+stutter~|signal:-1.0:1.0'signal:-1.0:1.0'signal:-1.0:1.0/signal
+tri~|signal float:0.01:10000.0/signal
+train~|float:1.0:5000.0'signal float:0.0:1.0'signal float:0.0:1.0/signal
+triangle~|signal:-1.0:1.0'signal float:0.0:1.0/signal
+zerox~|signal:-1.0:1.0/signal
