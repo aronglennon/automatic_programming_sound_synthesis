@@ -2,13 +2,14 @@ from mysqldb.db_commands import mysql_object
 import matplotlib.pyplot as plt
 from operator import itemgetter
 
+TESTRUN_ID = 19
 
 def main():
     # NOTE: Currently, this code just outputs similarity scores sorted by some other column (e.g. total amount deleted in the sampdel tests)
     mysql_obj = mysql_object(sameThread = True)
     table = 'repinsert'
     sort_by_column = 'total_length_reps'
-    values = mysql_obj.get_similarity_test_data(table, sort_by_column, 19)
+    values = mysql_obj.get_similarity_test_data(table, sort_by_column, TESTRUN_ID)
     DTW_Vals = []
     DPLA_Vals = []
     SIC_DPLA_Vals = []

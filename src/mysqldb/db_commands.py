@@ -141,10 +141,10 @@ class mysql_object():
         else:
             return []
         
-    def insert_full_test_data(self, testrun_id, generation_number, individual, fitness, subgroup, parameter_set, max_tree_depth, resource_count, patch_type, exchange_frequency, exchange_proportion, simulated_annealing_size):
+    def insert_full_test_data(self, testrun_id, generation_number, individual, fitness, subgroup, parameter_set, max_tree_depth, resource_count, patch_type, exchange_frequency, exchange_proportion, simulated_annealing_size, obj_list_file, target_file):
         if self.connected:
-            statement = "INSERT INTO testdata (testrun_id, generation, individual, fitness, subgroup, parameter_set, max_tree_depth, resource_count, patch_type, exchange_frequency, exchange_proportion, simulated_annealing_size) \
-            VALUES (%d, %d, '%s', %0.8f, %d, %d, %d, %d, '%s', %d, %0.8f, %d)" % (testrun_id, generation_number, individual, fitness, subgroup, parameter_set, max_tree_depth, resource_count, patch_type, exchange_frequency, exchange_proportion, simulated_annealing_size)
+            statement = "INSERT INTO testdata (testrun_id, generation, individual, fitness, subgroup, parameter_set, max_tree_depth, resource_count, patch_type, exchange_frequency, exchange_proportion, simulated_annealing_size, obj_list_file, target_file) \
+            VALUES (%d, %d, '%s', %0.8f, %d, %d, %d, %d, '%s', %d, %0.8f, %d, '%s', '%s')" % (testrun_id, generation_number, individual, fitness, subgroup, parameter_set, max_tree_depth, resource_count, patch_type, exchange_frequency, exchange_proportion, simulated_annealing_size, obj_list_file, target_file)
             values = db_core.insert(self.dbConnection, statement)
             return values
         else:
@@ -217,10 +217,10 @@ class mysql_object():
         else:
             return []
         
-    def insert_genops_test_data(self, test_run, test_case, target_filename, patch, patch_fitness, neighbor, neighbor_fitness, max_tree_depth, patch_type, tournament_size):
+    def insert_genops_test_data(self, test_run, test_case, target_filename, patch, patch_fitness, neighbor, neighbor_fitness, max_tree_depth, patch_type, tournament_size, obj_list_file):
         if self.connected:
-            statement = "INSERT INTO testdata_genops (testrun_id, testcase_id, target_file, patch, patch_fitness, neighbor, neighbor_fitness, max_tree_depth, patch_type, tournament_size) \
-            VALUES (%d, %d, '%s', '%s', %0.8f, '%s', %0.8f, %d, '%s', %d)" % (test_run, test_case, target_filename, patch, patch_fitness, neighbor, neighbor_fitness, max_tree_depth, patch_type, tournament_size)
+            statement = "INSERT INTO testdata_genops (testrun_id, testcase_id, target_file, patch, patch_fitness, neighbor, neighbor_fitness, max_tree_depth, patch_type, tournament_size, obj_list_file) \
+            VALUES (%d, %d, '%s', '%s', %0.8f, '%s', %0.8f, %d, '%s', %d, '%s')" % (test_run, test_case, target_filename, patch, patch_fitness, neighbor, neighbor_fitness, max_tree_depth, patch_type, tournament_size, obj_list_file)
             values = db_core.insert(self.dbConnection, statement)
             return values
         else:

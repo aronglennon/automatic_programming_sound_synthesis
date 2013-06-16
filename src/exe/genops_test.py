@@ -146,7 +146,7 @@ def main():
         neighbors.sort(key = lambda x:x.fitness, reverse = True)
         best_neighbor = neighbors[0]
         # store patch, fitness, best neighbor, its fitness
-        mysql_obj.insert_genops_test_data(testrun_id, i, TEST_ROOT + '1.wav', auto_gen_patch.patch_to_string(), auto_gen_patch.fitness, best_neighbor.patch_to_string(), best_neighbor.fitness, INIT_MAX_TREE_DEPTH, PATCH_TYPE, TOURNAMENT_SIZE)
+        mysql_obj.insert_genops_test_data(testrun_id, i, TARGET_FILE, auto_gen_patch.patch_to_string(), auto_gen_patch.fitness, best_neighbor.patch_to_string(), best_neighbor.fitness, INIT_MAX_TREE_DEPTH, PATCH_TYPE, TOURNAMENT_SIZE, OBJ_LIST_FILE)
         
     run_end = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
     mysql_obj.close_test_run(testrun_id, run_end)

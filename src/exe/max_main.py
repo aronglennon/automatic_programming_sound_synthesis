@@ -249,7 +249,7 @@ def main():
         elif atypical_flavor == 'IFF':
             # we start at the most significant warp and slowly wear it off over time
             warp_factor = float(NUM_GENERATIONS-i)/NUM_GENERATIONS
-        elif atypical_flavor == 'simulated annealing':
+        elif atypical_flavor == 'SA':
             simulated_annealing = True
         else:
             simulated_annealing = False
@@ -297,7 +297,7 @@ def store_state(mysql_obj, testrun_id, generation_number, population_data, subgr
     for p in population_data:
         if resource_count is None:
             resource_count = 0
-        if (mysql_obj.insert_full_test_data(testrun_id, generation_number, p.patch_to_string(), p.fitness, subgroup, parameter_set, max_tree_depth, resource_count, PATCH_TYPE, EXCHANGE_FREQUENCY, EXCHANGE_PROPORTION, SIMULATED_ANNEALING_SIZE) == []):
+        if (mysql_obj.insert_full_test_data(testrun_id, generation_number, p.patch_to_string(), p.fitness, subgroup, parameter_set, max_tree_depth, resource_count, PATCH_TYPE, EXCHANGE_FREQUENCY, EXCHANGE_PROPORTION, SIMULATED_ANNEALING_SIZE, OBJ_LIST_FILE, TARGET_FILE) == []):
             print 'test data not inserted for unknown reason'
 
 if __name__ == "__main__":
