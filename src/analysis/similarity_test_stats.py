@@ -8,7 +8,7 @@ def main():
     mysql_obj = mysql_object(sameThread = True)
     table = 'repinsert'
     sort_by_column = 'total_length_reps'
-    values = mysql_obj.get_similarity_test_data(table, sort_by_column)
+    values = mysql_obj.get_similarity_test_data(table, sort_by_column, 19)
     DTW_Vals = []
     DPLA_Vals = []
     SIC_DPLA_Vals = []
