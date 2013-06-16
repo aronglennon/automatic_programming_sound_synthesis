@@ -135,7 +135,7 @@ class mysql_object():
         
     def close_test_run(self, testrun_id, run_end):
         if self.connected:
-            statement = "UPDATE testrun SET end_time = '%s' WHERE id = %s" % (run_end, testrun_id)
+            statement = "UPDATE testrun SET end_time = '%s' WHERE testrun_id = %s" % (run_end, testrun_id)
             values = db_core.update(self.dbConnection, statement)
             return values
         else:

@@ -18,8 +18,8 @@ import numpy as np
 
 # TODO: turn into config params
 DEBUG = False
-OBJ_LIST_FILE = '/etc/max/object_list.txt'
-TARGET_FILE = '/var/data/max/results_target.wav'
+OBJ_LIST_FILE = '/etc/max/general1_object_list.txt'
+TARGET_FILE = '/var/data/max/Freight_Train-Mono.wav'
 JS_FILE_ROOT =  '/etc/max/js_file'
 TEST_ROOT = '/var/data/max/output'
 PATCH_TYPE = 'synthesis'

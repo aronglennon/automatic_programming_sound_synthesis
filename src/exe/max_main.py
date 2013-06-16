@@ -17,24 +17,7 @@ from datetime import datetime
 import numpy as np
 import threading
 
-# TODO: turn into config params
-DEBUG = False
-OBJ_LIST_FILE = '/etc/max/object_list.txt'
-TARGET_FILE = '/var/data/max/results_target.wav'
-JS_FILE_ROOT =  '/etc/max/js_file'
-TEST_ROOT = '/var/data/max/output'
-NUM_GENERATIONS = 200
 PATCH_TYPE = 'synthesis'
-
-POPULATION_SIZE = 10    # population size
-CONCURRENT_PATCHES = 5
-INIT_MAX_TREE_DEPTH = 5 # init limit on any one individuals depth
-FINAL_MAX_TREE_DEPTH = 10
-INIT_RESOURCE_COUNT = 1000
-FINAL_RESOURCE_COUNT = 5000
-SUBGROUPS = 1
-EXCHANGE_FREQUENCY = 10
-EXCHANGE_PROPORTION = 0.10
 SIMULATED_ANNEALING_SIZE = 10
 
 class calculateFitnessThread (threading.Thread):
@@ -105,6 +88,23 @@ class calculateFitnessThread (threading.Thread):
                     self.population[loc] = auto_gen_patch
                     self.patch = auto_gen_patch
 
+# TODO: turn into config params
+DEBUG = False
+OBJ_LIST_FILE = '/etc/max/general1_object_list.txt'
+TARGET_FILE = '/var/data/max/Freight_Train-Mono.wav'
+JS_FILE_ROOT =  '/etc/max/js_file'
+TEST_ROOT = '/var/data/max/output'
+NUM_GENERATIONS = 200
+POPULATION_SIZE = 100    # population size
+CONCURRENT_PATCHES = 5
+INIT_MAX_TREE_DEPTH = 5 # init limit on any one individuals depth
+FINAL_MAX_TREE_DEPTH = 10
+INIT_RESOURCE_COUNT = 1000
+FINAL_RESOURCE_COUNT = 5000
+EXCHANGE_FREQUENCY = 10
+EXCHANGE_PROPORTION = 0.10
+SUBGROUPS = 5
+
 def main():
     # get all options
     parser = OptionParser()
@@ -156,10 +156,12 @@ def main():
     if selection_type is None:
         selection_type = 'fitness-proportionate'
     atypical_flavor = parameters[0][16]
+    subgroups = 1
+    pop_size = POPULATION_SIZE
     if atypical_flavor == 'PADGP':
         # update num of subgroups and population size if PADGP
-        SUBGROUPS = 5
-        POPULATION_SIZE /= SUBGROUPS
+        subgroups = SUBGROUPS
+        pop_size = POPULATION_SIZE / SUBGROUPS
     
     # log run start time    
     run_start = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
@@ -182,23 +184,32 @@ def main():
     # create initial population of max objects
     populations = []
     max_tree_depth = INIT_MAX_TREE_DEPTH
-    resource_count = INIT_RESOURCE_COUNT / SUBGROUPS
-    for i in range(0, SUBGROUPS):
+    if resource_limitation_type is not None:
+        resource_count = INIT_RESOURCE_COUNT / subgroups
+    for i in range(0, subgroups):
         population = []
-        for j in range (0, POPULATION_SIZE):
-            average_resource_count = resource_count / (POPULATION_SIZE - j)
+        for j in range (0, pop_size):
+            if resource_limitation_type is not None:
+                average_resource_count = resource_count / (pop_size - j)
             if init_method == 'ramped_half_and_half':
                 if i % 2 == 0:
                     this_init = 'grow'
                 else:
                     this_init = 'full'
                 # the following keeps the average init tree depth the same, which likely maintains a similar initial resource allotment
-                this_max_tree_depth = int(max_tree_depth/2 + j*max_tree_depth/POPULATION_SIZE)
-                auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, init_type = this_init, resources_to_use = average_resource_count)
+                this_max_tree_depth = int(max_tree_depth/2 + j*max_tree_depth/pop_size)
+                if resource_limitation_type is not None:
+                    auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, init_type = this_init, max_resource_count = average_resource_count)
+                else:
+                    auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, init_type = this_init)
             else:
-                auto_gen_patch = create_patch_from_scratch(max_tree_depth, all_objects, init_type = init_method, resources_to_use = average_resource_count)
+                if resource_limitation_type is not None:
+                    auto_gen_patch = create_patch_from_scratch(max_tree_depth, all_objects, init_type = init_method, max_resource_count = average_resource_count)
+                else:
+                    auto_gen_patch = create_patch_from_scratch(max_tree_depth, all_objects, init_type = init_method)
             #print auto_gen_patch.patch_to_string()
-            resource_count -= auto_gen_patch.count
+            if resource_limitation_type is not None:
+                resource_count -= auto_gen_patch.count
             population.append(auto_gen_patch)
         populations.append(population)
     # get features for target file - NOTE: should be 2D numpy array
@@ -211,13 +222,13 @@ def main():
             if NUM_GENERATIONS % EXCHANGE_FREQUENCY == 0 and NUM_GENERATIONS != 0:
                 # determine who is sending patches to who
                 received = []
-                for i in range(0, SUBGROUPS):
-                    send_to = random.randint(0, SUBGROUPS-1)
+                for i in range(0, subgroups):
+                    send_to = random.randint(0, subgroups-1)
                     while send_to in received or send_to == i:
-                        send_to = random.randint(0, SUBGROUPS-1)
+                        send_to = random.randint(0, subgroups-1)
                     received.append(send_to)
                 # gather groups of the swap_patches
-                swap_amount = int(POPULATION_SIZE * EXCHANGE_PROPORTION)
+                swap_amount = int(pop_size * EXCHANGE_PROPORTION)
                 temp_main_populations = []
                 temp_swap_populations = []
                 for population in populations:
@@ -243,9 +254,10 @@ def main():
         else:
             simulated_annealing = False
             warp_factor = 0.0
-        for j in range(0, SUBGROUPS):
+        for j in range(0, subgroups):
             max_tree_depth = get_max_tree_depth(INIT_MAX_TREE_DEPTH, FINAL_MAX_TREE_DEPTH, NUM_GENERATIONS, tree_depth_type, i)
-            resource_count = get_max_resource_count(INIT_RESOURCE_COUNT, FINAL_RESOURCE_COUNT, NUM_GENERATIONS, resource_limitation_type, i)
+            if resource_limitation_type is not None:
+                resource_count = get_max_resource_count(INIT_RESOURCE_COUNT, FINAL_RESOURCE_COUNT, NUM_GENERATIONS, resource_limitation_type, i)
             for k in range(0, len(population)/CONCURRENT_PATCHES):
                 fitnessThreads = []
                 for l in range(0, CONCURRENT_PATCHES):
@@ -260,7 +272,10 @@ def main():
             print 'Max gen fitness %f' % max_gen_fitness
             print 'Min gen fitness %f' % min_gen_fitness
             # TODO: store STATE of system in case of crash
-            store_state(mysql_obj, testrun_id, i, populations[j], j, int(options.parameter_set), max_tree_depth, resource_count)
+            if resource_limitation_type is not None: 
+                store_state(mysql_obj, testrun_id, i, populations[j], j, int(options.parameter_set), max_tree_depth, resource_count)
+            else:
+                store_state(mysql_obj, testrun_id, i, populations[j], j, int(options.parameter_set), max_tree_depth)
             # first generation
             if i == 0 and j == 0:
                 best_patch = populations[0][0]
@@ -270,13 +285,18 @@ def main():
                     best_patch = populations[j][0]
             selected = select_patches(populations[j], selection_type)                        # fitness proportionate selection
             # create next generation of patches and place them in allPatches
-            populations[j] = create_next_generation(selected, gen_ops, max_tree_depth, all_objects, resource_count)
+            if resource_limitation_type is not None: 
+                populations[j] = create_next_generation(selected, gen_ops, max_tree_depth, all_objects, resource_count)
+            else:
+                populations[j] = create_next_generation(selected, gen_ops, max_tree_depth, all_objects)
     # save off best of run
     run_end = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
     mysql_obj.close_test_run(testrun_id, run_end)
 
-def store_state(mysql_obj, testrun_id, generation_number, population_data, subgroup, parameter_set, max_tree_depth, resource_count):
+def store_state(mysql_obj, testrun_id, generation_number, population_data, subgroup, parameter_set, max_tree_depth, resource_count = None):
     for p in population_data:
+        if resource_count is None:
+            resource_count = 0
         if (mysql_obj.insert_full_test_data(testrun_id, generation_number, p.patch_to_string(), p.fitness, subgroup, parameter_set, max_tree_depth, resource_count, PATCH_TYPE, EXCHANGE_FREQUENCY, EXCHANGE_PROPORTION, SIMULATED_ANNEALING_SIZE) == []):
             print 'test data not inserted for unknown reason'
 
