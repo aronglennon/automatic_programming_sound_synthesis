@@ -348,7 +348,7 @@ def crossover(patches, max_num_levels, objects):
             in_limbo.append(second_patch)
             random_num = random.randint(0,len(patches)-1)
             second_patch = patches.pop(random_num)
-            cross_connections = can_cross_on_connections(first_patch.children[0],second_patch.children[0])
+            cross_connections = can_cross_on_connections(first_patch,second_patch)
         if pass_through:
             already_used.append(first_patch)
             already_used.append(second_patch)

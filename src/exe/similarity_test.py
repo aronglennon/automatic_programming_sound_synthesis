@@ -3,19 +3,12 @@ Generate N different tests of pairs of similar timbral content of various comple
 Test distances given by each similarity measure to determine which is consistently good for both similar and dissimilar test pairs.
 '''
 
-#from maxclasses import predicates
-from maxclasses.max_patch import create_patch_from_scratch
-from maxclasses.max_object import get_max_objects_from_file
-from geneticoperators.fitness import change_fitness_to_probability
-from geneticoperators.ga_ops import create_next_generation, select_patches_by_fitness
 from features.features_functions import *
 from distortions.distortions import *
 from similarity.similarity_calc import get_similarity
-from resource_limitations.resource_limitations import get_max_tree_depth
 from mysqldb.db_commands import mysql_object
-import wave, struct
 from optparse import OptionParser
-import sys, random, os, re
+import os, re
 from datetime import datetime
 import numpy as np
 
@@ -121,7 +114,6 @@ def run_tsts_tests(directory, test_run, test_case, mysql_obj):
                     mysql_obj.insert_tsts_test_data(test_run, test_case, filename, scale_percent, shift_amount, 'DTW', dtw_sim)
                     mysql_obj.insert_tsts_test_data(test_run, test_case, filename, scale_percent, shift_amount, 'DPLA', dpla_sim)
                     mysql_obj.insert_tsts_test_data(test_run, test_case, filename, scale_percent, shift_amount, 'SIC-DPLA', sic_dpla_sim)
-
     return []
 
 '''

@@ -5,6 +5,8 @@ from javascript import fill_JS_file
 from features.features_functions import get_features
 import wave, copy
 
+signal_generators = ["noise~", "cycle~", "saw~", "rand~", "sfplay~"]
+
 class MaxPatch():
     def __init__ (self,rootObject,parentPatch,subPatch,connections,depth,count,fitness):
         self.root = rootObject
@@ -61,8 +63,11 @@ def create_patch_from_scratch(maxBranchLength, objectsToUse, init_type = "grow",
 # an empty list for cut_inlets means this patch is 'pure' and therefore all inlets need to be treated.
 # NOTE: max_resource_count is not strictly enforced, but once/if it is reached, terminals are added going forward
 def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, init_type = "grow", max_resource_count = None, cut_inlets = []):
+    # disallow trivial situations
+    if maxBranchLength <= 2:
+        maxBranchLength = 3
     # if the patch's root has no inlets (i.e. is a terminal), we can't add on
-    if patch.root.isTerminal:
+    if patch.root.isTerminal or patch.root.name in signal_generators:
         return
     for i in range(0,len(patch.root.inlets)):
         if cut_inlets != [] and i not in cut_inlets:
@@ -73,14 +78,14 @@ def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, init_type =
         if maxBranchLength - currentDepth == 1 or max_resource_count is not None and max_resource_count <= 1:
             objectList = []
             for o in objectsToUse:
-                if o.isTerminal:
+                if o.isTerminal or o.name in signal_generators:
                     objectList.append(o)
             subpatchRoot = get_random_object_with_connection(objectList,patch.root.inlets[i].inletTypes)
         # if the current root is a dac~, we must avoid the trivial situation by picking an object that is not a terminal...no matter what method we use
         elif currentDepth == 1 and patch.root.name == 'dac~':
             objectList = []
             for o in objectsToUse:
-                if not o.isTerminal:
+                if not o.isTerminal and o.name not in signal_generators:
                     objectList.append(o)
             subpatchRoot = get_random_object_with_connection(objectList,patch.root.inlets[i].inletTypes)
         # otherwise
@@ -92,7 +97,7 @@ def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, init_type =
             elif init_type == "full":
                 objectList = []
                 for o in objectsToUse:
-                    if not o.isTerminal:
+                    if not o.isTerminal and o.name not in signal_generators:
                         objectList.append(o)
                 subpatchRoot = get_random_object_with_connection(objectList,patch.root.inlets[i].inletTypes)
                 # in the case that there are no non-terminals to make a connection we must allow terminals to be used
