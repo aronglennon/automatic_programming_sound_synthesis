@@ -67,20 +67,36 @@ def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, init_type =
     if maxBranchLength <= 2:
         maxBranchLength = 3
     # if the patch's root has no inlets (i.e. is a terminal), we can't add on
-    if patch.root.isTerminal or patch.root.name in signal_generators:
+    if patch.root.isTerminal:
         return
     for i in range(0,len(patch.root.inlets)):
         if cut_inlets != [] and i not in cut_inlets:
             continue
         connectionOutlet = 0
         connectionInlet = i
-        # if we are about to reach the max length or max resource count, make the root of the new subpatch patch a terminal...no matter what method we use
-        if maxBranchLength - currentDepth == 1 or max_resource_count is not None and max_resource_count <= 1:
+        # if we have hit our max, then we can only add on loadmess objects
+        if maxBranchLength == currentDepth or max_resource_count is not None and max_resource_count <= 1:
             objectList = []
             for o in objectsToUse:
-                if o.isTerminal or o.name in signal_generators:
+                if o.name == 'loadmess':
                     objectList.append(o)
             subpatchRoot = get_random_object_with_connection(objectList,patch.root.inlets[i].inletTypes)
+        # if we are about to reach the max length or max resource count, make the root of the new subpatch patch a terminal...no matter what method we use
+        if maxBranchLength - currentDepth == 1 or max_resource_count is not None and max_resource_count <= 1:
+            signalTerminalObjectList = []
+            otherTerminalObjectList = []
+            for o in objectsToUse:
+                # store signal generator terminals in one list
+                if o.name in signal_generators:
+                    signalTerminalObjectList.append(o)
+                # and non signal generator termianls in another
+                elif o.isTerminal:
+                    otherTerminalObjectList.append(o)
+            # if we accept a signal, place a signal producer as a terminal
+            if 'signal' in patch.root.inlets[i].inletTypes:
+                subpatchRoot = get_random_object_with_connection(signalTerminalObjectList,patch.root.inlets[i].inletTypes)
+            else:
+                subpatchRoot = get_random_object_with_connection(otherTerminalObjectList,patch.root.inlets[i].inletTypes)
         # if the current root is a dac~, we must avoid the trivial situation by picking an object that is not a terminal...no matter what method we use
         elif currentDepth == 1 and patch.root.name == 'dac~':
             objectList = []
