@@ -12,7 +12,7 @@ from features.features_functions import get_features
 from similarity.similarity_calc import get_similarity
 from mysqldb.db_commands import mysql_object
 from optparse import OptionParser
-import sys, random
+import sys, random, copy
 from datetime import datetime
 import numpy as np
 
@@ -25,7 +25,8 @@ TEST_ROOT = '/var/data/max/output'
 PATCH_TYPE = 'synthesis'
 
 INIT_MAX_TREE_DEPTH = 5 # init limit on any one individuals depth
-POPULATION_SIZE = 200
+POPULATION_SIZE = 2000
+BATCH_SIZE = 10
 TOURNAMENT_SIZE = 10
 
 def main():
@@ -98,56 +99,67 @@ def main():
     max_tree_depth = INIT_MAX_TREE_DEPTH
     this_max_tree_depth = max_tree_depth
     fitness_threshold = 0
-    for i in range (0, POPULATION_SIZE-1):
-        new_fitness = False
-        # METROPOLIS-HASTINGS SAMPLING ------------------------
-        while not new_fitness:
-            # generate random number to test ratio of this patch's fitness to the last CHOSEN patch's fitness to
-            u = random.uniform(0.0, 1.0)
-            if init_method == 'ramped_half_and_half':
-                if i % 2 == 0:
-                    this_init = 'grow'
+    for i in range (0, POPULATION_SIZE/BATCH_SIZE):
+        # create one batch at a time, so that crossover has appropriate patches to choose from
+        batch_patches = []
+        for k in range (0, BATCH_SIZE - 1):
+            new_fitness = False
+            # METROPOLIS-HASTINGS SAMPLING ------------------------
+            while not new_fitness:
+                # generate random number to test ratio of this patch's fitness to the last CHOSEN patch's fitness to
+                u = random.uniform(0.0, 1.0)
+                if init_method == 'ramped_half_and_half':
+                    if k % 2 == 0:
+                        this_init = 'grow'
+                    else:
+                        this_init = 'full'
+                    # the following keeps the average init tree depth the same, which likely maintains a similar initial resource allotment
+                    this_max_tree_depth = int(max_tree_depth/2 + i*max_tree_depth/(POPULATION_SIZE/BATCH_SIZE))
+                    auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, this_init)
                 else:
-                    this_init = 'full'
-                # the following keeps the average init tree depth the same, which likely maintains a similar initial resource allotment
-                this_max_tree_depth = int(max_tree_depth/2 + i*max_tree_depth/POPULATION_SIZE)
-                auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, this_init)
-            else:
-                this_init = init_method
-                auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, this_init)
-            auto_gen_patch.start_max_processing(JS_FILE_ROOT + '1.js', TEST_ROOT + '1.wav', feature_type, PATCH_TYPE)
-            auto_gen_patch.fitness = get_similarity(target_features,auto_gen_patch.data, similarity_measure)
-            # if nan, create new random patch, calculate fitness, if not nan, use to  replace
-            while (np.isnan(auto_gen_patch.fitness)):
-                auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, this_init)
+                    this_init = init_method
+                    auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, this_init)
                 auto_gen_patch.start_max_processing(JS_FILE_ROOT + '1.js', TEST_ROOT + '1.wav', feature_type, PATCH_TYPE)
                 auto_gen_patch.fitness = get_similarity(target_features,auto_gen_patch.data, similarity_measure)
-            # ratio of this patch's fitness to the last CHOSEN patch's fitness
-            alpha = np.minimum(1.0, auto_gen_patch.fitness/fitness_threshold)
-            # if a uniformly random number between 0.0 and 1.0 is less than the ratio above, keep this patch and set it's fitness as the new
-            # denominator in the ratio calculated
-            if u <= alpha:
-                new_fitness = True
-                fitness_threshold = auto_gen_patch.fitness
-        # ------------------------------------------------------
+                # if nan, create new random patch, calculate fitness, if not nan, use to  replace
+                while (np.isnan(auto_gen_patch.fitness)):
+                    auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, this_init)
+                    auto_gen_patch.start_max_processing(JS_FILE_ROOT + '1.js', TEST_ROOT + '1.wav', feature_type, PATCH_TYPE)
+                    auto_gen_patch.fitness = get_similarity(target_features,auto_gen_patch.data, similarity_measure)
+                # ratio of this patch's fitness to the last CHOSEN patch's fitness
+                alpha = np.minimum(1.0, auto_gen_patch.fitness/fitness_threshold)
+                # if a uniformly random number between 0.0 and 1.0 is less than the ratio above, keep this patch and set it's fitness as the new
+                # denominator in the ratio calculated
+                if u <= alpha:
+                    new_fitness = True
+                    fitness_threshold = auto_gen_patch.fitness
+            batch_patches.append(auto_gen_patch)
+            # ------------------------------------------------------
         
-        # generate 10 neighbors using genops        
-        copies = []
-        for i in range (0, TOURNAMENT_SIZE):
-            copies.append(auto_gen_patch)
-        neighbors = create_next_generation(copies, gen_ops, max_tree_depth, all_objects)
-        # sort neighbors by fitness
-        for n in neighbors:
-            n.fitness = get_similarity(target_features,n.data, similarity_measure)
-            # if similarity fails, generate a new patch
-            while (np.isnan(n.fitness)):
-                n = create_next_generation(auto_gen_patch, gen_ops, max_tree_depth, all_objects)
+        # after a batch has been created...
+        for k in range (0, BATCH_SIZE):
+            # generate 10 neighbors using genops        
+            copies = []
+            for j in range (0, TOURNAMENT_SIZE):
+                copies.append(batch_patches[k])
+            # create a crossover pool of the rest of the patches from the batch, which should all have similar fitness due to M-H sampling using roughly the same threshold for each batch
+            crossover_pool = []
+            for l in range (0, BATCH_SIZE):
+                if l != k:
+                    crossover_pool.append(copy.deepcopy(batch_patches[l]))
+            neighbors = create_next_generation(copies, gen_ops, max_tree_depth, all_objects, None, True, crossover_pool)
+            # sort neighbors by fitness
+            for n in neighbors:
+                n.start_max_processing(JS_FILE_ROOT + '1.js', TEST_ROOT + '1.wav', feature_type, PATCH_TYPE)
                 n.fitness = get_similarity(target_features,n.data, similarity_measure)
-        neighbors.sort(key = lambda x:x.fitness, reverse = True)
-        best_neighbor = neighbors[0]
-        # store patch, fitness, best neighbor, its fitness
-        mysql_obj.insert_genops_test_data(testrun_id, i, TARGET_FILE, auto_gen_patch.patch_to_string(), auto_gen_patch.fitness, best_neighbor.patch_to_string(), best_neighbor.fitness, INIT_MAX_TREE_DEPTH, PATCH_TYPE, TOURNAMENT_SIZE, OBJ_LIST_FILE)
-        
+                # if similarity fails, generate a new patch
+                while (np.isnan(n.fitness)):
+                    n = create_patch_from_scratch(this_max_tree_depth, all_objects, this_init)
+                    n.start_max_processing(JS_FILE_ROOT + '1.js', TEST_ROOT + '1.wav', feature_type, PATCH_TYPE)
+                    n.fitness = get_similarity(target_features,n.data, similarity_measure)
+                    # store patch, fitness, neighbor, its fitness
+                mysql_obj.insert_genops_test_data(testrun_id, i, TARGET_FILE, batch_patches[k].patch_to_string(), batch_patches[k].fitness, n.patch_to_string(), n.fitness, INIT_MAX_TREE_DEPTH, PATCH_TYPE, TOURNAMENT_SIZE, OBJ_LIST_FILE)
+            
     run_end = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
     mysql_obj.close_test_run(testrun_id, run_end)
 

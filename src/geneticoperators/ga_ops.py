@@ -96,7 +96,7 @@ def split_selected_into_gen_ops(selected, gen_ops):
 
 # NOTE: only subtree mutation is able to change the number of resources used in the population, so first count
 # all resources used in all other patches, subtract from max_resource_count, and send that number to subtree_mutate
-def create_next_generation(selected, gen_ops, max_num_levels, all_objects, max_resource_count = None):
+def create_next_generation(selected, gen_ops, max_num_levels, all_objects, max_resource_count = None, allow_equal_cross = True, crossover_pool = []):
     # put even # of vecs in crossover and rest in mutation based on respective probabilities for those operations
     # (fills crossover and mutation vectors from selected vector)
     separated_patches = split_selected_into_gen_ops(selected, gen_ops)
@@ -108,7 +108,7 @@ def create_next_generation(selected, gen_ops, max_num_levels, all_objects, max_r
     subtree_mutation_patches = []
     for patch_group in separated_patches.keys():
         if patch_group == 'crossover':
-            crossover_patches = crossover(separated_patches['crossover'], max_num_levels, all_objects)
+            crossover_patches = crossover(separated_patches['crossover'], max_num_levels, all_objects, allow_equal_cross, crossover_pool)
         elif patch_group == 'reproduction':
             reproduction_patches = reproduction(separated_patches['reproduction'])
         elif patch_group == 'point_mutation':
@@ -313,7 +313,7 @@ def cut_subpatch_at_location(patch, cut_location, depth = 1, connections = 0):
     # if we don't find cut_location, keep moving along, but decrease depth by 1 since we are popping out a recursive cal
     return connections, cut_patch, 0, depth - 1, 0
 
-def crossover(patches, max_num_levels, objects):
+def crossover(patches, max_num_levels, objects, allow_equal_cross = True, crossover_pool = []):
     print 'crossover patches'
     # transfer patches from crossover_patches into already_used and when complete, transfer all of these back to crossover_patches
     already_used = []
@@ -328,13 +328,16 @@ def crossover(patches, max_num_levels, objects):
         # select a random patch from the list 
         random_num = random.randint(0,len(patches)-1)
         second_patch = patches.pop(random_num)
+        # very hacky, but if a crossover pool exists, we just replace the second patch with a patch from the pool
+        if crossover_pool != []:
+            second_patch = copy.deepcopy(crossover_pool[random_num])
         pass_through = False
         '''
         test whether patches can be crossed...if not, grab another. If none can be crossed with first_patch, just pass patches through to children
         note that we are passing in the first child of each...this is because we don't want to cross at the dac level
         '''
         # cross connections will contain pairs of connections that CAN be crossed 
-        cross_connections = can_cross_on_connections(first_patch,second_patch)
+        cross_connections = can_cross_on_connections(first_patch,second_patch, allow_equal_cross)
         while cross_connections == []:
             # if length of patches is 0, we've tried all patches and none can cross with first_patch, so just pass through
             if len(patches) == 0:
@@ -348,7 +351,10 @@ def crossover(patches, max_num_levels, objects):
             in_limbo.append(second_patch)
             random_num = random.randint(0,len(patches)-1)
             second_patch = patches.pop(random_num)
-            cross_connections = can_cross_on_connections(first_patch,second_patch)
+            # very hacky, but if a crossover pool exists, we just replace the second patch with a patch from the pool
+            if crossover_pool != []:
+                second_patch = copy.deepcopy(crossover_pool[random_num])
+            cross_connections = can_cross_on_connections(first_patch,second_patch, allow_equal_cross)
         if pass_through:
             already_used.append(first_patch)
             already_used.append(second_patch)
@@ -363,7 +369,7 @@ def crossover(patches, max_num_levels, objects):
     return output_patches
 
 # find connections that two patches can cross on and place all combinations in [input_connection,output_connection] lists
-def can_cross_on_connections(first_patch, second_patch):
+def can_cross_on_connections(first_patch, second_patch, allow_equal_cross = True):
     crossConnections = []
     # get all input and output connection types for first and second patch
     print 'determining if patches can cross'
@@ -394,7 +400,8 @@ def can_cross_on_connections(first_patch, second_patch):
             # if corresponding outlet types involved in first patch connection intersect with these inlet types, then cross is possible
             outletTypes = first_patch_out_connections[fConnectionNumber]
             intersection = [val for val in inletTypes if val in outletTypes]
-            if intersection != []:
+            # either add connection if it exists when we allow equal cross locations or if we don't, make sure the locations are not the same
+            if intersection != [] and (allow_equal_cross or fConnectionNumber != sConnectionNum):
                 crossConnections.append([fConnectionNumber,sConnectionNum])
         fConnectionNumber += 1
     return crossConnections    

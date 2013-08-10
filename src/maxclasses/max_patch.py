@@ -22,7 +22,11 @@ class MaxPatch():
         if self.root.name == 'dac~':
             string += '|dac~|'
         else:
-            string += "|%s->%s|" % (self.parent.root.name, self.root.name)
+            string += "|%s->%s" % (self.parent.root.name, self.root.name)
+            if self.root.name == 'loadmess':
+                string += "--%0.8f|" % (self.root.arguments[0]) 
+            else:
+                string += "|"
         for i in range(0,len(self.children)):
             if self.children[i] != []:
                 string += self.children[i].patch_to_string()
@@ -82,7 +86,7 @@ def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, init_type =
                     objectList.append(o)
             subpatchRoot = get_random_object_with_connection(objectList,patch.root.inlets[i].inletTypes)
         # if we are about to reach the max length or max resource count, make the root of the new subpatch patch a terminal...no matter what method we use
-        if maxBranchLength - currentDepth == 1 or max_resource_count is not None and max_resource_count <= 1:
+        elif maxBranchLength - currentDepth == 1 or max_resource_count is not None and max_resource_count <= 1:
             signalTerminalObjectList = []
             otherTerminalObjectList = []
             for o in objectsToUse:
@@ -119,6 +123,8 @@ def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, init_type =
                 # in the case that there are no non-terminals to make a connection we must allow terminals to be used
                 if subpatchRoot == []:
                     subpatchRoot = get_random_object_with_connection(objectsToUse,patch.root.inlets[i].inletTypes)
+        if subpatchRoot == []:
+            print 'bad logic'
         # if the loadmess maxobj, generate a random argument
         if subpatchRoot.name == 'loadmess':
             subpatchRoot.attach_random_argument(patch.root.inlets[i].lowVal, patch.root.inlets[i].highVal)
