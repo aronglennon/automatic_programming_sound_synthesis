@@ -29,6 +29,8 @@ POPULATION_SIZE = 2000
 BATCH_SIZE = 10
 TOURNAMENT_SIZE = 10
 
+SILENCE_VAL = 0.909448
+
 def main():
     # get all options
     parser = OptionParser()
@@ -102,7 +104,7 @@ def main():
     for i in range (0, POPULATION_SIZE/BATCH_SIZE):
         # create one batch at a time, so that crossover has appropriate patches to choose from
         batch_patches = []
-        for k in range (0, BATCH_SIZE - 1):
+        for k in range (0, BATCH_SIZE):
             new_fitness = False
             # METROPOLIS-HASTINGS SAMPLING ------------------------
             while not new_fitness:
@@ -122,7 +124,8 @@ def main():
                 auto_gen_patch.start_max_processing(JS_FILE_ROOT + '1.js', TEST_ROOT + '1.wav', feature_type, PATCH_TYPE)
                 auto_gen_patch.fitness = get_similarity(target_features,auto_gen_patch.data, similarity_measure)
                 # if nan, create new random patch, calculate fitness, if not nan, use to  replace
-                while (np.isnan(auto_gen_patch.fitness)):
+                while (np.isnan(auto_gen_patch.fitness) or (auto_gen_patch.fitness >= SILENCE_VAL and auto_gen_patch.fitness <= (SILENCE_VAL + 0.000001))):
+                    print 'BAD PATCH'
                     auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, this_init)
                     auto_gen_patch.start_max_processing(JS_FILE_ROOT + '1.js', TEST_ROOT + '1.wav', feature_type, PATCH_TYPE)
                     auto_gen_patch.fitness = get_similarity(target_features,auto_gen_patch.data, similarity_measure)
@@ -158,7 +161,7 @@ def main():
                     n.start_max_processing(JS_FILE_ROOT + '1.js', TEST_ROOT + '1.wav', feature_type, PATCH_TYPE)
                     n.fitness = get_similarity(target_features,n.data, similarity_measure)
                     # store patch, fitness, neighbor, its fitness
-                mysql_obj.insert_genops_test_data(testrun_id, i, TARGET_FILE, batch_patches[k].patch_to_string(), batch_patches[k].fitness, n.patch_to_string(), n.fitness, INIT_MAX_TREE_DEPTH, PATCH_TYPE, TOURNAMENT_SIZE, OBJ_LIST_FILE)
+                mysql_obj.insert_genops_test_data(testrun_id, i*BATCH_SIZE+k, TARGET_FILE, batch_patches[k].patch_to_string(), batch_patches[k].fitness, n.patch_to_string(), n.fitness, INIT_MAX_TREE_DEPTH, PATCH_TYPE, TOURNAMENT_SIZE, OBJ_LIST_FILE)
             
     run_end = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
     mysql_obj.close_test_run(testrun_id, run_end)

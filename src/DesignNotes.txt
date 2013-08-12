@@ -18,7 +18,8 @@ replace it.
 FULL method really isn't FULL since we require syntactic correctness, but it means we only use a terminal when it is absolutely necessary either due to syntactic correctness OR a depth limitation
 
 Sphere inside (-1,-1,-1) to (1,1,1) has diameter 2, so even though distance across cube is sqrt(12), we should consider scaling factor as 2.
-
+sqrt(2^2*20) = 4sqrt(5)
+sqrt(2^2*8) = 4sqrt(2)
 
 
 FUTURE WORK:
