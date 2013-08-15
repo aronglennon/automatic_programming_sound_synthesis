@@ -24,8 +24,8 @@ JS_FILE_ROOT =  '/etc/max/js_file'
 TEST_ROOT = '/var/data/max/output'
 PATCH_TYPE = 'synthesis'
 
-INIT_MAX_TREE_DEPTH = 5 # init limit on any one individuals depth
-POPULATION_SIZE = 2000
+INIT_MAX_TREE_DEPTH = 6 # init limit on any one individuals depth
+POPULATION_SIZE = 1000
 BATCH_SIZE = 10
 TOURNAMENT_SIZE = 10
 
@@ -130,12 +130,12 @@ def main():
                     auto_gen_patch.start_max_processing(JS_FILE_ROOT + '1.js', TEST_ROOT + '1.wav', feature_type, PATCH_TYPE)
                     auto_gen_patch.fitness = get_similarity(target_features,auto_gen_patch.data, similarity_measure)
                 # ratio of this patch's fitness to the last CHOSEN patch's fitness
-                alpha = np.minimum(1.0, auto_gen_patch.fitness/fitness_threshold)
+                alpha = np.minimum(1.0, (auto_gen_patch.fitness - SILENCE_VAL)/fitness_threshold)
                 # if a uniformly random number between 0.0 and 1.0 is less than the ratio above, keep this patch and set it's fitness as the new
                 # denominator in the ratio calculated
                 if u <= alpha:
                     new_fitness = True
-                    fitness_threshold = auto_gen_patch.fitness
+                    fitness_threshold = (auto_gen_patch.fitness - SILENCE_VAL)
             batch_patches.append(auto_gen_patch)
             # ------------------------------------------------------
         

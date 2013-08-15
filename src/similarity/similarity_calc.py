@@ -38,20 +38,20 @@ def get_euclidean(features1, features2):
         trunc_features1 = features1[:len(features2)]
         for i in range(0, features2.shape[0]):
             # the nlse features are in 20-space with [-1.0, 1.0] ranges in each dim, so the max distance is sqrt(80) or 4*sqrt(5)...we divide by this to normalize between 0.0 and 1.0
-            dist += np.linalg.norm(trunc_features1[i][:]-features2[i][:]) / (4*np.sqrt(5))
+            dist += np.linalg.norm(trunc_features1[i][:]-features2[i][:]) / (4*np.sqrt(2))
         # normalize over sum of distances
         dist /= float(features2.shape[0])
         return dist
     elif len(features1) < len(features2):
         trunc_features2 = features2[:len(features1)]
         for i in range(0, features1.shape[0]):
-            dist += np.linalg.norm(features1[i][:]-trunc_features2[i][:]) / (4*np.sqrt(5))
+            dist += np.linalg.norm(features1[i][:]-trunc_features2[i][:]) / (4*np.sqrt(2))
         # normalize over sum of distances
         dist /= float(features1.shape[0])
         return dist
     else:
         for i in range(0, features1.shape[0]):
-            dist += np.linalg.norm(features1[i][:]-features2[i][:]) / (4*np.sqrt(5))
+            dist += np.linalg.norm(features1[i][:]-features2[i][:]) / (4*np.sqrt(2))
         # normalize over sum of distances
         dist /= float(features1.shape[0])
         return dist
@@ -69,7 +69,7 @@ def get_DPLA(features1, features2):
     for i in range(0, len(features1)):
         for j in range(0, len(features2)):
             # calculate similarity as transformed version of Euclidean distance to fit between -1.0 and 1.0
-            similarity_matrix[i][j] = 1.0 - np.linalg.norm(features1[i][:]-features2[j][:]) / (4*np.sqrt(5))
+            similarity_matrix[i][j] = 1.0 - np.linalg.norm(features1[i][:]-features2[j][:]) / (4*np.sqrt(2))
     # generate Smith-Waterman H matrix
     alignment_matrix = np.zeros(shape=(len(features1),len(features2)))
     # generate corresponding path matrix P (to track the alignment path to any index i,j)
@@ -128,7 +128,7 @@ def get_SIC_DPLA(features1, features2):
     for i in range(0, len(features1)):
         for j in range(0, len(features2)):
             # calculate similarity as transformed version of Euclidean distance to fit between -1.0 and 1.0
-            similarity_matrix[i][j] = 1.0 - np.linalg.norm(features1[i][:]-features2[j][:]) / (4*np.sqrt(5))
+            similarity_matrix[i][j] = 1.0 - np.linalg.norm(features1[i][:]-features2[j][:]) / (4*np.sqrt(2))
     # generate Smith-Waterman H matrix
     alignment_matrix = np.zeros(shape=(len(features1),len(features2)))
     # generate corresponding path matrix P (to track the alignment path to any index i,j)
@@ -284,7 +284,7 @@ def ICDPLA(alignment_matrix, path_trace_matrix, superior, inferior, row_offset, 
     while (x_index != -1 and x_index >= row_offset):
         start_x = x_index
         start_y = y_index
-        local_distance += (np.linalg.norm(superior[x_index][:]-inferior[y_index][:])) / (4*np.sqrt(5))
+        local_distance += (np.linalg.norm(superior[x_index][:]-inferior[y_index][:])) / (4*np.sqrt(2))
         if transposed:
             [y_index, x_index] = path_trace_matrix[x_index][y_index]
         else:
