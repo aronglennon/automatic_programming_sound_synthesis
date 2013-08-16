@@ -5,7 +5,7 @@ from javascript import fill_JS_file
 from features.features_functions import get_features
 import wave, copy
 
-signal_generators = ["noise~", "cycle~", "saw~", "rand~", "sfplay~"]
+signal_generators = ["noise~", "cycle~", "saw~", "rand~"]
 
 class MaxPatch():
     def __init__ (self,rootObject,parentPatch,subPatch,connections,depth,count,fitness):

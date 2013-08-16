@@ -95,6 +95,12 @@ def convert_name(object_name):
         name = 'multiply'
     elif name == 'nw.gverb':
         name = 'nwgverb'
+    elif name == '<':
+        name = 'lessthan'
+    elif name == '>':
+        name = 'greaterthan'
+    elif name == '%':
+        name = 'modulo'
     return name
 
 # *** RECURSIVE ***
