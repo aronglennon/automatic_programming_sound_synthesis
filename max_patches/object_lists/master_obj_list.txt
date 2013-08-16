@@ -12,7 +12,6 @@ noise~|/signal
 apgdelay|signal:1.0:1.0'int:100:1500'signal float:0.0:0.9/signal
 clip~|signal:-1.0:1.0'float:-1.0:1.0'float:-1.0:1.0/signal 
 cycle~|signal:-1.0:1.0'float:0.1:10000.0'signal:-1.0:1.0/signal
-dcblocker~|signal:-1.0:1.0/signal
 degrade~|signal:-1.0:1.0'float:0.0:1.0'int:1:24/signal
 delta~|signal:-1.0:1.0/signal
 downsamp~|signal:-1.0:1.0'float:2.0:128.0/signal
@@ -22,7 +21,6 @@ lores~|signal:-1.0:1.0'signal float:0.0:10000.0'signal float:0.0:1.0/signal
 nw.gverb~|signal:-1.0:1.0'signal float:0.0:1000.0/signal
 overdrive~|signal:-1.0:1.0'signal float:1.0:10.0/signal
 peakamp~|signal:-1.0:1.0'int:1:1000/signal
-peakfollow~|signal:-1.0:1.0/signal
 pong~|signal:-1.0:1.0'signal float:0.05:3.00'signal float:0.05:3.00/signal
 rand~|float:0.01:10000.0/signal
 rect~|signal float:0.01:10000.0/signal
