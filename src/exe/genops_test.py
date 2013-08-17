@@ -18,14 +18,14 @@ import numpy as np
 
 # TODO: turn into config params
 DEBUG = False
-OBJ_LIST_FILE = '/etc/max/general1_object_list.txt'
+OBJ_LIST_FILE = '/etc/max/general3_object_list.txt'
 TARGET_FILE = '/var/data/max/Freight_Train-Mono.wav'
 JS_FILE_ROOT =  '/etc/max/js_file'
 TEST_ROOT = '/var/data/max/output'
 PATCH_TYPE = 'synthesis'
 
 INIT_MAX_TREE_DEPTH = 6 # init limit on any one individuals depth
-POPULATION_SIZE = 1000
+POPULATION_SIZE = 331
 BATCH_SIZE = 10
 TOURNAMENT_SIZE = 10
 
