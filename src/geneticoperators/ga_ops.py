@@ -108,11 +108,14 @@ def create_next_generation(selected, gen_ops, max_num_levels, all_objects, max_r
     subtree_mutation_patches = []
     for patch_group in separated_patches.keys():
         if patch_group == 'crossover':
-            crossover_patches = crossover(separated_patches['crossover'], max_num_levels, all_objects, allow_equal_cross, crossover_pool)
+            if separated_patches['crossover'] != []:
+                crossover_patches = crossover(separated_patches['crossover'], max_num_levels, all_objects, allow_equal_cross, crossover_pool)
         elif patch_group == 'reproduction':
-            reproduction_patches = reproduction(separated_patches['reproduction'])
+            if separated_patches['reproduction'] != []:
+                reproduction_patches = reproduction(separated_patches['reproduction'])
         elif patch_group == 'point_mutation':
-            point_mutation_patches = point_mutate(separated_patches['point_mutate'], all_objects)
+            if separated_patches['point_mutation'] != []:
+                point_mutation_patches = point_mutate(separated_patches['point_mutation'], all_objects)
     resource_count = 0
     next_generation = []
     for m in point_mutation_patches:
@@ -128,10 +131,11 @@ def create_next_generation(selected, gen_ops, max_num_levels, all_objects, max_r
         resources_left = max_resource_count - resource_count
     # now we can tell the subtree mutation how many resources it may use in generating new subpatches
     if 'subtree_mutation' in separated_patches:
-        if max_resource_count is not None:
-            subtree_mutation_patches = subtree_mutate(separated_patches['subtree_mutation'], max_num_levels, all_objects, resources_left)
-        else:
-            subtree_mutation_patches = subtree_mutate(separated_patches['subtree_mutation'], max_num_levels, all_objects)
+        if separated_patches['subtree_mutation'] != []:
+            if max_resource_count is not None:
+                subtree_mutation_patches = subtree_mutate(separated_patches['subtree_mutation'], max_num_levels, all_objects, resources_left)
+            else:
+                subtree_mutation_patches = subtree_mutate(separated_patches['subtree_mutation'], max_num_levels, all_objects)
     for m in subtree_mutation_patches:
         next_generation.append(copy.deepcopy(m))
         resource_count += m.count
@@ -164,24 +168,24 @@ def get_node_connection_types(patch, node_location, current_connection_number = 
     child_index = 0
     for c in patch.connections:
         # returns inlets and outlets only if they've been found...otherwise, simply updates the connection num so we can track the node_location
-        [inlets, outlets, current_connection_num] = get_node_connection_types(patch.children[child_index], node_location, current_connection_number)
+        [inlets, outlets, object_at_node, current_connection_number] = get_node_connection_types(patch.children[child_index], node_location, current_connection_number)
         # check to see if we've already found inlets/outlets and now just need to bubble up - note that inlets may be empty if we are changing a terminal
         if outlets != []:
-            return inlets, outlets, current_connection_num
+            return inlets, outlets, object_at_node, current_connection_number
         # if we get to the appropriate connection number, return the (sub)patch we want
-        if current_connection_num == node_location:
+        if current_connection_number == node_location:
             # the subpatch that we've found's root is the node we want to replace...it's connections refer to inlets and this connection to its outlet connection
             outlets = c.type
             node = patch.children[child_index]
             inlets = []
             for nc in node.connections:
                 inlets.extend(nc.type)
-            return inlets, outlets, current_connection_num
+            return inlets, outlets, node.root, current_connection_number
         # otherwise, increment the current_connection_num as we have just passed over another connection
         else:
-            current_connection_num += 1
+            current_connection_number += 1
         child_index += 1
-    return [], [], current_connection_num
+    return [], [], [], current_connection_number
 
 # return list of objects that could take the appropriate inlet connections and provide appropriate output
 # that is not not_object
@@ -189,24 +193,24 @@ def get_objects_with_interface(objects, inlets, outlets, not_object = []):
     objects_with_interface = []
     for o in objects:
         # don't include not_object
-        if o == not_object:
+        if o.name == not_object.name:
             continue
         # check to make sure the object has the appropriate number of inlets and outlets
         if len(o.outlets) == len(outlets) and len(o.inlets) == len(inlets):
             # step through outlets and make sure the types are equivalent
             passed_test = True
-            for i in range(0, len(outlets)-1):
+            for i in range(0, len(outlets)):
                 if o.outlets[i] != outlets[i]:
                     passed_test = False
             if passed_test:
                 # step through inlets and make sure each inlet in inlets can be represented in o.inlets
-                for i in range(0, len(inlets) - 1):
+                for i in range(0, len(inlets)):
                     if inlets[i] not in o.inlets[i].inletTypes:
                         passed_test = False
             # if we've passed all tests it means this object has the same # of ins and outs as passed in interface, the outlet types are consistent with interface, and the inlets can
             # be involved in the connections specified by the interface.
             if passed_test:
-                objects_with_interface.exnted(o)
+                objects_with_interface.append(o)
     return objects_with_interface
 
 # swap the node in patch at node_location with the object having
@@ -214,20 +218,20 @@ def swap_node(patch, node_location, object, current_node_number = 0):
     child_index = 0
     for c in patch.connections:
         # returns inlets and outlets only if they've been found...otherwise, simply updates the connection num so we can track the node_location
-        [swapped, current_connection_num] = swap_node(patch.children[child_index], node_location, object, current_node_number)
+        [swapped, current_node_number] = swap_node(patch.children[child_index], node_location, object, current_node_number)
         # check to see if we've already found inlets/outlets and now just need to bubble up - note that inlets may be empty if we are changing a terminal
         if swapped:
-            return swapped, current_connection_num
+            return swapped, current_node_number
         # if we get to the appropriate node number, swap the node
-        if current_connection_num == node_location:
+        if current_node_number == node_location:
             # the subpatch that we've found's root is the node we want to replace
             patch.children[child_index].root = object
-            return True, current_connection_num
+            return True, current_node_number
         # otherwise, increment the current_connection_num as we have just passed over another connection
         else:
-            current_connection_num += 1
+            current_node_number += 1
         child_index += 1
-    return False, current_connection_num
+    return False, current_node_number
 
 def point_mutate(patches, objects):
     # TODO: swap a random node for another with the same type and number of inlets...if one doesn't exist, select another random node
@@ -237,27 +241,23 @@ def point_mutate(patches, objects):
         node_location = random.randint(0,numConnections-2)
         nodes_tried = [node_location]
         # determine signature of patch at node_location
-        [object_chosen, inlets, outlets] = get_node_connection_types(patches[i], node_location)
+        [inlets, outlets, object_chosen, dummy] = get_node_connection_types(patches[i], node_location)
         # determine if other nodes exist with that interface
         objects_with_interface = get_objects_with_interface(objects, inlets, outlets, object_chosen)
         # if there is at least 2 nodes with this interface, there is at least one node to swap with, otherwise, find new node
-        while len(objects_with_interface) <= 1 and len(nodes_tried) != patches[i].count:
+        while len(objects_with_interface) < 1 and len(nodes_tried) != patches[i].count:
             node_location = random.randint(0,numConnections-2)
             # keep trying until we get a node we haven't tried yet
             while node_location in nodes_tried:
                 node_location = random.randint(0,numConnections-2)
-            nodes_tried.extend(node_location)
+            nodes_tried.append(node_location)
             # determine signature of patch at node_location
-            [object_chosen, inlets, outlets] = get_node_connection_types(patches[i], node_location)
+            [inlets, outlets, object_chosen, dummy] = get_node_connection_types(patches[i], node_location)
             # determine if other nodes exist with that interface
             objects_with_interface = get_objects_with_interface(objects, inlets, outlets, object_chosen)
-        if len(objects_with_interface) > 1:
-            objects_to_choose_from = []
-            for o in objects_with_interface:
-                if o != object_chosen:
-                    objects_to_choose_from.append(0)
-            object_num = random.randint(0,len(objects_to_choose_from)-2)
-            swap_node(patches[i], node_location, objects_to_choose_from[object_num])
+        if len(objects_with_interface) > 0:
+            object_num = random.randint(0,len(objects_with_interface)-1)
+            swap_node(patches[i], node_location, objects_with_interface[object_num])
         # this means we couldn't find a node to swap
         else:
             print 'couldn\'t find node to swap...just passing through'

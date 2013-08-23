@@ -25,7 +25,7 @@ TEST_ROOT = '/var/data/max/output'
 PATCH_TYPE = 'synthesis'
 
 INIT_MAX_TREE_DEPTH = 6 # init limit on any one individuals depth
-POPULATION_SIZE = 331
+POPULATION_SIZE = 1000
 BATCH_SIZE = 10
 TOURNAMENT_SIZE = 10
 

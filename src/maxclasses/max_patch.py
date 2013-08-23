@@ -79,7 +79,7 @@ def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, init_type =
         connectionOutlet = 0
         connectionInlet = i
         # if we have hit our max, then we can only add on loadmess objects
-        if maxBranchLength == currentDepth or max_resource_count is not None and max_resource_count <= 1:
+        if maxBranchLength <= currentDepth or max_resource_count is not None and max_resource_count <= 1:
             objectList = []
             for o in objectsToUse:
                 if o.name == 'loadmess':
@@ -123,8 +123,10 @@ def create_patch(maxBranchLength, objectsToUse, patch, currentDepth, init_type =
                 # in the case that there are no non-terminals to make a connection we must allow terminals to be used
                 if subpatchRoot == []:
                     subpatchRoot = get_random_object_with_connection(objectsToUse,patch.root.inlets[i].inletTypes)
+        # in the case that we subtree mutate with a terminal at max depth, the above logic may try to force a connection that is not possible. In this case, we just
+        # extend the depth a bit until we can successfully terminate. This 'side-effect' of mutation falls in line with other STGP frameworks I've seen.
         if subpatchRoot == []:
-            print 'bad logic'
+            subpatchRoot = get_random_object_with_connection(objectsToUse,patch.root.inlets[i].inletTypes)
         # if the loadmess maxobj, generate a random argument
         if subpatchRoot.name == 'loadmess':
             subpatchRoot.attach_random_argument(patch.root.inlets[i].lowVal, patch.root.inlets[i].highVal)
