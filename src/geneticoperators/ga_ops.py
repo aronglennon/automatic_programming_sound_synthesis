@@ -179,7 +179,7 @@ def get_node_connection_types(patch, node_location, current_connection_number = 
             node = patch.children[child_index]
             inlets = []
             for nc in node.connections:
-                inlets.extend(nc.type)
+                inlets.append(nc.type)
             return inlets, outlets, node.root, current_connection_number
         # otherwise, increment the current_connection_num as we have just passed over another connection
         else:
@@ -245,7 +245,7 @@ def point_mutate(patches, objects):
         # determine if other nodes exist with that interface
         objects_with_interface = get_objects_with_interface(objects, inlets, outlets, object_chosen)
         # if there is at least 2 nodes with this interface, there is at least one node to swap with, otherwise, find new node
-        while len(objects_with_interface) < 1 and len(nodes_tried) != patches[i].count:
+        while len(objects_with_interface) < 1 and len(nodes_tried) != numConnections-2:
             node_location = random.randint(0,numConnections-2)
             # keep trying until we get a node we haven't tried yet
             while node_location in nodes_tried:
