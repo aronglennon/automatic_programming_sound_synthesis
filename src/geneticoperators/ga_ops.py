@@ -163,7 +163,7 @@ def subtree_mutate(patches, max_num_levels, objects, max_resource_count = None):
     # return subtree_mutated patches
     return patches
 
-# find the node at node_location and return its inlet and outlet connection types (both types and number) in lists
+# find the node at node_location and return the connection types of the outlets connected to its inlets and inlets connecting to its outlets
 def get_node_connection_types(patch, node_location, current_connection_number = 0):
     child_index = 0
     for c in patch.connections:
@@ -174,12 +174,14 @@ def get_node_connection_types(patch, node_location, current_connection_number = 
             return inlets, outlets, object_at_node, current_connection_number
         # if we get to the appropriate connection number, return the (sub)patch we want
         if current_connection_number == node_location:
-            # the subpatch that we've found's root is the node we want to replace...it's connections refer to inlets and this connection to its outlet connection
-            outlets = c.type
+            # the subpatch that we've found's root is the node we want to replace
+            # to find the outlets it could have, we look at the inlet types of the connection we are breaking from it to its parent
+            outlets = patch.root.inlets[child_index].inletTypes
             node = patch.children[child_index]
+            # to find the inlets it could have, we look at the outlets its children provide to connect to
             inlets = []
-            for nc in node.connections:
-                inlets.append(nc.type)
+            for i in range(0, len(node.children)):
+                inlets.append(node.children[i].root.outlets)
             return inlets, outlets, node.root, current_connection_number
         # otherwise, increment the current_connection_num as we have just passed over another connection
         else:
@@ -205,8 +207,14 @@ def get_objects_with_interface(objects, inlets, outlets, not_object = []):
             if passed_test:
                 # step through inlets and make sure each inlet in inlets can be represented in o.inlets
                 for i in range(0, len(inlets)):
-                    if inlets[i] not in o.inlets[i].inletTypes:
+                    any_match = False
+                    for j in range(0, len(inlets[i])):
+                        if inlets[i][j] in o.inlets[i].inletTypes:
+                            any_match = True
+                            break
+                    if any_match == False:
                         passed_test = False
+                        break
             # if we've passed all tests it means this object has the same # of ins and outs as passed in interface, the outlet types are consistent with interface, and the inlets can
             # be involved in the connections specified by the interface.
             if passed_test:
@@ -238,18 +246,18 @@ def point_mutate(patches, objects):
     for i in range(0, len(patches)):
         numConnections = get_num_connections(patches[i])
         # find node location that is not the dac connecton (which is the LAST connection when going through cut_subpatch_at_location
-        node_location = random.randint(0,numConnections-2)
+        node_location = random.randint(0,numConnections-1)
         nodes_tried = [node_location]
         # determine signature of patch at node_location
         [inlets, outlets, object_chosen, dummy] = get_node_connection_types(patches[i], node_location)
         # determine if other nodes exist with that interface
         objects_with_interface = get_objects_with_interface(objects, inlets, outlets, object_chosen)
         # if there is at least 2 nodes with this interface, there is at least one node to swap with, otherwise, find new node
-        while len(objects_with_interface) < 1 and len(nodes_tried) != numConnections-2:
-            node_location = random.randint(0,numConnections-2)
+        while len(objects_with_interface) < 1 and len(nodes_tried) != numConnections:
+            node_location = random.randint(0,numConnections-1)
             # keep trying until we get a node we haven't tried yet
             while node_location in nodes_tried:
-                node_location = random.randint(0,numConnections-2)
+                node_location = random.randint(0,numConnections-1)
             nodes_tried.append(node_location)
             # determine signature of patch at node_location
             [inlets, outlets, object_chosen, dummy] = get_node_connection_types(patches[i], node_location)
