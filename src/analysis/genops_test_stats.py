@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from operator import itemgetter
 
 PARTITION_COUNT = 10
-TESTRUN_ID = 46
+TESTRUN_ID = [73, 75]
 
 FITNESS_OFFSET = 0.909448
 
@@ -43,7 +43,7 @@ def main():
         P = (neighbor_average_fitnesses[i] - neighbor_average_fitnesses[i-1]) / (original_average_fitnesses[i] - original_average_fitnesses[i-1])
         if P < 0.0:
             NSC += P
-    print 'NSC for testrun %d is %0.8f' % (TESTRUN_ID,NSC)
+    print 'NSC for testrun %d is %0.8f' % (TESTRUN_ID[0],NSC)
     plt.figure(facecolor='white')
     plt.scatter(xVals, yVals, s = 1, hold = True)
     plt.axis(xmin = 0.0, xmax = 1.0, ymin = 0.0, ymax = 1.0)
