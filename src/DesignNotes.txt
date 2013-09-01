@@ -15,7 +15,13 @@ are not important because once a connection is severed in a patch it may be the 
 replace it.
 
 
-FULL method really isn't FULL since we require syntactic correctness, but it means we only use a terminal when it is absolutely necessary either due to syntactic correctness OR a depth limitation
+* FULL method really isn't FULL since we require syntactic correctness, but it means we only use a terminal when it is absolutely necessary either due to syntactic correctness OR a depth limitation
+
+* in genops tests, we see some 'straight lines' meaning that a lot of randomly generated patches produce the same audio...what audio is this? well, either sine or square or sawtooth waves
+OR silence. We fight against silence when producing patches, since we know the silence sim value for each test (simply run silence through and determine the value of similarity) and thus do not allow
+these patches by creating new patches and inserting them into the mix, but this may slow down typical gen ops from working as effectively as possible, since we often end up just generating random patches.
+We filter out in the gen_ops tests on both ends, b.c. if we don't allow silence patches, then the 'neighbors' really should be the randomly generated patches to show what chances we have
+at progressing well. 
 
 Sphere inside (-1,-1,-1) to (1,1,1) has diameter 2, so even though distance across cube is sqrt(12), we should consider scaling factor as 2.
 sqrt(2^2*20) = 4sqrt(5)

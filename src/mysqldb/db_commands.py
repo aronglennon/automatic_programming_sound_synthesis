@@ -234,9 +234,9 @@ class mysql_object():
         else:
             return []
     
-    def get_genops_test_data(self, testrun, offset):
+    def get_genops_test_data(self, testrun, bad_vals):
         if self.connected:
-            statement = "SELECT patch_fitness - %0.8f, max(neighbor_fitness) - %0.8f FROM automatic_programming_sound_synthesis.testdata_genops WHERE testrun_id IN (%s) AND patch_fitness != neighbor_fitness GROUP BY testcase_id;" % (offset, offset, ','.join([str(s) for s in testrun]))
+            statement = "SELECT patch_fitness, max(neighbor_fitness) FROM automatic_programming_sound_synthesis.testdata_genops WHERE testrun_id IN (%s) AND patch_fitness != neighbor_fitness AND patch_fitness NOT IN (%s) AND neighbor_fitness NOT IN (%s) GROUP BY testcase_id;" % (','.join([str(s) for s in testrun]), ','.join([str(b) for b in bad_vals]), ','.join([str(b) for b in bad_vals]))
             values = db_core.select(self.dbConnection, statement)
             return values
         else:

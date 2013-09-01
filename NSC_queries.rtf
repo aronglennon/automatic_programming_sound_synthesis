@@ -6,4 +6,16 @@
 
 \f0\fs24 \cf0 To see patch fitness vs neighbor fitness for all test cases for a test run\
 \
-SELECT testcase_id, patch_fitness, max(neighbor_fitness), patch_fitness > max(neighbor_fitness) AS patch_greater FROM automatic_programming_sound_synthesis.testdata_genops WHERE testrun_id = 21 AND patch_fitness != neighbor_fitness GROUP BY testcase_id;}
+SELECT testcase_id, patch_fitness, max(neighbor_fitness), patch_fitness > max(neighbor_fitness) AS patch_greater FROM automatic_programming_sound_synthesis.testdata_genops WHERE testrun_id = 21 AND patch_fitness != neighbor_fitness GROUP BY testcase_id;\
+\
+-------------\
+\
+To see histogram of neighbor fitness to determine which to disregard in real runs.\
+\
+SELECT neighbor_fitness, COUNT(*) as count FROM automatic_programming_sound_synthesis.testdata_genops where testrun_id = 77 GROUP BY neighbor_fitness;\
+\
+-------------\
+\
+To get current testcase id:\
+\
+SELECT max(testcase_id) FROM automatic_programming_sound_synthesis.testdata_genops where testrun_id = 85}

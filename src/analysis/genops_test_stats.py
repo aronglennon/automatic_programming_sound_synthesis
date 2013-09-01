@@ -3,24 +3,36 @@ import matplotlib.pyplot as plt
 from operator import itemgetter
 
 PARTITION_COUNT = 10
-TESTRUN_ID = [73, 75]
+TESTRUN_ID = [76]
 
-FITNESS_OFFSET = 0.909448
+FITNESS_OFFSETS = [0.90944803, 0.94135302, 0.94318003, 0.94135201]
+MIN_FITNESS = 0.878749
+MAX_FITNESS = 0.97
+
+SCALAR = 1/(MAX_FITNESS - MIN_FITNESS)
+OFFSET = -MIN_FITNESS
+
+def norm_fit(x):
+    return (x+OFFSET)*SCALAR
 
 def main():
     # NOTE: Currently, this code just outputs similarity scores sorted by some other column (e.g. total amount deleted in the sampdel tests)
     mysql_obj = mysql_object(sameThread = True)
     # input testrun, get back (fitness, neighbor fitness)
-    values = mysql_obj.get_genops_test_data(TESTRUN_ID, FITNESS_OFFSET)
+    values = mysql_obj.get_genops_test_data(TESTRUN_ID, FITNESS_OFFSETS)
+    # get out of decimal format
+    cleanValues = []
+    for i in range (0, len(values)):
+        cleanValues.append([float(values[i][0]), float(values[i][1])])
     # sort on fitness (x-coord in NSC calc)
-    sortedVals = sorted(values, key=itemgetter(0))
+    sortedVals = sorted(cleanValues, key=itemgetter(0))
     maxFitness = sortedVals[-1][0]
     minFitness = sortedVals[0][0]
     xVals = []
     yVals = []
     for s in sortedVals:
-        xVals.append(s[0]/(maxFitness))
-        yVals.append(s[1]/(maxFitness))
+        xVals.append(norm_fit(s[0]))
+        yVals.append(norm_fit(s[1]))
     original_average_fitnesses = [0] * PARTITION_COUNT
     neighbor_average_fitnesses = [0] * PARTITION_COUNT
     count_fitnesses = [0] * PARTITION_COUNT
@@ -48,8 +60,8 @@ def main():
     plt.scatter(xVals, yVals, s = 1, hold = True)
     plt.axis(xmin = 0.0, xmax = 1.0, ymin = 0.0, ymax = 1.0)
     for partition in range(0, PARTITION_COUNT+1):
-        plt.vlines(minFitness/(maxFitness) + (maxFitness-minFitness)*partition/((maxFitness)*(PARTITION_COUNT)), 0.0, 1.0, linestyles = ':', hold = True)
-    plt.plot([x/maxFitness for x in original_average_fitnesses], [x/maxFitness for x in neighbor_average_fitnesses], linewidth=2, color='r')
+        plt.vlines(norm_fit(minFitness) + norm_fit((maxFitness-minFitness)*partition/PARTITION_COUNT), 0.0, 1.0, linestyles = ':', hold = True)
+    plt.plot([norm_fit(x) for x in original_average_fitnesses], [norm_fit(x) for x in neighbor_average_fitnesses], linewidth=2, color='r')
     plt.plot([0, 1], [0, 1], linewidth=1, linestyle='--')
     plt.title('Negative Slope Coefficient (NSC)')
     plt.xlabel('Patch Fitness')
