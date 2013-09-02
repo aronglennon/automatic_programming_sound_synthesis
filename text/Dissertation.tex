@@ -1343,7 +1343,16 @@ We have searched for these timbres using the optimal parameters/methods obtained
 \section{Finding an Optimal Similarity Measure for Time-Varying Timbres}
 As discussed in Chapter 3, 
 \section{Optimizing the Fitness Surface by Varying Genetic Operator Sets}
-As discussed in Chapter 3, 
+As discussed in Chapter 3, the measure we used to determine `problem difficulty', which is directly related to the shape and characteristics of the fitness surface is NSC. We used Metropolis-Hastings sampling to generate sample points and tournament selection (with tournament size $10$) to determine their neighbors for use in the NSC calculation. During our initial experiments, we noticed a few interesting things that influenced experiments going forward. A discussion of these items is necessary before showing and discussing the results.
+\subsubsection{Problematic Outputs}
+Several similarity scores for each target were repeated with high frequency during initial testing. Investigation of the patches related to these scores showed that silence and white noise were often the result of randomly generated patches, resulting in what, at least for the terms of our experiments, were ill-formed patches. However, it should be noted that such patches do not generate the lowest fitness score, since it is likely that a large portion of timbral material will exist that is more dissimilar to our target than even white noise or silence. Otherwise, silence and white noise, for example, would have to be maximally dissimilar from all other points in our timbre space, which is not possible given that it is Euclidean and bounded. One interpretation of this phenomenon is that our fitness function is suboptimal and to some extent we agree. However, we believe an appropriate solution is to disregard white noise or silence generating patches as if they were syntactically invalid such that their representations do not exist in our objective timbre space. In other words, we consider silence and white noise to be `absent' of timbre for our purposes. 
+
+The problem with such a distinction (beyond the fact that it is conceptually arguable) is that one cannot know when a patch will generate silence or white noise before it has been constructed in Max and made to generate audio. Therefore, our system was developed to detect silence and white noise in our features and disregard any patches that produce such audio before allowing them to undergo genetic operations with other patches. In the absence of such patches, we randomly generate new patches until one is found that does not produce silence or white noise and replace the original patch with it in the population. This random patch generation therefore acts as a separate genetic operator in all of our experiments that is equivalent to subtree mutation directly above the root (dac\texttildelow{}) of the patch.
+
+The results of using various genetic operator sets can be seen in Table X.Y over each of the five `real-world' target timbres. 
+
+
+
 \section{Investigating Methods for Reducing Code Bloat and Promoting Parsimonious Solutions}
 As discussed in Chapter 3, 
 \section{Testing the Effects of Various Initial Conditions and Selection Mechanisms}
