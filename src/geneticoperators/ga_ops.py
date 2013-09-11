@@ -327,9 +327,12 @@ def crossover(patches, max_num_levels, objects, allow_equal_cross = True, crosso
     already_used = []
     in_limbo = []
     output_patches = []
+    original_count = len(patches)/2
     # will create N/2 pairs if num of patches is N
-    for i in range(0, len(patches)/2):
+    for i in range(0, original_count):
         # select a random patch from the list that hasn't already been used
+        if len(patches) < 2:
+            break
         random_num = random.randint(0,len(patches)-1)
         # pop off first patch to be used
         first_patch = patches.pop(random_num)
@@ -350,10 +353,11 @@ def crossover(patches, max_num_levels, objects, allow_equal_cross = True, crosso
             # if length of patches is 0, we've tried all patches and none can cross with first_patch, so just pass through
             if len(patches) == 0:
                 pass_through = True
-                # use first selected second patch to pass through
-                second_patch = in_limbo.pop(0)
-                # place all other patches in limbo back in patches
-                patches.extend(in_limbo)
+                if len(in_limbo) > 0:
+                    # use first selected second patch to pass through
+                    second_patch = in_limbo.pop(0)
+                    # place all other patches in limbo back in patches
+                    patches.extend(in_limbo)
                 break
             # remove second_patch from the running!
             in_limbo.append(second_patch)
@@ -374,6 +378,9 @@ def crossover(patches, max_num_levels, objects, allow_equal_cross = True, crosso
             [child1, child2] = cross(first_patch,second_patch,cross_connections)
             output_patches.append(child1)
             output_patches.append(child2)
+    # safety check
+    while len(output_patches) < original_count:
+        output_patches.append(copy.deepcopy(output_patches[0]))
     return output_patches
 
 # find connections that two patches can cross on and place all combinations in [input_connection,output_connection] lists

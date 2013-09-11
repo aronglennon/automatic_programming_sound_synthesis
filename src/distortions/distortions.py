@@ -245,7 +245,7 @@ def stable_extension(audio, total_percent_to_extended):
     max_segment = 0
     min_segment = audio.shape[0]
     for i in range(1, num_segments-1):
-        start_extension = random.randint(0,int(avg_jump*i-current_position)) + current_position
+        start_extension = random.randint(0,int(avg_jump*i))
         rand_extension_amount = random.randint(0,int(avg_segment*(i)-total_extension_amount))
         end_extension = start_extension + rand_extension_amount
         total_extension_amount += rand_extension_amount
@@ -260,7 +260,7 @@ def stable_extension(audio, total_percent_to_extended):
         if rand_extension_amount > max_segment:
             max_segment = rand_extension_amount
     # copy over end
-    start_extension = random.randint(0,avg_jump*num_segments-current_position) + current_position
+    start_extension = random.randint(0,avg_jump*num_segments)
     rand_extension_amount = amount_to_extend - total_extension_amount
     end_extension = start_extension + rand_extension_amount
     stable_extension_audio = np.append(stable_extension_audio, audio[current_position:end_extension])
@@ -382,29 +382,29 @@ def introduce_content(audio, total_percent_introduction, total_percent_deletion,
 
 # [reordered_audio, max_size, min_size, total_size, avg_size] = reorder_segments(test_audio, num_swaps)
 def reorder_segments(audio, num_swaps):
-    # swap amount between 10%-20% of file length
-    random_swap = random.randint(int(len(audio)*0.10), int(len(audio)*0.20))
+    # swap amount between 10%-75% of file length
+    random_swap = random.randint(int(len(audio)*0.10), int(len(audio)*0.75))
     min_swap = random_swap
     max_swap = random_swap
     total_swap = random_swap
-    # choose swap locations that do not overlap (simplest way is to choose first location in first half of audio and second in second)
-    location_one = random.randint(0,len(audio)/2-random_swap)
-    location_two = random.randint(len(audio)/2, len(audio)-random_swap)
+    # choose swap locations that don't overlap much
+    location_one = random.randint(0,(len(audio)-random_swap)/2)
+    location_two = random.randint((len(audio)-random_swap)/2, len(audio)-random_swap)
     reordered_audio = audio[:location_one]
     reordered_audio = np.append(reordered_audio, audio[location_two:(location_two+random_swap)])
     reordered_audio = np.append(reordered_audio, audio[location_one+random_swap+1:location_two])
     reordered_audio = np.append(reordered_audio, audio[location_one:(location_one+random_swap)])
     reordered_audio = np.append(reordered_audio, audio[location_two+1:])
     for i in range(1, num_swaps):
-        random_swap = random.randint(int(len(audio)*0.10), int(len(audio)*0.20))
+        random_swap = random.randint(int(len(audio)*0.10), int(len(audio)*0.75))
         if random_swap < min_swap:
             min_swap = random_swap
         if random_swap > max_swap:
             max_swap = random_swap
         total_swap += random_swap
         # choose swap locations that do not overlap (simplest way is to choose first location in first half of audio and second in second)
-        location_one = random.randint(0,len(audio)/2-random_swap)
-        location_two = random.randint(len(audio)/2, len(audio)-random_swap)
+        location_one = random.randint(0,(len(audio)-random_swap)/2)
+        location_two = random.randint((len(audio)-random_swap)/2, len(audio)-random_swap)
         reordered_audio = audio[:location_one]
         reordered_audio = np.append(reordered_audio, audio[location_two:(location_two+random_swap)])
         reordered_audio = np.append(reordered_audio, audio[location_one+random_swap+1:location_two])
@@ -495,7 +495,7 @@ def insert_repetitions(audio, num_subsequences):
     # swaps -> [num_reps, random_rep_length]
     jump = 1
     for s in swaps:
-        start_repetition = random.randint(0,avg_jump*jump-current_position) + current_position
+        start_repetition = random.randint(0,avg_jump*jump)
         end_repetition = start_repetition + s[1]
         # copy over audio up to end of first extension, then repeat extension part
         repetitive_insertion_audio = np.append(repetitive_insertion_audio, audio[current_position:end_repetition])
