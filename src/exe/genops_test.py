@@ -19,19 +19,19 @@ import numpy as np
 # TODO: turn into config params
 DEBUG = False
 OBJ_LIST_FILE = '/etc/max/general3_object_list.txt'
-TARGET_FILE = '/var/data/max/Lion-Growling-Mono.wav'
+TARGET_FILE = '/var/data/max/RandomAnalogReverb-Ballad-Mono.wav'
 JS_FILE_ROOT =  '/etc/max/js_file'
 TEST_ROOT = '/var/data/max/output'
 PATCH_TYPE = 'synthesis'
 
-MAX_PATCH = 6
+MAX_PATCH = 5
 INIT_MAX_TREE_DEPTH = 6 # init limit on any one individuals depth
-POPULATION_SIZE = 1000
+POPULATION_SIZE = 857
 BATCH_SIZE = 10
 TOURNAMENT_SIZE = 10
 
-SILENCE_VALS = [0.878749, 0.886835, 0.909438]
-MIN_SILENCE_VAL = 0.878749
+SILENCE_VALS = [0.87853897, 0.90788585, 0.90580123, 0.90788548]
+MIN_SILENCE_VAL = 0.75
 
 def main():
     # get all options
@@ -126,7 +126,7 @@ def main():
                 auto_gen_patch.start_max_processing(JS_FILE_ROOT + '%s.js' % MAX_PATCH, TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type, PATCH_TYPE)
                 auto_gen_patch.fitness = get_similarity(target_features,auto_gen_patch.data, similarity_measure)
                 # if nan, create new random patch, calculate fitness, if not nan, use to  replace
-                while (np.isnan(auto_gen_patch.fitness) or any(auto_gen_patch.fitness >= fitness and auto_gen_patch.fitness <= (fitness + 0.000001) for fitness in SILENCE_VALS)):
+                while (np.isnan(auto_gen_patch.fitness) or any(auto_gen_patch.fitness >= (fitness - 0.000001) and auto_gen_patch.fitness <= (fitness + 0.000001) for fitness in SILENCE_VALS)):
                     print 'BAD PATCH'
                     auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, this_init)
                     auto_gen_patch.start_max_processing(JS_FILE_ROOT + '%s.js' % MAX_PATCH, TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type, PATCH_TYPE)
@@ -159,7 +159,7 @@ def main():
                 n.fitness = get_similarity(target_features,n.data, similarity_measure)
                 # if similarity fails, generate a new patch - NOTE: we do this check still b.c. in the end this is how our system works, so the random gen of a patch should be considered
                 # part of the process
-                while (np.isnan(auto_gen_patch.fitness) or any(auto_gen_patch.fitness >= fitness and auto_gen_patch.fitness <= (fitness + 0.000001) for fitness in SILENCE_VALS)):
+                while (np.isnan(n.fitness) or any(n.fitness >= (fitness - 0.000001) and n.fitness <= (fitness + 0.000001) for fitness in SILENCE_VALS)):
                     n = create_patch_from_scratch(this_max_tree_depth, all_objects, this_init)
                     n.start_max_processing(JS_FILE_ROOT + '%s.js' % MAX_PATCH, TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type, PATCH_TYPE)
                     n.fitness = get_similarity(target_features,n.data, similarity_measure)

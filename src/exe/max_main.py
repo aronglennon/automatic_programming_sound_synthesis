@@ -19,6 +19,7 @@ import threading
 
 PATCH_TYPE = 'synthesis'
 SIMULATED_ANNEALING_SIZE = 10
+SILENCE_VALS = [0.89162869, 0.91073726, 0.91073702]
 
 class calculateFitnessThread (threading.Thread):
     def __init__ (self, threadID, patch, js_filename, test_filename, feature_type, target_features, similarity_measure, population, max_tree_depth, all_objects, warp_factor = 1.0, simulated_annealing = False):
@@ -40,7 +41,7 @@ class calculateFitnessThread (threading.Thread):
         self.patch.start_max_processing(self.js_filename, self.test_filename, self.feature_type, PATCH_TYPE) 
         self.patch.fitness = get_similarity(self.target_features,self.patch.data, self.similarity_measure, self.warp_factor)
         # if nan, create new random patch, calculate fitness, if not nan, use to  replace
-        while (np.isnan(self.patch.fitness)):
+        while (np.isnan(self.patch.fitness) or any(self.patch.fitness >= (fitness - 0.000001) and self.patch.fitness <= (fitness + 0.000001) for fitness in SILENCE_VALS)):
             auto_gen_patch = create_patch_from_scratch(self.max_tree_depth, self.all_objects, resources_to_use = self.patch.count)
             auto_gen_patch.start_max_processing(self.js_filename, self.test_filename, self.feature_type)
             auto_gen_patch.fitness = get_similarity(self.target_features,auto_gen_patch.data, self.similarity_measure, self.warp_factor)
@@ -63,7 +64,7 @@ class calculateFitnessThread (threading.Thread):
                 auto_gen_patch.start_max_processing(self.js_filename, self.test_filename, self.feature_type, PATCH_TYPE)
                 auto_gen_patch.fitness = get_similarity(self.target_features,self.patch.data, self.similarity_measure, self.warp_factor)
                 # if nan, create new random patch, calculate fitness, if not nan, use to  replace
-                while (np.isnan(auto_gen_patch.fitness)):
+                while (np.isnan(auto_gen_patch.fitness) or any(auto_gen_patch.fitness >= (fitness - 0.000001) and auto_gen_patch.fitness <= (fitness + 0.000001) for fitness in SILENCE_VALS)):
                     auto_gen_patch = update_all_parameters(self.patch)
                     auto_gen_patch.start_max_processing(self.js_filename, self.test_filename, self.feature_type)
                     auto_gen_patch.fitness = get_similarity(self.target_features,auto_gen_patch.data, self.similarity_measure, self.warp_factor)
