@@ -18,4 +18,22 @@ SELECT neighbor_fitness, COUNT(*) as count FROM automatic_programming_sound_synt
 \
 To get current testcase id:\
 \
-SELECT max(testcase_id) FROM automatic_programming_sound_synthesis.testdata_genops where testrun_id = 00}
+SELECT max(testcase_id) FROM automatic_programming_sound_synthesis.testdata_genops where testrun_id = 00\
+\
+-----------\
+\
+To see histogram of fitnesses to determine which to disregard in real runs.\
+\
+SELECT fitness, COUNT(*) as count FROM testdata where testrun_id = 180 GROUP BY fitness\
+\
+---------\
+\
+To see avg fitness per generation\
+\
+SELECT AVG(fitness) as fitness, generation FROM automatic_programming_sound_synthesis.testdata WHERE testrun_id = 194 GROUP BY generation ORDER BY fitness DESC;\
+\
+-------\
+\
+To see max generation num\
+\
+SELECT max(generation) FROM automatic_programming_sound_synthesis.testdata WHERE testrun_id = 176;}
