@@ -189,10 +189,10 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 326.0, 278.0, 60.0, 21.0 ],
+					"patching_rect" : [ 326.0, 278.0, 46.0, 21.0 ],
 					"presentation" : 0,
 					"presentation_rect" : [ 0.0, 0.0, 0.0, 0.0 ],
-					"text" : "del 7000",
+					"text" : "del #3",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 
@@ -413,10 +413,10 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
-					"patching_rect" : [ 570.0, 278.0, 144.0, 20.0 ],
+					"patching_rect" : [ 570.0, 278.0, 131.0, 20.0 ],
 					"presentation" : 0,
 					"presentation_rect" : [ 0.0, 0.0, 0.0, 0.0 ],
-					"text" : "buffer~ #1container 7000",
+					"text" : "buffer~ #1container #3",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 

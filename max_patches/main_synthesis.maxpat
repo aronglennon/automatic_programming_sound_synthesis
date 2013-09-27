@@ -99,8 +99,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 43.0, 227.0, 299.0, 20.0 ],
-					"text" : "dissertation_maxpatch_synthesis 4 /etc/max/js_file4.js"
+					"patching_rect" : [ 43.0, 227.0, 329.0, 20.0 ],
+					"text" : "dissertation_maxpatch_synthesis 4 /etc/max/js_file4.js 3000"
 				}
 
 			}
@@ -112,8 +112,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 43.0, 199.0, 299.0, 20.0 ],
-					"text" : "dissertation_maxpatch_synthesis 3 /etc/max/js_file3.js"
+					"patching_rect" : [ 43.0, 199.0, 329.0, 20.0 ],
+					"text" : "dissertation_maxpatch_synthesis 3 /etc/max/js_file3.js 3000"
 				}
 
 			}
@@ -125,8 +125,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 43.0, 115.0, 299.0, 20.0 ],
-					"text" : "dissertation_maxpatch_synthesis 0 /etc/max/js_file0.js"
+					"patching_rect" : [ 43.0, 115.0, 329.0, 20.0 ],
+					"text" : "dissertation_maxpatch_synthesis 0 /etc/max/js_file0.js 3000"
 				}
 
 			}
@@ -138,8 +138,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 43.0, 170.0, 299.0, 20.0 ],
-					"text" : "dissertation_maxpatch_synthesis 2 /etc/max/js_file2.js"
+					"patching_rect" : [ 43.0, 170.0, 329.0, 20.0 ],
+					"text" : "dissertation_maxpatch_synthesis 2 /etc/max/js_file2.js 3000"
 				}
 
 			}
@@ -151,8 +151,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 43.0, 142.0, 299.0, 20.0 ],
-					"text" : "dissertation_maxpatch_synthesis 1 /etc/max/js_file1.js"
+					"patching_rect" : [ 43.0, 142.0, 329.0, 20.0 ],
+					"text" : "dissertation_maxpatch_synthesis 1 /etc/max/js_file1.js 3000"
 				}
 
 			}
@@ -166,7 +166,70 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "js_file.js",
+				"name" : "js_file1.js",
+				"bootpath" : "/private/etc/max",
+				"patcherrelativepath" : "../../../../../private/etc/max",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "js_file2.js",
+				"bootpath" : "/private/etc/max",
+				"patcherrelativepath" : "../../../../../private/etc/max",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "js_file0.js",
+				"bootpath" : "/private/etc/max",
+				"patcherrelativepath" : "../../../../../private/etc/max",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "js_file3.js",
+				"bootpath" : "/private/etc/max",
+				"patcherrelativepath" : "../../../../../private/etc/max",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "js_file4.js",
+				"bootpath" : "/private/etc/max",
+				"patcherrelativepath" : "../../../../../private/etc/max",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "js_file6.js",
+				"bootpath" : "/private/etc/max",
+				"patcherrelativepath" : "../../../../../private/etc/max",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "js_file7.js",
+				"bootpath" : "/private/etc/max",
+				"patcherrelativepath" : "../../../../../private/etc/max",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "js_file5.js",
+				"bootpath" : "/private/etc/max",
+				"patcherrelativepath" : "../../../../../private/etc/max",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "js_file8.js",
+				"bootpath" : "/private/etc/max",
+				"patcherrelativepath" : "../../../../../private/etc/max",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "js_file9.js",
 				"bootpath" : "/private/etc/max",
 				"patcherrelativepath" : "../../../../../private/etc/max",
 				"type" : "TEXT",
