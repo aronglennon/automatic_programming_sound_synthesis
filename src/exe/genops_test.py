@@ -24,9 +24,9 @@ JS_FILE_ROOT =  '/etc/max/js_file'
 TEST_ROOT = '/var/data/max/output'
 PATCH_TYPE = 'synthesis'
 
-MAX_PATCH = 5
+MAX_PATCH = 4
 INIT_MAX_TREE_DEPTH = 6 # init limit on any one individuals depth
-POPULATION_SIZE = 857
+POPULATION_SIZE = 397
 BATCH_SIZE = 10
 TOURNAMENT_SIZE = 10
 

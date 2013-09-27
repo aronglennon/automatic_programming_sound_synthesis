@@ -282,7 +282,14 @@ class mysql_object():
             return values
         else:
             return []
-    
+    def get_last_generation(self, testrun_id):
+        if self.connected:
+            statement = "SELECT generation, individual, fitness FROM testdata WHERE generation = (SELECT max(generation) FROM testdata where testrun_id = %d) and testrun_id = %d;" % (testrun_id, testrun_id)
+            values = db_core.select(self.dbConnection, statement)
+            return values
+        else:
+            return []
+        
 def main():
     usage = "usage: %prog"
     

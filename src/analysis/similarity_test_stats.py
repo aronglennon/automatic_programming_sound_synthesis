@@ -2,7 +2,7 @@ from mysqldb.db_commands import mysql_object
 import matplotlib.pyplot as plt
 from operator import itemgetter
 
-TESTRUN_ID = 6
+TESTRUN_ID = 124
 
 def main():
     # NOTE: Currently, this code just outputs similarity scores sorted by some other column (e.g. total amount deleted in the sampdel tests)
@@ -24,12 +24,12 @@ def main():
             SIC_DPLA_Vals.append(v[1])
         elif v[0] == 'euclidean' and v[2] != 0:
             Euc_Vals.append(v[1])
-    plt.plot(DTW_Vals, hold = True)
+    #plt.plot(DTW_Vals, hold = True)
     plt.plot(DPLA_Vals, hold = True)
     plt.plot(SIC_DPLA_Vals, hold = True)
-    plt.plot(Euc_Vals, hold = True)
+    #plt.plot(Euc_Vals, hold = True)
     plt.axis(ymin = 0.0, ymax = 1.0)
-    plt.legend('asdf')
+    plt.legend('as')
     plt.show()
     
 if __name__ == "__main__":

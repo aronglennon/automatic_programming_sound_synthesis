@@ -3,10 +3,10 @@ import matplotlib.pyplot as plt
 from operator import itemgetter
 
 PARTITION_COUNT = 10
-TESTRUN_ID = [76]
+TESTRUN_ID = [137, 141]
 
-FITNESS_OFFSETS = [0.90944803, 0.94135302, 0.94318003, 0.94135201]
-MIN_FITNESS = 0.878749
+FITNESS_OFFSETS = [0.87853897, 0.88049448, 0.90788585, 0.90580123, 0.90788548]
+MIN_FITNESS = 0.8
 MAX_FITNESS = 0.97
 
 SCALAR = 1/(MAX_FITNESS - MIN_FITNESS)
@@ -38,6 +38,8 @@ def main():
     count_fitnesses = [0] * PARTITION_COUNT
     # place counts of all patches in each partition inside count_fitnesses and cumulative sums inside the other two arrays
     for s in sortedVals:
+        if s[0] < minFitness or s[0] > maxFitness:
+            continue
         bucket = int(((s[0]-minFitness) / (maxFitness-minFitness)) * PARTITION_COUNT)
         # fot max fitness exactly
         if bucket == PARTITION_COUNT:
