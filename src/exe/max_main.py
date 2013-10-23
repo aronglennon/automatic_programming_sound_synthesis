@@ -17,35 +17,38 @@ from datetime import datetime
 import numpy as np
 import threading
 
+# 1.
 MAX_PATCH = 3
 DEBUG = False
-INIT_MAX_TREE_DEPTH = 8 # init limit on any one individuals depth
-FINAL_MAX_TREE_DEPTH = 10
+# 2.
+INIT_MAX_TREE_DEPTH = 6 # init limit on any one individuals depth
+FINAL_MAX_TREE_DEPTH = 6
 INIT_RESOURCE_COUNT = 1000
-FINAL_RESOURCE_COUNT = 5000
+FINAL_RESOURCE_COUNT = 1000
 SIMULATED_ANNEALING_SIZE = 10
 EXCHANGE_FREQUENCY = 10
 EXCHANGE_PROPORTION = 0.10
 SUBGROUPS = 5
 
+# 3. 
 # adaptive-downsample_and_bit_reduction_stereo.wav - 3
-'''
+
 OBJ_LIST_FILE = '/etc/max/adaptive_downsampling_object_list.txt'
 TARGET_FILE = '/var/data/max/adaptive-downsample_and_bit_reduction_stereo.wav'
 SILENCE_VALS = [0.87624177, 0.81243946, 0.83953520, 0.83950409, 0.87623865, 0.87834727]
-'''
+
 '''
 # clipping-reverb-saw.wav - 3
 OBJ_LIST_FILE = '/etc/max/clipping_reverb_object_list.txt'
 TARGET_FILE = '/var/data/max/clipping-reverb-saw.wav'
 SILENCE_VALS = [0.88450581, 0.88220514, 0.81728712, 0.89264148, 0.88851541]
 '''
-
+'''
 # sine-downsample-delay-AM-volume.wav - 3
 OBJ_LIST_FILE = '/etc/max/feedback_delay_object_list.txt'
 TARGET_FILE = '/var/data/max/sine-downsample-delay-AM-volume.wav'
 SILENCE_VALS = [0.89317668, 0.87404699, 0.87733233, 0.87147831]
-
+'''
 JS_FILE_ROOT =  '/etc/max/js_file'
 TEST_ROOT = '/var/data/max/output'
 NUM_GENERATIONS = 200
@@ -71,10 +74,12 @@ class calculateFitnessThread (threading.Thread):
         self.fitnessLock = fitnessLock
         
     def run(self):
-        self.patch.start_max_processing(self.js_filename, self.test_filename, self.feature_type, PATCH_TYPE, None) 
-        self.patch.fitness = get_similarity(self.target_features,self.patch.data, self.similarity_measure, self.warp_factor)
+        # this 'if' is here b.c. it is possible we calculated fitness previously when testing if we should increase a DMTD
+        if self.patch.fitness == 0.0:
+            self.patch.start_max_processing(self.js_filename, self.test_filename, self.feature_type, PATCH_TYPE, None) 
+            self.patch.fitness = get_similarity(self.target_features,self.patch.data, self.similarity_measure, self.warp_factor)
         # if nan, create new random patch, calculate fitness, if not nan, use to  replace
-        while (np.isnan(self.patch.fitness) or any(self.patch.fitness >= (fitness - 0.000001) and self.patch.fitness <= (fitness + 0.000001) for fitness in SILENCE_VALS)):
+        if (np.isnan(self.patch.fitness) or any(self.patch.fitness >= (fitness - 0.000001) and self.patch.fitness <= (fitness + 0.000001) for fitness in SILENCE_VALS)):
             print 'bad patch...'
             self.patch.fitness = 0
             '''
@@ -101,7 +106,7 @@ class calculateFitnessThread (threading.Thread):
                 auto_gen_patch.start_max_processing(self.js_filename, self.test_filename, self.feature_type, PATCH_TYPE, None)
                 auto_gen_patch.fitness = get_similarity(self.target_features,self.patch.data, self.similarity_measure, self.warp_factor)
                 # if nan, create new random patch, calculate fitness, if not nan, use to  replace
-                while (np.isnan(auto_gen_patch.fitness) or any(auto_gen_patch.fitness >= (fitness - 0.000001) and auto_gen_patch.fitness <= (fitness + 0.000001) for fitness in SILENCE_VALS)):
+                if (np.isnan(auto_gen_patch.fitness) or any(auto_gen_patch.fitness >= (fitness - 0.000001) and auto_gen_patch.fitness <= (fitness + 0.000001) for fitness in SILENCE_VALS)):
                     print 'bad patch...'
                     self.patch.fitness = 0
                     '''
@@ -133,6 +138,7 @@ class calculateFitnessThread (threading.Thread):
 # TODO: option to start at gen X, grab all individual strings from DB, turn into patches and make that the pop
 
 def main():
+    sys.setrecursionlimit(10000)
     # get all options
     parser = OptionParser()
     parser.add_option("--parameter_set", action = "store", dest = "parameter_set", help = "The id of the parameter set to use")
@@ -210,11 +216,16 @@ def main():
         # note start generation
         generation_start = int(results[0][0]) + 1
         populations = []
+        # init max tree depth to what it was at the time of crash
+        max_tree_depth = INIT_MAX_TREE_DEPTH
         # break patches into subgroups
         for i in range(0, subgroups):
             population = []
             for j in range(0, pop_size):
                 population.append(string_to_patch(results[i*pop_size+j][1], float(results[i*pop_size+j][2]), all_objects))
+            for p in population:
+                if p.depth > max_tree_depth:
+                    max_tree_depth = p.depth
             populations.append(population)
     else:
         # log run start time    
@@ -242,7 +253,7 @@ def main():
                     else:
                         this_init = 'full'
                     # the following keeps the average init tree depth the same, which likely maintains a similar initial resource allotment
-                    this_max_tree_depth = int(max_tree_depth/2 + j*max_tree_depth/pop_size)
+                    this_max_tree_depth = int(max_tree_depth/2 + j*max_tree_depth/(2*pop_size))
                     if resource_limitation_type is not None:
                         auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, init_type = this_init, max_resource_count = average_resource_count)
                     else:
@@ -299,8 +310,8 @@ def main():
         else:
             simulated_annealing = False
             warp_factor = 0.0
+        new_max_depth = max_tree_depth
         for j in range(0, subgroups):
-            max_tree_depth = get_max_tree_depth(INIT_MAX_TREE_DEPTH, FINAL_MAX_TREE_DEPTH, NUM_GENERATIONS, tree_depth_type, i)
             if resource_limitation_type is not None:
                 resource_count = get_max_resource_count(INIT_RESOURCE_COUNT, FINAL_RESOURCE_COUNT, NUM_GENERATIONS, resource_limitation_type, i)
             for k in range(0, len(population)/CONCURRENT_PATCHES):
@@ -326,9 +337,13 @@ def main():
             selected = select_patches(populations[j], selection_type)                        # fitness proportionate selection
             # create next generation of patches and place them in allPatches
             if resource_limitation_type is not None: 
-                populations[j] = create_next_generation(selected, gen_ops, max_tree_depth, all_objects, resource_count)
+                [populations[j], max_num_levels] = create_next_generation(selected, gen_ops, max_tree_depth, FINAL_MAX_TREE_DEPTH, all_objects, resource_count, js_filename = JS_FILE_ROOT + '%s.js' % MAX_PATCH, test_filename = TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type = feature_type, patch_type = PATCH_TYPE, target_features = target_features, similarity_measure = similarity_measure, warp_factor = warp_factor, silence_vals = SILENCE_VALS)
             else:
-                populations[j] = create_next_generation(selected, gen_ops, max_tree_depth, all_objects)
+                [populations[j], max_num_levels] = create_next_generation(selected, gen_ops, max_tree_depth, FINAL_MAX_TREE_DEPTH, all_objects, js_filename = JS_FILE_ROOT + '%s.js' % MAX_PATCH, test_filename = TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type = feature_type, patch_type = PATCH_TYPE, target_features = target_features, similarity_measure = similarity_measure, warp_factor = warp_factor, silence_vals = SILENCE_VALS)
+            if (max_num_levels > new_max_depth):
+                new_max_depth = max_num_levels
+        # if we updated the new_max_depth, update the max_tree_depth to the new one for all subsequent populations
+        max_tree_depth = new_max_depth
     # save off best of run
     run_end = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
     mysql_obj.close_test_run(testrun_id, run_end)

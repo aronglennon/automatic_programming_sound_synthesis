@@ -46,7 +46,7 @@ class MaxPatch():
     
     def get_output(self, filename, feature_type, fitnessLock = None):
         # empty file is 48 bytes
-        while os.path.getsize(filename) == 0:
+        while not os.path.isfile(filename) or os.path.getsize(filename) == 0:
             continue
         if fitnessLock is not None:
             fitnessLock.acquire()

@@ -19,18 +19,22 @@ import numpy as np
 # TODO: turn into config params
 DEBUG = False
 OBJ_LIST_FILE = '/etc/max/general3_object_list.txt'
+# 1.
 TARGET_FILE = '/var/data/max/RandomAnalogReverb-Ballad-Mono.wav'
 JS_FILE_ROOT =  '/etc/max/js_file'
 TEST_ROOT = '/var/data/max/output'
 PATCH_TYPE = 'synthesis'
 
-MAX_PATCH = 4
+# 2.
+MAX_PATCH = 2
 INIT_MAX_TREE_DEPTH = 6 # init limit on any one individuals depth
-POPULATION_SIZE = 397
+# 3.
+POPULATION_SIZE = 333
 BATCH_SIZE = 10
 TOURNAMENT_SIZE = 10
 
-SILENCE_VALS = [0.87853897, 0.90788585, 0.90580123, 0.90788548]
+# 4.
+SILENCE_VALS = [0.87853897, 0.88049448, 0.90788585, 0.90580123, 0.90788548]
 MIN_SILENCE_VAL = 0.75
 
 def main():
@@ -152,7 +156,7 @@ def main():
             for l in range (0, BATCH_SIZE):
                 if l != k:
                     crossover_pool.append(copy.deepcopy(batch_patches[l]))
-            neighbors = create_next_generation(copies, gen_ops, max_tree_depth, all_objects, None, True, crossover_pool)
+            neighbors = create_next_generation(copies, gen_ops, max_tree_depth, max_tree_depth, all_objects, None, True, crossover_pool, js_filename = JS_FILE_ROOT + '%s.js' % MAX_PATCH, test_filename = TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type = feature_type, patch_type = PATCH_TYPE, target_features = target_features, similarity_measure = similarity_measure, warp_factor = 1.0, silence_vals = SILENCE_VALS)
             # sort neighbors by fitness
             for n in neighbors:
                 n.start_max_processing(JS_FILE_ROOT + '%s.js' % MAX_PATCH, TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type, PATCH_TYPE)
