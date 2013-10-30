@@ -1,7 +1,3 @@
-'''
-TODO: MORE LOGGING!!!
-TOOD: MAX LOGGING??? CAN WE PRE-EMPTIVELY KNOW AUDIO ISN'T FLOWING IN MAX AND TRY AGAIN? JS?
-'''
 #from maxclasses import predicates
 from maxclasses.max_patch import create_patch_from_scratch, string_to_patch
 from maxclasses.max_object import get_max_objects_from_file
@@ -18,11 +14,11 @@ import numpy as np
 import threading
 
 # 1.
-MAX_PATCH = 3
+MAX_PATCH = 4
 DEBUG = False
 # 2.
-INIT_MAX_TREE_DEPTH = 6 # init limit on any one individuals depth
-FINAL_MAX_TREE_DEPTH = 6
+INIT_MAX_TREE_DEPTH = 12 # init limit on any one individuals depth
+FINAL_MAX_TREE_DEPTH = 12
 INIT_RESOURCE_COUNT = 1000
 FINAL_RESOURCE_COUNT = 1000
 SIMULATED_ANNEALING_SIZE = 10
@@ -32,23 +28,23 @@ SUBGROUPS = 5
 
 # 3. 
 # adaptive-downsample_and_bit_reduction_stereo.wav - 3
-
+'''
 OBJ_LIST_FILE = '/etc/max/adaptive_downsampling_object_list.txt'
 TARGET_FILE = '/var/data/max/adaptive-downsample_and_bit_reduction_stereo.wav'
 SILENCE_VALS = [0.87624177, 0.81243946, 0.83953520, 0.83950409, 0.87623865, 0.87834727]
-
+'''
 '''
 # clipping-reverb-saw.wav - 3
 OBJ_LIST_FILE = '/etc/max/clipping_reverb_object_list.txt'
 TARGET_FILE = '/var/data/max/clipping-reverb-saw.wav'
 SILENCE_VALS = [0.88450581, 0.88220514, 0.81728712, 0.89264148, 0.88851541]
 '''
-'''
+
 # sine-downsample-delay-AM-volume.wav - 3
 OBJ_LIST_FILE = '/etc/max/feedback_delay_object_list.txt'
 TARGET_FILE = '/var/data/max/sine-downsample-delay-AM-volume.wav'
 SILENCE_VALS = [0.89317668, 0.87404699, 0.87733233, 0.87147831]
-'''
+
 JS_FILE_ROOT =  '/etc/max/js_file'
 TEST_ROOT = '/var/data/max/output'
 NUM_GENERATIONS = 200
@@ -227,10 +223,12 @@ def main():
                 if p.depth > max_tree_depth:
                     max_tree_depth = p.depth
             populations.append(population)
+        best_of_run_fitness = int(mysql_obj.get_best_of_run(testrun_id)[0][0][0])
     else:
         # log run start time    
         run_start = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
         testrun_id = mysql_obj.new_test_run(run_start)
+        best_of_run_fitness = 0.0
         generation_start = 0
         if testrun_id == []:
             sys.exit(0)
@@ -327,6 +325,8 @@ def main():
             populations[j].sort(key = lambda x:x.fitness, reverse = True)
             max_gen_fitness = populations[j][0].fitness
             min_gen_fitness = populations[j][-1].fitness
+            if (max_gen_fitness > best_of_run_fitness):
+                best_of_run_fitness = max_gen_fitness
             print 'Max gen fitness %f' % max_gen_fitness
             print 'Min gen fitness %f' % min_gen_fitness
             # TODO: store STATE of system in case of crash
@@ -337,9 +337,9 @@ def main():
             selected = select_patches(populations[j], selection_type)                        # fitness proportionate selection
             # create next generation of patches and place them in allPatches
             if resource_limitation_type is not None: 
-                [populations[j], max_num_levels] = create_next_generation(selected, gen_ops, max_tree_depth, FINAL_MAX_TREE_DEPTH, all_objects, resource_count, js_filename = JS_FILE_ROOT + '%s.js' % MAX_PATCH, test_filename = TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type = feature_type, patch_type = PATCH_TYPE, target_features = target_features, similarity_measure = similarity_measure, warp_factor = warp_factor, silence_vals = SILENCE_VALS)
+                [populations[j], max_num_levels] = create_next_generation(selected, gen_ops, max_tree_depth, FINAL_MAX_TREE_DEPTH, all_objects, resource_count, js_filename = JS_FILE_ROOT + '%s.js' % MAX_PATCH, test_filename = TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type = feature_type, patch_type = PATCH_TYPE, target_features = target_features, similarity_measure = similarity_measure, warp_factor = warp_factor, silence_vals = SILENCE_VALS, best_of_run_fitness = best_of_run_fitness)
             else:
-                [populations[j], max_num_levels] = create_next_generation(selected, gen_ops, max_tree_depth, FINAL_MAX_TREE_DEPTH, all_objects, js_filename = JS_FILE_ROOT + '%s.js' % MAX_PATCH, test_filename = TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type = feature_type, patch_type = PATCH_TYPE, target_features = target_features, similarity_measure = similarity_measure, warp_factor = warp_factor, silence_vals = SILENCE_VALS)
+                [populations[j], max_num_levels] = create_next_generation(selected, gen_ops, max_tree_depth, FINAL_MAX_TREE_DEPTH, all_objects, js_filename = JS_FILE_ROOT + '%s.js' % MAX_PATCH, test_filename = TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type = feature_type, patch_type = PATCH_TYPE, target_features = target_features, similarity_measure = similarity_measure, warp_factor = warp_factor, silence_vals = SILENCE_VALS, best_of_run_fitness = best_of_run_fitness)
             if (max_num_levels > new_max_depth):
                 new_max_depth = max_num_levels
         # if we updated the new_max_depth, update the max_tree_depth to the new one for all subsequent populations

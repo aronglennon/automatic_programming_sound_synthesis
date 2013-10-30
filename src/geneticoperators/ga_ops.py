@@ -98,7 +98,7 @@ def split_selected_into_gen_ops(selected, gen_ops):
 # NOTE: only subtree mutation is able to change the number of resources used in the population, so first count
 # all resources used in all other patches, subtract from max_resource_count, and send that number to subtree_mutate
 # NOTE!!!! THIS SIGNATURE IS RIDICULOUS BUT I NEEDED TO GET THE TESTS RUN QUICKLY, SO I JUST PASSED EVERYTHING IN THAT WAS NECESSARY...HORRIBLE!!!
-def create_next_generation(selected, gen_ops, max_num_levels, tree_depth_limit, all_objects, max_resource_count = None, allow_equal_cross = True, crossover_pool = [], js_filename =[], test_filename=[], feature_type=[], patch_type=[], target_features=[], similarity_measure=[], warp_factor=[], silence_vals=[]):
+def create_next_generation(selected, gen_ops, max_num_levels, tree_depth_limit, all_objects, max_resource_count = None, allow_equal_cross = True, crossover_pool = [], js_filename =[], test_filename=[], feature_type=[], patch_type=[], target_features=[], similarity_measure=[], warp_factor=[], silence_vals=[], best_of_run_fitness=0.0):
     # put even # of vecs in crossover and rest in mutation based on respective probabilities for those operations
     # (fills crossover and mutation vectors from selected vector)
     separated_patches = split_selected_into_gen_ops(selected, gen_ops)
@@ -126,6 +126,8 @@ def create_next_generation(selected, gen_ops, max_num_levels, tree_depth_limit, 
     new_max_num_levels = max_num_levels
     crossover_counter = 0
     for c in crossover_patches:
+        #print 'crosover depth is %d' % c.depth
+        #print 'max num levels is %d' % max_num_levels
         if c.depth > max_num_levels and c.depth <= tree_depth_limit:
             # if the crossover patch's depth is beyond max_num_levels, we must compare its fitness to its parents
             c.start_max_processing(js_filename, test_filename, feature_type, patch_type, None) 
@@ -134,7 +136,7 @@ def create_next_generation(selected, gen_ops, max_num_levels, tree_depth_limit, 
                 print 'bad patch...'
                 c.fitness = 0
             if crossover_counter % 2 == 0:
-                if c.fitness > cross_parent_patches[crossover_counter].fitness and c.fitness > cross_parent_patches[crossover_counter+1].fitness:
+                if c.fitness > best_of_run_fitness:
                     next_generation.append(copy.deepcopy(c))
                     if c.depth > new_max_num_levels:
                         new_max_num_levels = c.depth
@@ -143,7 +145,7 @@ def create_next_generation(selected, gen_ops, max_num_levels, tree_depth_limit, 
                     index = random.randint(0,1)
                     next_generation.append(copy.deepcopy(cross_parent_patches[crossover_counter+index]))
             else:
-                if c.fitness > cross_parent_patches[crossover_counter].fitness and c.fitness > cross_parent_patches[crossover_counter-1].fitness:
+                if c.fitness > best_of_run_fitness:
                     next_generation.append(copy.deepcopy(c))
                     if c.depth > new_max_num_levels:
                         new_max_num_levels = c.depth
@@ -151,7 +153,7 @@ def create_next_generation(selected, gen_ops, max_num_levels, tree_depth_limit, 
                     # select random parent
                     index = random.randint(0,1)
                     next_generation.append(copy.deepcopy(cross_parent_patches[crossover_counter-index]))
-        elif c.depth > tree_depth_limit+1:
+        elif c.depth > tree_depth_limit:
             # replace with one of its 
             index = random.randint(0,1)
             if crossover_counter % 2 == 0:
@@ -177,6 +179,8 @@ def create_next_generation(selected, gen_ops, max_num_levels, tree_depth_limit, 
     for m in subtree_mutation_patches:
         next_generation.append(copy.deepcopy(m))
         resource_count += m.count
+    #for p in next_generation:
+    #    print 'next gen depth is %d' % p.depth
     return [next_generation, new_max_num_levels]
 
 def subtree_mutate(patches, max_num_levels, objects, max_resource_count = None):
@@ -540,15 +544,16 @@ def cross(first_patch, second_patch, cross_connections):
 
 def get_new_depth(patch, depth):
     depth += 1
-    child_index = 0
     # we've reached the end
     if patch.connections == []:
         return depth
     max_depth = depth
+    child_index = 0
     for c in patch.connections:
         sub_depth = get_new_depth(patch.children[child_index], depth)
         if sub_depth > max_depth:
             max_depth = sub_depth
+        child_index += 1
     return max_depth
     
 # must walk through in the same order the connection list was generated (depth-first) ... current_connection_num allows us to keep track of which connection we are on
