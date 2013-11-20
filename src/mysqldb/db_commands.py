@@ -244,7 +244,7 @@ class mysql_object():
         
     def get_best_of_run(self, testrun):
         if self.connected:
-            statement = "SELECT fitness, generation, individual, count FROM testdata WHERE testrun_id = %d SORT BY fitness DESC LIMIT 1;" % (testrun)
+            statement = "SELECT fitness, generation, individual, count FROM testdata WHERE testrun_id = %d ORDER BY fitness DESC LIMIT 1;" % (testrun)
             values = db_core.select(self.dbConnection, statement)
             return values
         else:

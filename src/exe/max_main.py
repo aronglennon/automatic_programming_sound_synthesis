@@ -4,7 +4,6 @@ from maxclasses.max_object import get_max_objects_from_file
 from geneticoperators.ga_ops import create_next_generation, select_patches, update_all_parameters
 from features.features_functions import get_features
 from similarity.similarity_calc import get_similarity
-from resource_limitations.resource_limitations import get_max_tree_depth, get_max_resource_count
 from mysqldb.db_commands import mysql_object
 import math
 from optparse import OptionParser
@@ -14,13 +13,13 @@ import numpy as np
 import threading
 
 # 1.
-MAX_PATCH = 4
+MAX_PATCH = 02
 DEBUG = False
 # 2.
-INIT_MAX_TREE_DEPTH = 12 # init limit on any one individuals depth
+INIT_MAX_TREE_DEPTH = 8 # init limit on any one individuals depth
 FINAL_MAX_TREE_DEPTH = 12
-INIT_RESOURCE_COUNT = 1000
-FINAL_RESOURCE_COUNT = 1000
+INIT_RESOURCE_COUNT = 1500
+FINAL_RESOURCE_COUNT = 2500
 SIMULATED_ANNEALING_SIZE = 10
 EXCHANGE_FREQUENCY = 10
 EXCHANGE_PROPORTION = 0.10
@@ -153,6 +152,7 @@ def main():
     if init_method is None:
         init_method = 'grow'
     resource_limitation_type = parameters[0][3]
+    resource_count_lim = 0
     gen_ops = []
     if parameters[0][4] is None:
         sys.exit(0)
@@ -209,12 +209,15 @@ def main():
     if options.continue_test_run is not None:
         testrun_id = int(options.continue_test_run)
         results = mysql_obj.get_last_generation(testrun_id)
+        total_pop_size = len(results)
+        pop_size = total_pop_size / subgroups
         # note start generation
         generation_start = int(results[0][0]) + 1
         populations = []
         # init max tree depth to what it was at the time of crash
         max_tree_depth = INIT_MAX_TREE_DEPTH
         # break patches into subgroups
+        total_count = 0
         for i in range(0, subgroups):
             population = []
             for j in range(0, pop_size):
@@ -222,8 +225,10 @@ def main():
             for p in population:
                 if p.depth > max_tree_depth:
                     max_tree_depth = p.depth
+                total_count += p.count
             populations.append(population)
-        best_of_run_fitness = int(mysql_obj.get_best_of_run(testrun_id)[0][0][0])
+        resource_count_lim = total_count
+        best_of_run_fitness = float(mysql_obj.get_best_of_run(testrun_id)[0][0])
     else:
         # log run start time    
         run_start = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
@@ -270,6 +275,10 @@ def main():
     target_features = get_features(TARGET_FILE, feature_type)
     # --- MAIN LOOP ---
     warp_factor = 0.0
+    if resource_limitation_type is not None:
+        if resource_count_lim < INIT_RESOURCE_COUNT:
+            resource_count_lim = INIT_RESOURCE_COUNT
+        best_mean_fitness = 0.0
     for i in range(generation_start, NUM_GENERATIONS):
         if atypical_flavor == "PADGP":
             # check if the generation requires exchange
@@ -310,9 +319,7 @@ def main():
             warp_factor = 0.0
         new_max_depth = max_tree_depth
         for j in range(0, subgroups):
-            if resource_limitation_type is not None:
-                resource_count = get_max_resource_count(INIT_RESOURCE_COUNT, FINAL_RESOURCE_COUNT, NUM_GENERATIONS, resource_limitation_type, i)
-            for k in range(0, len(population)/CONCURRENT_PATCHES):
+            for k in range(0, len(populations[j])/CONCURRENT_PATCHES):
                 fitnessThreads = []
                 fitnessLock = threading.Lock()
                 for l in range(0, CONCURRENT_PATCHES):
@@ -331,17 +338,22 @@ def main():
             print 'Min gen fitness %f' % min_gen_fitness
             # TODO: store STATE of system in case of crash
             if resource_limitation_type is not None: 
-                store_state(mysql_obj, testrun_id, i, populations[j], j, int(options.parameter_set), max_tree_depth, resource_count)
+                store_state(mysql_obj, testrun_id, i, populations[j], j, int(options.parameter_set), max_tree_depth, resource_count_lim)
             else:
                 store_state(mysql_obj, testrun_id, i, populations[j], j, int(options.parameter_set), max_tree_depth)
             selected = select_patches(populations[j], selection_type)                        # fitness proportionate selection
             # create next generation of patches and place them in allPatches
             if resource_limitation_type is not None: 
-                [populations[j], max_num_levels] = create_next_generation(selected, gen_ops, max_tree_depth, FINAL_MAX_TREE_DEPTH, all_objects, resource_count, js_filename = JS_FILE_ROOT + '%s.js' % MAX_PATCH, test_filename = TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type = feature_type, patch_type = PATCH_TYPE, target_features = target_features, similarity_measure = similarity_measure, warp_factor = warp_factor, silence_vals = SILENCE_VALS, best_of_run_fitness = best_of_run_fitness)
+                [populations[j], max_num_levels, max_resource_count, new_best_mean_fitness] = create_next_generation(selected, gen_ops, max_tree_depth, FINAL_MAX_TREE_DEPTH, all_objects, resource_count_lim, js_filename = JS_FILE_ROOT + '%s.js' % MAX_PATCH, test_filename = TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type = feature_type, patch_type = PATCH_TYPE, target_features = target_features, similarity_measure = similarity_measure, warp_factor = warp_factor, silence_vals = SILENCE_VALS, best_of_run_fitness = best_of_run_fitness, pop_size = POPULATION_SIZE, resource_type = resource_limitation_type, max_total_resource_limit = FINAL_RESOURCE_COUNT, best_mean_fitness=best_mean_fitness)
             else:
-                [populations[j], max_num_levels] = create_next_generation(selected, gen_ops, max_tree_depth, FINAL_MAX_TREE_DEPTH, all_objects, js_filename = JS_FILE_ROOT + '%s.js' % MAX_PATCH, test_filename = TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type = feature_type, patch_type = PATCH_TYPE, target_features = target_features, similarity_measure = similarity_measure, warp_factor = warp_factor, silence_vals = SILENCE_VALS, best_of_run_fitness = best_of_run_fitness)
+                [populations[j], max_num_levels, max_resource_count, new_best_mean_fitness] = create_next_generation(selected, gen_ops, max_tree_depth, FINAL_MAX_TREE_DEPTH, all_objects, js_filename = JS_FILE_ROOT + '%s.js' % MAX_PATCH, test_filename = TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type = feature_type, patch_type = PATCH_TYPE, target_features = target_features, similarity_measure = similarity_measure, warp_factor = warp_factor, silence_vals = SILENCE_VALS, best_of_run_fitness = best_of_run_fitness, pop_size = POPULATION_SIZE, resource_type = resource_limitation_type, max_total_resource_limit = FINAL_RESOURCE_COUNT)
             if (max_num_levels > new_max_depth):
                 new_max_depth = max_num_levels
+            if resource_limitation_type is not None:
+                if max_resource_count > resource_count_lim:
+                    resource_count_lim = max_resource_count
+                if new_best_mean_fitness > best_mean_fitness:
+                    best_mean_fitness = new_best_mean_fitness
         # if we updated the new_max_depth, update the max_tree_depth to the new one for all subsequent populations
         max_tree_depth = new_max_depth
     # save off best of run
