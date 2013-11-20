@@ -6,3 +6,11 @@ For everything but sfplay, this will result in something different since loadmes
 SIMILARITY TESTING:
 For baseline, calc distances/similarities between all pairs of different files...since these are 'different', we can normalize by the difference as an extra point of analysis
 when comparing metrics.
+
+————————
+Implementation of DMTD changed from what is written in diss…look at both lit review and description in methods
+
+Change all limiting code bloat vals:
+SMTD - 4, 6, 8, 10, 12
+DMTD - 4-8, 6-12, 8-20
+RLGP - ?
