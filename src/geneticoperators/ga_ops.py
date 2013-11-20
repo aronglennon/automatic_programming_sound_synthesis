@@ -98,7 +98,7 @@ def split_selected_into_gen_ops(selected, gen_ops):
 # NOTE: only subtree mutation is able to change the number of resources used in the population, so first count
 # all resources used in all other patches, subtract from max_resource_count, and send that number to subtree_mutate
 # NOTE!!!! THIS SIGNATURE IS RIDICULOUS BUT I NEEDED TO GET THE TESTS RUN QUICKLY, SO I JUST PASSED EVERYTHING IN THAT WAS NECESSARY...HORRIBLE!!!
-def create_next_generation(selected, gen_ops, max_num_levels, tree_depth_limit, all_objects, max_resource_count = None, allow_equal_cross = True, crossover_pool = [], js_filename =[], test_filename=[], feature_type=[], patch_type=[], target_features=[], similarity_measure=[], warp_factor=[], silence_vals=[], best_of_run_fitness=0.0):
+def create_next_generation(selected, gen_ops, max_num_levels, tree_depth_limit, all_objects, max_resource_count = None, allow_equal_cross = True, crossover_pool = [], js_filename =[], test_filename=[], feature_type=[], patch_type=[], target_features=[], similarity_measure=[], warp_factor=[], silence_vals=[], best_of_run_fitness=0.0, pop_size = 100, resource_type = 'RLGP', max_total_resource_limit = None, best_mean_fitness = 0.0):
     # put even # of vecs in crossover and rest in mutation based on respective probabilities for those operations
     # (fills crossover and mutation vectors from selected vector)
     separated_patches = split_selected_into_gen_ops(selected, gen_ops)
@@ -118,11 +118,9 @@ def create_next_generation(selected, gen_ops, max_num_levels, tree_depth_limit, 
         elif patch_group == 'point_mutation':
             if separated_patches['point_mutation'] != []:
                 point_mutation_patches = point_mutate(separated_patches['point_mutation'], all_objects)
-    resource_count = 0
     next_generation = []
     for m in point_mutation_patches:
         next_generation.append(copy.deepcopy(m))
-        resource_count += m.count
     new_max_num_levels = max_num_levels
     crossover_counter = 0
     for c in crossover_patches:
@@ -162,26 +160,70 @@ def create_next_generation(selected, gen_ops, max_num_levels, tree_depth_limit, 
                 next_generation.append(copy.deepcopy(cross_parent_patches[crossover_counter-index]))
         else:
             next_generation.append(copy.deepcopy(c))
-        resource_count += c.count
         crossover_counter += 1
     for r in reproduction_patches:
         next_generation.append(copy.deepcopy(r))
-        resource_count += r.count
-    if max_resource_count is not None:
-        resources_left = max_resource_count - resource_count
     # now we can tell the subtree mutation how many resources it may use in generating new subpatches
     if 'subtree_mutation' in separated_patches:
         if separated_patches['subtree_mutation'] != []:
-            if max_resource_count is not None:
-                subtree_mutation_patches = subtree_mutate(separated_patches['subtree_mutation'], max_num_levels, all_objects, resources_left)
-            else:
-                subtree_mutation_patches = subtree_mutate(separated_patches['subtree_mutation'], max_num_levels, all_objects)
+            subtree_mutation_patches = subtree_mutate(separated_patches['subtree_mutation'], max_num_levels, all_objects)
     for m in subtree_mutation_patches:
         next_generation.append(copy.deepcopy(m))
-        resource_count += m.count
     #for p in next_generation:
     #    print 'next gen depth is %d' % p.depth
-    return [next_generation, new_max_num_levels]
+    # if there is a max_resource_count, order all patches for the next_generation by fitness (first children, then parents), then linearly go through to choose 
+    # for next generation, subtracting allocated resources as you go. If we reach a patch that we can't allocate resources for, we go to next patch and continue down
+    # the line until we either reach pop_size or have no resources left.
+    if max_resource_count is not None:
+        this_max_resource_count = max_resource_count
+        resources_used = 0
+        master_sorted_list = []
+        chosen_list = []
+        rejected_list = []
+        # order children by fitness and append to list
+        next_generation.sort(key = lambda x:x.fitness, reverse = True)
+        master_sorted_list.extend(next_generation)
+        # order parents by fitness and append to list
+        selected.sort(key = lambda x:x.fitness, reverse = True)
+        master_sorted_list.extend(selected)
+        # go through master sorted list and subtract resources as you go...stop when you either reach pop_size or resources are gone
+        i = 0
+        total_fitness = 0.0
+        while len(chosen_list) < pop_size and i < len(master_sorted_list):
+            # add patch to our chosen list if by doing so we won't over-expend resources
+            if (resources_used + master_sorted_list[i].count <= max_resource_count):
+                chosen_list.append(copy.deepcopy(master_sorted_list[i]))
+                resources_used += master_sorted_list[i].count
+                total_fitness += master_sorted_list[i].fitness
+            else:
+                rejected_list.append(copy.deepcopy(master_sorted_list[i]))
+            # move on to next item in master sorted list
+            i += 1
+        if resource_type == 'dRLGP' and len(chosen_list) < pop_size:
+            chosen_mean_pop_fitness = total_fitness / len(chosen_list)
+            if chosen_mean_pop_fitness > best_mean_fitness:
+                best_mean_fitness = chosen_mean_pop_fitness
+            for r in rejected_list:
+                #break if we reach pop_size
+                if len(chosen_list) == pop_size:
+                    break
+                # caclulate what the mean pop fitness would be if we added r
+                new_chosen_mean_pop_fitness = chosen_mean_pop_fitness * (len(chosen_list)) + r.fitness / (len(chosen_list) + 1.0)
+                # if r's fitness improves mean fitness, add it to chosen_list, update mean fitness, and increment resources_used
+                if (new_chosen_mean_pop_fitness > best_mean_fitness):
+                    chosen_mean_pop_fitness = new_chosen_mean_pop_fitness
+                    chosen_list.append(copy.deepcopy(r))
+                    resources_used += r.count 
+                # else break
+                else:
+                    break
+                # also break our total resource count gets too big
+                if max_total_resource_limit is not None and resources_used > max_total_resource_limit:
+                    break
+        next_generation = copy.deepcopy(chosen_list)
+        if resources_used > this_max_resource_count:
+            max_resource_count = resources_used
+    return [next_generation, new_max_num_levels, max_resource_count, best_mean_fitness]
 
 def subtree_mutate(patches, max_num_levels, objects, max_resource_count = None):
     print 'mutating patches'
