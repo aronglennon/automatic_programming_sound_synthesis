@@ -54,7 +54,7 @@ def select_patches(patches, selection_type):
                 most_parsimonious_patch = patches[index_list[0]]
                 for i in index_list:
                     if patches[i].count < most_parsimonious_patch.count:
-                        most_parsimonious_patch = patches[i].count
+                        most_parsimonious_patch = patches[i]
                 random_num = random.random()
                 if random_num < PARSIMONY_PROB:
                     parsimony_winner_patches.append(copy.deepcopy(most_parsimonious_patch))

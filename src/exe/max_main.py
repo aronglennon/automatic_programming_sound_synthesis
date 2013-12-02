@@ -13,13 +13,13 @@ import numpy as np
 import threading
 
 # 1.
-MAX_PATCH = 02
+MAX_PATCH = 4
 DEBUG = False
 # 2.
 INIT_MAX_TREE_DEPTH = 8 # init limit on any one individuals depth
-FINAL_MAX_TREE_DEPTH = 12
-INIT_RESOURCE_COUNT = 1500
-FINAL_RESOURCE_COUNT = 2500
+FINAL_MAX_TREE_DEPTH = 8
+INIT_RESOURCE_COUNT = 0
+FINAL_RESOURCE_COUNT = 0
 SIMULATED_ANNEALING_SIZE = 10
 EXCHANGE_FREQUENCY = 10
 EXCHANGE_PROPORTION = 0.10
@@ -27,23 +27,23 @@ SUBGROUPS = 5
 
 # 3. 
 # adaptive-downsample_and_bit_reduction_stereo.wav - 3
-'''
+
 OBJ_LIST_FILE = '/etc/max/adaptive_downsampling_object_list.txt'
 TARGET_FILE = '/var/data/max/adaptive-downsample_and_bit_reduction_stereo.wav'
 SILENCE_VALS = [0.87624177, 0.81243946, 0.83953520, 0.83950409, 0.87623865, 0.87834727]
-'''
+
 '''
 # clipping-reverb-saw.wav - 3
 OBJ_LIST_FILE = '/etc/max/clipping_reverb_object_list.txt'
 TARGET_FILE = '/var/data/max/clipping-reverb-saw.wav'
 SILENCE_VALS = [0.88450581, 0.88220514, 0.81728712, 0.89264148, 0.88851541]
 '''
-
+'''
 # sine-downsample-delay-AM-volume.wav - 3
 OBJ_LIST_FILE = '/etc/max/feedback_delay_object_list.txt'
 TARGET_FILE = '/var/data/max/sine-downsample-delay-AM-volume.wav'
 SILENCE_VALS = [0.89317668, 0.87404699, 0.87733233, 0.87147831]
-
+'''
 JS_FILE_ROOT =  '/etc/max/js_file'
 TEST_ROOT = '/var/data/max/output'
 NUM_GENERATIONS = 200
@@ -76,7 +76,7 @@ class calculateFitnessThread (threading.Thread):
         # if nan, create new random patch, calculate fitness, if not nan, use to  replace
         if (np.isnan(self.patch.fitness) or any(self.patch.fitness >= (fitness - 0.000001) and self.patch.fitness <= (fitness + 0.000001) for fitness in SILENCE_VALS)):
             print 'bad patch...'
-            self.patch.fitness = 0
+            self.patch.fitness = 0.1
             '''
             auto_gen_patch = create_patch_from_scratch(self.max_tree_depth, self.all_objects, max_resource_count = self.patch.count)
             auto_gen_patch.start_max_processing(self.js_filename, self.test_filename, self.feature_type, PATCH_TYPE, None)
@@ -103,7 +103,7 @@ class calculateFitnessThread (threading.Thread):
                 # if nan, create new random patch, calculate fitness, if not nan, use to  replace
                 if (np.isnan(auto_gen_patch.fitness) or any(auto_gen_patch.fitness >= (fitness - 0.000001) and auto_gen_patch.fitness <= (fitness + 0.000001) for fitness in SILENCE_VALS)):
                     print 'bad patch...'
-                    self.patch.fitness = 0
+                    self.patch.fitness = 0.1
                     '''
                     auto_gen_patch = update_all_parameters(self.patch)
                     auto_gen_patch.start_max_processing(self.js_filename, self.test_filename, self.feature_type, PATCH_TYPE, None)
@@ -251,7 +251,7 @@ def main():
                 if resource_limitation_type is not None:
                     average_resource_count = resource_count / (pop_size - j)
                 if init_method == 'ramped_half_and_half':
-                    if i % 2 == 0:
+                    if j % 2 == 0:
                         this_init = 'grow'
                     else:
                         this_init = 'full'
@@ -260,11 +260,17 @@ def main():
                     if resource_limitation_type is not None:
                         auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, init_type = this_init, max_resource_count = average_resource_count)
                     else:
-                        auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, init_type = this_init)
+                        if this_init == 'full' and this_max_tree_depth > 10:
+                            auto_gen_patch = create_patch_from_scratch(10, all_objects, init_type = this_init)
+                        else:
+                            auto_gen_patch = create_patch_from_scratch(this_max_tree_depth, all_objects, init_type = this_init)
                 else:
                     if resource_limitation_type is not None:
                         auto_gen_patch = create_patch_from_scratch(max_tree_depth, all_objects, init_type = init_method, max_resource_count = average_resource_count)
                     else:
+                        # we cannot generate full trees greater than depth 10
+                        if max_tree_depth > 10:
+                            max_tree_depth = 10
                         auto_gen_patch = create_patch_from_scratch(max_tree_depth, all_objects, init_type = init_method)
                 #print auto_gen_patch.patch_to_string()
                 if resource_limitation_type is not None:
@@ -280,6 +286,9 @@ def main():
             resource_count_lim = INIT_RESOURCE_COUNT
         best_mean_fitness = 0.0
     for i in range(generation_start, NUM_GENERATIONS):
+        # this is required in case we init with smaller depth due to processing constraints in Max
+        if max_tree_depth < INIT_MAX_TREE_DEPTH:
+            max_tree_depth = INIT_MAX_TREE_DEPTH
         if atypical_flavor == "PADGP":
             # check if the generation requires exchange
             if NUM_GENERATIONS % EXCHANGE_FREQUENCY == 0 and NUM_GENERATIONS != 0:

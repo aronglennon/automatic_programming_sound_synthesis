@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 from operator import itemgetter
 
 PARTITION_COUNT = 10
-TESTRUN_ID = [137, 141]
+TESTRUN_ID = [313, 319, 322, 327]
 
-FITNESS_OFFSETS = [0.87853897, 0.88049448, 0.90788585, 0.90580123, 0.90788548]
+FITNESS_OFFSETS = [0.83389444, 0.83389474, 0.86494295, 0.93800486, 0.92892614, 0.93698597]
 MIN_FITNESS = 0.8
 MAX_FITNESS = 0.97
 
@@ -26,8 +26,8 @@ def main():
         cleanValues.append([float(values[i][0]), float(values[i][1])])
     # sort on fitness (x-coord in NSC calc)
     sortedVals = sorted(cleanValues, key=itemgetter(0))
-    maxFitness = sortedVals[-1][0]
-    minFitness = sortedVals[0][0]
+    maxFitness = sortedVals[-10][0]
+    minFitness = sortedVals[10][0]
     xVals = []
     yVals = []
     for s in sortedVals:
@@ -58,6 +58,7 @@ def main():
         if P < 0.0:
             NSC += P
     print 'NSC for testrun %d is %0.8f' % (TESTRUN_ID[0],NSC)
+    '''
     plt.figure(facecolor='white')
     plt.scatter(xVals, yVals, s = 1, hold = True)
     plt.axis(xmin = 0.0, xmax = 1.0, ymin = 0.0, ymax = 1.0)
@@ -69,6 +70,6 @@ def main():
     plt.xlabel('Patch Fitness')
     plt.ylabel('Neighbor Fitness')
     plt.show()
-    
+    '''
 if __name__ == "__main__":
     main()
