@@ -33,7 +33,8 @@
 \contentsline {chapter}{\numberline {4}Results}{198}
 \contentsline {section}{\numberline {4.1}Finding an Optimal Similarity Measure for Time-Varying Timbres}{198}
 \contentsline {section}{\numberline {4.2}Optimizing the Fitness Surface by Varying Genetic Operator Sets}{198}
-\contentsline {section}{\numberline {4.3}Investigating Methods for Reducing Code Bloat and Promoting Parsimonious Solutions}{199}
-\contentsline {section}{\numberline {4.4}Testing the Effects of Various Initial Conditions and Selection Mechanisms}{199}
-\contentsline {section}{\numberline {4.5}Measuring System Generalization}{199}
-\contentsline {chapter}{References}{200}
+\contentsline {subsubsection}{Problematic Outputs}{199}
+\contentsline {section}{\numberline {4.3}Investigating Methods for Reducing Code Bloat and Promoting Parsimonious Solutions}{200}
+\contentsline {section}{\numberline {4.4}Testing the Effects of Various Initial Conditions and Selection Mechanisms}{201}
+\contentsline {section}{\numberline {4.5}Measuring Generalization Ability over an Optimized System}{201}
+\contentsline {chapter}{References}{202}
