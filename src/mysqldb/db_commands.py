@@ -263,7 +263,7 @@ class mysql_object():
         if self.connected:
             statement = "SELECT AVG(fitness) FROM testdata WHERE testrun_id = %d GROUP BY generation" % (testrun)
             values = db_core.select(self.dbConnection, statement)
-            return values
+            return [float(x) for x in [y[0] for y in values]]
         else:
             return []
         
@@ -271,7 +271,7 @@ class mysql_object():
         if self.connected:
             statement = "SELECT MAX(fitness) FROM testdata WHERE testrun_id = %d GROUP BY generation" % (testrun)
             values = db_core.select(self.dbConnection, statement)
-            return values
+            return [float(x) for x in [y[0] for y in values]]
         else:
             return []
         
@@ -279,7 +279,7 @@ class mysql_object():
         if self.connected:
             statement = "SELECT MIN(fitness) FROM testdata WHERE testrun_id = %d GROUP BY generation" % (testrun)
             values = db_core.select(self.dbConnection, statement)
-            return values
+            return [float(x) for x in [y[0] for y in values]]
         else:
             return []
     def get_last_generation(self, testrun_id):
