@@ -73,7 +73,7 @@ Results are presented and discussed for all proposed pieces of this system, show
 \addcontentsline{toc}{subsection}{Acknowledgements}
 This work could not have been completed without the patience and support of many different individuals. I would like to specifically thank:
 
-My advisor Prof. Robert Rowe for providing me the appropriate amount of freedom to follow my instincts when they were strong and the appropriate amount of guidance when I led myself to forks in the road.
+My advisor Prof. Robert Rowe for providing me with the appropriate amount of freedom to follow my instincts when they were strong and the appropriate amount of guidance when I led myself to forks in the road.
 
 My adopted advisor (though I'm not sure who adopted who) Prof. Juan Bello for always pushing me to do more, for always being there to talk through even the most wild ideas, and for nurturing my interest in both Music Information Retrieval and Machine Learning. While I always looked to Juan for advice and viewed him as a mentor, I always felt that he was more of a friend than anything.
 
@@ -612,7 +612,7 @@ In order for Python to have an internal representation of Max patches, we have m
 \subsection{Framing as a Genetic Programming Problem}
 The majority of GP research uses tree data structures to represent each individual algorithm within a population. We have adopted this representation in evolving Max patches that function as synthesis algorithms. Since Max, in general, allows the creation of graph structures, we have decided to limit the number of possible patch representations by enforcing several rules. 
 \begin{enumerate}
-\item The root of each tree will be Max's audio output object (the \emph{dac\texttildelow{}}), internal nodes will represent other Max objects are able to receive Max signal input and return Max signal output, and the leaf nodes or terminals will represent either audio generators (including audio playback objects and live audio input objects) or input parameters to the patch (see fig. 3).
+\item The root of each tree will be Max's audio output object (the \emph{dac\texttildelow{}}), internal nodes will represent other Max objects are able to receive Max signal input and return Max signal output, and the leaf nodes or terminals will represent either audio generators (including audio playback objects and live audio input objects) or input parameters to the patch (see Figure 3.3).
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.7]{RootTree}
@@ -1013,23 +1013,19 @@ The two resultant IC-DPLA distances are then summed together to provide the SIC-
 
 It should be noted that our approach is still greedy in that we optimize local alignments without regard to how it will affect our overall global scores (i.e. we optimize before applying our scaling factors), but we believe it to be a considerable upgrade over typical DTW and non-time warped aligned-Euclidean methods. A more systematic and less greedy measure is left for future work.
 
-In order to test our approach versus the three approaches discussed above (aligned-Euclidean, global DTW, and DPLA), we developed a controlled experiment that starts with a sound and applies various kinds of temporal distortion that should not alter its timbal similarity score. The distortions applied are broken into the following categories:
-\begin{itemize}
-\item Slight global time scaling (randomly selected between $2-5\%$) combined with time shifting (randomly selected between $100-500ms$).
-\item Local time warping (randomly selected such that the warping path does not diverge from the diagonal more than 5 frames).
-\item Random sample deletion (randomly selected and totaling between $2-5\%$ of all content).
-\item Random extension of stable timbral content randomly selected and totaling between $2-5\%$ of all content. 
-\end{itemize}
-We measure how invariant each model is to these temporal distortions by considering a nonzero distance between the original sample and one of its distorted versions as an error. We measure these errors given a number of different sample files and average over each distortion.
+In order to test our approach versus the three approaches discussed above (aligned-Euclidean, global DTW, and DPLA), we developed a controlled experiment that applies various kinds of temporal distortion to a sound (at various levels of severity for each temporal distortion) and measures the similarity of each distorted copy with the undistorted original. The results of this experiment will highlight trends in how the tested similarity measures assign scores as each distortion is made more severe.
 
-We then progressively distort our target in way that produces sounds that we would like to consider less and less timbrally similar by:
+The distortions applied are broken into the following categories:
 \begin{itemize}
-\item Introducing new timbal content (between $10-50\%$ of the file length) while randomly deleting other content.
-\item Re-ordering random subsequences within content (by choosing subsequences that are between $10-20\%$ of the file length and swapping out of order up to 5 times).
-\item Randomly inserting repetitions paired with random deleting of non-repetitive segments (by choosing up to 3 subsequences that are between $10-20\%$ of the file length and repeating each up to 3 times).
-\item Applying severe temporal warpings (randomly selected such that the warping path diverges at least more than 10 frames once during the length of the file). 
+\item Global time scaling (randomly selected between a $2-500\%$ increase in scale) combined with time shifting (randomly selected between $100-500ms$).
+\item Random sample deletion (randomly selected and totaling between $2-75\%$ of all content).
+\item Random extension of stable timbral content randomly selected and totaling between $2-500\%$ of all content. This can be seen as a way to apply time warping to a sound.
+\item Introducing new timbal content (between $10-500\%$ of the file length) while randomly deleting other content.
+\item Reordering random subsequences within content (by choosing subsequences that are between $10-75\%$ of the file length and swapping out of order up to $100$ times).
+\item Randomly inserting repetitions paired with random deleting of non-repetitive segments (by choosing up to $10$ subsequences that are between $10-20\%$ of the file length and repeating each up to $10$ times).
 \end{itemize}
-In these cases, we want the amount of distortion severity to be inversely proportional to the similarity calculated. We therefore measure how the similarity calculated changes as a function of increased distortion severity. For example, we look at the rate at which the similarity measure decreases as the introduction of new timbal content increases from $10-50\%$ of the file length.
+
+Ideally, we want the amount of distortion severity to be inversely related to the similarity calculated. It should be noted that `distortion severity' is a fuzzy concept and so for each distortion type, we substitute in its place the parameter that we believe to most align with it. For example, we measure distortion severity as the percent of content inserted (in relation to the original sound's length) in the case where we introduce new timbral content as a distortion.
 
 The sounds we distort are the same sounds that we use as real-world targets as discussed in section 3.2.7.
 
@@ -1340,8 +1336,78 @@ We have searched for these timbres using the optimal parameters/methods obtained
 
 \vspace*{\QuarterPage}
 \chapter{Results} % * suppresses heading numbers	
-\section{Finding an Optimal Similarity Measure for Time-Varying Timbres}
-As discussed in Chapter 3, 
+\section{Finding an Optimal Similarity Measure for Time-Varying Timbre}
+One of the most important parameters in any genetic algorithm (and therefore any application of GP) is an appropriate measure of fitness. For our problem domain, we have developed the SIC-DPLA measure - over a sequence of feature vectors from a NLSE timbre space - in hopes to best represent our objective of matching timbre sequence similarity between two given sounds. In order to determine its efficacy, we have tested it against aligned-Euclidean, DTW, and DPLA measures in an experiment that determines the similarity between an undistorted sound and a large number of temporally distorted counterparts (as described in Chapter 3). Each type of distortion was tested with $1000$ different randomly chosen parameterizations.
+
+The results of this testing follows, with each plot showing the \textit{mean} normalized similarity scores under each distortion test case, calculated over individual scores from the $5$ real-world target files chosen for the generalization testing. The similarity scores for each similarity type were normalized over their natural range so as to better compare the effects that increasing distortion severity has on each type.
+
+\subsection{Global Time Scaling}
+The global time scaling distortion that we applied takes the feature data from the undistorted audio and stretches it by a randomly selected amount in a range between $2-500\%$ of the length of the undistorted feature data. Figure 4.1 shows the similarity scores assigned over $1000$ randomly chosen stretch amounts.
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.5,width=\linewidth]{GlobalTimeScaling}
+\caption[Global Time Scaling Results]{Global Time Scaling Results}
+\end{center}
+\end{figure}
+Note that all similarity measures trend downward (as desired) as the global scale percentage is increased, except for the DTW measure. Given that DTW should find its optimal path to be along the diagonal, the fact that the score does not change significantly is expected. We view this as drawback of DTW, since our ideal similarity measure will decay to some degree as temporal distortion severity is increased by several orders of magnitude.
+
+SIC-DPLA produces a normalized similarity value of almost $1.0$ when the features are only slightly stretched and falls relatively linearly as the scale percentage is increased. It is not clear whether the relation between global scale percentage and similarity score should be inversely proportional or inversely related in some more complex way (e.g. as DPLA seems to be), so the results here do not favor SIC-DPLA over DPLA based solely on how the scores decay with increased distortion severity. However, we would expect a near $1.0$ score under very slight scalings and so SIC-DPLA does prove favorable in that sense.
+
+One shortcoming of DPLA indicated in the plot is that there is quite a bit of noise in its scores as the global scale percentage is increased. This noise is undesirable under this specific distortion because global time scaling is very straightforward and there is no good reason for this variability to exist.
+
+The aligned-Euclidean measure suffers from similar noise in its scores, but is further weakened by the fact that its apparent downward trend is contained completely within the variance of this noise, undermining its validity.
+
+\subsection{Sample Deletion}
+The sample deletion distortion removes a certain percentage of samples from the original audio at random locations. The total amount deleted in any given test case is between $2-75\%$ of the total undistorted content. Figure 4.2 shows the similarity scores assigned over $1000$ randomly chosen deletion amounts.
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.5,width=\linewidth]{SampleDeletion}
+\caption[Sample Deletion Results]{Sample Deletion Results}
+\end{center}
+\end{figure}
+The results of the sample deletion tests mirror those of the global time scaling results to a certain degree, which should not be a surprise. One can view time compression as a very systematic way of deleting content (e.g. via resampling) and therefore random sample deletion is a sort of stochastic version of time compression, which is the inverse of time stretching. 
+
+One difference between these results and the global time scaling results that is interesting is that there does seem to be a slight downward trend to the scores assigned by DTW as the total percent deleted increases, which does not mirror its behavior in the global time scaling results. This downward trend can be explained by the stochastic nature of the deletion. If one were to simply time compress original audio and then run DTW between the compressed version and the original, the best path of alignment would run along the diagonal and, as in the case with time stretching, there would be no penalties associated with optimal warp path. However, with the random deletion of content, one would expect the path to diverge from the diagonal and penalties to accrue. The more content that is deleted, the more opportunities there will be for divergence, and the larger the overall alignment penalty, which would decrease the similarity score. Therefore, unlike with the global time scaling case, DTW would appropriately penalize random sample deletion as that distortion becomes more severe.
+
+It should also be noted that both DPLA and SIC-DPLA show high similarity scores under minimal distortion and that the aligned-Euclidean again has a significant amount of noise in its scores with variance that is on par with the strength of its downward trend (though slightly more favorable than in the global time scaling case). 
+
+\subsection{Extension of Stable Timbral Content}
+When extending stable timbral content, we look at pairs of feature vectors whose distances in our NLSE-defined timbre space are less than a given threshold. If a series of feature vectors representing at least one second of audio contains neighboring pairs of vectors that all meet this criteria, they are labelled as timbrally stable. Such sequences from our test files become candidates to undergo extension distortion, which simply copies a portion (or all) of a number of these sequences and inserts them directly after their original occurrences.
+
+Since the content is deemed stable, this copy process can be seen as warping the time axis around each extension and therefore applying a time warp to the undistorted original. The reason why it is desirable to look at areas of stable extension (rather than just repeating any single feature vector in order to mimic time warping) is that in typical musical scenarios, steady, unchanging timbre coincides with harmonic content void of transients. If we were to warp transients, it would be much less clear to what degree even small warpings should affect the overall timbre of the material, whereas with harmonic, stationary content, one would expect small time warpings to not be perceptually relevant.
+
+The total amount of stable audio extended ranges between $2-500\%$ of the undistorted audio length. Figure 4.2 shows the similarity scores assigned over $1000$ randomly chosen extension amounts.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.5,width=\linewidth]{StableExtension}
+\caption[Extension of Stable Timbral Content Results]{Extension of Stable Timbral Content Results}
+\end{center}
+\end{figure}
+The results of the stable extension tests show a curious peak in the DPLA data around the $5\%$ extension mark, which may have to do with some interaction between the length of the subsequence chosen by DPLA under small extensions and how ideal such subsequences are in relation to slightly smaller ones that may be found under larger extensions. Whatever the reason may be, DPLA seems to not be ideal under this type of distortion. 
+
+In the same way that DTW is found to decrease for random sample deletion due to its stochastic nature (with respect to placement), it similarly decreases here due to the extension of content occurring in non-uniform cases (i.e. this mimics a time warping that is not simply time scaling and therefore optimal paths will be found to move around the diagonal as they would in the sample deletion case).
+
+\subsection{Introduction of New Timbral Content}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.5,width=\linewidth]{ContentIntroduction}
+\caption[Content Introduction Results]{Content Introduction Results}
+\end{center}
+\end{figure}
+
+\subsection{Subsequence Reordering}
+
+\subsection{Repetition Insertion}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.5,width=\linewidth]{RepetitionInsertion}
+\caption[Repetition Insertion Results]{Repetition Insertion Results}
+\end{center}
+\end{figure}
+
 \section{Optimizing the Fitness Surface by Varying Genetic Operator Sets}
 As discussed in Chapter 3, the measure we used to determine `problem difficulty', which is directly related to the shape and characteristics of the fitness surface is NSC. We used Metropolis-Hastings sampling to generate sample points and tournament selection (with tournament size $10$) to determine their neighbors for use in the NSC calculation. During our initial experiments, we noticed a few interesting things that influenced experiments going forward. A discussion of these items is necessary before showing and discussing the results.
 \subsubsection{Problematic Outputs}
@@ -1349,7 +1415,7 @@ Several similarity scores for each target were repeated with high frequency duri
 
 The problem with such a distinction (beyond the fact that it is conceptually arguable) is that one cannot know when a patch will generate silence or white noise before it has been constructed in Max and made to generate audio. Therefore, our system was developed to detect silence and white noise in our features and disregard any patches that produce such audio before allowing them to undergo genetic operations with other patches. In the absence of such patches, we randomly generate new patches until one is found that does not produce silence or white noise and replace the original patch with it in the population. This random patch generation therefore acts as a separate genetic operator in all of our experiments that is equivalent to subtree mutation directly above the root (dac\texttildelow{}) of the patch.
 
-The results of using various genetic operator sets can be seen in Table X.Y over each of the five `real-world' target timbres. 
+The results of using various genetic operator sets can be seen in Table X.Y over each of the five `real-world' target timbres.
 
 
 

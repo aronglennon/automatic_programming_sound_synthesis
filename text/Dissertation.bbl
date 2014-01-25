@@ -2516,9 +2516,36 @@ Shiraishi, S.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-Silva%
+S.~Silva%
+\ \BBA{} Costa%
 }{%
-Silva%
+S.~Silva%
+\ \BBA{} Costa%
+}{%
+{\protect\APACyear{2005}}%
+}]{%
+silva2005resource}%
+\APACinsertmetastar{%
+silva2005resource}%
+Silva, S.%
+\BCBT{}\ \BBA{} Costa, E.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2005}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{Resource-limited genetic programming: the dynamic
+  approach}{Resource-limited genetic programming: the dynamic approach}.\BBCQ{}
+\newblock
+\BIn{} \APACrefbtitle{Proceedings of the 2005 conference on Genetic and
+  evolutionary computation}{Proceedings of the 2005 conference on genetic and
+  evolutionary computation}\ (\BPGS\ 1673--1680).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+S\BPBI G\BPBI O.~da Silva%
+}{%
+S\BPBI G\BPBI O.~da Silva%
 }{%
 {\protect\APACyear{2008}}%
 }]{%

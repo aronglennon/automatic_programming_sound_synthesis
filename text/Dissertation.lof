@@ -54,7 +54,7 @@
 \contentsline {figure}{\numberline {3.29}{\ignorespaces Crossover}}{162}
 \contentsline {figure}{\numberline {3.30}{\ignorespaces Subtree Mutation}}{162}
 \contentsline {figure}{\numberline {3.31}{\ignorespaces Point Mutation}}{163}
-\contentsline {figure}{\numberline {3.32}{\ignorespaces Reproduction}}{164}
+\contentsline {figure}{\numberline {3.32}{\ignorespaces Reproduction}}{163}
 \contentsline {figure}{\numberline {3.33}{\ignorespaces Delay Feedback AM Max Patch}}{167}
 \contentsline {figure}{\numberline {3.34}{\ignorespaces Delay Feedback AM Time-Frequency Representation}}{168}
 \contentsline {figure}{\numberline {3.35}{\ignorespaces Adaptive Downsampling Max Patch}}{169}
@@ -71,3 +71,8 @@
 \contentsline {figure}{\numberline {3.46}{\ignorespaces Evolving Metallic Synth Time-Frequency Representation}}{196}
 \contentsline {figure}{\numberline {3.47}{\ignorespaces Random Analog LFO Reverb Time-Frequency Representation}}{197}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Global Time Scaling Results}}{200}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Sample Deletion Results}}{202}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Extension of Stable Timbral Content Results}}{204}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Content Introduction Results}}{205}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Repetition Insertion Results}}{206}

@@ -1,7 +1,13 @@
-This is BibTeX, Version 0.99c (Web2C 7.5.6)
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Dissertation.aux
 The style file: apacite.bst
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=20001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Reallocated field_info (elt_size=4) to 10016 items from 5000.
 Database file #1: mybib.bib.bib
@@ -88,6 +94,8 @@ Warning--No publisher in Seago:2008ya
 Warning--No publisher in Seyerlehner:2009hs
 Warning--No publisher in Seyerlehner:2008tw
 Warning--No publisher in Sharman:1995bs
+Warning--No publisher in silva2005resource
+Warning--No address in silva2005resource
 Warning--No publisher in Stowell:2008qf
 Warning--No publisher in Timoney:2004ff
 Warning--No address in Todd:1998tg
@@ -96,45 +104,45 @@ Warning--No publisher in Wehn:1998bh
 Warning--No publisher in Zhang:2006jo
 Warning--No address in Zhang:2006jo
 Warning--No publisher in Zils:2001bd
-You've used 114 entries,
+You've used 115 entries,
             6361 wiz_defined-function locations,
-            1848 strings with 29431 characters,
-and the built_in function-call counts, 226940 in all, are:
-= -- 29389
-> -- 1729
-< -- 10873
-+ -- 10807
-- -- 230
-* -- 14141
-:= -- 40762
-add.period$ -- 562
-call.type$ -- 114
-change.case$ -- 712
+            1854 strings with 29623 characters,
+and the built_in function-call counts, 229499 in all, are:
+= -- 29749
+> -- 1749
+< -- 10970
++ -- 10938
+- -- 232
+* -- 14284
+:= -- 41169
+add.period$ -- 568
+call.type$ -- 115
+change.case$ -- 718
 chr.to.int$ -- 0
-cite$ -- 310
-duplicate$ -- 5429
-empty$ -- 8400
-format.name$ -- 2691
-if$ -- 43395
+cite$ -- 314
+duplicate$ -- 5514
+empty$ -- 8482
+format.name$ -- 2723
+if$ -- 43901
 int.to.chr$ -- 0
-int.to.str$ -- 228
+int.to.str$ -- 230
 missing$ -- 0
-newline$ -- 2718
-num.names$ -- 916
-pop$ -- 5227
+newline$ -- 2742
+num.names$ -- 924
+pop$ -- 5292
 preamble$ -- 1
-purify$ -- 546
+purify$ -- 550
 quote$ -- 0
-skip$ -- 14630
+skip$ -- 14786
 stack$ -- 0
-substring$ -- 11982
-swap$ -- 3007
-text.length$ -- 413
+substring$ -- 12154
+swap$ -- 3052
+text.length$ -- 422
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 13280
-warning$ -- 82
-while$ -- 1026
+type$ -- 13424
+warning$ -- 84
+while$ -- 1042
 width$ -- 0
-write$ -- 3339
-(There were 90 warnings)
+write$ -- 3369
+(There were 92 warnings)
