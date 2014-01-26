@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  26 JAN 2014 15:19
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  26 JAN 2014 17:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1489,10 +1489,48 @@ Package pdftex.def Info: ResourceLimTable2.pdf used on input line 1572.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [225] [226 <./ResourceLimTable1.pdf>] [227 <./ResourceLimTable2.pdf>] [228]
-[229] (./Dissertation.bbl [230
+<InitializationTable1.pdf, id=2769, 790.955pt x 378.41376pt>
+File: InitializationTable1.pdf Graphic file (type pdf)
 
-] [231] [232] [233] [234] [235] [236] [237]
-[238] [239] [240] [241] [242] [243] [244] [245]) [246] (./Dissertation.aux)
+<use InitializationTable1.pdf>
+Package pdftex.def Info: InitializationTable1.pdf used on input line 1596.
+(pdftex.def)             Requested size: 474.57666pt x 227.05pt.
+
+<InitializationTable2.png, id=2770, 796.9775pt x 388.45125pt>
+File: InitializationTable2.png Graphic file (type png)
+
+<use InitializationTable2.png>
+Package pdftex.def Info: InitializationTable2.png used on input line 1603.
+(pdftex.def)             Requested size: 478.19019pt x 233.07254pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[229] [230 <./InitializationTable1.pdf> <./InitializationTable2.png>]
+<NonStandardSelectionTable.png, id=2787, 798.985pt x 156.585pt>
+File: NonStandardSelectionTable.png Graphic file (type png)
+
+<use NonStandardSelectionTable.png>
+Package pdftex.def Info: NonStandardSelectionTable.png used on input line 1615.
+
+(pdftex.def)             Requested size: 479.3947pt x 93.95172pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[231] [232 <./NonStandardSelectionTable.png>]
+<ExpansionRestrictionTable.pdf, id=2794, 800.9925pt x 170.6375pt>
+File: ExpansionRestrictionTable.pdf Graphic file (type pdf)
+
+<use ExpansionRestrictionTable.pdf>
+Package pdftex.def Info: ExpansionRestrictionTable.pdf used on input line 1630.
+
+(pdftex.def)             Requested size: 480.5992pt x 102.38327pt.
+ [233 <./ExpansionRestrictionTable.pdf>]
+[234] (./Dissertation.bbl [235
+
+] [236] [237] [238] [239] [240] [241] [242]
+[243] [244] [245] [246] [247] [248] [249] [250]) [251] (./Dissertation.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1501,10 +1539,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4524 strings out of 493315
- 70145 string characters out of 6137904
- 126852 words of memory out of 5000000
- 7810 multiletter control sequences out of 15000+600000
+ 4544 strings out of 493315
+ 70751 string characters out of 6137904
+ 125852 words of memory out of 5000000
+ 7826 multiletter control sequences out of 15000+600000
  21861 words of font info for 48 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  38i,12n,23p,3331b,599s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1528,10 +1566,10 @@ type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2013/texmf-dist/fonts/ty
 pe1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/ti
 mes/utmbi8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8
 a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Dissertation.pdf (259 pages, 13358972 bytes).
+Output written on Dissertation.pdf (264 pages, 13749149 bytes).
 PDF statistics:
- 2885 PDF objects out of 2984 (max. 8388607)
- 1994 compressed objects within 20 object streams
+ 2925 PDF objects out of 2984 (max. 8388607)
+ 2018 compressed objects within 21 object streams
  0 named destinations out of 1000 (max. 500000)
- 426 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 446 words of extra memory for PDF output out of 10000 (max. 10000000)
 

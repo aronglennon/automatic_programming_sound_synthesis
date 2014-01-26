@@ -43,8 +43,9 @@
 \contentsline {subsubsection}{Problematic Outputs}{212}
 \contentsline {subsubsection}{Results}{214}
 \contentsline {section}{\numberline {4.3}Investigating Methods for Reducing Code Bloat and Promoting Parsimonious Solutions}{224}
-\contentsline {section}{\numberline {4.4}Testing the Effects of Various Initial Conditions and Selection Mechanisms}{229}
+\contentsline {section}{\numberline {4.4}Testing the Effects of Various Initial Conditions and Selection Mechanisms}{228}
 \contentsline {subsection}{\numberline {4.4.1}Initial Conditions and Standard Selection Mechanisms}{229}
-\contentsline {subsection}{\numberline {4.4.2}Non-standard Selection Mechanisms}{229}
-\contentsline {section}{\numberline {4.5}Measuring Generalization Ability over an Optimized System}{229}
-\contentsline {chapter}{References}{230}
+\contentsline {subsection}{\numberline {4.4.2}Non-standard Selection Mechanisms}{231}
+\contentsline {section}{\numberline {4.5}Restricting/Expanding the Search Space}{232}
+\contentsline {section}{\numberline {4.6}Measuring Generalization Ability over an Optimized System}{234}
+\contentsline {chapter}{References}{235}

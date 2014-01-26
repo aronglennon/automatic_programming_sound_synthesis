@@ -1584,11 +1584,59 @@ Imposing a SMTD of $6$ or $8$ (both of which perform almost as well as a SMTD of
 For the pragmatic and theoretical reasons stated above, we decided to eliminate an SMTD of $14$ as a candidate. This left an SMTD of $6$ or an SMTD of $8$, which had comparable results as seen in both Table 4.3 and Table 4.4. We decided to choose an SMTD of $8$ going forward because we believed it struck a good balance between offering parsimonious solutions and not restricting the search space too much for more complex timbral evolutions than those tested.
 
 \section{Testing the Effects of Various Initial Conditions and Selection Mechanisms}
+The last set of tests we ran that specifically dealt with system variables were to ascertain which initialization and selection mechanisms were best suited for our problem domain. These tests are split into two sections: one investigating initialization types along with standard selection mechanisms and one investigating what we have previously termed `non-standard' selection methods. The non-standard methods do not conflict with the standard selection mechanisms, but instead change how they specifically work over the life of the process.
+
 \subsection{Initial Conditions and Standard Selection Mechanisms}
+
+Recall that there are three flavors of initialization we wanted to investigate: Full, Grow, and Ramped Half-and-Half. We ran tests that paired each of these with one of the four different selection mechanisms previously mentioned: Fitness-Proportionate, Ranking, Tournament, and Double Tournament.
+
+Each pairing of initialization and selection we tested was applied over a run of $200$ generations (with an initial population of $100$) for each of our three contrived targets. The fitness values for the best-of-run patches for each pairing are provided in Table 4.5 with the two top performing pairs in bold.
+\begin{table}[h!]
+\begin{center}
+\includegraphics[scale=0.6,width=\linewidth]{InitializationTable1}
+\caption[Initialization and Selection Best-of-Run Values]{The best-of-run values for each pairing of initialization and selection methods.}
+\end{center}
+\end{table}
+Note that ranking selection provided better solutions for all types of initialization. Also note that full initialization produced inferior solutions to both grow and ramped half-and-half initialization methods. It can be seen from the mean best-of-run fitness column in Table 4.5 that grow initialization slightly outperformed ramped half-and-half when both used ranking selection. This is also evident in the table of best-of-run ranks below (see Table 4.6).
+\begin{table}[h!]
+\begin{center}
+\includegraphics[scale=0.6,width=\linewidth]{InitializationTable2}
+\caption[Initialization and Selection Best-of-Run Ranks]{The best-of-run ranks for each pairing of initialization and selection methods.}
+\end{center}
+\end{table}
+While either grow and ramped half-and-half initialization methods could be used along with ranking selection, we chose grow based on its slightly better mean best-of-run values in both tables.
+
 \subsection{Non-standard Selection Mechanisms}
-As discussed in Chapter 3, 
+The non-standard selection mechanisms we tested involved only allowing distinct subsets of the population to interact via selection for crossover at a restricted set of generation numbers (PADGP), attempting to optimize the parameter set for each selected individual before allowing it to undergo a genetic operation (via SA), and starting with a more lenient fitness function and increasing its discriminatory power of the lifetime of the run (via IFFs).
+
+These methods were tested by applying them each over an individual run of $200$ generations (with an initial population of $100$) for each of our three contrived targets. The fitness values for the best-of-run patches for each method are provided in Table 4.7 along with the the best-of-run values obtained when using none of them.
+\begin{table}[h!]
+\begin{center}
+\includegraphics[scale=0.6,width=\linewidth]{NonStandardSelectionTable}
+\caption[Non-standard Selection Best-of-Run Values]{The best-of-run values for each non-standard selection method compared to best-of-run values for a run using none of them.}
+\end{center}
+\end{table}
+Note that while PADGP outperformed both SA and IDFF in each test run, it was, on average, outperformed by the system that used none of the non-standard methods. Therefore, we found that for this problem domain these methods did not lead to an optimal system and so were not used in testing going forward.
+
+\section{Restricting/Expanding the Search Space}
+When testing different parameterizations of our system, we used contrived targets and object sets that were perfectly chosen for those targets in order to eliminate outside factors from influencing the performance of the different flavors of our system. Specifically, we wanted to ensure we were not testing our system on targets that it could not possibly meet. However, in practice, not only do we (often) not have a good intuition about the ideal object set to produce a given timbre, it is possible a given target isn't achievable even with the entire Max object set at the system's disposal (due to inherent processing limitations). With this in mind, we decided to test how the best-of-run fitness is affected when the object set given to the system is not sufficient to replicate our contrived targets and also to test how the best-of-run fitness is affected when the object set is sufficient, but also contains objects that would only serve to increase code bloat.
+
+For each contrived target, we generated one restricted object set by both removing objects from the set tailored for that target and restricting parameter ranges for the objects that were left over. We also generated two expanded object sets: one that increased the various objects for use by the system by approximately $50\%$ while also expanding the parameter ranges of the original objects from the tailored set and another that increased the various objects for use by the system by approximately $100\%$ with further increases to the parameter ranges of the original objects.
+
+We tested each object set over an individual run of $200$ generations (with an initial population of $100$) for each of our three contrived targets. The fitness values for the best-of-run patches for each method are provided in Table 4.8 along with the the best-of-run values obtained when using the standard `ideal' object set.
+
+\begin{table}[h!]
+\begin{center}
+\includegraphics[scale=0.6,width=\linewidth]{ExpansionRestrictionTable}
+\caption[Restriction/Expansion Best-of-Run Values]{The best-of-run values for each object set tested, representing restricted and expanded spaces as compared to the standard ideal space.}
+\end{center}
+\end{table}
+
+The best-of-run fitness values are hurt more by restricting the space rather than expanding it, which is expected behavior given that the ideal solution is not even possible when restricting the space and entirely possible, just harder to find with an expanded space. It is interesting to note that the more expanded object set actually produced solutions that were comparable to the standard set. This implies that the system we have developed appropriately reduces code bloat and finds good solutions even when the search space is large, which is a main goal of any GP system. 
+
+Equipped with this knowledge, we decided to use a large object set in attempting to evolve solutions to our real-world targets with unknown solutions, since the system is more handicapped by object sets that restrict the space too much rather than those that do not restrict enough.
+
 \section{Measuring Generalization Ability over an Optimized System}
-As discussed in Chapter 3, 
 
 \newpage
 \nocite{*}	% This says to cite all refs in the bib file
