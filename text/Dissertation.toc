@@ -35,12 +35,14 @@
 \contentsline {subsection}{\numberline {4.1.1}Global Time Scaling}{199}
 \contentsline {subsection}{\numberline {4.1.2}Sample Deletion}{201}
 \contentsline {subsection}{\numberline {4.1.3}Extension of Stable Timbral Content}{203}
-\contentsline {subsection}{\numberline {4.1.4}Introduction of New Timbral Content}{205}
-\contentsline {subsection}{\numberline {4.1.5}Subsequence Reordering}{206}
-\contentsline {subsection}{\numberline {4.1.6}Repetition Insertion}{206}
-\contentsline {section}{\numberline {4.2}Optimizing the Fitness Surface by Varying Genetic Operator Sets}{206}
-\contentsline {subsubsection}{Problematic Outputs}{207}
-\contentsline {section}{\numberline {4.3}Investigating Methods for Reducing Code Bloat and Promoting Parsimonious Solutions}{208}
-\contentsline {section}{\numberline {4.4}Testing the Effects of Various Initial Conditions and Selection Mechanisms}{209}
-\contentsline {section}{\numberline {4.5}Measuring Generalization Ability over an Optimized System}{209}
-\contentsline {chapter}{References}{210}
+\contentsline {subsection}{\numberline {4.1.4}Introduction of New Timbral Content}{206}
+\contentsline {subsection}{\numberline {4.1.5}Subsequence Reordering}{208}
+\contentsline {subsection}{\numberline {4.1.6}Repetition Insertion}{208}
+\contentsline {subsection}{\numberline {4.1.7}Looking Back at Our Results}{210}
+\contentsline {section}{\numberline {4.2}Optimizing the Fitness Surface by Varying Genetic Operator Sets}{211}
+\contentsline {subsubsection}{Problematic Outputs}{212}
+\contentsline {subsubsection}{Results}{213}
+\contentsline {section}{\numberline {4.3}Investigating Methods for Reducing Code Bloat and Promoting Parsimonious Solutions}{213}
+\contentsline {section}{\numberline {4.4}Testing the Effects of Various Initial Conditions and Selection Mechanisms}{214}
+\contentsline {section}{\numberline {4.5}Measuring Generalization Ability over an Optimized System}{214}
+\contentsline {chapter}{References}{215}

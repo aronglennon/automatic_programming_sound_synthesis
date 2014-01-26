@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  25 JAN 2014 18:48
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  25 JAN 2014 21:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1339,26 +1339,41 @@ File: StableExtension.pdf Graphic file (type pdf)
 <use StableExtension.pdf>
 Package pdftex.def Info: StableExtension.pdf used on input line 1383.
 (pdftex.def)             Requested size: 545.03491pt x 338.76479pt.
- [204 <./StableExtension.pdf>]
-<ContentIntroduction.png, id=2417, 1088.065pt x 675.52374pt>
-File: ContentIntroduction.png Graphic file (type png)
+ [204 <./StableExtension.pdf>] [205]
+<ContentIntroduction.pdf, id=2421, 1090.0725pt x 673.51625pt>
+File: ContentIntroduction.pdf Graphic file (type pdf)
 
-<use ContentIntroduction.png>
-Package pdftex.def Info: ContentIntroduction.png used on input line 1395.
-(pdftex.def)             Requested size: 544.03117pt x 337.76105pt.
+<use ContentIntroduction.pdf>
+Package pdftex.def Info: ContentIntroduction.pdf used on input line 1402.
+(pdftex.def)             Requested size: 545.03491pt x 336.7573pt.
 
-<RepetitionInsertion.pdf, id=2418, 1090.0725pt x 676.5275pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[206] [207 <./ContentIntroduction.pdf>]
+<RepetitionInsertion.pdf, id=2438, 1090.0725pt x 676.5275pt>
 File: RepetitionInsertion.pdf Graphic file (type pdf)
 
 <use RepetitionInsertion.pdf>
-Package pdftex.def Info: RepetitionInsertion.pdf used on input line 1406.
+Package pdftex.def Info: RepetitionInsertion.pdf used on input line 1416.
 (pdftex.def)             Requested size: 545.03491pt x 338.26291pt.
- [205 <./ContentIntroduction.png>] [206 <./RepetitionInsertion.pdf>] [207] [208
-] [209] (./Dissertation.bbl [210
 
-] [211] [212]
-[213] [214] [215] [216] [217] [218] [219] [220] [221] [222] [223] [224]
-[225]) [226] (./Dissertation.aux)
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+File: RepetitionInsertion.pdf Graphic file (type pdf)
+<use RepetitionInsertion.pdf>
+Package pdftex.def Info: RepetitionInsertion.pdf used on input line 1427.
+(pdftex.def)             Requested size: 545.03491pt x 338.26291pt.
+ [208]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[209 <./RepetitionInsertion.pdf>] [210] [211] [212] [213] [214]
+(./Dissertation.bbl [215
+
+] [216] [217] [218] [219] [220] [221] [222] [223]
+[224] [225] [226] [227] [228] [229] [230]) [231] (./Dissertation.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1369,7 +1384,7 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  4455 strings out of 493315
  68838 string characters out of 6137904
- 125361 words of memory out of 5000000
+ 126361 words of memory out of 5000000
  7754 multiletter control sequences out of 15000+600000
  21861 words of font info for 48 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -1394,10 +1409,10 @@ type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2013/texmf-dist/fonts/ty
 pe1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/ti
 mes/utmbi8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8
 a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Dissertation.pdf (238 pages, 10269731 bytes).
+Output written on Dissertation.pdf (243 pages, 10389255 bytes).
 PDF statistics:
- 2557 PDF objects out of 2984 (max. 8388607)
- 1780 compressed objects within 18 object streams
+ 2583 PDF objects out of 2984 (max. 8388607)
+ 1798 compressed objects within 18 object streams
  0 named destinations out of 1000 (max. 500000)
  376 words of extra memory for PDF output out of 10000 (max. 10000000)
 
