@@ -77,3 +77,9 @@
 \contentsline {figure}{\numberline {4.4}{\ignorespaces Content Introduction Results}}{207}
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Subsequence Reordering Results}}{209}
 \contentsline {figure}{\numberline {4.6}{\ignorespaces Repetition Insertion Results}}{210}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces $0.75$ Crossover and $0.25$ Subtree Mutation NSC Plots}}{215}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces $0.75$ Crossover and $0.25$ Point Mutation NSC Plots}}{217}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces $0.25$ Crossover and $0.75$ Point Mutation NSC Plots}}{218}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces $0.5$ Crossover, $0.25$ Point Mutation, and $0.25$ Subtree Mutation NSC Plots}}{219}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces $0.5$ Crossover, $0.25$ Reproduction, and $0.25$ Subtree Mutation NSC Plots}}{221}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces $0.25$ Crossover, $0.25$ Reproduction, and $0.5$ Subtree Mutation NSC Plots}}{222}

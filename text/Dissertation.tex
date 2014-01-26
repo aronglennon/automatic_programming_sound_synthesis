@@ -13,6 +13,7 @@
 \usepackage{mathtools}
 \usepackage{textcomp }
 \usepackage{amsmath}
+\usepackage{afterpage}
 
 \numberwithin{figure}{chapter}
 \numberwithin{table}{chapter}
@@ -1346,7 +1347,7 @@ The global time scaling distortion that we applied takes the feature data from t
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.5,width=\linewidth]{GlobalTimeScaling}
-\caption[Global Time Scaling Results]{Global Time Scaling Results}
+\caption[Global Time Scaling Results]{Similarity scores under various amounts of global time scaling distortion.}
 \end{center}
 \end{figure}
 Note that all similarity measures trend downward (as desired) as the global scale percentage is increased, except for the DTW measure. Given that DTW should find its optimal path to be along the main diagonal, the fact that the score does not change significantly is expected. We view this as drawback of DTW, since our ideal similarity measure will decay to some degree as temporal distortion severity is increased by several orders of magnitude.
@@ -1362,7 +1363,7 @@ The sample deletion distortion removes a certain percentage of samples from the 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.5,width=\linewidth]{SampleDeletion}
-\caption[Sample Deletion Results]{Sample Deletion Results}
+\caption[Sample Deletion Results]{Similarity scores under various amounts of sample deletion distortion.}
 \end{center}
 \end{figure}
 The results of the sample deletion tests mirror those of the global time scaling results to a certain degree, which should not be a surprise. One can view time compression as a very systematic way of deleting content (e.g. via resampling) and therefore random sample deletion is a sort of stochastic version of time compression, which is the inverse of time stretching. 
@@ -1381,7 +1382,7 @@ The total amount of stable audio extended ranges between $2-500\%$ of the undist
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.5,width=\linewidth]{StableExtension}
-\caption[Extension of Stable Timbral Content Results]{Extension of Stable Timbral Content Results}
+\caption[Extension of Stable Timbral Content Results]{Similarity scores under various amounts of stable content extension distortion.}
 \end{center}
 \end{figure}
 In the same way that DTW is found to decrease for random sample deletion due to its stochastic nature (with respect to placement), it similarly decreases here due to the extension of content occurring in non-uniform cases (i.e. this mimics a time warping that is not simply time scaling and therefore optimal paths will be found to move around the main diagonal as they would in the sample deletion case). 
@@ -1400,7 +1401,7 @@ The amount of content we introduce is between $10-500\%$ of the undistorted file
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.5,width=\linewidth]{ContentIntroduction}
-\caption[Content Introduction Results]{Content Introduction Results}
+\caption[Content Introduction Results]{Similarity scores under various amounts of content introduction distortion.}
 \end{center}
 \end{figure}
 The results from this testing look considerably different than the others presented thus far in that all measures show ample noise as the amount of introduced content increases. This variability is expected in this case, since the similarity score should not only depend on the amount of content introduced, but also on how timbrally different that content is from the undistorted content. However, underlying this noise should still be a relatively simple inverse relationship between the similarity scores as a function of the total content introduced. It is therefore problematic that both Euclidean and DTW measures do not show such a discernible relationship.
@@ -1414,7 +1415,7 @@ Also, as has been the case with all previous distortions discussed, both SIC-DPL
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.5,width=\linewidth]{RepetitionInsertion}
-\caption[Subsequence Reordering Results]{Subsequence Reordering Results}
+\caption[Subsequence Reordering Results]{Similarity scores under various amounts of subsequence reordering distortion.}
 \end{center}
 \end{figure}
 
@@ -1425,7 +1426,7 @@ In each test, we chose up to $10$ segments of audio each totaling anywhere betwe
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.5,width=\linewidth]{RepetitionInsertion}
-\caption[Repetition Insertion Results]{Repetition Insertion Results}
+\caption[Repetition Insertion Results]{Similarity scores under various amounts of repetition insertion distortion.}
 \end{center}
 \end{figure}
 
@@ -1441,7 +1442,7 @@ We believe SIC-DPLA has shown its slight superiority over DPLA as well during th
 \begin{itemize}
 \item SIC-DPLA scores very high similarity under all types of slight distortion, whereas DPLA does not for the global time scaling and repetition insertion distortions. 
 \item SIC-DPLA demonstrates low noise in its trend over the global time scaling distortion testing and strong noise in its trend over the content introduction distortion testing, which is desirable, as previously discussed. DPLA, on the other hand, demonstrates high noise in its trend over global time scaling and low noise over content introduction testing.
-\item In all other aspects, SIC-DPLA and DPLA have similar characteristics.
+\item In all other aspects, SIC-DPLA and DPLA have similar characteristics. The one characteristic whose desirability remains unclear is the severity with which both SIC-DPLA and DPLA penalize severity increases in stable content extension distortion as compared to the other types of distortion tested. However, since both SIC-DPLA and DPLA possess this characteristic, neither gains an advantage regardless of whether or not it is an ideal behavior.
 \end{itemize}
 
 For these reasons, we used the SIC-DPLA timbre sequence similarity measure in all tests going forward.
@@ -1449,15 +1450,142 @@ For these reasons, we used the SIC-DPLA timbre sequence similarity measure in al
 \section{Optimizing the Fitness Surface by Varying Genetic Operator Sets}
 As discussed in Chapter 3, the measure we used to determine `problem difficulty', which is directly related to the shape and characteristics of the fitness surface is NSC. We used Metropolis-Hastings sampling to generate sample points and tournament selection (with tournament size $10$) to determine their neighbors for use in the NSC calculation. During our initial experiments, we noticed a few interesting things that influenced experiments going forward. A discussion of these items is necessary before showing and discussing the results.
 \subsubsection{Problematic Outputs}
-Several similarity scores for each target were repeated with high frequency during initial testing. Investigation of the patches related to these scores showed that silence and white noise were often the result of randomly generated patches, resulting in what, at least for the terms of our experiments, were ill-formed patches. However, it should be noted that such patches will not necessarily generate the lowest fitness score (and in fact do not for our tested files), since it is likely that a large portion of timbral material will exist that is more dissimilar to our target than even white noise or silence. Otherwise, silence and white noise, for example, would have to be maximally dissimilar from all other points in our timbre space, which is not possible given that it is Euclidean and bounded. One interpretation of this phenomenon is that our fitness function is suboptimal and to some extent we agree. However, we believe an appropriate solution is to disregard white noise or silence generating patches as if they were syntactically invalid such that their representations do not exist in our objective timbre space. In other words, we consider silence and white noise to be `absent' of timbre for our purposes. 
+Several similarity scores for each target were repeated with high frequency during initial testing. Investigation of the patches related to these scores showed that silence and white noise were often the result of randomly generated patches, resulting in what, at least for the terms of our experiments, were ill-formed patches. However, it should be noted that such patches will not necessarily generate the lowest fitness score (and in fact do not for our tested files), since it is likely that a large portion of timbral material will exist that is more dissimilar to our target than even white noise or silence. Otherwise, silence and white noise, for example, would have to be maximally dissimilar from all other points in our timbre space, which is not possible given that it is Euclidean and bounded. One interpretation of this phenomenon is that our fitness function is suboptimal and to some extent we agree. However, we believe an appropriate solution is to disregard white noise or silence generating patches as if they were syntactically invalid such that their representations do not exist in our objective timbre space. In other words, we consider silence and white noise to be `absent' of timbre for our purposes.
 
 The problem with such a distinction (beyond the fact that it is conceptually arguable) is that one cannot know when a patch will generate silence or white noise before it has been constructed in Max and made to generate audio. Therefore, our system was developed to detect silence and white noise in our features and disregard any patches that produce such audio before allowing them to undergo genetic operations with other patches. In the absence of such patches, we randomly generate new patches until one is found that does not produce silence or white noise and replace the original patch with it in the population. This random patch generation therefore acts as a separate genetic operator in all of our experiments that injects new patches into the population on occasion. We found that this injection was much more common in early generations and nearly non-existent in later generations, meaning it is only disruptive during the portion of the search that is much more exploratory (when disruption is welcome) than exploitative (when it is not).
 \subsubsection{Results}
-The results of using various genetic operator sets can be seen in Table 4.1 over each of the five `real-world' target timbres.
+The testing we carried out to calculate the NSC for each genetic operation candidate set involved generating $1000$ sample patches and corresponding neighbors for each real-world target sound chosen for the generalization testing. The fitness measure used in this testing was SIC-DPLA on sequences of feature vectors in the NLSE-defined objective timbre space.
+
+The first genetic operation candidate set tested utilized a $0.75$ crossover probability and a $0.25$ subtree mutation probability. The NSC plots over each real-world target sound are shown in Figure 4.7 for this candidate set.
+\afterpage{
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.15]{GOPS_Param2}
+\caption[$0.75$ Crossover and $0.25$ Subtree Mutation NSC Plots]{$0.75$ Crossover and $0.25$ Subtree Mutation NSC Plots.}
+\end{center}
+\end{figure}
+\clearpage
+}
+Note that the line segments in the NSC plots (whose slopes are considered when calculating NSC) for this candidate set are mostly non-negative, which implies regions of the fitness surface that promote moving towards regions of higher fitness. Also, the segments with negative slope exist in the lower fitness range, implying that fitness traps likely exist in these regions, while the regions with mid-to-high fitness patches are more likely to allow for a more fruitful search. In other words, the early stages of evolution are likely slow to produce strong patches, but once such patches are produced, they are able to evolve more easily towards optimal solutions.
+
+The next operation candidate set tested utilized $0.75$ crossover probability and a $0.25$ point mutation probability. The NSC plots over each real-world target sound are shown in Figure 4.8 for this candidate set.
+\afterpage{
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.15]{GOPS_Param3}
+\caption[$0.75$ Crossover and $0.25$ Point Mutation NSC Plots]{$0.75$ Crossover and $0.25$ Point Mutation NSC Plots.}
+\end{center}
+\end{figure}
+\clearpage
+}
+This candidate set shows similar characteristics to the $0.75$ crossover and $0.25$ subtree mutation set, differing only slightly in the location of the negative segments, which occur in areas of somewhat higher fitness than the previous set, but still in the low range of absolute fitness.
+
+We tested a candidate set with the same operators as the first set, but with swapped probabilities (i.e. $0.25$ for crossover and $0.75$ for subtree mutation) to determine how operator strength plays a role between crossover and mutation. The NSC plots over each real-world target sound are shown in Figure 4.9 for this set.
+\afterpage{
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.15]{GOPS_Param4}
+\caption[$0.25$ Crossover and $0.75$ Point Mutation NSC Plots]{$0.25$ Crossover and $0.75$ Point Mutation NSC Plots.}
+\end{center}
+\end{figure}
+\clearpage
+}
+Note how the line segments with negative slope in this example have higher magnitude than those in the previous two examples. This suggests that a combination weighing mutation more than crossover generates a more difficult fitness surface to navigate, especially at the lower ends of the fitness range.
+
+The next candidate set we tested combined crossover (with a $0.50$ probability) and a mixture of both types of mutation (with a $0.25$ probability for subtree and a $0.25$ probability for point). The NSC plots over each real-world target sound are shown in Figure 4.10 for this set.
+\afterpage{
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.15]{GOPS_Param5}
+\caption[$0.5$ Crossover, $0.25$ Point Mutation, and $0.25$ Subtree Mutation NSC Plots]{$0.5$ Crossover, $0.25$ Point Mutation $0.25$, and Subtree Mutation NSC Plots.}
+\end{center}
+\end{figure}
+\clearpage
+}
+As with the last candidate set tested, this set shows very strong negatively-sloped segments, implying a problematic fitness surface.
+
+We switched out point mutation in the previous example with reproduction to form the next candidate set. The NSC plots over each real-world target sound are shown in Figure 4.11 for this set.
+\afterpage{
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.15]{GOPS_Param6}
+\caption[$0.5$ Crossover, $0.25$ Reproduction, and $0.25$ Subtree Mutation NSC Plots]{$0.5$ Crossover, $0.25$ Reproduction, and $0.25$ Subtree Mutation NSC Plots.}
+\end{center}
+\end{figure}
+\clearpage
+}
+The results for this set look slightly better than those of the previous set, but are still inferior to the first two candidate sets, which both use $75\%$ crossover.
+
+Lastly, we looked at how reproduction influenced a stronger mutation probability by utilizing a $0.50$ subtree mutation probability, a $0.25$ reproduction probability, and a $0.25$ crossover probability. The NSC plots over each real-world target sound are shown in Figure 4.12 for this set.
+\afterpage{
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.15]{GOPS_Param7}
+\caption[$0.25$ Crossover, $0.25$ Reproduction, and $0.5$ Subtree Mutation NSC Plots]{$0.5$ Crossover, $0.25$ Reproduction, and $0.25$ Subtree Mutation NSC Plots.}
+\end{center}
+\end{figure}
+\clearpage
+}
+The results of these tests have characteristics that mirror the last few, which are less desirable than our first two candidate sets. One can see the superiority of these sets in regards to problem difficulty more clearly by looking at the NSC values for each of these tests and the means and standard deviations over the target files, as shown in Table 4.1
+\afterpage{
+\begin{table}[h!]
+\begin{center}
+\includegraphics[scale=0.6,width=\linewidth]{GOPS_Table1}
+\caption[NSC Values for Tested Genetic Operation Combinations]{NSC values for the tested genetic operation combinations involving Crossover (C), Subtree Mutation (S), Point Mutation (P), and Reproduction (R) over our selected real-world targets.}
+\end{center}
+\end{table}
+}
+Note that the average NSC values over our targets are considerably better for the first two sets than the averages of all other test sets (with the first slightly better than the second), but the standard deviations are such that we are apprehensive to label any set clearly superior.
+
+Another way to view the data is to look only at NSC rankings per file, rather than the absolute NSC values. These rankings follow in Table 4.2.
+\afterpage{
+\begin{table}[h!]
+\begin{center}
+\includegraphics[scale=0.6,width=\linewidth]{GOPS_Table2}
+\caption[NSC Rankings for Tested Genetic Operation Combinations]{NSC rankings for the tested genetic operation combinations involving Crossover (C), Subtree Mutation (S), Point Mutation (P), and Reproduction (R) over our selected real-world targets.}
+\end{center}
+\end{table}
+\clearpage
+}
+Once again, the first two candidate sets have the best average ranking, with the second set edging out the first this time. The ranking standard deviations are rather significant as well and therefore still do not suggest a clear-cut winner. 
+
+Taking the data from both tables into account, we decided to move forward using the second candidate set (which uses a $0.75$ crossover probability and a $0.25$ point mutation probability) due to its favorable mean NSC value and ranking and its relatively low standard deviation in both data sets. The low standard deviation is desirable because it suggests this candidate set may generalize better over all possible timbre sequences than the first set, which seems to work well for some sequences and not well for others.
 
 \section{Investigating Methods for Reducing Code Bloat and Promoting Parsimonious Solutions}
-As discussed in Chapter 3, 
+In order to promote parsimonious solutions with limited code bloat, we tested enforcing limits both on the tree depth of any one individual patch and on the number of total objects (i.e. nodes) each population has at its disposal. Recall that both types of limitation come in two distinct flavors: static maximum tree depth (SMTD) and dynamic maximum tree depth (DMTD) for former limitation type and resource limited genetic programming (RLGP) and dynamic resource limited genetic programming (dRLGP) for the latter. Each genetic programming problem will be affected by these limitations differently, so we tested variations of each type against one another to determine what, if any, limitation is most beneficial for our problem domain. 
+
+Each limitation (or pair of limitations) we tested was applied over a run of $200$ generations (with an initial population of $100$) for each of the three contrived target files previously referenced.
+
+The tests were broken into the following groups: varying SMTD restrictions, varying DMTD restrictions, varying RLGP restrictions, varying dRLGP restrictions, and combinations of varying SMTD/RLGP restrictions and DMTD/dRLGP restrictions. The fitness values for the best-of-run patches for each test are provided in Table 4.3 with the best performers of each group in bold.
+
+\begin{table}[h!]
+\begin{center}
+\includegraphics[scale=0.6,width=\linewidth]{ResourceLimTable1}
+\caption[Code Bloat Limitation Best-of-Run Values]{The best-of-run fitness values for each variation of code bloat limitation.}
+\end{center}
+\end{table}
+
+Note that the three strongest performers in terms of mean best-of-run fitness over the three tested contrived targets were all in the SMTD category. The separation of these three limitation candidates is even more evident when looking at the associated rank table below (see Table 4.4).
+
+\begin{table}[h!]
+\begin{center}
+\includegraphics[scale=0.6,width=\linewidth]{ResourceLimTable2}
+\caption[Code Bloat Limitation Best-of-Run Ranks]{The best-of-run ranks for each variation of code bloat limitation.}
+\end{center}
+\end{table}
+
+While a SMTD limitation of $14$ shows the best scores, it should be noted that this limitation makes the entire system more volatile as patches generated with this depth often reach beyond the limits of Max's processing power. Therefore, from a pragmatic perspective, this limitation is not ideal in that it often crashes the system and requires closer attention during test runs. It is actually possible that even better solutions could be found by increasing the limitation beyond $14$, but our system does would not function well with such an increase and so tree depth limitations beyond $14$ were not tested.
+
+Imposing a SMTD of $6$ or $8$ (both of which perform almost as well as a SMTD of $14$) will produce much more parsimonious solutions that imposing a SMTD of $14$, which is beneficial for several reasons. One benefit is that solutions that are generated with a SMTD of $6$ or $8$ will contain less Max objects and therefore represent more efficient algorithms. Another result of imposing a stricter SMTD limit is that the end-user of such a system would be able to mimic a desired timbre using a patch with a lot less terminals, which often represent the control parameters of an algorithm. This benefits the user in two ways:
+\begin{enumerate}
+\item The smaller the controllable parameter set of an algorithm, the more simultaneous interaction the user can have with such parameters and therefore the more power the user has in moving to other areas of timbre space.
+\item By increasing the object count to mimic a timbre, there is less pressure on each object to contribute significantly to the output timbre and therefore it is less likely that the patch will truly capture the natural factors of variation that produced the timbre. One could view this as a form of overfitting to the very specific timbral evolution presented.
+\end{enumerate}
+For the pragmatic and theoretical reasons stated above, we decided to eliminate an SMTD of $14$ as a candidate. This left an SMTD of $6$ or an SMTD of $8$, which had comparable results as seen in both Table 4.3 and Table 4.4. We decided to choose an SMTD of $8$ going forward because we believed it struck a good balance between offering parsimonious solutions and not restricting the search space too much for more complex timbral evolutions than those tested.
+
 \section{Testing the Effects of Various Initial Conditions and Selection Mechanisms}
+\subsection{Initial Conditions and Standard Selection Mechanisms}
+\subsection{Non-standard Selection Mechanisms}
 As discussed in Chapter 3, 
 \section{Measuring Generalization Ability over an Optimized System}
 As discussed in Chapter 3, 

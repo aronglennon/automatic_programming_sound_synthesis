@@ -1,7 +1,7 @@
 \contentsline {subsection}{Abstract}{i}
 \contentsline {subsection}{Acknowledgements}{ii}
 \contentsline {subsection}{Figures}{vii}
-\contentsline {subsection}{Tables}{xi}
+\contentsline {subsection}{Tables}{xii}
 \contentsline {chapter}{\numberline {1}Introduction}{1}
 \contentsline {section}{\numberline {1.1}Motivations}{4}
 \contentsline {section}{\numberline {1.2}Overview}{6}
@@ -39,10 +39,12 @@
 \contentsline {subsection}{\numberline {4.1.5}Subsequence Reordering}{208}
 \contentsline {subsection}{\numberline {4.1.6}Repetition Insertion}{208}
 \contentsline {subsection}{\numberline {4.1.7}Looking Back at Our Results}{210}
-\contentsline {section}{\numberline {4.2}Optimizing the Fitness Surface by Varying Genetic Operator Sets}{211}
+\contentsline {section}{\numberline {4.2}Optimizing the Fitness Surface by Varying Genetic Operator Sets}{212}
 \contentsline {subsubsection}{Problematic Outputs}{212}
-\contentsline {subsubsection}{Results}{213}
-\contentsline {section}{\numberline {4.3}Investigating Methods for Reducing Code Bloat and Promoting Parsimonious Solutions}{213}
-\contentsline {section}{\numberline {4.4}Testing the Effects of Various Initial Conditions and Selection Mechanisms}{214}
-\contentsline {section}{\numberline {4.5}Measuring Generalization Ability over an Optimized System}{214}
-\contentsline {chapter}{References}{215}
+\contentsline {subsubsection}{Results}{214}
+\contentsline {section}{\numberline {4.3}Investigating Methods for Reducing Code Bloat and Promoting Parsimonious Solutions}{224}
+\contentsline {section}{\numberline {4.4}Testing the Effects of Various Initial Conditions and Selection Mechanisms}{229}
+\contentsline {subsection}{\numberline {4.4.1}Initial Conditions and Standard Selection Mechanisms}{229}
+\contentsline {subsection}{\numberline {4.4.2}Non-standard Selection Mechanisms}{229}
+\contentsline {section}{\numberline {4.5}Measuring Generalization Ability over an Optimized System}{229}
+\contentsline {chapter}{References}{230}
