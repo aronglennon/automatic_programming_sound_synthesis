@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  26 JAN 2014 17:36
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  29 JAN 2014 21:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -448,46 +448,35 @@ File: SubtractiveVsAdditive.pdf Graphic file (type pdf)
 Package pdftex.def Info: SubtractiveVsAdditive.pdf used on input line 192.
 (pdftex.def)             Requested size: 349.60289pt x 140.92519pt.
  [11] [12 <./SubtractiveVsAdditive.pdf>]
-
-LaTeX Warning: Citation `Seago:2008y' undefined on input line 200.
-
-[13] [14] [15]
-
-LaTeX Warning: Citation `Malloch' undefined on input line 209.
-
-Missing character: There is no Ô in font ptmr7t!
-Missing character: There is no Ð in font ptmr7t!
-Missing character: There is no Õ in font ptmr7t!
-[16] [17] [18]
+[13] [14] [15] [16] [17] [18]
 <SynthesisTechniqueTaxonomy.pdf, id=123, 572.1375pt x 309.155pt>
 File: SynthesisTechniqueTaxonomy.pdf Graphic file (type pdf)
 
 <use SynthesisTechniqueTaxonomy.pdf>
-Package pdftex.def Info: SynthesisTechniqueTaxonomy.pdf used on input line 219.
+Package pdftex.def Info: SynthesisTechniqueTaxonomy.pdf used on input line 221.
 
 (pdftex.def)             Requested size: 400.49352pt x 216.40701pt.
 
-Overfull \hbox (19.79564pt too wide) in paragraph at lines 219--220
+Overfull \hbox (19.79564pt too wide) in paragraph at lines 221--222
  [] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-Missing character: There is no Õ in font ptmr7t!
 [19] [20 <./SynthesisTechniqueTaxonomy.pdf>]
 <SamplingSynthesis.pdf, id=140, 343.2825pt x 154.5775pt>
 File: SamplingSynthesis.pdf Graphic file (type pdf)
 
 <use SamplingSynthesis.pdf>
-Package pdftex.def Info: SamplingSynthesis.pdf used on input line 227.
+Package pdftex.def Info: SamplingSynthesis.pdf used on input line 231.
 (pdftex.def)             Requested size: 274.62636pt x 123.66214pt.
  [21 <./SamplingSynthesis.pdf>]
 <GranularSynthesis.pdf, id=187, 381.425pt x 318.18875pt>
 File: GranularSynthesis.pdf Graphic file (type pdf)
 
 <use GranularSynthesis.pdf>
-Package pdftex.def Info: GranularSynthesis.pdf used on input line 235.
+Package pdftex.def Info: GranularSynthesis.pdf used on input line 239.
 (pdftex.def)             Requested size: 305.1404pt x 254.55133pt.
 
 
@@ -497,29 +486,24 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: AdditiveSynthesis.pdf Graphic file (type pdf)
 
 <use AdditiveSynthesis.pdf>
-Package pdftex.def Info: AdditiveSynthesis.pdf used on input line 243.
+Package pdftex.def Info: AdditiveSynthesis.pdf used on input line 247.
 (pdftex.def)             Requested size: 289.0804pt x 146.14618pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[23 <./GranularSynthesis.pdf>]
-<SubtractiveSynthesis.pdf, id=223, 451.6875pt x 208.78pt>
+[23 <./GranularSynthesis.pdf>] [24 <./AdditiveSynthesis.pdf>]
+<SubtractiveSynthesis.pdf, id=250, 451.6875pt x 208.78pt>
 File: SubtractiveSynthesis.pdf Graphic file (type pdf)
 
 <use SubtractiveSynthesis.pdf>
-Package pdftex.def Info: SubtractiveSynthesis.pdf used on input line 251.
+Package pdftex.def Info: SubtractiveSynthesis.pdf used on input line 255.
 (pdftex.def)             Requested size: 361.35048pt x 167.0242pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-Missing character: There is no Õ in font ptmr7t!
-[24 <./AdditiveSynthesis.pdf>] [25 <./SubtractiveSynthesis.pdf>]
+ [25 <./SubtractiveSynthesis.pdf>]
 <FMSynthesis.pdf, id=284, 575.14874pt x 170.6375pt>
 File: FMSynthesis.pdf Graphic file (type pdf)
  <use FMSynthesis.pdf>
-Package pdftex.def Info: FMSynthesis.pdf used on input line 259.
+Package pdftex.def Info: FMSynthesis.pdf used on input line 263.
 (pdftex.def)             Requested size: 373.84225pt x 110.91304pt.
 
 [26 <./FMSynthesis.pdf>]
@@ -527,85 +511,76 @@ Package pdftex.def Info: FMSynthesis.pdf used on input line 259.
 File: DigitalWaveguideSynthesis.pdf Graphic file (type pdf)
 
 <use DigitalWaveguideSynthesis.pdf>
-Package pdftex.def Info: DigitalWaveguideSynthesis.pdf used on input line 267.
+Package pdftex.def Info: DigitalWaveguideSynthesis.pdf used on input line 271.
 (pdftex.def)             Requested size: 398.03828pt x 262.23048pt.
 
-Overfull \hbox (17.34041pt too wide) in paragraph at lines 267--268
+Overfull \hbox (17.34041pt too wide) in paragraph at lines 271--272
  [] 
  []
 
-[27 <./DigitalWaveguideSynthesis.pdf>] [28]
-<ResynthesisProblem.pdf, id=342, 419.5675pt x 273.02pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[27] [28 <./DigitalWaveguideSynthesis.pdf>] [29]
+<ResynthesisProblem.pdf, id=345, 419.5675pt x 273.02pt>
 File: ResynthesisProblem.pdf Graphic file (type pdf)
 
 <use ResynthesisProblem.pdf>
-Package pdftex.def Info: ResynthesisProblem.pdf used on input line 280.
+Package pdftex.def Info: ResynthesisProblem.pdf used on input line 284.
 (pdftex.def)             Requested size: 293.69524pt x 191.11269pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[29] <ResynthesisIdea.pdf, id=346, 772.8875pt x 293.095pt>
+ [30 <./ResynthesisProblem.pdf>]
+<ResynthesisIdea.pdf, id=377, 772.8875pt x 293.095pt>
 File: ResynthesisIdea.pdf Graphic file (type pdf)
 
 <use ResynthesisIdea.pdf>
-Package pdftex.def Info: ResynthesisIdea.pdf used on input line 288.
+Package pdftex.def Info: ResynthesisIdea.pdf used on input line 292.
 (pdftex.def)             Requested size: 386.4428pt x 146.54713pt.
 
-Overfull \hbox (5.74492pt too wide) in paragraph at lines 288--289
+Overfull \hbox (5.74492pt too wide) in paragraph at lines 292--293
  [] 
  []
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[30 <./ResynthesisProblem.pdf>]
-<ConcatSynth.pdf, id=378, 760.8425pt x 637.38126pt>
+[31 <./ResynthesisIdea.pdf>]
+<ConcatSynth.pdf, id=411, 760.8425pt x 637.38126pt>
 File: ConcatSynth.pdf Graphic file (type pdf)
  <use ConcatSynth.pdf>
-Package pdftex.def Info: ConcatSynth.pdf used on input line 298.
+Package pdftex.def Info: ConcatSynth.pdf used on input line 302.
 (pdftex.def)             Requested size: 418.46466pt x 350.56078pt.
 
-Overfull \hbox (37.76678pt too wide) in paragraph at lines 298--299
+Overfull \hbox (37.76678pt too wide) in paragraph at lines 302--303
  [] 
  []
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[31 <./ResynthesisIdea.pdf>] [32 <./ConcatSynth.pdf>] [33]
-<PhaseVocoder.pdf, id=456, 929.4725pt x 494.84875pt>
+[32 <./ConcatSynth.pdf>] [33] [34]
+<PhaseVocoder.pdf, id=459, 929.4725pt x 494.84875pt>
 File: PhaseVocoder.pdf Graphic file (type pdf)
  <use PhaseVocoder.pdf>
-Package pdftex.def Info: PhaseVocoder.pdf used on input line 314.
+Package pdftex.def Info: PhaseVocoder.pdf used on input line 318.
 (pdftex.def)             Requested size: 418.25877pt x 222.67989pt.
 
-Overfull \hbox (37.5609pt too wide) in paragraph at lines 314--315
+Overfull \hbox (37.5609pt too wide) in paragraph at lines 318--319
  [] 
  []
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[34] [35 <./PhaseVocoder.pdf>] <SMS.pdf, id=494, 741.77126pt x 429.605pt>
+[35 <./PhaseVocoder.pdf>] [36] <SMS.pdf, id=498, 741.77126pt x 429.605pt>
 File: SMS.pdf Graphic file (type pdf)
 
 <use SMS.pdf>
-Package pdftex.def Info: SMS.pdf used on input line 334.
+Package pdftex.def Info: SMS.pdf used on input line 338.
 (pdftex.def)             Requested size: 407.97546pt x 236.28348pt.
 
-Overfull \hbox (27.27759pt too wide) in paragraph at lines 334--335
+Overfull \hbox (27.27759pt too wide) in paragraph at lines 338--339
  [] 
  []
 
-[36] [37 <./SMS.pdf>] [38] <AdaptiveFM.pdf, id=535, 809.0225pt x 575.14874pt>
+[37 <./SMS.pdf>] [38] <AdaptiveFM.pdf, id=535, 809.0225pt x 575.14874pt>
 File: AdaptiveFM.pdf Graphic file (type pdf)
 
 <use AdaptiveFM.pdf>
-Package pdftex.def Info: AdaptiveFM.pdf used on input line 346.
+Package pdftex.def Info: AdaptiveFM.pdf used on input line 350.
 (pdftex.def)             Requested size: 404.51027pt x 287.57367pt.
 
-Overfull \hbox (23.8124pt too wide) in paragraph at lines 346--347
+Overfull \hbox (23.8124pt too wide) in paragraph at lines 350--351
  [] 
  []
 
@@ -616,7 +591,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 <MetaSynthesis1.pdf, id=572, 454.69875pt x 638.385pt>
 File: MetaSynthesis1.pdf Graphic file (type pdf)
  <use MetaSynthesis1.pdf>
-Package pdftex.def Info: MetaSynthesis1.pdf used on input line 357.
+Package pdftex.def Info: MetaSynthesis1.pdf used on input line 361.
 (pdftex.def)             Requested size: 363.75949pt x 510.70868pt.
 
 
@@ -631,7 +606,7 @@ LaTeX Warning: Text page 42 contains only floats.
 File: PucketteMetaSynthesis.pdf Graphic file (type pdf)
 
 <use PucketteMetaSynthesis.pdf>
-Package pdftex.def Info: PucketteMetaSynthesis.pdf used on input line 365.
+Package pdftex.def Info: PucketteMetaSynthesis.pdf used on input line 369.
 (pdftex.def)             Requested size: 310.15797pt x 465.98979pt.
 
 
@@ -646,45 +621,48 @@ LaTeX Warning: Text page 45 contains only floats.
 File: OrchestralMetaSynthesis.pdf Graphic file (type pdf)
 
 <use OrchestralMetaSynthesis.pdf>
-Package pdftex.def Info: OrchestralMetaSynthesis.pdf used on input line 377.
+Package pdftex.def Info: OrchestralMetaSynthesis.pdf used on input line 381.
 (pdftex.def)             Requested size: 438.89104pt x 351.11282pt.
 
-Overfull \hbox (58.19316pt too wide) in paragraph at lines 377--378
+Overfull \hbox (58.19316pt too wide) in paragraph at lines 381--382
  [] 
  []
 
-[48 <./OrchestralMetaSynthesis.pdf>] [49]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[48] [49 <./OrchestralMetaSynthesis.pdf>]
 <FitnessFunction.pdf, id=746, 413.545pt x 475.7775pt>
 File: FitnessFunction.pdf Graphic file (type pdf)
 
 <use FitnessFunction.pdf>
-Package pdftex.def Info: FitnessFunction.pdf used on input line 389.
+Package pdftex.def Info: FitnessFunction.pdf used on input line 393.
 (pdftex.def)             Requested size: 289.4795pt x 333.04196pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<DifferentTopologies.pdf, id=747, 628.3475pt x 196.735pt>
+[50] <DifferentTopologies.pdf, id=750, 628.3475pt x 196.735pt>
 File: DifferentTopologies.pdf Graphic file (type pdf)
 
 <use DifferentTopologies.pdf>
-Package pdftex.def Info: DifferentTopologies.pdf used on input line 397.
+Package pdftex.def Info: DifferentTopologies.pdf used on input line 401.
 (pdftex.def)             Requested size: 377.0114pt x 118.04189pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-LaTeX Warning: Citation `2003ov' undefined on input line 401.
+LaTeX Warning: Citation `2003ov' undefined on input line 405.
 
-[50] [51 <./FitnessFunction.pdf>] [52 <./DifferentTopologies.pdf>] [53]
+[51 <./FitnessFunction.pdf>] [52 <./DifferentTopologies.pdf>] [53]
 <GASearch.pdf, id=802, 768.8725pt x 972.63374pt>
 File: GASearch.pdf Graphic file (type pdf)
  <use GASearch.pdf>
-Package pdftex.def Info: GASearch.pdf used on input line 407.
+Package pdftex.def Info: GASearch.pdf used on input line 411.
 (pdftex.def)             Requested size: 384.4353pt x 486.31567pt.
 
-Overfull \hbox (3.73743pt too wide) in paragraph at lines 407--408
+Overfull \hbox (3.73743pt too wide) in paragraph at lines 411--412
  [] 
  []
 
@@ -701,84 +679,68 @@ Overfull \vbox (1.54172pt too high) has occurred while \output is active []
 
 [55 <./GASearch.pdf>]
 
-LaTeX Warning: Citation `Koza:1992g' undefined on input line 415.
+LaTeX Warning: Citation `Koza:1992g' undefined on input line 419.
 
 [56] [57] <GraphAsPoint.pdf, id=832, 401.5pt x 480.79625pt>
 File: GraphAsPoint.pdf Graphic file (type pdf)
 
 <use GraphAsPoint.pdf>
-Package pdftex.def Info: GraphAsPoint.pdf used on input line 421.
+Package pdftex.def Info: GraphAsPoint.pdf used on input line 425.
 (pdftex.def)             Requested size: 281.04808pt x 336.55507pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-LaTeX Warning: Citation `Todd:1998t' undefined on input line 425.
+LaTeX Warning: Citation `Todd:1998t' undefined on input line 429.
 
 [58] [59 <./GraphAsPoint.pdf>]
 
-LaTeX Warning: Citation `Conrads:1998w' undefined on input line 431.
+LaTeX Warning: Citation `Conrads:1998w' undefined on input line 435.
 
 
-LaTeX Warning: Citation `Dahlstedt:2001d' undefined on input line 437.
+LaTeX Warning: Citation `Dahlstedt:2001d' undefined on input line 441.
 
-[60] [61] [62] [63] [64] [65] [66]
-Missing character: There is no Ô in font ptmr7t!
-Missing character: There is no Õ in font ptmr7t!
- [67] [68] [69] [70]
+[60] [61] [62] [63] [64] [65] [66] [67] [68] [69] [70]
 <GMM.pdf, id=890, 499.8675pt x 283.0575pt>
 File: GMM.pdf Graphic file (type pdf)
  <use GMM.pdf>
-Package pdftex.def Info: GMM.pdf used on input line 481.
+Package pdftex.def Info: GMM.pdf used on input line 485.
 (pdftex.def)             Requested size: 349.90486pt x 198.13889pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[71] [72 <./GMM.pdf>] [73] [74]
-Missing character: There is no Õ in font ptmr7t!
-Missing character: There is no Õ in font ptmr7t!
- [75] [76]
-Missing character: There is no Ô in font ptmr7t!
-Missing character: There is no Õ in font ptmr7t!
-Missing character: There is no Õ in font ptmr7t!
- [77] [78] [79]
-Missing character: There is no Ô in font ptmr7t!
-Missing character: There is no Õ in font ptmr7t!
- [80] [81] [82]
-[83]
-Missing character: There is no Ô in font ptmr7t!
-Missing character: There is no Õ in font ptmr7t!
- [84] [85] <SyntacticCorrectness.pdf, id=963, 602.25pt x 370.38374pt>
+[71] [72 <./GMM.pdf>] [73] [74] [75] [76] [77] [78] [79] [80] [81] [82]
+[83] [84] [85] <SyntacticCorrectness.pdf, id=963, 602.25pt x 370.38374pt>
 File: SyntacticCorrectness.pdf Graphic file (type pdf)
 
 <use SyntacticCorrectness.pdf>
-Package pdftex.def Info: SyntacticCorrectness.pdf used on input line 554.
+Package pdftex.def Info: SyntacticCorrectness.pdf used on input line 558.
 (pdftex.def)             Requested size: 421.57211pt x 259.26685pt.
 
-Overfull \hbox (40.87424pt too wide) in paragraph at lines 554--555
+Overfull \hbox (40.87424pt too wide) in paragraph at lines 558--559
  [] 
  []
 
 [86 <./SyntacticCorrectness.pdf>] [87] [88] [89] [90] [91]
 
-LaTeX Warning: Citation `2006ud' undefined on input line 576.
+LaTeX Warning: Citation `2006ud' undefined on input line 580.
 
 [92] [93]
 Chapter 3.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 583.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 587.
 [94
 
 ] [95] <JSTranslation.pdf, id=1021, 1010.77625pt x 401.5pt>
 File: JSTranslation.pdf Graphic file (type pdf)
 
 <use JSTranslation.pdf>
-Package pdftex.def Info: JSTranslation.pdf used on input line 598.
+Package pdftex.def Info: JSTranslation.pdf used on input line 602.
 (pdftex.def)             Requested size: 404.30333pt x 160.59715pt.
 
-Overfull \hbox (23.60545pt too wide) in paragraph at lines 598--599
+Overfull \hbox (23.60545pt too wide) in paragraph at lines 602--603
  [] 
  []
 
@@ -789,7 +751,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: MaxAudioToPython.pdf Graphic file (type pdf)
 
 <use MaxAudioToPython.pdf>
-Package pdftex.def Info: MaxAudioToPython.pdf used on input line 606.
+Package pdftex.def Info: MaxAudioToPython.pdf used on input line 610.
 (pdftex.def)             Requested size: 371.78242pt x 160.59715pt.
 
 
@@ -799,7 +761,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 <RootTree.pdf, id=1085, 517.935pt x 563.10374pt>
 File: RootTree.pdf Graphic file (type pdf)
  <use RootTree.pdf>
-Package pdftex.def Info: RootTree.pdf used on input line 619.
+Package pdftex.def Info: RootTree.pdf used on input line 623.
 (pdftex.def)             Requested size: 362.55202pt x 394.16994pt.
 
 
@@ -809,10 +771,10 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: MaxDAGs.pdf Graphic file (type pdf)
 
 <use MaxDAGs.pdf>
-Package pdftex.def Info: MaxDAGs.pdf used on input line 632.
+Package pdftex.def Info: MaxDAGs.pdf used on input line 636.
 (pdftex.def)             Requested size: 406.8171pt x 402.60138pt.
 
-Overfull \hbox (26.11922pt too wide) in paragraph at lines 632--633
+Overfull \hbox (26.11922pt too wide) in paragraph at lines 636--637
  [] 
  []
 
@@ -823,10 +785,10 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: MaxDAGsLoadmess.pdf Graphic file (type pdf)
 
 <use MaxDAGsLoadmess.pdf>
-Package pdftex.def Info: MaxDAGsLoadmess.pdf used on input line 640.
+Package pdftex.def Info: MaxDAGsLoadmess.pdf used on input line 644.
 (pdftex.def)             Requested size: 396.98041pt x 371.68608pt.
 
-Overfull \hbox (16.28253pt too wide) in paragraph at lines 640--641
+Overfull \hbox (16.28253pt too wide) in paragraph at lines 644--645
  [] 
  []
 
@@ -837,10 +799,10 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: MaxDAGsSendReceive1.pdf Graphic file (type pdf)
 
 <use MaxDAGsSendReceive1.pdf>
-Package pdftex.def Info: MaxDAGsSendReceive1.pdf used on input line 648.
+Package pdftex.def Info: MaxDAGsSendReceive1.pdf used on input line 652.
 (pdftex.def)             Requested size: 421.57397pt x 474.27072pt.
 
-Overfull \hbox (40.8761pt too wide) in paragraph at lines 648--649
+Overfull \hbox (40.8761pt too wide) in paragraph at lines 652--653
  [] 
  []
 
@@ -848,7 +810,7 @@ Overfull \hbox (40.8761pt too wide) in paragraph at lines 648--649
 File: MaxDAGsSendReceive2.pdf Graphic file (type pdf)
 
 <use MaxDAGsSendReceive2.pdf>
-Package pdftex.def Info: MaxDAGsSendReceive2.pdf used on input line 654.
+Package pdftex.def Info: MaxDAGsSendReceive2.pdf used on input line 658.
 (pdftex.def)             Requested size: 239.29431pt x 334.04843pt.
  [100] [101 <./MaxDAGs.pdf>] [102 <./MaxDAGsLoadmess.pdf>]
 
@@ -860,10 +822,10 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 <MaxDAGs2DACs.pdf, id=1169, 592.2125pt x 467.7475pt>
 File: MaxDAGs2DACs.pdf Graphic file (type pdf)
  <use MaxDAGs2DACs.pdf>
-Package pdftex.def Info: MaxDAGs2DACs.pdf used on input line 662.
+Package pdftex.def Info: MaxDAGs2DACs.pdf used on input line 666.
 (pdftex.def)             Requested size: 414.54591pt x 327.421pt.
 
-Overfull \hbox (33.84804pt too wide) in paragraph at lines 662--663
+Overfull \hbox (33.84804pt too wide) in paragraph at lines 666--667
  [] 
  []
 
@@ -874,7 +836,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: MaxDAGsCrossedPaths.pdf Graphic file (type pdf)
 
 <use MaxDAGsCrossedPaths.pdf>
-Package pdftex.def Info: MaxDAGsCrossedPaths.pdf used on input line 670.
+Package pdftex.def Info: MaxDAGsCrossedPaths.pdf used on input line 674.
 (pdftex.def)             Requested size: 204.76526pt x 396.68254pt.
  [103]
 
@@ -888,10 +850,10 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: MaxDAGsCrossedPaths2.pdf Graphic file (type pdf)
 
 <use MaxDAGsCrossedPaths2.pdf>
-Package pdftex.def Info: MaxDAGsCrossedPaths2.pdf used on input line 678.
+Package pdftex.def Info: MaxDAGsCrossedPaths2.pdf used on input line 682.
 (pdftex.def)             Requested size: 397.48553pt x 395.87955pt.
 
-Overfull \hbox (16.78766pt too wide) in paragraph at lines 678--679
+Overfull \hbox (16.78766pt too wide) in paragraph at lines 682--683
  [] 
  []
 
@@ -903,12 +865,12 @@ ssedPaths.pdf>] <SyntaxInfo.pdf, id=1277, 379.4175pt x 168.63pt>
 File: SyntaxInfo.pdf Graphic file (type pdf)
 
 <use SyntaxInfo.pdf>
-Package pdftex.def Info: SyntaxInfo.pdf used on input line 690.
+Package pdftex.def Info: SyntaxInfo.pdf used on input line 694.
 (pdftex.def)             Requested size: 303.53441pt x 134.90417pt.
  [108 <./MaxDAGsCrossedPaths2.pdf>]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 697.
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 697.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 701.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 701.
 
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omsptm.fd
@@ -917,18 +879,18 @@ File: omsptm.fd
 
 LaTeX Font Warning: Font shape `OMS/ptm/bx/it' undefined
 (Font)              using `OMS/ptm/m/n' instead
-(Font)              for symbol `textbar' on input line 697.
+(Font)              for symbol `textbar' on input line 701.
 
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 697.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 701.
 [109 <./SyntaxInfo.pdf>] [110]
 <OverallGPSystem.pdf, id=1330, 811.03pt x 786.94pt>
 File: OverallGPSystem.pdf Graphic file (type pdf)
  <use OverallGPSystem.pdf>
-Package pdftex.def Info: OverallGPSystem.pdf used on input line 711.
+Package pdftex.def Info: OverallGPSystem.pdf used on input line 715.
 (pdftex.def)             Requested size: 405.514pt x 393.46904pt.
 
-Overfull \hbox (24.81613pt too wide) in paragraph at lines 711--712
+Overfull \hbox (24.81613pt too wide) in paragraph at lines 715--716
  [] 
  []
 
@@ -938,20 +900,12 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [112] [113 <./OverallGPSystem.pdf>] [114
 
-] [115]
-Missing character: There is no Ô in font ptmr7t!
-Missing character: There is no Õ in font ptmr7t!
-Missing character: There is no Ô in font ptmr7t!
-Missing character: There is no Õ in font ptmr7t!
- [116]
-Missing character: There is no Ô in font ptmr7t!
-Missing character: There is no Õ in font ptmr7t!
-
+] [115] [116]
 <NearestNeighbor.jpg, id=1384, 508.90125pt x 311.1625pt>
 File: NearestNeighbor.jpg Graphic file (type jpg)
 
 <use NearestNeighbor.jpg>
-Package pdftex.def Info: NearestNeighbor.jpg used on input line 740.
+Package pdftex.def Info: NearestNeighbor.jpg used on input line 744.
 (pdftex.def)             Requested size: 254.45pt x 155.58087pt.
 
 
@@ -961,20 +915,20 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 <PairwiseCNN.pdf, id=1403, 451.6875pt x 266.9975pt>
 File: PairwiseCNN.pdf Graphic file (type pdf)
  <use PairwiseCNN.pdf>
-Package pdftex.def Info: PairwiseCNN.pdf used on input line 775.
+Package pdftex.def Info: PairwiseCNN.pdf used on input line 779.
 (pdftex.def)             Requested size: 429.10068pt x 253.64616pt.
 
-Overfull \hbox (48.4028pt too wide) in paragraph at lines 775--776
+Overfull \hbox (48.4028pt too wide) in paragraph at lines 779--780
  [] 
  []
 
 [122] <CNN_kNN.pdf, id=1409, 451.6875pt x 373.395pt>
 File: CNN_kNN.pdf Graphic file (type pdf)
  <use CNN_kNN.pdf>
-Package pdftex.def Info: CNN_kNN.pdf used on input line 783.
+Package pdftex.def Info: CNN_kNN.pdf used on input line 787.
 (pdftex.def)             Requested size: 383.93617pt x 317.38725pt.
 
-Overfull \hbox (3.2383pt too wide) in paragraph at lines 783--784
+Overfull \hbox (3.2383pt too wide) in paragraph at lines 787--788
  [] 
  []
 
@@ -982,10 +936,10 @@ Overfull \hbox (3.2383pt too wide) in paragraph at lines 783--784
 File: NLSECluster.pdf Graphic file (type pdf)
 
 <use NLSECluster.pdf>
-Package pdftex.def Info: NLSECluster.pdf used on input line 791.
+Package pdftex.def Info: NLSECluster.pdf used on input line 795.
 (pdftex.def)             Requested size: 457.10916pt x 425.08943pt.
 
-Overfull \hbox (76.41129pt too wide) in paragraph at lines 791--792
+Overfull \hbox (76.41129pt too wide) in paragraph at lines 795--796
  [] 
  []
 
@@ -993,24 +947,24 @@ Overfull \hbox (76.41129pt too wide) in paragraph at lines 791--792
 File: TimbreDistance1.pdf Graphic file (type pdf)
 
 <use TimbreDistance1.pdf>
-Package pdftex.def Info: TimbreDistance1.pdf used on input line 801.
+Package pdftex.def Info: TimbreDistance1.pdf used on input line 805.
 (pdftex.def)             Requested size: 322.00343pt x 242.50633pt.
  [125 <./NLSECluster.pdf>]
 <TimbreDistance2.pdf, id=1679, 402.50375pt x 303.1325pt>
 File: TimbreDistance2.pdf Graphic file (type pdf)
 
 <use TimbreDistance2.pdf>
-Package pdftex.def Info: TimbreDistance2.pdf used on input line 809.
+Package pdftex.def Info: TimbreDistance2.pdf used on input line 813.
 (pdftex.def)             Requested size: 322.00343pt x 242.50633pt.
  [126 <./TimbreDistance1.pdf>] [127 <./TimbreDistance2.pdf>] <TimbreDistance3.p
 df, id=1723, 637.38126pt x 227.85126pt>
 File: TimbreDistance3.pdf Graphic file (type pdf)
 
 <use TimbreDistance3.pdf>
-Package pdftex.def Info: TimbreDistance3.pdf used on input line 823.
+Package pdftex.def Info: TimbreDistance3.pdf used on input line 827.
 (pdftex.def)             Requested size: 382.4317pt x 136.71179pt.
 
-Overfull \hbox (1.73383pt too wide) in paragraph at lines 823--824
+Overfull \hbox (1.73383pt too wide) in paragraph at lines 827--828
  [] 
  []
 
@@ -1021,10 +975,10 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: TimbreDistance4.pdf Graphic file (type pdf)
 
 <use TimbreDistance4.pdf>
-Package pdftex.def Info: TimbreDistance4.pdf used on input line 831.
+Package pdftex.def Info: TimbreDistance4.pdf used on input line 835.
 (pdftex.def)             Requested size: 382.4317pt x 136.71179pt.
 
-Overfull \hbox (1.73383pt too wide) in paragraph at lines 831--832
+Overfull \hbox (1.73383pt too wide) in paragraph at lines 835--836
  [] 
  []
 
@@ -1032,7 +986,7 @@ Overfull \hbox (1.73383pt too wide) in paragraph at lines 831--832
 File: DTWExample.pdf Graphic file (type pdf)
 
 <use DTWExample.pdf>
-Package pdftex.def Info: DTWExample.pdf used on input line 839.
+Package pdftex.def Info: DTWExample.pdf used on input line 843.
 (pdftex.def)             Requested size: 350.80975pt x 356.83224pt.
  [129 <./TimbreDistance3.pdf> <./TimbreDistance4.pdf>]
 
@@ -1043,18 +997,18 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: GreedyMatching1.pdf Graphic file (type pdf)
 
 <use GreedyMatching1.pdf>
-Package pdftex.def Info: GreedyMatching1.pdf used on input line 857.
+Package pdftex.def Info: GreedyMatching1.pdf used on input line 861.
 (pdftex.def)             Requested size: 308.95662pt x 430.61206pt.
 
 
-LaTeX Warning: Float too large for page by 3.8381pt on input line 860.
+LaTeX Warning: Float too large for page by 3.8381pt on input line 864.
 
 [134] [135 <./GreedyMatching1.pdf>]
 <GreedyMatching2.pdf, id=1821, 516.93124pt x 679.53876pt>
 File: GreedyMatching2.pdf Graphic file (type pdf)
 
 <use GreedyMatching2.pdf>
-Package pdftex.def Info: GreedyMatching2.pdf used on input line 867.
+Package pdftex.def Info: GreedyMatching2.pdf used on input line 871.
 (pdftex.def)             Requested size: 336.00133pt x 441.69496pt.
 
 
@@ -1064,7 +1018,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: GreedyMatching3.pdf Graphic file (type pdf)
 
 <use GreedyMatching3.pdf>
-Package pdftex.def Info: GreedyMatching3.pdf used on input line 875.
+Package pdftex.def Info: GreedyMatching3.pdf used on input line 879.
 (pdftex.def)             Requested size: 336.00133pt x 441.69496pt.
 
 
@@ -1083,7 +1037,7 @@ LaTeX Warning: Text page 138 contains only floats.
 File: SIC-DPLA_1.pdf Graphic file (type pdf)
 
 <use SIC-DPLA_1.pdf>
-Package pdftex.def Info: SIC-DPLA_1.pdf used on input line 949.
+Package pdftex.def Info: SIC-DPLA_1.pdf used on input line 953.
 (pdftex.def)             Requested size: 356.07944pt x 424.5852pt.
 
 
@@ -1097,13 +1051,13 @@ LaTeX Warning: Text page 150 contains only floats.
 File: SIC-DPLA_2.pdf Graphic file (type pdf)
 
 <use SIC-DPLA_2.pdf>
-Package pdftex.def Info: SIC-DPLA_2.pdf used on input line 962.
+Package pdftex.def Info: SIC-DPLA_2.pdf used on input line 966.
 (pdftex.def)             Requested size: 375.0015pt x 180.67523pt.
  [151 <./SIC-DPLA_2.pdf>]
 <Penalty_1.pdf, id=1944, 512.91624pt x 678.535pt>
 File: Penalty_1.pdf Graphic file (type pdf)
  <use Penalty_1.pdf>
-Package pdftex.def Info: Penalty_1.pdf used on input line 981.
+Package pdftex.def Info: Penalty_1.pdf used on input line 985.
 (pdftex.def)             Requested size: 359.03893pt x 474.97125pt.
 
 
@@ -1117,20 +1071,17 @@ LaTeX Warning: Text page 153 contains only floats.
 File: Penalty_2.pdf Graphic file (type pdf)
 
 <use Penalty_2.pdf>
-Package pdftex.def Info: Penalty_2.pdf used on input line 993.
+Package pdftex.def Info: Penalty_2.pdf used on input line 997.
 (pdftex.def)             Requested size: 356.93106pt x 332.33936pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[154] [155 <./Penalty_2.pdf>] [156] [157]
-Missing character: There is no Ô in font ptmr7t!
-Missing character: There is no Õ in font ptmr7t!
- [158] [159] [160]
+[154] [155 <./Penalty_2.pdf>] [156] [157] [158] [159] [160]
 <Crossover.pdf, id=2000, 589.20125pt x 398.48875pt>
 File: Crossover.pdf Graphic file (type pdf)
  <use Crossover.pdf>
-Package pdftex.def Info: Crossover.pdf used on input line 1054.
+Package pdftex.def Info: Crossover.pdf used on input line 1058.
 (pdftex.def)             Requested size: 294.5999pt x 199.24388pt.
 
 
@@ -1140,49 +1091,56 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: SubtreeMutation.pdf Graphic file (type pdf)
 
 <use SubtreeMutation.pdf>
-Package pdftex.def Info: SubtreeMutation.pdf used on input line 1062.
+Package pdftex.def Info: SubtreeMutation.pdf used on input line 1066.
 (pdftex.def)             Requested size: 287.57367pt x 116.93657pt.
- [161]
-<PointMutation.pdf, id=2005, 597.23125pt x 190.7125pt>
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<PointMutation.pdf, id=2002, 597.23125pt x 190.7125pt>
 File: PointMutation.pdf Graphic file (type pdf)
  <use PointMutation.pdf>
-Package pdftex.def Info: PointMutation.pdf used on input line 1070.
+Package pdftex.def Info: PointMutation.pdf used on input line 1074.
 (pdftex.def)             Requested size: 298.61488pt x 95.356pt.
 
-[162 <./Crossover.pdf> <./SubtreeMutation.pdf>]
-<Reproduction.pdf, id=2042, 597.23125pt x 190.7125pt>
+[161]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<Reproduction.pdf, id=2006, 597.23125pt x 190.7125pt>
 File: Reproduction.pdf Graphic file (type pdf)
  <use Reproduction.pdf>
-Package pdftex.def Info: Reproduction.pdf used on input line 1078.
+Package pdftex.def Info: Reproduction.pdf used on input line 1082.
 (pdftex.def)             Requested size: 298.61488pt x 95.356pt.
 
-[163 <./PointMutation.pdf> <./Reproduction.pdf>] [164] [165]
+[162 <./Crossover.pdf> <./SubtreeMutation.pdf>] [163 <./PointMutation.pdf> <./R
+eproduction.pdf>] [164] [165]
 <DelayFeedbackAM.pdf, id=2085, 473.77pt x 338.26375pt>
 File: DelayFeedbackAM.pdf Graphic file (type pdf)
 
 <use DelayFeedbackAM.pdf>
-Package pdftex.def Info: DelayFeedbackAM.pdf used on input line 1110.
+Package pdftex.def Info: DelayFeedbackAM.pdf used on input line 1114.
 (pdftex.def)             Requested size: 379.01651pt x 270.61136pt.
 
 <FeedbackDelayAMTarget.pdf, id=2086, 1139.25626pt x 991.705pt>
 File: FeedbackDelayAMTarget.pdf Graphic file (type pdf)
 
 <use FeedbackDelayAMTarget.pdf>
-Package pdftex.def Info: FeedbackDelayAMTarget.pdf used on input line 1117.
+Package pdftex.def Info: FeedbackDelayAMTarget.pdf used on input line 1121.
 (pdftex.def)             Requested size: 398.74567pt x 347.10196pt.
 
 <AdaptiveDegrade.pdf, id=2087, 298.11375pt x 315.1775pt>
 File: AdaptiveDegrade.pdf Graphic file (type pdf)
 
 <use AdaptiveDegrade.pdf>
-Package pdftex.def Info: AdaptiveDegrade.pdf used on input line 1124.
+Package pdftex.def Info: AdaptiveDegrade.pdf used on input line 1128.
 (pdftex.def)             Requested size: 238.49132pt x 252.14233pt.
 
 <AdaptiveDownsamplingTarget.pdf, id=2088, 1226.5825pt x 996.72375pt>
 File: AdaptiveDownsamplingTarget.pdf Graphic file (type pdf)
 
 <use AdaptiveDownsamplingTarget.pdf>
-Package pdftex.def Info: AdaptiveDownsamplingTarget.pdf used on input line 1131
+Package pdftex.def Info: AdaptiveDownsamplingTarget.pdf used on input line 1135
 .
 (pdftex.def)             Requested size: 429.3103pt x 348.85854pt.
 
@@ -1190,7 +1148,7 @@ Package pdftex.def Info: AdaptiveDownsamplingTarget.pdf used on input line 1131
 File: ClippingReverbSaw.pdf Graphic file (type pdf)
 
 <use ClippingReverbSaw.pdf>
-Package pdftex.def Info: ClippingReverbSaw.pdf used on input line 1138.
+Package pdftex.def Info: ClippingReverbSaw.pdf used on input line 1142.
 (pdftex.def)             Requested size: 273.82335pt x 333.24544pt.
 
 
@@ -1212,60 +1170,57 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: ClippingReverbTarget.pdf Graphic file (type pdf)
 
 <use ClippingReverbTarget.pdf>
-Package pdftex.def Info: ClippingReverbTarget.pdf used on input line 1146.
+Package pdftex.def Info: ClippingReverbTarget.pdf used on input line 1150.
 (pdftex.def)             Requested size: 420.17606pt x 344.29141pt.
- [166]
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[167 <./DelayFeedbackAM.pdf>] [168 <./FeedbackDelayAMTarget.pdf>] [169 <./Adapt
-iveDegrade.pdf>] [170 <./AdaptiveDownsamplingTarget.pdf>] [171 <./ClippingRever
-bSaw.pdf>] [172 <./ClippingReverbTarget.pdf>] [173] [174] [175] [176] [177]
-<PieChartSelection.jpg, id=2189, 432.61626pt x 434.62375pt>
+[166] [167 <./DelayFeedbackAM.pdf>] [168 <./FeedbackDelayAMTarget.pdf>]
+[169 <./AdaptiveDegrade.pdf>] [170 <./AdaptiveDownsamplingTarget.pdf>] [171 <./
+ClippingReverbSaw.pdf>] [172 <./ClippingReverbTarget.pdf>] [173] [174] [175]
+[176] [177] <PieChartSelection.jpg, id=2189, 432.61626pt x 434.62375pt>
 File: PieChartSelection.jpg Graphic file (type jpg)
 
 <use PieChartSelection.jpg>
-Package pdftex.def Info: PieChartSelection.jpg used on input line 1204.
+Package pdftex.def Info: PieChartSelection.jpg used on input line 1208.
 (pdftex.def)             Requested size: 302.82932pt x 304.23454pt.
  [178]
 <RankSelection.pdf, id=2193, 436.63126pt x 572.1375pt>
 File: RankSelection.pdf Graphic file (type pdf)
  <use RankSelection.pdf>
-Package pdftex.def Info: RankSelection.pdf used on input line 1212.
+Package pdftex.def Info: RankSelection.pdf used on input line 1216.
 (pdftex.def)             Requested size: 261.98077pt x 343.28514pt.
 
 [179 <./PieChartSelection.jpg>]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 <TournamentSelection.pdf, id=2197, 592.2125pt x 553.06625pt>
 File: TournamentSelection.pdf Graphic file (type pdf)
 
 <use TournamentSelection.pdf>
-Package pdftex.def Info: TournamentSelection.pdf used on input line 1220.
+Package pdftex.def Info: TournamentSelection.pdf used on input line 1224.
 (pdftex.def)             Requested size: 355.33023pt x 331.8423pt.
-
+ [180 <./RankSelection.pdf>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<DoubleTournamentSelection.pdf, id=2198, 458.71375pt x 556.0775pt>
+<DoubleTournamentSelection.pdf, id=2218, 458.71375pt x 556.0775pt>
 File: DoubleTournamentSelection.pdf Graphic file (type pdf)
 
 <use DoubleTournamentSelection.pdf>
-Package pdftex.def Info: DoubleTournamentSelection.pdf used on input line 1229.
+Package pdftex.def Info: DoubleTournamentSelection.pdf used on input line 1233.
 
 (pdftex.def)             Requested size: 321.09743pt x 389.25159pt.
- [180] [181 <./RankSelection.pdf>]
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[182 <./TournamentSelection.pdf>] [183 <./DoubleTournamentSelection.pdf>]
+[181] [182 <./TournamentSelection.pdf>] [183 <./DoubleTournamentSelection.pdf>]
 [184] [185] [186] [187] [188] [189] [190] [191]
 <EvolvingLionRoar.pdf, id=2290, 1169.36874pt x 983.675pt>
 File: EvolvingLionRoar.pdf Graphic file (type pdf)
 
 <use EvolvingLionRoar.pdf>
-Package pdftex.def Info: EvolvingLionRoar.pdf used on input line 1303.
+Package pdftex.def Info: EvolvingLionRoar.pdf used on input line 1307.
 (pdftex.def)             Requested size: 409.28519pt x 344.29141pt.
 
 
@@ -1275,7 +1230,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: EvolvingFreightTrain.pdf Graphic file (type pdf)
 
 <use EvolvingFreightTrain.pdf>
-Package pdftex.def Info: EvolvingFreightTrain.pdf used on input line 1310.
+Package pdftex.def Info: EvolvingFreightTrain.pdf used on input line 1314.
 (pdftex.def)             Requested size: 409.98782pt x 347.10196pt.
 
 
@@ -1285,7 +1240,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: EvolvingMetalGong.pdf Graphic file (type pdf)
 
 <use EvolvingMetalGong.pdf>
-Package pdftex.def Info: EvolvingMetalGong.pdf used on input line 1317.
+Package pdftex.def Info: EvolvingMetalGong.pdf used on input line 1321.
 (pdftex.def)             Requested size: 402.25883pt x 344.64273pt.
 
 
@@ -1295,7 +1250,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: EvolvingMetallicSynth.pdf Graphic file (type pdf)
 
 <use EvolvingMetallicSynth.pdf>
-Package pdftex.def Info: EvolvingMetallicSynth.pdf used on input line 1324.
+Package pdftex.def Info: EvolvingMetallicSynth.pdf used on input line 1328.
 (pdftex.def)             Requested size: 408.23125pt x 343.9401pt.
  [192]
 
@@ -1305,7 +1260,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: RandomAnalogLFOReverb.pdf Graphic file (type pdf)
 
 <use RandomAnalogLFOReverb.pdf>
-Package pdftex.def Info: RandomAnalogLFOReverb.pdf used on input line 1332.
+Package pdftex.def Info: RandomAnalogLFOReverb.pdf used on input line 1336.
 (pdftex.def)             Requested size: 401.90752pt x 339.72427pt.
 
 
@@ -1321,7 +1276,7 @@ Chapter 4.
 File: GlobalTimeScaling.pdf Graphic file (type pdf)
 
 <use GlobalTimeScaling.pdf>
-Package pdftex.def Info: GlobalTimeScaling.pdf used on input line 1349.
+Package pdftex.def Info: GlobalTimeScaling.pdf used on input line 1353.
 (pdftex.def)             Requested size: 543.02742pt x 339.26666pt.
 
 
@@ -1332,7 +1287,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: SampleDeletion.pdf Graphic file (type pdf)
 
 <use SampleDeletion.pdf>
-Package pdftex.def Info: SampleDeletion.pdf used on input line 1365.
+Package pdftex.def Info: SampleDeletion.pdf used on input line 1369.
 (pdftex.def)             Requested size: 533.49182pt x 336.7573pt.
 
 
@@ -1343,21 +1298,21 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: StableExtension.pdf Graphic file (type pdf)
 
 <use StableExtension.pdf>
-Package pdftex.def Info: StableExtension.pdf used on input line 1384.
+Package pdftex.def Info: StableExtension.pdf used on input line 1388.
 (pdftex.def)             Requested size: 545.03491pt x 338.76479pt.
  [204 <./StableExtension.pdf>] [205]
 <ContentIntroduction.pdf, id=2424, 1090.0725pt x 673.51625pt>
 File: ContentIntroduction.pdf Graphic file (type pdf)
 
 <use ContentIntroduction.pdf>
-Package pdftex.def Info: ContentIntroduction.pdf used on input line 1403.
+Package pdftex.def Info: ContentIntroduction.pdf used on input line 1407.
 (pdftex.def)             Requested size: 545.03491pt x 336.7573pt.
  [206] [207 <./ContentIntroduction.pdf>]
 <RepetitionInsertion.pdf, id=2441, 1090.0725pt x 676.5275pt>
 File: RepetitionInsertion.pdf Graphic file (type pdf)
 
 <use RepetitionInsertion.pdf>
-Package pdftex.def Info: RepetitionInsertion.pdf used on input line 1417.
+Package pdftex.def Info: RepetitionInsertion.pdf used on input line 1421.
 (pdftex.def)             Requested size: 545.03491pt x 338.26291pt.
 
 
@@ -1366,7 +1321,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [208]
 File: RepetitionInsertion.pdf Graphic file (type pdf)
  <use RepetitionInsertion.pdf>
-Package pdftex.def Info: RepetitionInsertion.pdf used on input line 1428.
+Package pdftex.def Info: RepetitionInsertion.pdf used on input line 1432.
 (pdftex.def)             Requested size: 545.03491pt x 338.26291pt.
 
 
@@ -1376,11 +1331,11 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 <GOPS_Param2.pdf, id=2474, 2413.015pt x 3631.5675pt>
 File: GOPS_Param2.pdf Graphic file (type pdf)
  <use GOPS_Param2.pdf>
-Package pdftex.def Info: GOPS_Param2.pdf used on input line 1471.
+Package pdftex.def Info: GOPS_Param2.pdf used on input line 1475.
 (pdftex.def)             Requested size: 361.93663pt x 544.71162pt.
 
 
-LaTeX Warning: Float too large for page by 1.93767pt on input line 1471.
+LaTeX Warning: Float too large for page by 1.93767pt on input line 1475.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1391,7 +1346,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 <GOPS_Param3.pdf, id=2515, 2388.925pt x 3605.47pt>
 File: GOPS_Param3.pdf Graphic file (type pdf)
  <use GOPS_Param3.pdf>
-Package pdftex.def Info: GOPS_Param3.pdf used on input line 1507.
+Package pdftex.def Info: GOPS_Param3.pdf used on input line 1511.
 (pdftex.def)             Requested size: 358.32329pt x 540.79718pt.
 
 
@@ -1401,7 +1356,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: GOPS_Param4.pdf Graphic file (type pdf)
 
 <use GOPS_Param4.pdf>
-Package pdftex.def Info: GOPS_Param4.pdf used on input line 1507.
+Package pdftex.def Info: GOPS_Param4.pdf used on input line 1511.
 (pdftex.def)             Requested size: 352.90327pt x 532.06493pt.
 
 
@@ -1411,11 +1366,11 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: GOPS_Param5.pdf Graphic file (type pdf)
 
 <use GOPS_Param5.pdf>
-Package pdftex.def Info: GOPS_Param5.pdf used on input line 1507.
+Package pdftex.def Info: GOPS_Param5.pdf used on input line 1511.
 (pdftex.def)             Requested size: 352.90327pt x 531.4627pt.
 
 
-LaTeX Warning: Float too large for page by 15.25873pt on input line 1507.
+LaTeX Warning: Float too large for page by 15.25873pt on input line 1511.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1428,11 +1383,11 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 <GOPS_Param6.pdf, id=2630, 2358.8125pt x 3579.3725pt>
 File: GOPS_Param6.pdf Graphic file (type pdf)
  <use GOPS_Param6.pdf>
-Package pdftex.def Info: GOPS_Param6.pdf used on input line 1551.
+Package pdftex.def Info: GOPS_Param6.pdf used on input line 1555.
 (pdftex.def)             Requested size: 353.80661pt x 536.88272pt.
 
 
-LaTeX Warning: Float too large for page by 20.64877pt on input line 1551.
+LaTeX Warning: Float too large for page by 20.64877pt on input line 1555.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1441,11 +1396,11 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 <GOPS_Param7.pdf, id=2667, 2354.7975pt x 3555.2825pt>
 File: GOPS_Param7.pdf Graphic file (type pdf)
  <use GOPS_Param7.pdf>
-Package pdftex.def Info: GOPS_Param7.pdf used on input line 1551.
+Package pdftex.def Info: GOPS_Param7.pdf used on input line 1555.
 (pdftex.def)             Requested size: 353.20439pt x 533.26938pt.
 
 
-LaTeX Warning: Float too large for page by 17.03543pt on input line 1551.
+LaTeX Warning: Float too large for page by 17.03543pt on input line 1555.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1454,13 +1409,13 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: GOPS_Table1.pdf Graphic file (type pdf)
 
 <use GOPS_Table1.pdf>
-Package pdftex.def Info: GOPS_Table1.pdf used on input line 1551.
+Package pdftex.def Info: GOPS_Table1.pdf used on input line 1555.
 (pdftex.def)             Requested size: 451.08871pt x 181.8809pt.
  <GOPS_Table2.pdf, id=2707, 796.9775pt x 312.16624pt>
 File: GOPS_Table2.pdf Graphic file (type pdf)
 
 <use GOPS_Table2.pdf>
-Package pdftex.def Info: GOPS_Table2.pdf used on input line 1551.
+Package pdftex.def Info: GOPS_Table2.pdf used on input line 1555.
 (pdftex.def)             Requested size: 478.19019pt x 187.3012pt.
  [223
 
@@ -1472,7 +1427,7 @@ Package pdftex.def Info: GOPS_Table2.pdf used on input line 1551.
 File: ResourceLimTable1.pdf Graphic file (type pdf)
 
 <use ResourceLimTable1.pdf>
-Package pdftex.def Info: ResourceLimTable1.pdf used on input line 1563.
+Package pdftex.def Info: ResourceLimTable1.pdf used on input line 1567.
 (pdftex.def)             Requested size: 453.49774pt x 381.82944pt.
 
 
@@ -1482,7 +1437,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: ResourceLimTable2.pdf Graphic file (type pdf)
 
 <use ResourceLimTable2.pdf>
-Package pdftex.def Info: ResourceLimTable2.pdf used on input line 1572.
+Package pdftex.def Info: ResourceLimTable2.pdf used on input line 1576.
 (pdftex.def)             Requested size: 462.53157pt x 383.6362pt.
 
 
@@ -1493,14 +1448,14 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: InitializationTable1.pdf Graphic file (type pdf)
 
 <use InitializationTable1.pdf>
-Package pdftex.def Info: InitializationTable1.pdf used on input line 1596.
+Package pdftex.def Info: InitializationTable1.pdf used on input line 1600.
 (pdftex.def)             Requested size: 474.57666pt x 227.05pt.
 
 <InitializationTable2.png, id=2770, 796.9775pt x 388.45125pt>
 File: InitializationTable2.png Graphic file (type png)
 
 <use InitializationTable2.png>
-Package pdftex.def Info: InitializationTable2.png used on input line 1603.
+Package pdftex.def Info: InitializationTable2.png used on input line 1607.
 (pdftex.def)             Requested size: 478.19019pt x 233.07254pt.
 
 
@@ -1511,7 +1466,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: NonStandardSelectionTable.png Graphic file (type png)
 
 <use NonStandardSelectionTable.png>
-Package pdftex.def Info: NonStandardSelectionTable.png used on input line 1615.
+Package pdftex.def Info: NonStandardSelectionTable.png used on input line 1619.
 
 (pdftex.def)             Requested size: 479.3947pt x 93.95172pt.
 
@@ -1523,7 +1478,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: ExpansionRestrictionTable.pdf Graphic file (type pdf)
 
 <use ExpansionRestrictionTable.pdf>
-Package pdftex.def Info: ExpansionRestrictionTable.pdf used on input line 1630.
+Package pdftex.def Info: ExpansionRestrictionTable.pdf used on input line 1634.
 
 (pdftex.def)             Requested size: 480.5992pt x 102.38327pt.
  [233 <./ExpansionRestrictionTable.pdf>]
@@ -1539,13 +1494,13 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4544 strings out of 493315
- 70751 string characters out of 6137904
- 125852 words of memory out of 5000000
- 7826 multiletter control sequences out of 15000+600000
+ 4542 strings out of 493315
+ 70743 string characters out of 6137904
+ 126984 words of memory out of 5000000
+ 7824 multiletter control sequences out of 15000+600000
  21861 words of font info for 48 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,12n,23p,3331b,599s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,12n,23p,3346b,597s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -1566,7 +1521,7 @@ type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2013/texmf-dist/fonts/ty
 pe1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/ti
 mes/utmbi8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8
 a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Dissertation.pdf (264 pages, 13749149 bytes).
+Output written on Dissertation.pdf (264 pages, 13751858 bytes).
 PDF statistics:
  2925 PDF objects out of 2984 (max. 8388607)
  2018 compressed objects within 21 object streams

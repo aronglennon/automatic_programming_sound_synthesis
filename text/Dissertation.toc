@@ -24,7 +24,7 @@
 \contentsline {subsubsection}{Timbre Feature Extraction}{115}
 \contentsline {subsubsection}{Timbre Similarity}{126}
 \contentsline {subsection}{\numberline {3.2.2}Genetic Operator Variations}{158}
-\contentsline {subsection}{\numberline {3.2.3}Target Sound Selection}{165}
+\contentsline {subsection}{\numberline {3.2.3}Target Sound Selection}{164}
 \contentsline {subsection}{\numberline {3.2.4}Limiting Code Bloat and Promoting Parsimony}{172}
 \contentsline {subsection}{\numberline {3.2.5}Initial Conditions and Selection Methods}{176}
 \contentsline {subsubsection}{Non-standard Selection Methods}{185}

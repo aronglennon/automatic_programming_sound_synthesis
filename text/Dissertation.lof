@@ -6,7 +6,7 @@
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Additive Synthesis}}{24}
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Subtractive Synthesis}}{25}
 \contentsline {figure}{\numberline {2.6}{\ignorespaces FM Synthesis}}{26}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Digital Waveguide Synthesis}}{27}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Digital Waveguide Synthesis}}{28}
 \contentsline {figure}{\numberline {2.8}{\ignorespaces Producing a Target Timbre}}{30}
 \contentsline {figure}{\numberline {2.9}{\ignorespaces Re-synthesis}}{31}
 \contentsline {figure}{\numberline {2.10}{\ignorespaces Concatenative Synthesis}}{32}
@@ -15,7 +15,7 @@
 \contentsline {figure}{\numberline {2.13}{\ignorespaces Adaptive FM}}{40}
 \contentsline {figure}{\numberline {2.14}{\ignorespaces The Meta-Synthesis Problem}}{42}
 \contentsline {figure}{\numberline {2.15}{\ignorespaces Mapping Timbre to Parameters}}{45}
-\contentsline {figure}{\numberline {2.16}{\ignorespaces Searching for an Appropriate Linear Combination of Orchestral Instruments}}{48}
+\contentsline {figure}{\numberline {2.16}{\ignorespaces Searching for an Appropriate Linear Combination of Orchestral Instruments}}{49}
 \contentsline {figure}{\numberline {2.17}{\ignorespaces Fitness Function}}{51}
 \contentsline {figure}{\numberline {2.18}{\ignorespaces Fitness Surface Topologies}}{52}
 \contentsline {figure}{\numberline {2.19}{\ignorespaces GA Example}}{55}
@@ -62,7 +62,7 @@
 \contentsline {figure}{\numberline {3.37}{\ignorespaces Clipping Reverb Sawtooth Max Patch}}{171}
 \contentsline {figure}{\numberline {3.38}{\ignorespaces Clipping Reverb Sawtooth Time-Frequency Representation}}{172}
 \contentsline {figure}{\numberline {3.39}{\ignorespaces Fitness-proportionate Selection}}{179}
-\contentsline {figure}{\numberline {3.40}{\ignorespaces Ranking Selection}}{181}
+\contentsline {figure}{\numberline {3.40}{\ignorespaces Ranking Selection}}{180}
 \contentsline {figure}{\numberline {3.41}{\ignorespaces Tournament Selection}}{182}
 \contentsline {figure}{\numberline {3.42}{\ignorespaces Tournament Selection}}{183}
 \contentsline {figure}{\numberline {3.43}{\ignorespaces Evolving Lion Roar Time-Frequency Representation}}{193}

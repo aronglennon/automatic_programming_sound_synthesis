@@ -883,54 +883,6 @@ Humphrey, E.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-III%
-}{%
-III%
-}{%
-{\protect\APACyear{1991}}%
-}]{%
-III:1991hc}%
-\APACinsertmetastar{%
-III:1991hc}%
-III, J\BPBI O\BPBI S.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{1991}{October}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Viewpoints on the History of Digital
-  Synthesis}{Viewpoints on the history of digital synthesis}.\BBCQ{}
-\newblock
-\BIn{} \APACrefbtitle{Proceedings of the International Computer Music
-  Conference}{Proceedings of the international computer music conference}\
-  (\BPG~1-12).
-\newblock
-\APACaddressPublisher{Montreal}{}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
-III%
-}{%
-III%
-}{%
-{\protect\APACyear{1992}}%
-}]{%
-III:1992zn}%
-\APACinsertmetastar{%
-III:1992zn}%
-III, J\BPBI O\BPBI S.%
-%
-\unskip\
-\newblock
-\APACrefYearMonthDay{1992}{January}{}.
-\newblock
-\BBOQ{}\APACrefatitle{Physical Modeling Using Digital Waveguides}{Physical
-  modeling using digital waveguides}.\BBCQ{}
-\newblock
-\APACjournalVolNumPages{Computer Music Journal}{16}{4}{74-91}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem[\protect\citeauthoryear{%
 Jaffe%
 }{%
 Jaffe%
@@ -2374,10 +2326,10 @@ Serra, J.%
 
 \bibitem[\protect\citeauthoryear{%
 X.~Serra%
-\ \BBA{} III%
+\ \BBA{} Smith%
 }{%
 X.~Serra%
-\ \BBA{} III%
+\ \BBA{} Smith%
 }{%
 {\protect\APACyear{1990}}%
 }]{%
@@ -2385,7 +2337,7 @@ Serra:1990dk}%
 \APACinsertmetastar{%
 Serra:1990dk}%
 Serra, X.%
-\BCBT{}\ \BBA{} III, J\BPBI O\BPBI S.%
+\BCBT{}\ \BBA{} Smith, J\BPBI O., III.%
 %
 \unskip\
 \newblock
@@ -2566,10 +2518,58 @@ Silva, S\BPBI G\BPBI O. da.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-Smith%
+J\BPBI O.~Smith III%
+}{%
+J\BPBI O.~Smith III%
+}{%
+{\protect\APACyear{1991}}%
+}]{%
+III:1991hc}%
+\APACinsertmetastar{%
+III:1991hc}%
+Smith, J\BPBI O., III.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1991}{October}{}.
+\newblock
+\BBOQ{}\APACrefatitle{Viewpoints on the History of Digital
+  Synthesis}{Viewpoints on the history of digital synthesis}.\BBCQ{}
+\newblock
+\BIn{} \APACrefbtitle{Proceedings of the International Computer Music
+  Conference}{Proceedings of the international computer music conference}\
+  (\BPG~1-12).
+\newblock
+\APACaddressPublisher{Montreal}{}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+J\BPBI O.~Smith III%
+}{%
+J\BPBI O.~Smith III%
+}{%
+{\protect\APACyear{1992}}%
+}]{%
+III:1992zn}%
+\APACinsertmetastar{%
+III:1992zn}%
+Smith, J\BPBI O., III.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1992}{January}{}.
+\newblock
+\BBOQ{}\APACrefatitle{Physical Modeling Using Digital Waveguides}{Physical
+  modeling using digital waveguides}.\BBCQ{}
+\newblock
+\APACjournalVolNumPages{Computer Music Journal}{16}{4}{74-91}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+T.~Smith%
 \ \BBA{} Waterman%
 }{%
-Smith%
+T.~Smith%
 \ \BBA{} Waterman%
 }{%
 {\protect\APACyear{1981}}%
