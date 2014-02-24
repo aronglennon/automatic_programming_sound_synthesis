@@ -394,7 +394,7 @@ def reorder_segments(audio, num_swaps):
     reordered_audio = np.append(reordered_audio, audio[location_two:(location_two+random_swap)])
     reordered_audio = np.append(reordered_audio, audio[location_one+random_swap+1:location_two])
     reordered_audio = np.append(reordered_audio, audio[location_one:(location_one+random_swap)])
-    reordered_audio = np.append(reordered_audio, audio[location_two+1:])
+    reordered_audio = np.append(reordered_audio, audio[location_two+random_swap+1:])
     for i in range(1, num_swaps):
         random_swap = random.randint(int(len(audio)*0.10), int(len(audio)*0.75))
         if random_swap < min_swap:
@@ -405,11 +405,12 @@ def reorder_segments(audio, num_swaps):
         # choose swap locations that do not overlap (simplest way is to choose first location in first half of audio and second in second)
         location_one = random.randint(0,(len(audio)-random_swap)/2)
         location_two = random.randint((len(audio)-random_swap)/2, len(audio)-random_swap)
+        audio = reordered_audio        
         reordered_audio = audio[:location_one]
         reordered_audio = np.append(reordered_audio, audio[location_two:(location_two+random_swap)])
         reordered_audio = np.append(reordered_audio, audio[location_one+random_swap+1:location_two])
         reordered_audio = np.append(reordered_audio, audio[location_one:(location_one+random_swap)])
-        reordered_audio = np.append(reordered_audio, audio[location_two+1:])
+        reordered_audio = np.append(reordered_audio, audio[location_two+random_swap+1:])
     average_swap_size = total_swap/num_swaps
     return reordered_audio, max_swap, min_swap, total_swap, average_swap_size
 

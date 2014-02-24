@@ -234,6 +234,62 @@ class mysql_object():
         else:
             return []
     
+    def get_repinsert_similarity_test_data(self, testrun, sim_type):
+        if self.connected:
+            statement = "SELECT avg(sim_val), avg(total_length_reps)/44100 FROM testdata_similarity_repinsert WHERE testrun_id = %d AND sim_type = \"%s\" group by testcase_id" % (testrun, sim_type)
+            values = db_core.select(self.dbConnection, statement)
+            return values
+        else:
+            return []  
+            
+    def get_tsts_similarity_test_data(self, testrun, sim_type):
+        if self.connected:
+            statement = "SELECT avg(sim_val), scale_percent FROM automatic_programming_sound_synthesis.testdata_similarity_tsts WHERE testrun_id = %d AND sim_type = \"%s\" group by scale_percent;" % (testrun, sim_type)
+            values = db_core.select(self.dbConnection, statement)
+            return values
+        else:
+            return [] 
+
+    def get_sampdel_similarity_test_data(self, testrun, sim_type):
+        if self.connected:
+            statement = "SELECT avg(sim_val), total_deleted_content FROM automatic_programming_sound_synthesis.testdata_similarity_sampdel WHERE testrun_id = %d AND sim_type = \"%s\" group by testcase_id;" % (testrun, sim_type)
+            values = db_core.select(self.dbConnection, statement)
+            return values
+        else:
+            return [] 
+
+    def get_stableextension_similarity_test_data(self, testrun, sim_type):
+        if self.connected:
+            statement = "SELECT avg(sim_val), total_content_extended FROM automatic_programming_sound_synthesis.testdata_similarity_stableextension WHERE testrun_id = %d AND sim_type = \"%s\" group by testcase_id;" % (testrun, sim_type)
+            values = db_core.select(self.dbConnection, statement)
+            return values
+        else:
+            return []
+    
+    def get_reorder_similarity_test_data(self, testrun, sim_type):
+        if self.connected:
+            statement = "SELECT avg(sim_val), total_size/44100 FROM automatic_programming_sound_synthesis.testdata_similarity_reorder WHERE testrun_id = %d AND sim_type = \"%s\" GROUP BY testcase_id;" % (testrun, sim_type)
+            values = db_core.select(self.dbConnection, statement)
+            return values
+        else:
+            return []    
+
+    def get_tw_similarity_test_data(self, testrun, sim_type):
+        if self.connected:
+            statement = "SELECT avg(sim_val), max_warping_threshold FROM automatic_programming_sound_synthesis.testdata_similarity_tw WHERE testrun_id = %d AND sim_type = \"%s\" AND min_warping_threshold = 0 group by max_warping_threshold" % (testrun, sim_type)
+            values = db_core.select(self.dbConnection, statement)
+            return values
+        else:
+            return [] 
+    
+    def get_content_intro_similarity_test_data(self, testrun, sim_type):
+        if self.connected:
+            statement = "SELECT avg(sim_val), total_percent_introduction FROM testdata_similarity_contentintro WHERE testrun_id = %d AND sim_type = \"%s\" group by total_percent_deletion" % (testrun, sim_type)
+            values = db_core.select(self.dbConnection, statement)
+            return values
+        else:
+            return []    
+    
     def get_genops_test_data(self, testrun, bad_vals):
         if self.connected:
             statement = "SELECT patch_fitness, max(neighbor_fitness) FROM automatic_programming_sound_synthesis.testdata_genops WHERE testrun_id IN (%s) AND patch_fitness != neighbor_fitness AND patch_fitness NOT IN (%s) AND neighbor_fitness NOT IN (%s) GROUP BY testcase_id;" % (','.join([str(s) for s in testrun]), ','.join([str(b) for b in bad_vals]), ','.join([str(b) for b in bad_vals]))
@@ -263,7 +319,7 @@ class mysql_object():
         if self.connected:
             statement = "SELECT AVG(fitness) FROM testdata WHERE testrun_id = %d GROUP BY generation" % (testrun)
             values = db_core.select(self.dbConnection, statement)
-            return values
+            return [float(x) for x in [y[0] for y in values]]
         else:
             return []
         
@@ -271,7 +327,7 @@ class mysql_object():
         if self.connected:
             statement = "SELECT MAX(fitness) FROM testdata WHERE testrun_id = %d GROUP BY generation" % (testrun)
             values = db_core.select(self.dbConnection, statement)
-            return values
+            return [float(x) for x in [y[0] for y in values]]
         else:
             return []
         
@@ -279,7 +335,7 @@ class mysql_object():
         if self.connected:
             statement = "SELECT MIN(fitness) FROM testdata WHERE testrun_id = %d GROUP BY generation" % (testrun)
             values = db_core.select(self.dbConnection, statement)
-            return values
+            return [float(x) for x in [y[0] for y in values]]
         else:
             return []
     def get_last_generation(self, testrun_id):

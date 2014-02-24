@@ -6,7 +6,7 @@
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Additive Synthesis}}{24}
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Subtractive Synthesis}}{25}
 \contentsline {figure}{\numberline {2.6}{\ignorespaces FM Synthesis}}{26}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Digital Waveguide Synthesis}}{27}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Digital Waveguide Synthesis}}{28}
 \contentsline {figure}{\numberline {2.8}{\ignorespaces Producing a Target Timbre}}{30}
 \contentsline {figure}{\numberline {2.9}{\ignorespaces Re-synthesis}}{31}
 \contentsline {figure}{\numberline {2.10}{\ignorespaces Concatenative Synthesis}}{32}
@@ -15,7 +15,7 @@
 \contentsline {figure}{\numberline {2.13}{\ignorespaces Adaptive FM}}{40}
 \contentsline {figure}{\numberline {2.14}{\ignorespaces The Meta-Synthesis Problem}}{42}
 \contentsline {figure}{\numberline {2.15}{\ignorespaces Mapping Timbre to Parameters}}{45}
-\contentsline {figure}{\numberline {2.16}{\ignorespaces Searching for an Appropriate Linear Combination of Orchestral Instruments}}{48}
+\contentsline {figure}{\numberline {2.16}{\ignorespaces Searching for an Appropriate Linear Combination of Orchestral Instruments}}{49}
 \contentsline {figure}{\numberline {2.17}{\ignorespaces Fitness Function}}{51}
 \contentsline {figure}{\numberline {2.18}{\ignorespaces Fitness Surface Topologies}}{52}
 \contentsline {figure}{\numberline {2.19}{\ignorespaces GA Example}}{55}
@@ -54,7 +54,7 @@
 \contentsline {figure}{\numberline {3.29}{\ignorespaces Crossover}}{162}
 \contentsline {figure}{\numberline {3.30}{\ignorespaces Subtree Mutation}}{162}
 \contentsline {figure}{\numberline {3.31}{\ignorespaces Point Mutation}}{163}
-\contentsline {figure}{\numberline {3.32}{\ignorespaces Reproduction}}{164}
+\contentsline {figure}{\numberline {3.32}{\ignorespaces Reproduction}}{163}
 \contentsline {figure}{\numberline {3.33}{\ignorespaces Delay Feedback AM Max Patch}}{167}
 \contentsline {figure}{\numberline {3.34}{\ignorespaces Delay Feedback AM Time-Frequency Representation}}{168}
 \contentsline {figure}{\numberline {3.35}{\ignorespaces Adaptive Downsampling Max Patch}}{169}
@@ -62,7 +62,7 @@
 \contentsline {figure}{\numberline {3.37}{\ignorespaces Clipping Reverb Sawtooth Max Patch}}{171}
 \contentsline {figure}{\numberline {3.38}{\ignorespaces Clipping Reverb Sawtooth Time-Frequency Representation}}{172}
 \contentsline {figure}{\numberline {3.39}{\ignorespaces Fitness-proportionate Selection}}{179}
-\contentsline {figure}{\numberline {3.40}{\ignorespaces Ranking Selection}}{181}
+\contentsline {figure}{\numberline {3.40}{\ignorespaces Ranking Selection}}{180}
 \contentsline {figure}{\numberline {3.41}{\ignorespaces Tournament Selection}}{182}
 \contentsline {figure}{\numberline {3.42}{\ignorespaces Tournament Selection}}{183}
 \contentsline {figure}{\numberline {3.43}{\ignorespaces Evolving Lion Roar Time-Frequency Representation}}{193}
@@ -71,3 +71,15 @@
 \contentsline {figure}{\numberline {3.46}{\ignorespaces Evolving Metallic Synth Time-Frequency Representation}}{196}
 \contentsline {figure}{\numberline {3.47}{\ignorespaces Random Analog LFO Reverb Time-Frequency Representation}}{197}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Global Time Scaling Results}}{200}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Sample Deletion Results}}{202}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Extension of Stable Timbral Content Results}}{204}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Content Introduction Results}}{207}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Subsequence Reordering Results}}{209}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Repetition Insertion Results}}{210}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces $0.75$ Crossover and $0.25$ Subtree Mutation NSC Plots}}{215}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces $0.75$ Crossover and $0.25$ Point Mutation NSC Plots}}{217}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces $0.25$ Crossover and $0.75$ Point Mutation NSC Plots}}{218}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces $0.5$ Crossover, $0.25$ Point Mutation, and $0.25$ Subtree Mutation NSC Plots}}{219}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces $0.5$ Crossover, $0.25$ Reproduction, and $0.25$ Subtree Mutation NSC Plots}}{221}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces $0.25$ Crossover, $0.25$ Reproduction, and $0.5$ Subtree Mutation NSC Plots}}{222}
