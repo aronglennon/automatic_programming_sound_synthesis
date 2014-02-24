@@ -11,7 +11,7 @@ DTW = importr('dtw')
 from matplotlib import pylab as pl
 import math
 
-def get_similarity(features1, features2, similarity_type, warp_factor = 0.0):
+def get_similarity(features1, features2, similarity_type, idff_weight = 0.0):
     print 'calculating similarity'
     # option 1: calculate euclidean distance and send back multiplicative inverse so that a larger distance has lower fitness
     if similarity_type == 'euclidean':
@@ -24,12 +24,11 @@ def get_similarity(features1, features2, similarity_type, warp_factor = 0.0):
         return get_DPLA(features1, features2)
     # option 4: SIC-DPLA
     elif similarity_type == 'SIC-DPLA':
+        # idff_weight controls how much of sequences we compare for similarity
+        len_of_modified_features1 = max(len(features1) * (1.0-idff_weight), 1) 
+        len_of_modified_features2 = max(len(features2) * (1.0-idff_weight), 1) 
         # raw value is between 0 and 1
-        raw_value = get_SIC_DPLA(features1, features2)
-        # log function from 0 to 1
-        log_value = math.log(raw_value+1, 2)
-        # warp by mixing log and linear
-        return raw_value * (1.0-warp_factor) + log_value * (warp_factor)
+        return get_SIC_DPLA(features1[:len_of_modified_features1], features2[:len_of_modified_features2])
 
 def get_euclidean(features1, features2):
     # make sure both matrices are the same size...if not truncate the larger one
