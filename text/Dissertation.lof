@@ -6,7 +6,7 @@
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Additive Synthesis}}{24}
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Subtractive Synthesis}}{25}
 \contentsline {figure}{\numberline {2.6}{\ignorespaces FM Synthesis}}{26}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Digital Waveguide Synthesis}}{28}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Digital Waveguide Synthesis}}{27}
 \contentsline {figure}{\numberline {2.8}{\ignorespaces Producing a Target Timbre}}{30}
 \contentsline {figure}{\numberline {2.9}{\ignorespaces Re-synthesis}}{31}
 \contentsline {figure}{\numberline {2.10}{\ignorespaces Concatenative Synthesis}}{32}
@@ -21,7 +21,7 @@
 \contentsline {figure}{\numberline {2.19}{\ignorespaces GA Example}}{55}
 \contentsline {figure}{\numberline {2.20}{\ignorespaces The Genetic Programming Paradigm}}{59}
 \contentsline {figure}{\numberline {2.21}{\ignorespaces Gaussian Mixture Models}}{72}
-\contentsline {figure}{\numberline {2.22}{\ignorespaces Strongly-Typed Genetic Programming}}{86}
+\contentsline {figure}{\numberline {2.22}{\ignorespaces Strongly-Typed Genetic Programming}}{87}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Generating a Max patch given a parse-tree}}{97}
 \contentsline {figure}{\numberline {3.2}{\ignorespaces FromMax to Python}}{97}

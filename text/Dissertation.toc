@@ -13,7 +13,7 @@
 \contentsline {section}{\numberline {2.5}Artificially Intelligent Music Systems}{50}
 \contentsline {section}{\numberline {2.6}Audio-Implementation Systems}{67}
 \contentsline {section}{\numberline {2.7}Timbral Similarity}{68}
-\contentsline {section}{\numberline {2.8}State-of-the-Art Genetic Programming}{83}
+\contentsline {section}{\numberline {2.8}State-of-the-Art Genetic Programming}{84}
 \contentsline {chapter}{\numberline {3}Methods}{94}
 \contentsline {section}{\numberline {3.1}System Design}{94}
 \contentsline {subsection}{\numberline {3.1.1}Languages and Interoperability}{94}
@@ -21,13 +21,13 @@
 \contentsline {subsection}{\numberline {3.1.3}Genetic Programming System Overview}{110}
 \contentsline {section}{\numberline {3.2}Experiment Design}{114}
 \contentsline {subsection}{\numberline {3.2.1}The Fitness Function}{115}
-\contentsline {subsubsection}{Timbre Feature Extraction}{115}
-\contentsline {subsubsection}{Timbre Similarity}{126}
+\contentsline {subsubsection}{\numberline {3.2.1.1}Timbre Feature Extraction}{115}
+\contentsline {subsubsection}{\numberline {3.2.1.2}Timbre Similarity}{126}
 \contentsline {subsection}{\numberline {3.2.2}Genetic Operator Variations}{158}
 \contentsline {subsection}{\numberline {3.2.3}Target Sound Selection}{164}
 \contentsline {subsection}{\numberline {3.2.4}Limiting Code Bloat and Promoting Parsimony}{172}
 \contentsline {subsection}{\numberline {3.2.5}Initial Conditions and Selection Methods}{176}
-\contentsline {subsubsection}{Non-standard Selection Methods}{185}
+\contentsline {subsubsection}{\numberline {3.2.5.1}Non-standard Selection Methods}{185}
 \contentsline {subsection}{\numberline {3.2.6}Expanding/Restricting the Searchable Region of Input Space}{189}
 \contentsline {subsection}{\numberline {3.2.7}Generalization}{191}
 \contentsline {chapter}{\numberline {4}Results}{198}
@@ -40,8 +40,8 @@
 \contentsline {subsection}{\numberline {4.1.6}Repetition Insertion}{208}
 \contentsline {subsection}{\numberline {4.1.7}Looking Back at Our Results}{210}
 \contentsline {section}{\numberline {4.2}Optimizing the Fitness Surface by Varying Genetic Operator Sets}{212}
-\contentsline {subsubsection}{Problematic Outputs}{212}
-\contentsline {subsubsection}{Results}{214}
+\contentsline {subsection}{\numberline {4.2.1}Problematic Outputs}{212}
+\contentsline {subsection}{\numberline {4.2.2}Results}{214}
 \contentsline {section}{\numberline {4.3}Investigating Methods for Reducing Code Bloat and Promoting Parsimonious Solutions}{224}
 \contentsline {section}{\numberline {4.4}Testing the Effects of Various Initial Conditions and Selection Mechanisms}{228}
 \contentsline {subsection}{\numberline {4.4.1}Initial Conditions and Standard Selection Mechanisms}{229}
