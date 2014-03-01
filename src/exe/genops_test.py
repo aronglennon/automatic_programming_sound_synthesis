@@ -156,7 +156,7 @@ def main():
             for l in range (0, BATCH_SIZE):
                 if l != k:
                     crossover_pool.append(copy.deepcopy(batch_patches[l]))
-            neighbors = create_next_generation(copies, gen_ops, max_tree_depth, max_tree_depth, all_objects, None, True, crossover_pool, js_filename = JS_FILE_ROOT + '%s.js' % MAX_PATCH, test_filename = TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type = feature_type, patch_type = PATCH_TYPE, target_features = target_features, similarity_measure = similarity_measure, warp_factor = 1.0, silence_vals = SILENCE_VALS)
+            neighbors = create_next_generation(copies, gen_ops, max_tree_depth, max_tree_depth, all_objects, None, True, crossover_pool, js_filename = JS_FILE_ROOT + '%s.js' % MAX_PATCH, test_filename = TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type = feature_type, patch_type = PATCH_TYPE, target_features = target_features, similarity_measure = similarity_measure, idff_weight = 1.0, silence_vals = SILENCE_VALS)
             # sort neighbors by fitness
             for n in neighbors:
                 n.start_max_processing(JS_FILE_ROOT + '%s.js' % MAX_PATCH, TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type, PATCH_TYPE)

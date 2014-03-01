@@ -98,7 +98,7 @@ def split_selected_into_gen_ops(selected, gen_ops):
 # NOTE: only subtree mutation is able to change the number of resources used in the population, so first count
 # all resources used in all other patches, subtract from max_resource_count, and send that number to subtree_mutate
 # NOTE!!!! THIS SIGNATURE IS RIDICULOUS BUT I NEEDED TO GET THE TESTS RUN QUICKLY, SO I JUST PASSED EVERYTHING IN THAT WAS NECESSARY...HORRIBLE!!!
-def create_next_generation(selected, gen_ops, max_num_levels, tree_depth_limit, all_objects, max_resource_count = None, allow_equal_cross = True, crossover_pool = [], js_filename =[], test_filename=[], feature_type=[], patch_type=[], target_features=[], similarity_measure=[], warp_factor=[], silence_vals=[], best_of_run_fitness=0.0, pop_size = 100, resource_type = 'RLGP', max_total_resource_limit = None, best_mean_fitness = 0.0):
+def create_next_generation(selected, gen_ops, max_num_levels, tree_depth_limit, all_objects, max_resource_count = None, allow_equal_cross = True, crossover_pool = [], js_filename =[], test_filename=[], feature_type=[], patch_type=[], target_features=[], similarity_measure=[], idff_weight=[], silence_vals=[], best_of_run_fitness=0.0, pop_size = 100, resource_type = 'RLGP', max_total_resource_limit = None, best_mean_fitness = 0.0):
     # put even # of vecs in crossover and rest in mutation based on respective probabilities for those operations
     # (fills crossover and mutation vectors from selected vector)
     separated_patches = split_selected_into_gen_ops(selected, gen_ops)
@@ -129,7 +129,7 @@ def create_next_generation(selected, gen_ops, max_num_levels, tree_depth_limit, 
         if c.depth > max_num_levels and c.depth <= tree_depth_limit:
             # if the crossover patch's depth is beyond max_num_levels, we must compare its fitness to its parents
             c.start_max_processing(js_filename, test_filename, feature_type, patch_type, None) 
-            c.fitness = get_similarity(target_features,c.data, similarity_measure, warp_factor)
+            c.fitness = get_similarity(target_features,c.data, similarity_measure, idff_weight)
             if (np.isnan(c.fitness) or any(c.fitness >= (fitness - 0.000001) and c.fitness <= (fitness + 0.000001) for fitness in silence_vals)):
                 print 'bad patch...'
                 c.fitness = 0

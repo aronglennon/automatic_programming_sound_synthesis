@@ -13,7 +13,8 @@ import numpy as np
 import threading
 
 # 1.
-MAX_PATCH = 4
+MAX_PATCH = 1
+
 DEBUG = False
 # 2.
 INIT_MAX_TREE_DEPTH = 8 # init limit on any one individuals depth
@@ -25,34 +26,45 @@ EXCHANGE_FREQUENCY = 10
 EXCHANGE_PROPORTION = 0.10
 SUBGROUPS = 5
 
-# 3. 
-# adaptive-downsample_and_bit_reduction_stereo.wav - 3
+# 3.
+#OBJ_LIST_FILE = '/etc/max/general1_object_list.txt'
+OBJ_LIST_FILE = '/etc/max/general2_object_list.txt'
+#OBJ_LIST_FILE = '/etc/max/general3_object_list.txt'
+'''
+# 7 sec
+TARGET_FILE = '/var/data/max/Freight_Train-Mono.wav'
+SILENCE_VALS = [0.91050509, 0.91429948, 0.94318003, 0.94135201]
+'''
+'''
+# 3 sec
+TARGET_FILE = '/var/data/max/Lion-Growling-Mono.wav'
+SILENCE_VALS = [0.91480948, 0.91356656, 0.91356640]
+'''
 
-OBJ_LIST_FILE = '/etc/max/adaptive_downsampling_object_list.txt'
-TARGET_FILE = '/var/data/max/adaptive-downsample_and_bit_reduction_stereo.wav'
-SILENCE_VALS = [0.87624177, 0.81243946, 0.83953520, 0.83950409, 0.87623865, 0.87834727]
+# 6 sec
+TARGET_FILE = '/var/data/max/Metal_Gong-Mono.wav'
+SILENCE_VALS = [0.89184133, 0.91496528, 0.91496545, 0.88664024, 0.89162869, 0.91073726, 0.91073702, 0.91461484]
 
 '''
-# clipping-reverb-saw.wav - 3
-OBJ_LIST_FILE = '/etc/max/clipping_reverb_object_list.txt'
-TARGET_FILE = '/var/data/max/clipping-reverb-saw.wav'
-SILENCE_VALS = [0.88450581, 0.88220514, 0.81728712, 0.89264148, 0.88851541]
+# 7 sec
+TARGET_FILE = '/var/data/max/RandomAnalogReverb-Ballad-Mono.wav'
+SILENCE_VALS = [0.87853897, 0.88049448, 0.90788585, 0.90580123, 0.90788548]
 '''
 '''
-# sine-downsample-delay-AM-volume.wav - 3
-OBJ_LIST_FILE = '/etc/max/feedback_delay_object_list.txt'
-TARGET_FILE = '/var/data/max/sine-downsample-delay-AM-volume.wav'
-SILENCE_VALS = [0.89317668, 0.87404699, 0.87733233, 0.87147831]
+# 7 sec
+TARGET_FILE = '/var/data/max/Synth-Metallic-IDM-Pad-Mono.wav'
+SILENCE_VALS = [0.83389444, 0.83389474, 0.86494295, 0.93800486, 0.92892614, 0.93698597]
 '''
+
 JS_FILE_ROOT =  '/etc/max/js_file'
 TEST_ROOT = '/var/data/max/output'
-NUM_GENERATIONS = 200
+NUM_GENERATIONS = 800
 POPULATION_SIZE = 100    # population size
 CONCURRENT_PATCHES = 1
 PATCH_TYPE = 'synthesis'
 
 class calculateFitnessThread (threading.Thread):
-    def __init__ (self, threadID, patch, js_filename, test_filename, feature_type, target_features, similarity_measure, population, max_tree_depth, all_objects, warp_factor = 1.0, simulated_annealing = False, fitnessLock = None):
+    def __init__ (self, threadID, patch, js_filename, test_filename, feature_type, target_features, similarity_measure, population, max_tree_depth, all_objects, idff_weight = 1.0, simulated_annealing = False, fitnessLock = None):
         threading.Thread.__init__ (self)
         self.threadID = threadID
         self.patch = patch
@@ -64,7 +76,7 @@ class calculateFitnessThread (threading.Thread):
         self.population = population
         self.all_objects = all_objects
         self.max_tree_depth = max_tree_depth
-        self.warp_factor = warp_factor  # warp factor is necessary for IFFs
+        self.idff_weight = idff_weight  # warp factor is necessary for IFFs
         self.simulated_annealing = simulated_annealing
         self.fitnessLock = fitnessLock
         
@@ -72,7 +84,7 @@ class calculateFitnessThread (threading.Thread):
         # this 'if' is here b.c. it is possible we calculated fitness previously when testing if we should increase a DMTD
         if self.patch.fitness == 0.0:
             self.patch.start_max_processing(self.js_filename, self.test_filename, self.feature_type, PATCH_TYPE, None) 
-            self.patch.fitness = get_similarity(self.target_features,self.patch.data, self.similarity_measure, self.warp_factor)
+            self.patch.fitness = get_similarity(self.target_features,self.patch.data, self.similarity_measure, self.idff_weight)
         # if nan, create new random patch, calculate fitness, if not nan, use to  replace
         if (np.isnan(self.patch.fitness) or any(self.patch.fitness >= (fitness - 0.000001) and self.patch.fitness <= (fitness + 0.000001) for fitness in SILENCE_VALS)):
             print 'bad patch...'
@@ -80,7 +92,7 @@ class calculateFitnessThread (threading.Thread):
             '''
             auto_gen_patch = create_patch_from_scratch(self.max_tree_depth, self.all_objects, max_resource_count = self.patch.count)
             auto_gen_patch.start_max_processing(self.js_filename, self.test_filename, self.feature_type, PATCH_TYPE, None)
-            auto_gen_patch.fitness = get_similarity(self.target_features,auto_gen_patch.data, self.similarity_measure, self.warp_factor)
+            auto_gen_patch.fitness = get_similarity(self.target_features,auto_gen_patch.data, self.similarity_measure, self.idff_weight)
             loc = self.population.index(self.patch)
             self.population[loc] = auto_gen_patch
             self.patch = auto_gen_patch
@@ -88,7 +100,7 @@ class calculateFitnessThread (threading.Thread):
         # if there is no simulated annealing, exit
         if not self.simulated_annealing:
             return
-        fitness_threshold = 0
+        fitness_threshold = 0.1
         for i in range (0, SIMULATED_ANNEALING_SIZE):
             new_fitness = False
             temperature_value = i + 1
@@ -99,7 +111,7 @@ class calculateFitnessThread (threading.Thread):
                 u = random.uniform(0.0, 1.0)
                 auto_gen_patch = update_all_parameters(self.patch)
                 auto_gen_patch.start_max_processing(self.js_filename, self.test_filename, self.feature_type, PATCH_TYPE, None)
-                auto_gen_patch.fitness = get_similarity(self.target_features,self.patch.data, self.similarity_measure, self.warp_factor)
+                auto_gen_patch.fitness = get_similarity(self.target_features,self.patch.data, self.similarity_measure, self.idff_weight)
                 # if nan, create new random patch, calculate fitness, if not nan, use to  replace
                 if (np.isnan(auto_gen_patch.fitness) or any(auto_gen_patch.fitness >= (fitness - 0.000001) and auto_gen_patch.fitness <= (fitness + 0.000001) for fitness in SILENCE_VALS)):
                     print 'bad patch...'
@@ -107,7 +119,7 @@ class calculateFitnessThread (threading.Thread):
                     '''
                     auto_gen_patch = update_all_parameters(self.patch)
                     auto_gen_patch.start_max_processing(self.js_filename, self.test_filename, self.feature_type, PATCH_TYPE, None)
-                    auto_gen_patch.fitness = get_similarity(self.target_features,auto_gen_patch.data, self.similarity_measure, self.warp_factor)
+                    auto_gen_patch.fitness = get_similarity(self.target_features,auto_gen_patch.data, self.similarity_measure, self.idff_weight)
                     loc = self.population.index(self.patch)
                     '''
                 # ratio of this patch's fitness to the last CHOSEN patch's fitness
@@ -120,14 +132,12 @@ class calculateFitnessThread (threading.Thread):
             # if we've made it here, we've successfully found a neighbor meeting the M-H criteria
             # now, determine if we move in this direction or not
             if auto_gen_patch.fitness >= self.patch.fitness:
-                self.population[loc] = auto_gen_patch
                 self.patch = auto_gen_patch
             else:
                 # determine the acceptance probability based on the temperature and the two fitness values
                 probability = math.exp(-(auto_gen_patch.fitness - self.patch.fitness)/temperature_value)
                 random_num = random.random()
                 if random_num < probability:
-                    self.population[loc] = auto_gen_patch
                     self.patch = auto_gen_patch
 
 # TODO: option to start at gen X, grab all individual strings from DB, turn into patches and make that the pop
@@ -209,7 +219,10 @@ def main():
     if options.continue_test_run is not None:
         testrun_id = int(options.continue_test_run)
         results = mysql_obj.get_last_generation(testrun_id)
-        total_pop_size = len(results)
+        if subgroups == 1:
+            total_pop_size = len(results)
+        else:
+            total_pop_size = POPULATION_SIZE
         pop_size = total_pop_size / subgroups
         # note start generation
         generation_start = int(results[0][0]) + 1
@@ -280,7 +293,7 @@ def main():
     # get features for target file - NOTE: should be 2D numpy array
     target_features = get_features(TARGET_FILE, feature_type)
     # --- MAIN LOOP ---
-    warp_factor = 0.0
+    idff_weight = 0.0
     if resource_limitation_type is not None:
         if resource_count_lim < INIT_RESOURCE_COUNT:
             resource_count_lim = INIT_RESOURCE_COUNT
@@ -290,15 +303,23 @@ def main():
         if max_tree_depth < INIT_MAX_TREE_DEPTH:
             max_tree_depth = INIT_MAX_TREE_DEPTH
         if atypical_flavor == "PADGP":
+            simulated_annealing = False
+            idff_weight = 0.0
             # check if the generation requires exchange
             if NUM_GENERATIONS % EXCHANGE_FREQUENCY == 0 and NUM_GENERATIONS != 0:
                 # determine who is sending patches to who
                 received = []
                 for j in range(0, subgroups):
-                    send_to = random.randint(0, subgroups-1)
-                    while send_to in received or send_to == j:
+                    # in the case that we end up with last subgroup and it can only send patches to itself, swap it with previous subgroup
+                    if j == subgroups - 1 and j not in received:
+                        swapped_subgroup = received[subgroups-2]
+                        received[subgroups-2] = j
+                        received.append(swapped_subgroup)
+                    else:
                         send_to = random.randint(0, subgroups-1)
-                    received.append(send_to)
+                        while send_to in received or send_to == j:
+                            send_to = random.randint(0, subgroups-1)
+                        received.append(send_to)
                 # gather groups of the swap_patches
                 swap_amount = int(pop_size * EXCHANGE_PROPORTION)
                 temp_main_populations = []
@@ -320,12 +341,14 @@ def main():
                     populations[j].extend(temp_swap_populations[received[j]])
         elif atypical_flavor == 'IFF':
             # we start at the most significant warp and slowly wear it off over time
-            warp_factor = float(NUM_GENERATIONS-i)/NUM_GENERATIONS
+            idff_weight = float(NUM_GENERATIONS-i) / NUM_GENERATIONS
+            simulated_annealing = False
         elif atypical_flavor == 'SA':
             simulated_annealing = True
+            idff_weight = 0.0
         else:
             simulated_annealing = False
-            warp_factor = 0.0
+            idff_weight = 0.0
         new_max_depth = max_tree_depth
         for j in range(0, subgroups):
             for k in range(0, len(populations[j])/CONCURRENT_PATCHES):
@@ -333,7 +356,7 @@ def main():
                 fitnessLock = threading.Lock()
                 for l in range(0, CONCURRENT_PATCHES):
                     this_patch = populations[j][k*CONCURRENT_PATCHES + l]
-                    fitnessThreads.append(calculateFitnessThread(l, this_patch, JS_FILE_ROOT + '%s.js' % MAX_PATCH, TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type, target_features, similarity_measure, populations[j], max_tree_depth, all_objects, warp_factor, simulated_annealing, fitnessLock))
+                    fitnessThreads.append(calculateFitnessThread(l, this_patch, JS_FILE_ROOT + '%s.js' % MAX_PATCH, TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type, target_features, similarity_measure, populations[j], max_tree_depth, all_objects, idff_weight, simulated_annealing, fitnessLock))
                     fitnessThreads[l].start()
                 [l.join() for l in fitnessThreads]
                 # calc fitness of each patch
@@ -353,9 +376,9 @@ def main():
             selected = select_patches(populations[j], selection_type)                        # fitness proportionate selection
             # create next generation of patches and place them in allPatches
             if resource_limitation_type is not None: 
-                [populations[j], max_num_levels, max_resource_count, new_best_mean_fitness] = create_next_generation(selected, gen_ops, max_tree_depth, FINAL_MAX_TREE_DEPTH, all_objects, resource_count_lim, js_filename = JS_FILE_ROOT + '%s.js' % MAX_PATCH, test_filename = TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type = feature_type, patch_type = PATCH_TYPE, target_features = target_features, similarity_measure = similarity_measure, warp_factor = warp_factor, silence_vals = SILENCE_VALS, best_of_run_fitness = best_of_run_fitness, pop_size = POPULATION_SIZE, resource_type = resource_limitation_type, max_total_resource_limit = FINAL_RESOURCE_COUNT, best_mean_fitness=best_mean_fitness)
+                [populations[j], max_num_levels, max_resource_count, new_best_mean_fitness] = create_next_generation(selected, gen_ops, max_tree_depth, FINAL_MAX_TREE_DEPTH, all_objects, resource_count_lim, js_filename = JS_FILE_ROOT + '%s.js' % MAX_PATCH, test_filename = TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type = feature_type, patch_type = PATCH_TYPE, target_features = target_features, similarity_measure = similarity_measure, idff_weight = idff_weight, silence_vals = SILENCE_VALS, best_of_run_fitness = best_of_run_fitness, pop_size = POPULATION_SIZE, resource_type = resource_limitation_type, max_total_resource_limit = FINAL_RESOURCE_COUNT, best_mean_fitness=best_mean_fitness)
             else:
-                [populations[j], max_num_levels, max_resource_count, new_best_mean_fitness] = create_next_generation(selected, gen_ops, max_tree_depth, FINAL_MAX_TREE_DEPTH, all_objects, js_filename = JS_FILE_ROOT + '%s.js' % MAX_PATCH, test_filename = TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type = feature_type, patch_type = PATCH_TYPE, target_features = target_features, similarity_measure = similarity_measure, warp_factor = warp_factor, silence_vals = SILENCE_VALS, best_of_run_fitness = best_of_run_fitness, pop_size = POPULATION_SIZE, resource_type = resource_limitation_type, max_total_resource_limit = FINAL_RESOURCE_COUNT)
+                [populations[j], max_num_levels, max_resource_count, new_best_mean_fitness] = create_next_generation(selected, gen_ops, max_tree_depth, FINAL_MAX_TREE_DEPTH, all_objects, js_filename = JS_FILE_ROOT + '%s.js' % MAX_PATCH, test_filename = TEST_ROOT + '%s.wav' % MAX_PATCH, feature_type = feature_type, patch_type = PATCH_TYPE, target_features = target_features, similarity_measure = similarity_measure, idff_weight = idff_weight, silence_vals = SILENCE_VALS, best_of_run_fitness = best_of_run_fitness, pop_size = POPULATION_SIZE, resource_type = resource_limitation_type, max_total_resource_limit = FINAL_RESOURCE_COUNT)
             if (max_num_levels > new_max_depth):
                 new_max_depth = max_num_levels
             if resource_limitation_type is not None:
