@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  2 MAR 2014 10:47
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  2 MAR 2014 13:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1859,10 +1859,11 @@ ng>] [273]
 Chapter 5.
 [274
 
-] (./Dissertation.bbl [275
+] [275] [276] [277] [278] [279] [280] (./Dissertation.bbl [281
 
-] [276] [277] [278] [279] [280] [281] [282]
-[283] [284] [285] [286] [287] [288] [289] [290]) [291] (./Dissertation.aux)
+] [282]
+[283] [284] [285] [286] [287] [288] [289] [290] [291] [292] [293] [294]
+[295] [296]) [297] (./Dissertation.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1871,13 +1872,13 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4626 strings out of 493315
- 73650 string characters out of 6137904
+ 4625 strings out of 493315
+ 73639 string characters out of 6137904
  126984 words of memory out of 5000000
- 7890 multiletter control sequences out of 15000+600000
+ 7889 multiletter control sequences out of 15000+600000
  21861 words of font info for 48 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,12n,23p,3346b,591s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,12n,23p,3346b,590s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -1898,10 +1899,10 @@ type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2013/texmf-dist/fonts/ty
 pe1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/ti
 mes/utmbi8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8
 a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Dissertation.pdf (307 pages, 33946819 bytes).
+Output written on Dissertation.pdf (313 pages, 33953792 bytes).
 PDF statistics:
- 3001 PDF objects out of 3580 (max. 8388607)
- 2057 compressed objects within 21 object streams
+ 3020 PDF objects out of 3580 (max. 8388607)
+ 2070 compressed objects within 21 object streams
  0 named destinations out of 1000 (max. 500000)
  536 words of extra memory for PDF output out of 10000 (max. 10000000)
 

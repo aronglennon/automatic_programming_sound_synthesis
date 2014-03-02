@@ -57,5 +57,7 @@
 \contentsline {subsection}{\numberline {4.6.3}Metal Gong}{262}
 \contentsline {subsection}{\numberline {4.6.4}Metallic Synth}{266}
 \contentsline {subsection}{\numberline {4.6.5}Random Analog LFO Reverb Synth}{269}
-\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{274}
-\contentsline {chapter}{References}{275}
+\contentsline {chapter}{\numberline {5}Conclusion}{274}
+\contentsline {section}{\numberline {5.1}Limitations}{277}
+\contentsline {section}{\numberline {5.2}Future Work}{278}
+\contentsline {chapter}{References}{281}
