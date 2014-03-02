@@ -222,10 +222,10 @@ Bernardini, N.%
 
 \bibitem[\protect\citeauthoryear{%
 Bonada%
-\ \BBA{} Serra%
+\ \BBA{} Serr\'a%
 }{%
 Bonada%
-\ \BBA{} Serra%
+\ \BBA{} Serr\'a%
 }{%
 {\protect\APACyear{2007}}%
 }]{%
@@ -233,7 +233,7 @@ Bonada:2007bs}%
 \APACinsertmetastar{%
 Bonada:2007bs}%
 Bonada, J.%
-\BCBT{}\ \BBA{} Serra, X.%
+\BCBT{}\ \BBA{} Serr\'a, X.%
 %
 \unskip\
 \newblock
@@ -1468,6 +1468,36 @@ McDermott, J.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
+McDermott%
+, O'Neill%
+\BCBL{}\ \BBA{} Griffith%
+}{%
+McDermott%
+\ \protect\BOthers{.}}{%
+{\protect\APACyear{2006}}%
+}]{%
+McDermott:2006jd}%
+\APACinsertmetastar{%
+McDermott:2006jd}%
+McDermott, J.%
+, O'Neill, M.%
+\BCBL{}\ \BBA{} Griffith, N\BPBI J\BPBI L.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2006}{September}{}.
+\newblock
+\BBOQ{}\APACrefatitle{Target-Driven Genetic Algorithms for Synthesizer
+  Control}{Target-driven genetic algorithms for synthesizer control}.\BBCQ{}
+\newblock
+\BIn{} \APACrefbtitle{Proceedings of the 9th Conference on Digital Audio
+  Effects (DAFx-06).}{Proceedings of the 9th conference on digital audio
+  effects (dafx-06).}
+\newblock
+\APACaddressPublisher{Montreal, Canada}{}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
 Meng%
 , Ahrendt%
 \BCBL{}\ \BBA{} Larsen%
@@ -2295,22 +2325,22 @@ Seago, A.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-J.~Serra%
+J.~Serr\'a%
 , G{\'o}mez%
 , Herrera%
-\BCBL{}\ \BBA{} Serra%
+\BCBL{}\ \BBA{} Serr\'a%
 }{%
-J.~Serra%
+J.~Serr\'a%
 \ \protect\BOthers{.}}{%
 {\protect\APACyear{2008}}%
 }]{%
 serra2008chroma}%
 \APACinsertmetastar{%
 serra2008chroma}%
-Serra, J.%
+Serr\'a, J.%
 , G{\'o}mez, E.%
 , Herrera, P.%
-\BCBL{}\ \BBA{} Serra, X.%
+\BCBL{}\ \BBA{} Serr\'a, X.%
 %
 \unskip\
 \newblock
@@ -2325,10 +2355,10 @@ Serra, J.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-X.~Serra%
+X.~Serr\'a%
 \ \BBA{} Smith%
 }{%
-X.~Serra%
+X.~Serr\'a%
 \ \BBA{} Smith%
 }{%
 {\protect\APACyear{1990}}%
@@ -2336,7 +2366,7 @@ X.~Serra%
 Serra:1990dk}%
 \APACinsertmetastar{%
 Serra:1990dk}%
-Serra, X.%
+Serr\'a, X.%
 \BCBT{}\ \BBA{} Smith, J\BPBI O., III.%
 %
 \unskip\
