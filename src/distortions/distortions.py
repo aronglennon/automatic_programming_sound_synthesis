@@ -383,7 +383,7 @@ def introduce_content(audio, total_percent_introduction, total_percent_deletion,
 # [reordered_audio, max_size, min_size, total_size, avg_size] = reorder_segments(test_audio, num_swaps)
 def reorder_segments(audio, num_swaps):
     # swap amount between 10%-75% of file length
-    random_swap = random.randint(int(len(audio)*0.10), int(len(audio)*0.75))
+    random_swap = random.randint(int(len(audio)*0.10), int(len(audio)*0.20))
     min_swap = random_swap
     max_swap = random_swap
     total_swap = random_swap

@@ -11,9 +11,9 @@ import sys, random, copy
 from datetime import datetime
 import numpy as np
 import threading
-from javascript import fill_JS_file
+from maxclasses.javascript import fill_JS_file
 
-OBJ_LIST_FILE = '/etc/max/adaptive_downsampling_object_list.txt'
+OBJ_LIST_FILE = '/etc/max/general3_object_list.txt'
 JS_FILE_NAME =  '/etc/max/js_file_best_patch'
 
 def main():

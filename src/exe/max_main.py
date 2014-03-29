@@ -13,7 +13,7 @@ import numpy as np
 import threading
 
 # 1.
-MAX_PATCH = 1
+MAX_PATCH = 4
 
 DEBUG = False
 # 2.
@@ -40,16 +40,16 @@ SILENCE_VALS = [0.91050509, 0.91429948, 0.94318003, 0.94135201]
 TARGET_FILE = '/var/data/max/Lion-Growling-Mono.wav'
 SILENCE_VALS = [0.91480948, 0.91356656, 0.91356640]
 '''
-
+'''
 # 6 sec
 TARGET_FILE = '/var/data/max/Metal_Gong-Mono.wav'
 SILENCE_VALS = [0.89184133, 0.91496528, 0.91496545, 0.88664024, 0.89162869, 0.91073726, 0.91073702, 0.91461484]
-
 '''
+
 # 7 sec
 TARGET_FILE = '/var/data/max/RandomAnalogReverb-Ballad-Mono.wav'
 SILENCE_VALS = [0.87853897, 0.88049448, 0.90788585, 0.90580123, 0.90788548]
-'''
+
 '''
 # 7 sec
 TARGET_FILE = '/var/data/max/Synth-Metallic-IDM-Pad-Mono.wav'
@@ -58,8 +58,8 @@ SILENCE_VALS = [0.83389444, 0.83389474, 0.86494295, 0.93800486, 0.92892614, 0.93
 
 JS_FILE_ROOT =  '/etc/max/js_file'
 TEST_ROOT = '/var/data/max/output'
-NUM_GENERATIONS = 800
-POPULATION_SIZE = 100    # population size
+NUM_GENERATIONS = 100
+POPULATION_SIZE = 800    # population size
 CONCURRENT_PATCHES = 1
 PATCH_TYPE = 'synthesis'
 

@@ -47,18 +47,19 @@ def main():
     if testrun_id == []:
         sys.exit(0)
     for i in range(0, NUM_TESTS):
+        print i
         # light distortions (one for every file in WAVE_FILE_DIRECTORY
-        run_tsts_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
-        max_warp = random.randint(3,10)
-        run_tw_tests(WAVE_FILE_DIRECTORY, testrun_id, i, None, max_warp, mysql_obj)
-        run_sampdel_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
-        run_stableextension_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
+        #run_tsts_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
+        #max_warp = random.randint(3,10)
+        #run_tw_tests(WAVE_FILE_DIRECTORY, testrun_id, i, None, max_warp, mysql_obj)
+        #run_sampdel_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
+        #run_stableextension_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
         # heavy distortion
-        run_contentintro_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
+        #run_contentintro_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
         run_reorder_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
-        run_repinsert_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
-        min_warp = random.randint(3,10)
-        run_tw_tests(WAVE_FILE_DIRECTORY, testrun_id, i, min_warp, None, mysql_obj)
+        #run_repinsert_tests(WAVE_FILE_DIRECTORY, testrun_id, i, mysql_obj)
+        #min_warp = random.randint(3,10)
+        #run_tw_tests(WAVE_FILE_DIRECTORY, testrun_id, i, min_warp, None, mysql_obj)
         
     # generate distortion for file in WAVE_FILE_DIRECTORY
     # test using all similarity measures for apples-to-apples comparison
@@ -284,7 +285,7 @@ def run_contentintro_tests(directory, test_run, test_case, mysql_obj):
 -------------- params: severe, test_run, file, re-order, number swaps, max_size, min_size, total_size, average_size
 '''
 def run_reorder_tests(directory, test_run, test_case, mysql_obj):
-    num_swaps = random.randint(2, 100)
+    num_swaps = random.randint(1, 20)
     # for each file in directory, scale, shift - run through all sim measures - insert each result into db
     if os.path.isdir(directory):
         for dirname, dirnames, filenames in os.walk(directory):
