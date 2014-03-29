@@ -12,8 +12,8 @@ class Config():
                 {
                 'host'                  : 'localhost',
                 'database'              : 'automatic_programming_sound_synthesis',
-                'user'                  : 'aronglennon',
-                'password'              : 'glennon',
+                'user'                  : 'root',
+                'password'              : 'mypass',
                 'port'                  : 3306,
                 'charset'               : 'utf8',
                 'use_unicode'           : True,

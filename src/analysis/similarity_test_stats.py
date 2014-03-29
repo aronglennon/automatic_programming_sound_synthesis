@@ -5,7 +5,7 @@ from mysqldb.db_commands import mysql_object
 import matplotlib.pyplot as plt
 from operator import itemgetter
 
-TESTRUN_ID = 124
+TESTRUN_ID = 592
 
 def main():
     DTW_Vals = []
@@ -18,17 +18,17 @@ def main():
     Euc_xs = []    
     # NOTE: Currently, this code just outputs similarity scores sorted by some other column (e.g. total amount deleted in the sampdel tests)
     mysql_obj = mysql_object(sameThread = True)
-    table = 'tsts'
-    sort_by_column = 'scale_percent'
+    table = 'reorder'
+    sort_by_column = 'total_size'
     #values = mysql_obj.get_similarity_test_data(table, sort_by_column, TESTRUN_ID)
     
     #values = mysql_obj.get_content_intro_similarity_test_data(TESTRUN_ID, 'DTW') 
     #values = mysql_obj.get_repinsert_similarity_test_data(TESTRUN_ID, 'DTW')
     #values = mysql_obj.get_tsts_similarity_test_data(TESTRUN_ID, 'DTW')
     #values = mysql_obj.get_tw_similarity_test_data(TESTRUN_ID, 'DTW')
-    values = mysql_obj.get_sampdel_similarity_test_data(TESTRUN_ID, 'DTW')
+    #values = mysql_obj.get_sampdel_similarity_test_data(TESTRUN_ID, 'DTW')
     #values = mysql_obj.get_stableextension_similarity_test_data(TESTRUN_ID, 'DTW')
-    #values = mysql_obj.get_reorder_similarity_test_data(TESTRUN_ID, 'DTW')
+    values = mysql_obj.get_reorder_similarity_test_data(TESTRUN_ID, 'DTW')
     
     sortedVals = sorted(values, key=itemgetter(1))
     for v in sortedVals:
@@ -40,9 +40,9 @@ def main():
     #values = mysql_obj.get_repinsert_similarity_test_data(TESTRUN_ID, 'DPLA')
     #values = mysql_obj.get_tsts_similarity_test_data(TESTRUN_ID, 'DPLA')
     #values = mysql_obj.get_tw_similarity_test_data(TESTRUN_ID, 'DPLA')
-    values = mysql_obj.get_sampdel_similarity_test_data(TESTRUN_ID, 'DPLA')
+    #values = mysql_obj.get_sampdel_similarity_test_data(TESTRUN_ID, 'DPLA')
     #values = mysql_obj.get_stableextension_similarity_test_data(TESTRUN_ID, 'DPLA')
-    #values = mysql_obj.get_reorder_similarity_test_data(TESTRUN_ID, 'DPLA')
+    values = mysql_obj.get_reorder_similarity_test_data(TESTRUN_ID, 'DPLA')
 
     sortedVals = sorted(values, key=itemgetter(1))
     for v in sortedVals:
@@ -54,9 +54,9 @@ def main():
     #values = mysql_obj.get_repinsert_similarity_test_data(TESTRUN_ID, 'SIC-DPLA')
     #values = mysql_obj.get_tsts_similarity_test_data(TESTRUN_ID, 'SIC-DPLA')
     #values = mysql_obj.get_tw_similarity_test_data(TESTRUN_ID, 'SIC-DPLA')  
-    values = mysql_obj.get_sampdel_similarity_test_data(TESTRUN_ID, 'SIC-DPLA')
+    #values = mysql_obj.get_sampdel_similarity_test_data(TESTRUN_ID, 'SIC-DPLA')
     #values = mysql_obj.get_stableextension_similarity_test_data(TESTRUN_ID, 'SIC-DPLA')
-    #values = mysql_obj.get_reorder_similarity_test_data(TESTRUN_ID, 'SIC-DPLA')
+    values = mysql_obj.get_reorder_similarity_test_data(TESTRUN_ID, 'SIC-DPLA')
     
     sortedVals = sorted(values, key=itemgetter(1))
     for v in sortedVals:
@@ -68,9 +68,9 @@ def main():
     #values = mysql_obj.get_repinsert_similarity_test_data(TESTRUN_ID, 'euclidean')
     #values = mysql_obj.get_tsts_similarity_test_data(TESTRUN_ID, 'euclidean')
     #values = mysql_obj.get_tw_similarity_test_data(TESTRUN_ID, 'euclidean')
-    values = mysql_obj.get_sampdel_similarity_test_data(TESTRUN_ID, 'euclidean')
+    #values = mysql_obj.get_sampdel_similarity_test_data(TESTRUN_ID, 'euclidean')
     #values = mysql_obj.get_stableextension_similarity_test_data(TESTRUN_ID, 'euclidean')
-    #values = mysql_obj.get_reorder_similarity_test_data(TESTRUN_ID, 'euclidean')
+    values = mysql_obj.get_reorder_similarity_test_data(TESTRUN_ID, 'euclidean')
     
     sortedVals = sorted(values, key=itemgetter(1))
     for v in sortedVals:
@@ -103,15 +103,15 @@ def main():
 
     matplotlib.rc('font', **font)
     plt.figure(facecolor='white')
-    plt.title('Sample Deletion')
-    plt.xlabel('Total % Deleted')
-    plt.ylabel('Similarity Score')
+    plt.title('Reordering Subsequences')
+    plt.xlabel('Total Length of Reordered Audio (s)')
+    plt.ylabel('Average Similarity Score')
     plt.plot(DTW_xs, DTW_Vals, '-', hold = True, alpha = 0.8)
     plt.plot(DPLA_xs, DPLA_Vals, '-', hold = True, alpha = 0.8)
     plt.plot(SIC_DPLA_xs, SIC_DPLA_Vals, '-', hold = True, alpha = 0.8)
     plt.plot(Euc_xs, Euc_Vals, '-', hold = True, alpha = 0.8)
     plt.axis(ymin = 0.0, ymax = 1.0)
-    plt.axis(xmin = 2, xmax = 75)
+    plt.axis(xmin = 0, xmax = 50)
     plt.legend(('DTW', 'DPLA', 'SIC-DPLA', 'Euclidean'), loc = 3)
     plt.show()
     

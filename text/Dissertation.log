@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  2 MAR 2014 17:39
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  29 MAR 2014 09:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1870,7 +1870,7 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Here is how much of TeX's memory you used:
  4625 strings out of 493315
  73681 string characters out of 6137904
- 126131 words of memory out of 5000000
+ 126081 words of memory out of 5000000
  7889 multiletter control sequences out of 15000+600000
  21861 words of font info for 48 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -1895,7 +1895,7 @@ type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2013/texmf-dist/fonts/ty
 pe1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/ti
 mes/utmbi8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8
 a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Dissertation.pdf (315 pages, 33954949 bytes).
+Output written on Dissertation.pdf (315 pages, 33954804 bytes).
 PDF statistics:
  3026 PDF objects out of 3580 (max. 8388607)
  2074 compressed objects within 21 object streams

@@ -222,10 +222,10 @@ Bernardini, N.%
 
 \bibitem[\protect\citeauthoryear{%
 Bonada%
-\ \BBA{} Serr\'a%
+\ \BBA{} Serra%
 }{%
 Bonada%
-\ \BBA{} Serr\'a%
+\ \BBA{} Serra%
 }{%
 {\protect\APACyear{2007}}%
 }]{%
@@ -233,7 +233,7 @@ Bonada:2007bs}%
 \APACinsertmetastar{%
 Bonada:2007bs}%
 Bonada, J.%
-\BCBT{}\ \BBA{} Serr\'a, X.%
+\BCBT{}\ \BBA{} Serra, X.%
 %
 \unskip\
 \newblock
@@ -2325,12 +2325,12 @@ Seago, A.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-J.~Serr\'a%
+Serr\'a%
 , G{\'o}mez%
 , Herrera%
-\BCBL{}\ \BBA{} Serr\'a%
+\BCBL{}\ \BBA{} Serra%
 }{%
-J.~Serr\'a%
+Serr\'a%
 \ \protect\BOthers{.}}{%
 {\protect\APACyear{2008}}%
 }]{%
@@ -2340,7 +2340,7 @@ serra2008chroma}%
 Serr\'a, J.%
 , G{\'o}mez, E.%
 , Herrera, P.%
-\BCBL{}\ \BBA{} Serr\'a, X.%
+\BCBL{}\ \BBA{} Serra, X.%
 %
 \unskip\
 \newblock
@@ -2355,10 +2355,10 @@ Serr\'a, J.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-X.~Serr\'a%
+Serra%
 \ \BBA{} Smith%
 }{%
-X.~Serr\'a%
+Serra%
 \ \BBA{} Smith%
 }{%
 {\protect\APACyear{1990}}%
@@ -2366,7 +2366,7 @@ X.~Serr\'a%
 Serra:1990dk}%
 \APACinsertmetastar{%
 Serra:1990dk}%
-Serr\'a, X.%
+Serra, X.%
 \BCBT{}\ \BBA{} Smith, J\BPBI O., III.%
 %
 \unskip\

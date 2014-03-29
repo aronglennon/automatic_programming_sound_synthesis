@@ -99,43 +99,43 @@ Warning--No address in Zhang:2006jo
 Warning--No publisher in Zils:2001bd
 You've used 116 entries,
             6361 wiz_defined-function locations,
-            1844 strings with 29639 characters,
-and the built_in function-call counts, 232384 in all, are:
-= -- 30133
+            1844 strings with 29633 characters,
+and the built_in function-call counts, 232094 in all, are:
+= -- 30095
 > -- 1768
-< -- 11097
-+ -- 11100
+< -- 11089
++ -- 11076
 - -- 234
-* -- 14463
-:= -- 41650
+* -- 14447
+:= -- 41600
 add.period$ -- 574
 call.type$ -- 116
 change.case$ -- 726
 chr.to.int$ -- 0
 cite$ -- 317
-duplicate$ -- 5619
-empty$ -- 8580
-format.name$ -- 2767
-if$ -- 44440
+duplicate$ -- 5595
+empty$ -- 8572
+format.name$ -- 2759
+if$ -- 44394
 int.to.chr$ -- 0
 int.to.str$ -- 232
 missing$ -- 0
 newline$ -- 2769
 num.names$ -- 932
-pop$ -- 5366
+pop$ -- 5362
 preamble$ -- 1
 purify$ -- 556
 quote$ -- 0
-skip$ -- 14936
+skip$ -- 14928
 stack$ -- 0
-substring$ -- 12347
-swap$ -- 3108
+substring$ -- 12311
+swap$ -- 3096
 text.length$ -- 426
 text.prefix$ -- 0
 top$ -- 1
 type$ -- 13568
 warning$ -- 85
-while$ -- 1068
+while$ -- 1060
 width$ -- 0
 write$ -- 3405
 (There were 85 warnings)

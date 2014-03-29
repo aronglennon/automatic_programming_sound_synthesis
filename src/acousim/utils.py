@@ -108,7 +108,12 @@ def convert(filename, fout=None, samplerate=None, channels=None, bitdepth=None):
     except TypeError, e:
         print("Error executing: %s"%" ".join(sox_list))
         raise TypeError(e)
-    
+    test = wave.open(fout, 'w')
+    test.setnchannels(channels)
+    test.setsampwidth(2)
+    test.setframerate(samplerate)
+    test.close()
+    wavefile = wave.open(fout, 'r')
     wavefile._abspath = fout
     return wavefile
 

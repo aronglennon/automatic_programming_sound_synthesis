@@ -22,7 +22,7 @@
 \contentsline {section}{\numberline {3.2}Experiment Design}{114}
 \contentsline {subsection}{\numberline {3.2.1}The Fitness Function}{115}
 \contentsline {subsubsection}{\numberline {3.2.1.1}Timbre Feature Extraction}{115}
-\contentsline {subsubsection}{\numberline {3.2.1.2}Timbre Similarity}{126}
+\contentsline {subsubsection}{\numberline {3.2.1.2}timbral similarity}{126}
 \contentsline {subsection}{\numberline {3.2.2}Genetic Operator Variations}{158}
 \contentsline {subsection}{\numberline {3.2.3}Target Sound Selection}{164}
 \contentsline {subsection}{\numberline {3.2.4}Limiting Code Bloat and Promoting Parsimony}{173}

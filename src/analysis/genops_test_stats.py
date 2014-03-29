@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 from operator import itemgetter
 
 PARTITION_COUNT = 10
-TESTRUN_ID = [313, 319, 322, 327]
+TESTRUN_ID = [342, 346, 351, 355, 358]
 
-FITNESS_OFFSETS = [0.83389444, 0.83389474, 0.86494295, 0.93800486, 0.92892614, 0.93698597]
+FITNESS_OFFSETS = [0.87853897, 0.88049448, 0.90788585, 0.90580123, 0.90788548]
 MIN_FITNESS = 0.8
 MAX_FITNESS = 0.97
 
@@ -58,7 +58,11 @@ def main():
         if P < 0.0:
             NSC += P
     print 'NSC for testrun %d is %0.8f' % (TESTRUN_ID[0],NSC)
-    '''
+    font = {'family' : 'normal',
+        'weight' : 'bold',
+        'size'   : 20}
+
+    matplotlib.rc('font', **font)
     plt.figure(facecolor='white')
     plt.scatter(xVals, yVals, s = 1, hold = True)
     plt.axis(xmin = 0.0, xmax = 1.0, ymin = 0.0, ymax = 1.0)
@@ -66,10 +70,9 @@ def main():
         plt.vlines(norm_fit(minFitness) + norm_fit((maxFitness-minFitness)*partition/PARTITION_COUNT), 0.0, 1.0, linestyles = ':', hold = True)
     plt.plot([norm_fit(x) for x in original_average_fitnesses], [norm_fit(x) for x in neighbor_average_fitnesses], linewidth=2, color='r')
     plt.plot([0, 1], [0, 1], linewidth=1, linestyle='--')
-    plt.title('Negative Slope Coefficient (NSC)')
+    plt.title('Random Analog LFO Reverb')
     plt.xlabel('Patch Fitness')
     plt.ylabel('Neighbor Fitness')
     plt.show()
-    '''
 if __name__ == "__main__":
     main()
