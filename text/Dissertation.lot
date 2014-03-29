@@ -3,12 +3,13 @@
 \contentsline {table}{\numberline {2.1}{\ignorespaces Synthesis Technique Taxonomy}}{20}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces NSC Values for Tested Genetic Operation Combinations}}{225}
-\contentsline {table}{\numberline {4.2}{\ignorespaces NSC Rankings for Tested Genetic Operation Combinations}}{225}
-\contentsline {table}{\numberline {4.3}{\ignorespaces Code Bloat Limitation Best-of-Run Values}}{228}
-\contentsline {table}{\numberline {4.4}{\ignorespaces Code Bloat Limitation Best-of-Run Ranks}}{229}
-\contentsline {table}{\numberline {4.5}{\ignorespaces Initialization and Selection Best-of-Run Values}}{232}
-\contentsline {table}{\numberline {4.6}{\ignorespaces Initialization and Selection Best-of-Run Ranks}}{232}
-\contentsline {table}{\numberline {4.7}{\ignorespaces Non-standard Selection Best-of-Run Values}}{234}
-\contentsline {table}{\numberline {4.8}{\ignorespaces Restriction/Expansion Best-of-Run Values}}{235}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces NSC Values for Tested Genetic Operation Combinations}}{228}
+\contentsline {table}{\numberline {5.2}{\ignorespaces NSC Rankings for Tested Genetic Operation Combinations}}{228}
+\contentsline {table}{\numberline {5.3}{\ignorespaces Code Bloat Limitation Best-of-Run Values}}{231}
+\contentsline {table}{\numberline {5.4}{\ignorespaces Code Bloat Limitation Best-of-Run Ranks}}{232}
+\contentsline {table}{\numberline {5.5}{\ignorespaces Initialization and Selection Best-of-Run Values}}{235}
+\contentsline {table}{\numberline {5.6}{\ignorespaces Initialization and Selection Best-of-Run Ranks}}{235}
+\contentsline {table}{\numberline {5.7}{\ignorespaces Non-standard Selection Best-of-Run Values}}{237}
+\contentsline {table}{\numberline {5.8}{\ignorespaces Restriction/Expansion Best-of-Run Values}}{238}
 \addvspace {10\p@ }

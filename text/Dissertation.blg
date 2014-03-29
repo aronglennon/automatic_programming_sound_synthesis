@@ -9,8 +9,8 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
-Database file #1: mybib.bib.bib
 Reallocated field_info (elt_size=4) to 10016 items from 5000.
+Database file #1: mybib.bib.bib
 apacite.bst [2009/03/01 v4.05 APA bibliography style]
 Warning--No publisher in Alcazar:1996la
 Warning--No publisher in Allamanche:2002yo
@@ -97,45 +97,45 @@ Warning--No publisher in Wehn:1998bh
 Warning--No publisher in Zhang:2006jo
 Warning--No address in Zhang:2006jo
 Warning--No publisher in Zils:2001bd
-You've used 116 entries,
+You've used 117 entries,
             6361 wiz_defined-function locations,
-            1844 strings with 29633 characters,
-and the built_in function-call counts, 232094 in all, are:
-= -- 30095
-> -- 1768
-< -- 11089
-+ -- 11076
-- -- 234
-* -- 14447
-:= -- 41600
-add.period$ -- 574
-call.type$ -- 116
-change.case$ -- 726
+            1852 strings with 29839 characters,
+and the built_in function-call counts, 234129 in all, are:
+= -- 30338
+> -- 1787
+< -- 11200
++ -- 11188
+- -- 236
+* -- 14590
+:= -- 41989
+add.period$ -- 578
+call.type$ -- 117
+change.case$ -- 731
 chr.to.int$ -- 0
-cite$ -- 317
-duplicate$ -- 5595
-empty$ -- 8572
-format.name$ -- 2759
-if$ -- 44394
+cite$ -- 319
+duplicate$ -- 5652
+empty$ -- 8647
+format.name$ -- 2791
+if$ -- 44768
 int.to.chr$ -- 0
-int.to.str$ -- 232
+int.to.str$ -- 234
 missing$ -- 0
-newline$ -- 2769
-num.names$ -- 932
-pop$ -- 5362
+newline$ -- 2794
+num.names$ -- 940
+pop$ -- 5388
 preamble$ -- 1
-purify$ -- 556
+purify$ -- 560
 quote$ -- 0
-skip$ -- 14928
+skip$ -- 15046
 stack$ -- 0
-substring$ -- 12311
-swap$ -- 3096
-text.length$ -- 426
+substring$ -- 12432
+swap$ -- 3130
+text.length$ -- 428
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 13568
+type$ -- 13648
 warning$ -- 85
-while$ -- 1060
+while$ -- 1072
 width$ -- 0
-write$ -- 3405
+write$ -- 3439
 (There were 85 warnings)

@@ -853,6 +853,34 @@ Horner, A.%
 
 \bibitem[\protect\citeauthoryear{%
 Humphrey%
+, Bello%
+\BCBL{}\ \BBA{} LeCun%
+}{%
+Humphrey%
+\ \protect\BOthers{.}}{%
+{\protect\APACyear{2013}}%
+}]{%
+humphrey2013feature}%
+\APACinsertmetastar{%
+humphrey2013feature}%
+Humphrey, E.%
+, Bello, J\BPBI P.%
+\BCBL{}\ \BBA{} LeCun, Y.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2013}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{Feature learning and deep architectures: new directions
+  for music informatics}{Feature learning and deep architectures: new
+  directions for music informatics}.\BBCQ{}
+\newblock
+\APACjournalVolNumPages{Journal of Intelligent Information
+  Systems}{41}{3}{461--481}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Humphrey%
 , Glennon%
 \BCBL{}\ \BBA{} Bello%
 }{%
