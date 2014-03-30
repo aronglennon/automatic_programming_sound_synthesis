@@ -10,19 +10,20 @@
 \contentsline {section}{\numberline {2.2}Sound Synthesis}{16}
 \contentsline {section}{\numberline {2.3}Parameter Estimation}{29}
 \contentsline {section}{\numberline {2.4}Meta-synthesis}{39}
-\contentsline {section}{\numberline {2.5}Artificially Intelligent Music Systems}{50}
-\contentsline {section}{\numberline {2.6}Audio-Implementation Systems}{67}
-\contentsline {section}{\numberline {2.7}Timbral Similarity}{68}
-\contentsline {section}{\numberline {2.8}State-of-the-Art Genetic Programming}{84}
-\contentsline {chapter}{\numberline {3}Approach}{94}
-\contentsline {section}{\numberline {3.1}System Design}{94}
-\contentsline {subsection}{\numberline {3.1.1}Languages and Interoperability}{94}
-\contentsline {subsection}{\numberline {3.1.2}Framing as a Genetic Programming Problem}{98}
-\contentsline {subsection}{\numberline {3.1.3}Genetic Programming System Overview}{111}
-\contentsline {chapter}{\numberline {4}Experimental Design}{115}
-\contentsline {section}{\numberline {4.1}The Fitness Function}{116}
-\contentsline {subsection}{\numberline {4.1.1}Timbre Feature Extraction}{117}
-\contentsline {subsection}{\numberline {4.1.2}Timbral Similarity}{129}
+\contentsline {subsection}{\numberline {2.4.1}Searching for Synthesis Algorithms}{50}
+\contentsline {chapter}{\numberline {3}Approach}{68}
+\contentsline {section}{\numberline {3.1}Defining the Synthesis Topology Representation}{68}
+\contentsline {subsection}{\numberline {3.1.1}Audio-Implementation Systems}{68}
+\contentsline {subsection}{\numberline {3.1.2}Languages and Interoperability}{70}
+\contentsline {subsection}{\numberline {3.1.3}Framing as a Genetic Programming Problem}{73}
+\contentsline {section}{\numberline {3.2}Designing the Fitness Function}{86}
+\contentsline {subsection}{\numberline {3.2.1}Timbre Feature Extraction}{86}
+\contentsline {subsection}{\numberline {3.2.2}Timbral Similarity}{110}
+\contentsline {section}{\numberline {3.3}Refining Search}{145}
+\contentsline {subsection}{\numberline {3.3.1}State-of-the-Art Genetic Programming}{145}
+\contentsline {subsection}{\numberline {3.3.2}Genetic Programming System Overview}{155}
+\contentsline {chapter}{\numberline {4}Experimental Design}{160}
+\contentsline {section}{\numberline {4.1}Timbre Similarity Testing}{160}
 \contentsline {section}{\numberline {4.2}Genetic Operator Variations}{162}
 \contentsline {section}{\numberline {4.3}Target Sound Selection}{168}
 \contentsline {section}{\numberline {4.4}Limiting Code Bloat and Promoting Parsimony}{176}
@@ -39,11 +40,11 @@
 \contentsline {subsection}{\numberline {5.1.5}Subsequence Reordering}{212}
 \contentsline {subsection}{\numberline {5.1.6}Repetition Insertion}{214}
 \contentsline {subsection}{\numberline {5.1.7}Looking Back at Our Results}{215}
-\contentsline {section}{\numberline {5.2}Optimizing the Fitness Surface by Varying Genetic Operator Sets}{217}
+\contentsline {section}{\numberline {5.2}Optimizing the Fitness Surface by Varying Genetic Operator Sets}{216}
 \contentsline {subsection}{\numberline {5.2.1}Problematic Outputs}{217}
-\contentsline {subsection}{\numberline {5.2.2}Results}{219}
+\contentsline {subsection}{\numberline {5.2.2}Results}{218}
 \contentsline {section}{\numberline {5.3}Investigating Methods for Reducing Code Bloat and Promoting Parsimonious Solutions}{229}
-\contentsline {section}{\numberline {5.4}Testing the Effects of Various Initial Conditions and Selection Mechanisms}{233}
+\contentsline {section}{\numberline {5.4}Testing the Effects of Various Initial Conditions and Selection Mechanisms}{234}
 \contentsline {subsection}{\numberline {5.4.1}Initial Conditions and Standard Selection Mechanisms}{234}
 \contentsline {subsection}{\numberline {5.4.2}Non-standard Selection Mechanisms}{236}
 \contentsline {section}{\numberline {5.5}Restricting/Expanding the Search Space}{237}
