@@ -446,7 +446,16 @@ Taking into account the Automatic Programming research carried out in both digit
 
 There have been a few studies involving sound synthesis evolution using Interactive-GP (where fitness measurements are provided by test subjects) for timbre exploration---see \cite{Dahlstedt:2001dd, Mandelis:2005iw, McDermott:2006gd}. However, while each study provides a system that is applicable to any kind of synthesis topology, a fixed topology is chosen for each run of the system. As previously noted, making the user choose a fixed synthesis topology at the beginning of a run can severely limit the regions of timbre space that are even possible to explore. Additionally, using subjective judgements to steer the search requires that the user stay actively involved during the length of the search. A more desirable solution would replace the need for human fitness evaluation with an objective measure that correlates well. In other words, an objective timbre space would have to be developed where distances are semantically meaningful, so that pairwise similarity tests can be performed by the computer to replace subjective assessment by the end-user.
 
-Wehn was the first researcher to investigate such a system \cite{Wehn:1998bh}. In his work, he uses a basic function set comprised of noise, steady-state sinusoids, triangle and square waves, ramp functions, addition, multiplication, and high, low, and bandpass filters from which to generate more complex algorithms \cite[p. 2]{Wehn:1998bh}. The target sounds that Wehn tests his system with do not vary in time and he does not provide a mechanism by which time-varying sounds can be generated, but as a first step towards our goal, his work is important.
+Wehn was the first researcher to investigate such a system \cite{Wehn:1998bh}. A high-level diagram of his system can be found in Figure 2.21.
+\\
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale = 0.6]{SimpleSystem}
+\caption[GP for Sound Synthesis]{A high-level overview of using GP for generating synthesis algorithms.}
+\end{center}
+\end{figure}
+\\
+In his work, he uses a basic function set comprised of noise, steady-state sinusoids, triangle and square waves, ramp functions, addition, multiplication, and high, low, and bandpass filters from which to generate more complex algorithms \cite[p. 2]{Wehn:1998bh}. The target sounds that Wehn tests his system with do not vary in time and he does not provide a mechanism by which time-varying sounds can be generated, but as a first step towards our goal, his work is important.
 
 In order to assess fitness, Wehn calculates the Euclidean distance between the amplitude spectra of a target sound and those produced by the synthesizer output \cite[p. 2]{Wehn:1998bh}. Thus, Wehn implicitly assumes a timbre space where each point is represented by the elements of a magnitude spectrum. This is a problematic assumption for many reasons, but perhaps the most important being that such a space is extremely high dimensional and consequently suffers from the \emph{curse of dimensionality} \cite{Powell:NoRead}. Briefly, this states that as the dimensionality of a space increases, the usefulness of distance measurements decrease. In other words, Euclidean distance in a given timbre space will become less meaningful as the space grows in size. Another problem with using a simple Euclidean distance measure, as noted by Vercoe et al., is that ``humans do not measure \emph{noise} or \emph{reduction in quality} of sound in this way'' and so distances will not be semantically meaningful even if the magnitude spectrum were low-dimensional \cite[p. 2]{Vercoe:1998hh}.
 
@@ -480,7 +489,7 @@ We ended our discussion of prior work with an investigation into the complexitie
 In order to advance the current state of meta-synthesis research, we focus our efforts on the three most important parts of any GP system that contribute to how well it performs. Specifically, we first define a new set of primitive objects as building blocks for the synthesis algorithms our system will generate and utilize the pre-existing syntax of the implementation environment with our own imposed restrictions on representation to define well-formed individuals. We then focus on the design of an improved fitness function that calculates timbral sequence similarity between a target and the output of a given synthesis algorithm. Lastly, we look to recent advances in GP research to improve the basic mechanisms used in the search process with the intent of making it both more efficient and effective.
 
 \section{Defining the Synthesis Topology Representation}
-In Chapter 2 - Prior Work, we noted that the primitive sets used in meta-synthesis research thus far have been either too low-level (in the case of both When and Garcia's research) or too high-level and restrictive (in the case of Carpentier et al.'s work). The choice of primitive set is paramount to the ability of GP to find good solutions and therefore must be approached carefully. We have decided to look towards popular audio-implementation systems for guidance on what makes a suitable primitive set for this taks.
+In \textbf{Chapter 2 - Prior Work}, we noted that the primitive sets used in meta-synthesis research thus far have been either too low-level (in the case of both When and Garcia's research) or too high-level and restrictive (in the case of Carpentier et al.'s work). The choice of primitive set is paramount to the ability of GP to find good solutions and therefore must be approached carefully. We have decided to look towards popular audio-implementation systems for guidance on what makes a suitable primitive set for this taks.
 
 \subsection{Audio-Implementation Systems}
 
@@ -606,7 +615,7 @@ The format is as follows where the inlet information is simply repeated for mult
 
 \emph{Reasonable ranges} must be chosen carefully as to not be too restrictive, since a particular object may be required to function outside of what is considered its norm in order to contribute to the best solution. Thus, one of the variables we have decided to modify in our experiments is the amount of restriction we apply to each object inlet's range.
 
-An even more important restriction to consider is the number of unique Max objects available for use in our system (i.e. those for which we provide syntactic information). These objects directly determine the size of the resultant patch subspace over which we search. Therefore, we have also investigated how our system performs by varying the number of objects in an attempt to determine whether a general set exists that is small enough for the search to provide a good solution over a reasonable amount of iterations, but also large enough to provide a solution that produces content that is similar enough to the target to be considered a success. Specifics around the variation of both accepted inlet value ranges and object sets are provided in Chapter 4 - Experimental Design.
+An even more important restriction to consider is the number of unique Max objects available for use in our system (i.e. those for which we provide syntactic information). These objects directly determine the size of the resultant patch subspace over which we search. Therefore, we have also investigated how our system performs by varying the number of objects in an attempt to determine whether a general set exists that is small enough for the search to provide a good solution over a reasonable amount of iterations, but also large enough to provide a solution that produces content that is similar enough to the target to be considered a success. Specifics around the variation of both accepted inlet value ranges and object sets are provided in \textbf{Chapter 4 - Experimental Design}.
 
 \section{Designing the Fitness Function}
 
@@ -1042,11 +1051,9 @@ We covered in detail the design of our system's fitness function. We first expla
 We ended the chapter with a discussion of specific recent advancements in GP research that we expect to benefit the system by refining the search space with the intent of reducing code-bloat in the solutions produced.
 
 It is our belief that the approaches discussed in this chapter can combine to push synthesis topology evolution past a point of only being able to generate simple, \emph{toy-example} topologies. By utilizing a meta-synthesis software environment like Max, that was specifically designed to provide synthesis building blocks with the exact level of abstraction required by an efficient GP system, and an improved timbral sequence similarity metric, and leveraging recent advancements in GP research, we expect our results to contribute greatly to this area of research.
-\clearpage
-
 \vspace*{\QuarterPage}
 \chapter{Experimental Design} % * suppresses heading numbers
-There are many variations of the operations (known as \emph{genetic operators}) used to \emph{evolve} algorithms from generation to generation and numerous flavors of selection criteria for the algorithms that are subjected to these operations. The fitness function is problem-dependent and the quality of the solutions found using GP is completely dependent on how well it models the actual fitness of each algorithm with respect to the stated goal. Our efforts in evolving Max patches have led us to explore all facets of GP in depth and we have found, as will be detailed in \textbf{Chapter 5 - Results}, that varying some meta-parameters have a large impact on solution quality, while others seem to have very little. Figure 5.1 shows a high-level flow diagram of our GP system with components labelled to correspond to their relevant sub-sections within this chapter.
+There are many variations of the operations (known as \emph{genetic operators}) used to \emph{evolve} algorithms from generation to generation and numerous flavors of selection criteria for the algorithms that are subjected to these operations. The fitness function is problem-dependent and the quality of the solutions found using GP is completely dependent on how well it models the actual fitness of each algorithm with respect to the stated goal. Our efforts in evolving Max patches have led us to explore all facets of GP in depth and we have found, as will be detailed in \textbf{Chapter 5 - Results}, that varying some meta-parameters have a large impact on solution quality, while others seem to have very little. Figure 4.1 shows a more detailed flow diagram of our GP system that that in Figure 2.21, with components labelled to correspond to their relevant sections within this paper.
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.5]{OverallGPSystem}
@@ -1054,7 +1061,7 @@ There are many variations of the operations (known as \emph{genetic operators}) 
 \end{center}
 \end{figure}
 \\
-As can be seen in Figure 5.1, there are several modules that make up our sound synthesis search system. Each module represents at least one variable of the system that contributes to its ability to find the optimal solution as quickly (i.e. within the smallest number of iterations) as possible. Given the high-dimensionality of this variable set, it is infeasible to perform an appropriate search over all of its various permutations within a reasonable amount of time. We have chosen instead to take a measured approach to modifying each variable - while holding all others constant and comparing its different values/methods using key metrics designed specifically for it - by first looking at those variables that we believe have the least amount of dependence on the settings of all others and stepping through towards those that are most dependent. Using this approach, we will be able to treat the highly dependent variables given a fixed set of near-optimal values/methods for all others, thereby decreasing the chance that any noticeable shortcomings of a chosen value/method for one parameter are actually a result of the sub-optimal configuration of any others that directly influence the measure we use to test it.
+As can be seen in Figure 4.1, there are several modules that make up our sound synthesis search system. Each module represents at least one variable of the system that contributes to its ability to find the optimal solution as quickly (i.e. within the smallest number of iterations) as possible. Given the high-dimensionality of this variable set, it is infeasible to perform an appropriate search over all of its various permutations within a reasonable amount of time. We have chosen instead to take a measured approach to modifying each variable - while holding all others constant and comparing its different values/methods using key metrics designed specifically for it - by first looking at those variables that we believe have the least amount of dependence on the settings of all others and stepping through towards those that are most dependent. Using this approach, we will be able to treat the highly dependent variables given a fixed set of near-optimal values/methods for all others, thereby decreasing the chance that any noticeable shortcomings of a chosen value/method for one parameter are actually a result of the sub-optimal configuration of any others that directly influence the measure we use to test it.
 
 With this methodology in mind, we have chosen to first examine our fitness function, as it will be required to measure the success of various flavors of our system.
 
@@ -1093,7 +1100,7 @@ NSC = \sum_{i=1}^{M-1} max(0, P_i)
 If $NSC = 0$, the problem is considered easy, if $NSC < 0$ it is difficult, and the value of NSC quantifies this difficulty (p. 139). In our experiments, we have chosen $M=10$ so that we can generate enough points per segment of the fitness cloud given a relatively small sample size of $1000$ for the average values to be descriptive of the segment.
 The genetic operations we have decided to test are the most common set found in GP problems. A brief description of each follows:
 \begin{description}
-\item [Crossover] - In crossover, two trees are selected at random within the population, a subtree from each is selected and removed, and then the subtrees are attached to the cut points of the opposite trees. When ensuring syntactic correctness through the search process, the crossover operation must make sure to only choose subtrees that can be swapped and still result in syntactically correct structures (see Figure 5.2). 
+\item [Crossover] - In crossover, two trees are selected at random within the population, a subtree from each is selected and removed, and then the subtrees are attached to the cut points of the opposite trees. When ensuring syntactic correctness through the search process, the crossover operation must make sure to only choose subtrees that can be swapped and still result in syntactically correct structures (see Figure 4.2). 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.5]{Crossover}
@@ -1101,7 +1108,7 @@ The genetic operations we have decided to test are the most common set found in 
 \end{center}
 \end{figure}
 \\
-\item[Subtree Mutation] - This, unlike crossover, is a unary operator, which removes a subtree at a random location within a tree and replaces it with a randomly generated subtree. As with crossover, syntactic rules must be enforced during generation of this new subtree (see Figure 5.3).
+\item[Subtree Mutation] - This, unlike crossover, is a unary operator, which removes a subtree at a random location within a tree and replaces it with a randomly generated subtree. As with crossover, syntactic rules must be enforced during generation of this new subtree (see Figure 4.3).
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.5]{SubtreeMutation}
@@ -1109,7 +1116,7 @@ The genetic operations we have decided to test are the most common set found in 
 \end{center}
 \end{figure}
 \\
-\item[Point or Node Replacement Mutation] - Instead of removing an entire subtree and replacing it with a randomly generated subtree, point mutation randomly removes a single node in a tree and replaces it with a node that is syntactically valid in that position (i.e. with the same number of inputs and the same input/output types) (see Figure 5.4).
+\item[Point or Node Replacement Mutation] - Instead of removing an entire subtree and replacing it with a randomly generated subtree, point mutation randomly removes a single node in a tree and replaces it with a node that is syntactically valid in that position (i.e. with the same number of inputs and the same input/output types) (see Figure 4.4).
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.5]{PointMutation}
@@ -1117,7 +1124,7 @@ The genetic operations we have decided to test are the most common set found in 
 \end{center}
 \end{figure}
 \\
-\item[Reproduction] - This is the simplest of all genetic operators in that it is simply a pass-through mechanism for selected patches. Reproduction allows for highly fit individuals to remain in the population from generation to generation so that they may be involved in crossover with other individuals (and so they can be continuously mutated) in the hope that a higher fit individual will result (see Figure 5.5).
+\item[Reproduction] - This is the simplest of all genetic operators in that it is simply a pass-through mechanism for selected patches. Reproduction allows for highly fit individuals to remain in the population from generation to generation so that they may be involved in crossover with other individuals (and so they can be continuously mutated) in the hope that a higher fit individual will result (see Figure 4.5).
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.5]{Reproduction}
@@ -1149,35 +1156,35 @@ As Mitchell points out in his work on sound matching via evolutionary methods, t
 
 We therefore have chosen to test the search algorithm on three contrived targets with varying degrees of temporal complexity and dissimilar timbral content in order to attain an understanding of the limitations of the search algorithm (see Figures 4.6, 4.8, and 4.10). 
 
-In Figure 5.6, we present a Max patch that processes a sine wave through a feedback delay unit and modulates the result with a frequency-varying sine wave LFO, which produces a smooth and quick pulsation effect. 
+In Figure 4.6, we present a Max patch that processes a sine wave through a feedback delay unit and modulates the result with a frequency-varying sine wave LFO, which produces a smooth and quick pulsation effect. 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.8]{DelayFeedbackAM}
 \caption[Delay Feedback AM Max Patch]{A Max patch that generates audio by downsampling a $300$ Hz sine wave, passing it through a $500$ ms feedback delay line with feedback varied by a $10$ Hz sine wave, and then amplitude modulating it with a $20$ Hz frequency-modulated sine-wave LFO.}
 \end{center}
 \end{figure}
-We refer to this patch as the Feedback-Delay-AM target going forward. Figure 5.7 provides a time-frequency representation of the audio this patch produces:
+We refer to this patch as the Feedback-Delay-AM target going forward. Figure 4.7 provides a time-frequency representation of the audio this patch produces:
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\linewidth]{FeedbackDelayAMTargetSTFT}
 \caption[Delay Feedback AM Time-Frequency Representation]{A time-frequency representation of the audio produced by the Feedback-Delay-AM target patch.}
 \end{center}
 \end{figure}
-In Figure 5.8, we present a Max patch that down samples an 8-bit sine wave by an amount proportional to the amplitude of a sine wave modulated by a sawtooth. 
+In Figure 4.8, we present a Max patch that down samples an 8-bit sine wave by an amount proportional to the amplitude of a sine wave modulated by a sawtooth. 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.8]{AdaptiveDegrade}
 \caption[Adaptive Downsampling Max Patch]{A Max patch that generates audio by downsampling a $400$ Hz, $8$-bit sine wave by an amount that is proportional to the amplitude of an amplitude modulated $200 Hz$ sine wave by a $1$ Hz sawtooth modulator.}
 \end{center}
 \end{figure}
-The result sounds like a harsh bandpass filter sweeping over an abrupt impulse with a constant drone in the background. We refer to this patch as the Adaptive-Downsampling target going forward. Figure 5.9 provides a time-frequency representation of the audio this patch produces:
+The result sounds like a harsh bandpass filter sweeping over an abrupt impulse with a constant drone in the background. We refer to this patch as the Adaptive-Downsampling target going forward. Figure 4.9 provides a time-frequency representation of the audio this patch produces:
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\linewidth]{AdaptiveDownsamplingTargetSTFT}
 \caption[Adaptive Downsampling Time-Frequency Representation]{A time-frequency representation of the audio produced by the Adaptive-Downsampling target patch.}
 \end{center}
 \end{figure}
-Figure 5.10 shows a Max patch that regularly clips, but within those hard clips exists a reverberant sound similar to waves crashing in succession. 
+Figure 4.10 shows a Max patch that regularly clips, but within those hard clips exists a reverberant sound similar to waves crashing in succession. 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.8]{ClippingReverbSaw}
@@ -1185,7 +1192,7 @@ Figure 5.10 shows a Max patch that regularly clips, but within those hard clips 
 \end{center}
 \end{figure}
 \\
-We refer to this patch as the Clipping-Reverb target going forward. Figure 5.11 provides a time-frequency representation of the audio this patch produces.
+We refer to this patch as the Clipping-Reverb target going forward. Figure 4.11 provides a time-frequency representation of the audio this patch produces.
 \\
 \begin{figure}[h!]
 \begin{center}
@@ -1243,7 +1250,7 @@ The three initialization flavors we study are Full, Grow, and Ramped Half-and-Ha
 
 The four selection methods we have chosen are known as Fitness-Proportionate, Ranking, Tournament, and Double Tournament. A brief description of each of these methods follows:
 \begin{description}
-\item [Fitness-Proportionate Selection] - Individuals from one generation are chosen to populate the next generation with probability proportional to their fitness. Thus, the more fit an individual is, the more likely it will be chosen to breed new individuals for the next generation. In Figure 5.12, the top row of squares represent the individuals in a population and the pie chart below represents their respective fitnesses as fractions of the sum of all fitnesses in the population. In other words, for fitness-proportionate selection, the pie chart illustrates the probability with which each individual will be selected to breed the next population. Note in the figure that the red and green individuals from this example are chosen twice due to their high fitnesses (i.e. probabilities of selection), while the yellow is not chosen due to its low fitness.
+\item [Fitness-Proportionate Selection] - Individuals from one generation are chosen to populate the next generation with probability proportional to their fitness. Thus, the more fit an individual is, the more likely it will be chosen to breed new individuals for the next generation. In Figure 4.12, the top row of squares represent the individuals in a population and the pie chart below represents their respective fitnesses as fractions of the sum of all fitnesses in the population. In other words, for fitness-proportionate selection, the pie chart illustrates the probability with which each individual will be selected to breed the next population. Note in the figure that the red and green individuals from this example are chosen twice due to their high fitnesses (i.e. probabilities of selection), while the yellow is not chosen due to its low fitness.
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale = 0.7]{PieChartSelection}
@@ -1251,7 +1258,7 @@ The four selection methods we have chosen are known as Fitness-Proportionate, Ra
 \end{center}
 \end{figure}
 \\
-\item [Ranking Selection] - In ranking selection, individuals from one generation are ranked in order from least to most fit and the probability of selection is proportional to this ranking (see Figure 5.13). For example, if there are $N$ individuals in a generation, then the least fit individual has rank $1$ and the most fit rank $N$. The sum of all ranks is $N*(N+1)/2$. Therefore, the least fit individual will have a selection probability of $1/(N*(N+1)/2)$ or $2/(N*(N+1))$ regardless of its fitness value and the most fit individual will have a selection probability of $N/(N*(N+1)/2)$ regardless of its fitness value. 
+\item [Ranking Selection] - In ranking selection, individuals from one generation are ranked in order from least to most fit and the probability of selection is proportional to this ranking (see Figure 4.13). For example, if there are $N$ individuals in a generation, then the least fit individual has rank $1$ and the most fit rank $N$. The sum of all ranks is $N*(N+1)/2$. Therefore, the least fit individual will have a selection probability of $1/(N*(N+1)/2)$ or $2/(N*(N+1))$ regardless of its fitness value and the most fit individual will have a selection probability of $N/(N*(N+1)/2)$ regardless of its fitness value. 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale = 0.6]{RankSelection}
@@ -1259,7 +1266,7 @@ The four selection methods we have chosen are known as Fitness-Proportionate, Ra
 \end{center}
 \end{figure}
 \\
-\item [Tournament Selection] - In tournament selection, a set of patches are selected at random from a generation and the most fit of those patches is selected. All patches are placed back in the pool of all patches to be randomly sampled from on the next iteration (see Figure 5.14). This random sampling of patches and the tournament that follows is repeated as many times as there are individuals to be selected.
+\item [Tournament Selection] - In tournament selection, a set of patches are selected at random from a generation and the most fit of those patches is selected. All patches are placed back in the pool of all patches to be randomly sampled from on the next iteration (see Figure 4.14). This random sampling of patches and the tournament that follows is repeated as many times as there are individuals to be selected.
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale = 0.6]{TournamentSelection}
@@ -1267,7 +1274,7 @@ The four selection methods we have chosen are known as Fitness-Proportionate, Ra
 \end{center}
 \end{figure}
 \\
-\item [Double Tournament Selection] - In Double Tournament selection, each individual chosen to be part of a tournament is already the winner of a tournament with different conditions. The most common Double Tournament Selection mechanism works by first choosing a random grouping of patches, selecting the most parsimonious of those patches with probability $D$, and placing the winner in a pool of other parsimony tournament winners to be involved in a fitness tournament (see Figure 5.15). The idea is that Double Tournament Selection applies parsimony pressure absent from typical Tournament Selection, which is useful for controlling code bloat. The most common tournament size for the parsimony tournament is two with $D = 0.7$ and the most common tournament size for the fitness tournament is seven \cite[p. 21]{luke2006comparison}.
+\item [Double Tournament Selection] - In Double Tournament selection, each individual chosen to be part of a tournament is already the winner of a tournament with different conditions. The most common Double Tournament Selection mechanism works by first choosing a random grouping of patches, selecting the most parsimonious of those patches with probability $D$, and placing the winner in a pool of other parsimony tournament winners to be involved in a fitness tournament (see Figure 4.15). The idea is that Double Tournament Selection applies parsimony pressure absent from typical Tournament Selection, which is useful for controlling code bloat. The most common tournament size for the parsimony tournament is two with $D = 0.7$ and the most common tournament size for the fitness tournament is seven \cite[p. 21]{luke2006comparison}.
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale = 0.7]{DoubleTournamentSelection}
@@ -1341,35 +1348,35 @@ It is necessary to test this system on a number of real-world sounds in order to
 
 A brief description of the timbre targets we have chosen follows:
 \begin{description}
-\item[Evolving Lion Roar] - This is the sound of a lion roaring from start to finish with timbre evolving as the lion opens and closes his mouth. Figure 5.16 shows a time-frequency representation of this audio.
+\item[Evolving Lion Roar] - This is the sound of a lion roaring from start to finish with timbre evolving as the lion opens and closes his mouth. Figure 4.16 shows a time-frequency representation of this audio.
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.35,width=\linewidth]{EvolvingLionRoarTargetSTFT}
 \caption[Evolving Lion Roar Time-Frequency Representation]{A time-frequency representation of the Evolving Lion Roar target.}
 \end{center}
 \end{figure}
-\item[Evolving Freight Train] - This is the sound of a freight train passing close-miked tracks, with an increasing amount of high pitched random screeching as the sound progresses. Figure 5.17 shows a time-frequency representation of this audio.
+\item[Evolving Freight Train] - This is the sound of a freight train passing close-miked tracks, with an increasing amount of high pitched random screeching as the sound progresses. Figure 4.17 shows a time-frequency representation of this audio.
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.35,width=\linewidth]{FreightTrainTargetSTFT}
 \caption[Evolving Freight Train Time-Frequency Representation]{A time-frequency representation of the Evolving Freight Train target.}
 \end{center}
 \end{figure}
-\item[Evolving Metal Gong] - This is a single gong hit that evolves naturally with higher harmonics dying off before lower harmonics do. Figure 5.18 shows a time-frequency representation of this audio.
+\item[Evolving Metal Gong] - This is a single gong hit that evolves naturally with higher harmonics dying off before lower harmonics do. Figure 4.18 shows a time-frequency representation of this audio.
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.35,width=\linewidth]{MetalGongTargetSTFT}
 \caption[Evolving Metal Gong Time-Frequency Representation]{A time-frequency representation of the Evolving Metal Gong target.}
 \end{center}
 \end{figure}
-\item[Evolving Metallic Synth] - This sound was generated by a software synthesizer inside Ableton Live and evolves in a complex manner. Figure 5.19 shows a time-frequency representation of this audio.
+\item[Evolving Metallic Synth] - This sound was generated by a software synthesizer inside Ableton Live and evolves in a complex manner. Figure 4.19 shows a time-frequency representation of this audio.
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.35,width=\linewidth]{EvolvingMetallicSynthTargetSTFT}
 \caption[Evolving Metallic Synth Time-Frequency Representation]{A time-frequency representation of the Evolving Metallic Synth target.}
 \end{center}
 \end{figure}
-\item[Random Analog LFO Reverb] - This sound was generated by a software synthesizer inside Ableton Live that is modulated with a random LFO and put through a reverb plugin. Figure 5.20 shows a time-frequency representation of this audio.
+\item[Random Analog LFO Reverb] - This sound was generated by a software synthesizer inside Ableton Live that is modulated with a random LFO and put through a reverb plugin. Figure 4.20 shows a time-frequency representation of this audio.
 \end{description}
 \begin{figure}[h!]
 \begin{center}
@@ -1377,12 +1384,12 @@ A brief description of the timbre targets we have chosen follows:
 \caption[Random Analog LFO Reverb Time-Frequency Representation]{A time-frequency representation of the Random Analog LFO Reverb target.}
 \end{center}
 \end{figure}
-We have searched for these timbres using the optimal parameters/methods obtained in the previous tests, varying a stopping criterion based on iteration count - with runs ending at $200$, $400$, $600$, and $800$ iterations - and a fitness threshold (which is based on the results of the timbral similarity tests). We have calculated the typical statistics (min, max, mean) over each stopping criteria variation for each individual target as well as all targets combined. The results of these tests can be found at the end of \textbf{Chapter 4 - Results} with an accompanying discussion.
+We have searched for these timbres using the optimal parameters/methods obtained in the previous tests, varying a stopping criterion based on iteration count - with runs ending at $200$, $400$, $600$, and $800$ iterations - and a fitness threshold (which is based on the results of the timbral similarity tests). We have calculated the typical statistics (min, max, mean) over each stopping criteria variation for each individual target as well as all targets combined. The results of these tests can be found at the end of \textbf{Chapter 5 - Results} with an accompanying discussion.
 
 \vspace*{\QuarterPage}
 \chapter{Results} % * suppresses heading numbers	
 \section{Finding an Optimal Similarity Measure for Time-Varying Timbre}
-One of the most important parameters in any genetic algorithm (and thus any application of GP) is an appropriate measure of fitness. For our problem domain, we have developed the SIC-DPLA measure - over a sequence of feature vectors from a NLSE timbre space - in hopes to best represent our objective of matching timbral sequence similarity between two given sounds. In order to determine its efficacy, we have tested it against aligned-Euclidean, DTW, and DPLA measures in an experiment that determines the similarity between an undistorted sound and a large number of temporally distorted counterparts (as described in Chapter 3). Each type of distortion was tested with $1000$ different randomly chosen parameterizations.
+One of the most important parameters in any genetic algorithm (and thus any application of GP) is an appropriate measure of fitness. For our problem domain, we have developed the SIC-DPLA measure - over a sequence of feature vectors from a NLSE timbre space - in hopes to best represent our objective of matching timbral sequence similarity between two given sounds. In order to determine its efficacy, we have tested it against aligned-Euclidean, DTW, and DPLA measures in an experiment that determines the similarity between an undistorted sound and a large number of temporally distorted counterparts (as described in \textbf{Chapter 4 - Experimental Design}). Each type of distortion was tested with $1000$ different randomly chosen parameterizations.
 
 The results of this testing follows, with each plot showing the \textit{mean} normalized similarity scores under each distortion test case, calculated over individual scores from the $5$ real-world target files chosen for the generalization testing. The similarity scores for each similarity type were normalized over their natural range so as to better compare the effects that increasing distortion severity has on each type.
 
@@ -1495,7 +1502,7 @@ We believe SIC-DPLA has shown its slight superiority over DPLA as well during th
 For these reasons, we used the SIC-DPLA timbral sequence similarity measure in all tests going forward.
 
 \section{Optimizing the Fitness Surface by Varying Genetic Operator Sets}
-As discussed in Chapter 3, the measure we used to determine \emph{problem difficulty}, which is directly related to the shape and characteristics of the fitness surface is NSC. We used Metropolis-Hastings sampling to generate sample points and tournament selection (with tournament size $10$) to determine their neighbors for use in the NSC calculation. During our initial experiments, we noticed a few interesting things that influenced experiments going forward. A discussion of these items is necessary before showing and discussing the results.
+As discussed in \textbf{Chapter 4 - Experimental Design}, the measure we used to determine \emph{problem difficulty}, which is directly related to the shape and characteristics of the fitness surface is NSC. We used Metropolis-Hastings sampling to generate sample points and tournament selection (with tournament size $10$) to determine their neighbors for use in the NSC calculation. During our initial experiments, we noticed a few interesting things that influenced experiments going forward. A discussion of these items is necessary before showing and discussing the results.
 \subsection{Problematic Outputs}
 Several similarity scores for each target were repeated with high frequency during initial testing. Investigation of the patches related to these scores showed that silence and white noise were often the result of randomly generated patches, resulting in what, at least for the terms of our experiments, were ill-formed patches. However, such patches will not necessarily generate the lowest fitness score (and in fact do not for our tested files), since it is likely that a large portion of timbral material will exist that is more dissimilar to our target than even white noise or silence. Otherwise, silence and white noise, for example, would have to be maximally dissimilar from all other points in our timbre space, which is not possible given that it is Euclidean and bounded. One interpretation of this phenomenon is that our fitness function is suboptimal and to some extent we agree. However, we believe an appropriate solution is to disregard white noise or silence generating patches as if they were syntactically invalid such that their representations do not exist in our objective timbre space. In other words, we consider silence and white noise to be \emph{absent} of timbre for our purposes.
 
