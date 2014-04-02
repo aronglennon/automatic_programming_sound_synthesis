@@ -1,36 +1,36 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1}{\ignorespaces Subtractive vs. Additive Timbre Definitions}}{9}
-\contentsline {figure}{\numberline {2}{\ignorespaces Sampling Synthesis}}{16}
-\contentsline {figure}{\numberline {3}{\ignorespaces Granular Synthesis}}{17}
-\contentsline {figure}{\numberline {4}{\ignorespaces Additive Synthesis}}{18}
-\contentsline {figure}{\numberline {5}{\ignorespaces Subtractive Synthesis}}{19}
-\contentsline {figure}{\numberline {6}{\ignorespaces FM Synthesis}}{19}
-\contentsline {figure}{\numberline {7}{\ignorespaces Digital Waveguide Synthesis}}{21}
-\contentsline {figure}{\numberline {8}{\ignorespaces Producing a Target Timbre}}{23}
+\contentsline {figure}{\numberline {1}{\ignorespaces Subtractive vs. additive timbre definitions}}{9}
+\contentsline {figure}{\numberline {2}{\ignorespaces Sampling synthesis}}{16}
+\contentsline {figure}{\numberline {3}{\ignorespaces Granular synthesis}}{17}
+\contentsline {figure}{\numberline {4}{\ignorespaces Additive synthesis}}{18}
+\contentsline {figure}{\numberline {5}{\ignorespaces Subtractive synthesis}}{19}
+\contentsline {figure}{\numberline {6}{\ignorespaces FM synthesis}}{19}
+\contentsline {figure}{\numberline {7}{\ignorespaces Digital waveguide synthesis}}{21}
+\contentsline {figure}{\numberline {8}{\ignorespaces Producing a target timbre}}{23}
 \contentsline {figure}{\numberline {9}{\ignorespaces Re-synthesis}}{23}
-\contentsline {figure}{\numberline {10}{\ignorespaces Concatenative Synthesis}}{24}
-\contentsline {figure}{\numberline {11}{\ignorespaces Phase Vocoder}}{27}
+\contentsline {figure}{\numberline {10}{\ignorespaces Concatenative synthesis}}{24}
+\contentsline {figure}{\numberline {11}{\ignorespaces Phase vocoder}}{27}
 \contentsline {figure}{\numberline {12}{\ignorespaces SMS}}{28}
 \contentsline {figure}{\numberline {13}{\ignorespaces Adaptive FM}}{30}
-\contentsline {figure}{\numberline {14}{\ignorespaces The Meta-Synthesis Problem}}{32}
-\contentsline {figure}{\numberline {15}{\ignorespaces Mapping Timbre to Parameters}}{35}
-\contentsline {figure}{\numberline {16}{\ignorespaces Searching for an Appropriate Linear Combination of Orchestral Instruments}}{37}
-\contentsline {figure}{\numberline {17}{\ignorespaces Fitness Function}}{39}
-\contentsline {figure}{\numberline {18}{\ignorespaces Fitness Surface Topologies}}{40}
-\contentsline {figure}{\numberline {19}{\ignorespaces GA Example}}{42}
-\contentsline {figure}{\numberline {20}{\ignorespaces The Genetic Programming Paradigm}}{45}
-\contentsline {figure}{\numberline {21}{\ignorespaces GP for Sound Synthesis}}{47}
+\contentsline {figure}{\numberline {14}{\ignorespaces The meta-synthesis problem}}{32}
+\contentsline {figure}{\numberline {15}{\ignorespaces Mapping timbre to parameters}}{35}
+\contentsline {figure}{\numberline {16}{\ignorespaces Searching for an appropriate linear combination of orchestral instruments}}{37}
+\contentsline {figure}{\numberline {17}{\ignorespaces Fitness function}}{39}
+\contentsline {figure}{\numberline {18}{\ignorespaces Fitness surface topologies}}{40}
+\contentsline {figure}{\numberline {19}{\ignorespaces GA example}}{42}
+\contentsline {figure}{\numberline {20}{\ignorespaces The genetic programming paradigm}}{45}
+\contentsline {figure}{\numberline {21}{\ignorespaces GP for sound synthesis}}{47}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {22}{\ignorespaces Generating a Max Patch Given a Python Tree}}{58}
+\contentsline {figure}{\numberline {22}{\ignorespaces Generating a Max patch given a Python tree}}{58}
 \contentsline {figure}{\numberline {23}{\ignorespaces From Max to Python}}{58}
-\contentsline {figure}{\numberline {24}{\ignorespaces A Max Patch as a Directed Tree}}{60}
-\contentsline {figure}{\numberline {25}{\ignorespaces A Max Patch as a set of DAGs}}{61}
-\contentsline {figure}{\numberline {26}{\ignorespaces Using loadmess Objects to Provide Parameters to Max}}{62}
-\contentsline {figure}{\numberline {27}{\ignorespaces Removing send\texttildelow {} and receive\texttildelow {} Objects}}{63}
-\contentsline {figure}{\numberline {28}{\ignorespaces Reducing a Set of DAGs to a Single DAG}}{64}
-\contentsline {figure}{\numberline {29}{\ignorespaces A Single DAG with Two \emph {dac\texttildelow {}} Objects}}{65}
-\contentsline {figure}{\numberline {30}{\ignorespaces A DAG with Crossed Paths}}{66}
+\contentsline {figure}{\numberline {24}{\ignorespaces A Max patch as a directed tree}}{60}
+\contentsline {figure}{\numberline {25}{\ignorespaces A Max patch as a set of DAGs}}{61}
+\contentsline {figure}{\numberline {26}{\ignorespaces Using loadmess objects to provide parameters to Max}}{62}
+\contentsline {figure}{\numberline {27}{\ignorespaces Removing send\texttildelow {} and receive\texttildelow {} objects}}{63}
+\contentsline {figure}{\numberline {28}{\ignorespaces Reducing a set of DAGs to a single DAG}}{64}
+\contentsline {figure}{\numberline {29}{\ignorespaces A single DAG with two \emph {dac\texttildelow {}} objects}}{65}
+\contentsline {figure}{\numberline {30}{\ignorespaces A DAG with crossed paths}}{66}
 \contentsline {figure}{\numberline {31}{\ignorespaces Uncrossing Paths to Form a Tree}}{67}
 \contentsline {figure}{\numberline {32}{\ignorespaces Object List File}}{68}
 \contentsline {figure}{\numberline {33}{\ignorespaces Gaussian Mixture Models}}{72}

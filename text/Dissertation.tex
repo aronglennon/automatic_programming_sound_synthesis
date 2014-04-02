@@ -39,9 +39,14 @@
 \end{tabular}
 \\
 \vfill
-EVOLVING SYNTHESIS ALGORITHMS USING A MEASURE OF TIMBRAL SEQUENCE SIMILARITY\\
-\vfill
+EVOLVING SYNTHESIS ALGORITHMS USING A MEASURE\\
+\vspace{\baselineskip}
+OF TIMBRAL SEQUENCE SIMILARITY\\
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
 Aron Glennon\\
+\vspace{\baselineskip}
 Program in Music Technology\\
 Department of Music and Performing Arts Professions\\
 \vfill
@@ -50,7 +55,7 @@ of the requirements for the degree of\\
 Doctor of Philosophy in the\\
 Steinhardt School of Culture, Education, and Humanities Development\\
 New York University\\
-2013\\
+2014\\
 \end{center}
 \end{titlepage}
 
@@ -74,6 +79,7 @@ Copyright \copyright{} 2014 Aron Glennon
 \thispagestyle{plain}
 \setcounter{page}{3}
 \addcontentsline{toc}{subsection}{ABSTRACT}
+\vspace{\baselineskip}
 The advent of the computer has provided composers with the ability to produce absolutely any sonic material within the human range of hearing. However, this power comes with a fundamental caveat: the composer must communicate to the computer what sonic material they are interested in generating, and this process is a non-trivial task. It is primarily the case that computer composition software is written to provide an interface to the composer that defines boundaries within which the composer may generate material. While these interfaces have proven effective in producing a large variety of material, the paradigm of software developers providing specific boundaries for the composer to work within is not ideal and certainly not the only possibility. 
 
 The motivation of this research is to explore a different paradigm, where the composer communicates to the software exactly what sort of timbral material they are interested in generating and the software produces an appropriate interface to help them realize that. It is based on the idea that the most natural way for the composer to communicate with a computer is via describing by example.
@@ -93,6 +99,7 @@ The proposed system accepts a short audio file with timbral content that the com
 \thispagestyle{plain}
 \setcounter{page}{4}
 \addcontentsline{toc}{subsection}{ACKNOWLEDGEMENTS}
+\vspace{\baselineskip}
 This work could not have been completed without the patience and support of many different individuals. I would like to specifically thank:
 
 My advisor Prof. Robert Rowe for providing me with the appropriate amount of freedom to follow my instincts when they were strong and the appropriate amount of guidance when I led myself to forks in the road.
@@ -221,7 +228,7 @@ There are two approaches to defining timbre (see Figure 2.1): an additive defini
 \begin{figure}[!htp]
 \begin{center}
 \includegraphics[scale=0.45]{SubtractiveVsAdditive}
-\caption[Subtractive vs. Additive Timbre Definitions]{Visual representations of (a) subtractive and (b) additive definitions of timbre.}
+\caption[Subtractive vs. additive timbre definitions]{Visual representations of (a) subtractive and (b) additive definitions of timbre.}
 \end{center}
 \end{figure}
 In order to build an additive definition of timbre, one typically performs controlled perceptual similarity tests, uses the results to build a subjective timbre space where distances are semantically meaningful, and then associates the axes of this space with acoustic features \cite[p. 1]{Pampalk:2008xz}. Some of the earliest studies of subjective timbre spaces were performed separately by Grey and Wessel \cite{Grey:NoRead, Wessel:1979tg}. Both use multidimensional scaling algorithms (MDS) to develop a timbre space from pairwise subjective similarity tests. MDS allows one to generate a space, typically two- or three-dimensional (though by no means limited to these), given a set of distance measurements between points, where the cumulative error in the distances provided between the points is minimized. In other words, MDS provides a way to generate a Euclidean space given a set of subjective measurements. However, in order to assign acoustic features to the axes resulting from MDS analysis on subjective measurements, one is left to find correlations between these axes with tested features. For example, using a two-dimensional timbre space, Wessel finds that the axes correlate with the spectral envelope and the nature of the onset transient \cite[p. 48]{Wessel:1979tg}. However, definitively assigning features to these axes based simply on correlation is misguided. As Caclin, McAdams, Smith, and Winsberg point out in their investigation into the properties of timbre, ``Given the multiplicity of acoustical parameters that could be proposed to explain perceptual dimensions, one can never be sure that the selected parameters do not merely covary with the true underlying parameters'' \cite[p. 2]{Caclin:2005il}. 
@@ -249,7 +256,7 @@ One of the most comprehensive comparative studies of synthesis algorithms is pre
 \begin{table}[h!]
 \begin{center}
 \includegraphics[scale=0.7]{SynthesisTechniqueTaxonomy}
-\caption[Synthesis Technique Taxonomy]{A synthesis technique taxonomy proposed by Smith \protect\cite{III:1991hc}.}
+\caption[Synthesis technique taxonomy]{A synthesis technique taxonomy proposed by Smith \protect\cite{III:1991hc}.}
 \end{center}
 \end{table}
 
@@ -258,7 +265,7 @@ Sampling synthesis (see Figure 2.2) ``is a method in which recordings of relativ
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.8]{SamplingSynthesis}
-\caption[Sampling Synthesis]{Sampling Synthesis}
+\caption[Sampling synthesis]{Sampling Synthesis}
 \end{center}
 \end{figure}
 Granular synthesis (see Figure 2.3) ``is a set of techniques that share a common paradigm of representing sound signals by \emph{sound atoms} or grains...the synthetic sound signal is composed by adding these elementary units in the time domain'' \cite[p.13]{Tolonen:1998bh}. In his dissertation on analysis/synthesis techniques (which will be covered later), Klingbeil adds that ``granular synthesis may be viewed as a particular specialization of sampling synthesis...[It] offers the possibility to decouple the time and frequency evolution of a sound, as well as impart particular characteristics modulating between rough, smooth, or stochastic textures'' \cite[p. 6]{Klingbeil:2009lo}. Thus, unlike sampling synthesis, granular synthesis allows one to transform smoothly between timbres. However, this comes at the price of a higher dimensional parameter space, forcing the user to specify ``the shape of the overall \emph{cloud}, the fundamental frequency, the way in which the individual grains are generated, the structure of the individual grains used, etc'' \cite[p. 5]{Johnson:1998sh}. In Nicol's dissertation investigating mappings between synthesis parameter spaces and timbre spaces, he notes that the non-intuitive mapping between this high dimensional parameter space and timbre space makes ``emulation of target timbres a non-trivial process'' \cite[p. 49]{Nicol:2005rp}. Granular synthesis requires less memory than sampling synthesis, but is also less efficient (although real-time algorithms do exist). Vercoe, Gardner, and Scheirer point out that granular synthesis is ``best suited to the generation of noisy or textural sounds like water, wind, applause, and fire'' \cite[p. 6]{Vercoe:1998hh}.
@@ -266,7 +273,7 @@ Granular synthesis (see Figure 2.3) ``is a set of techniques that share a common
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.8]{GranularSynthesis}
-\caption[Granular Synthesis]{Granular Synthesis}
+\caption[Granular synthesis]{Granular Synthesis}
 \end{center}
 \end{figure}
 Additive synthesis (see Figure 2.4) ``is a method in which a composite waveform is formed by summing sinusoidal components to produce a sound'' \cite[p. 17]{Tolonen:1998bh}. Based on Fourier analysis, ``additive synthesis can in theory synthesize arbitrary sounds if an unlimited number of oscillators is available'' \cite[p. 94]{Tolonen:1998bh}. However, as the numbers of oscillators increase, so does the number of controllable parameters. Consequently, there is a fundamental tradeoff between flexibility and controllability with respect to the number of oscillators used \cite[p. 7]{Klingbeil:2009lo}. It is because of this that additive synthesis is best utilized for generating harmonic or quasi-harmonic signals where little noise is present \cite[p. 5]{Vercoe:1998hh}. Additive synthesis also requires a number of parameters to be changed simultaneously in order to move a small distance in timbre space, which is unattractive. The desirable properties that additive synthesis satisfies are low storage (although the control data can require a lot of memory) and the ability to generate, in theory, any timbre, but its parameter space is high-dimensional and difficult to control as a result.
@@ -274,7 +281,7 @@ Additive synthesis (see Figure 2.4) ``is a method in which a composite waveform 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.8]{AdditiveSynthesis}
-\caption[Additive Synthesis]{Additive Synthesis}
+\caption[Additive synthesis]{Additive Synthesis}
 \end{center}
 \end{figure}
 Subtractive synthesis (see Figure 2.5) is similarly based on Fourier analysis, but works by subtracting sinusoids from a spectrally rich source to generate material rather than building up material by adding sinusoids together, as in additive synthesis. The \emph{subtraction} is performed by a time-varying filter whose coefficients are supplied by the user. In order to achieve complex and temporally evolving sounds, the parameter space can grow to the size of additive synthesis and therefore will suffer from the same controllability issues \cite[p. 48]{Tolonen:1998bh}. If one uses a simple network of filters to try to reduce the size of the parameter space, ``the resulting tones have a distinctive \emph{analog synthesizer} character that, while sometimes desirable, is difficult to avoid'' \cite[p. 5]{Vercoe:1998hh}. Thus, one must trade timbral flexibility with the controllability of the algorithm. Similar to additive synthesis, the control data can require a lot of memory during sound production. Also, the efficiency of the algorithm and the facility to move around timbre space varies with the complexity of the time-varying filter or network of filters.
@@ -282,7 +289,7 @@ Subtractive synthesis (see Figure 2.5) is similarly based on Fourier analysis, b
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.8]{SubtractiveSynthesis}
-\caption[Subtractive Synthesis]{Subtractive Synthesis}
+\caption[Subtractive synthesis]{Subtractive Synthesis}
 \end{center}
 \end{figure}
 FM synthesis (see Figure 2.6), in its most basic form, contains two oscillators, which are connected so that one oscillator's waveform modulates the frequency of the other. There are only a few parameters with which to generate a large range of timbral material, which is desirable, but due to an inherent nonlinear mapping between parameter space and control space, ``FM has become widely regarded as a difficult synthesis type to control'' \cite{Mitchell:2007fe}. This is for two reasons. First, the nonlinearity provides a non-intuitive relationship between a given set of parameters and the sound it produces \cite[p. 45]{Nicol:2005rp}. Second, a  nonlinear mapping means that small changes in the input parameters can map to large changes in the timbre and thus fine timbral manipulation can be difficult \cite[p. 2]{Jaffe:1995fv}. Another undesirable quality of FM synthesis is that the characteristic FM sound is ``fairly metallic, so the FM output is often filtered in order to produce a more natural sound'' \cite[p. 45]{Nicol:2005rp}. The benefits of FM synthesis are that is ``is very cheap to implement, uses little memory, and [as previously mentioned] the control stream is sparse'' \cite[p. 92]{Tolonen:1998bh}.
@@ -290,7 +297,7 @@ FM synthesis (see Figure 2.6), in its most basic form, contains two oscillators,
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.65]{FMSynthesis}
-\caption[FM Synthesis]{FM Synthesis}
+\caption[FM synthesis]{FM Synthesis}
 \end{center}
 \end{figure}
 Digital waveguides (see Figure 2.7) are ``based on a general solution of the wave equation in a one-dimensional homogeneous medium'' \cite[p. 63]{Tolonen:1998bh}. They are basic linear time-invariant (LTI) structures that allow one to develop physical models of various instruments. Their parameters are intuitive and small in number, aiding in timbral manipulation. However, specific waveguide networks are designed to imitate a single sound producing body and therefore are timbrally restricted in comparison to additive synthesis. Also, as Smith comments in his seminal paper on digital waveguides, ``new models must be developed for each new kind of instrument, and for many instruments, no sufficiently concise algorithm is known'' \cite[p. 86]{III:1992zn}. In fact, as Tolonen et al. point out, any sound producing object that requires a two- or three-dimensional waveguide mesh to represent its governing physics will be computationally expensive to model and, consequently, only simple physical models based on waveguides will be able to run in real-time \cite[p. 99-100]{Tolonen:1998bh}. Thus, digital waveguides provide a low-dimensional, intuitive parameter set and low storage requirements, but can be computationally expensive for complex sounds and require separate topologies for each region of timbre space \cite[p. 50]{Nicol:2005rp}.
@@ -298,7 +305,7 @@ Digital waveguides (see Figure 2.7) are ``based on a general solution of the wav
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.55]{DigitalWaveguideSynthesis}
-\caption[Digital Waveguide Synthesis]{Digital Waveguide Synthesis}
+\caption[Digital waveguide synthesis]{Digital Waveguide Synthesis}
 \end{center}
 \end{figure}
 The above discussion illustrates a fundamental tradeoff between versatility and control that all synthesis topologies face. The in-depth comparative study of various sound synthesis techniques, carried out by Tolonen et al., elucidates the strengths and weaknesses of each algorithm in regards to this tradeoff as well as practical issues related to implementation. However, one practical issue of utmost importance that is not covered in this study is whether each algorithm provides a mechanism by which to realize a specific target timbre. If such a mechanism does not exist, the resultant algorithm would be, at best, as useful as an instrument capable of producing any pitch and offering fine pitch control, but lacking deterministic means to produce a specific desired pitch. Chafe, in presenting a historical perspective on the many ways synthesis has influenced and benefitted composition over the last fifty years, writes that, historically, imitation has been one of the main uses of sound synthesis since its inception \cite[p. 2]{Chafe:1999bx}. Thus, the importance of being able to achieve a specific desired timbre cannot be overstated.
@@ -311,7 +318,7 @@ Estimating synthesis parameters for a target timbre is a difficult problem (see 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.7]{ResynthesisProblem}
-\caption[Producing a Target Timbre]{The Task of Producing a Target Timbre}
+\caption[Producing a target timbre]{The Task of Producing a Target Timbre}
 \end{center}
 \end{figure}
 As opposed to leaving the task of target timbre discovery to the composer, re-synthesis and parameter estimation techniques attempt to automatically fit the parameters of a sound synthesis algorithm to imitate a target sound (see Figure 2.9). Specifically, re-synthesis uses the results of a target signal's analysis to fit parameters to an underlying synthesis algorithm. Once a particular parameter fitting has been found, the user is left to explore the space around the target using the underlying synthesizer. This means that a re-synthesis technique paired with a specific synthesis algorithm will combine to produce a system that suffers from the same pitfalls associated with the algorithm. It is therefore useful to categorize re-synthesis techniques based on their underlying synthesis algorithms, so that one may compare these techniques within the proper context.
@@ -329,7 +336,7 @@ One of the most popular re-synthesis techniques utilizing a sampling synthesis m
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.55]{ConcatSynth}
-\caption[Concatenative Synthesis]{Concatenative Synthesis}
+\caption[Concatenative synthesis]{Concatenative Synthesis}
 \end{center}
 \end{figure}
 In order to determine the best timbral match in the database to a given target one must rely on a perceptual distance measure. Deriving such a measure is complicated (as will be discussed later) \cite[p. 13]{Schwarz:2006gr}. In addition to searching for the best matching units, musical mosaicing also typically constrains the sequencing of these units to ensure a smooth timbral development \cite[p. 1]{Zils:2001bd}. In order to achieve accurate re-synthesis, a large database of units is required to meet both local and global constraints while providing a high-fidelity solution. As the size of this database increases an efficient search becomes difficult. The length of this search may not be problematic for a composer interested in matching one particular target, but if timbral exploration around the target is desired, the search for a new sequence for every slight timbral variation becomes a prohibitive bottleneck \cite[p. 11]{Schwarz:2006gr}.  If discontinuities between units and imprecise unit matching is acceptable however, such a search can usually be run in realtime.
@@ -345,7 +352,7 @@ The phase vocoder (see Figure 2.11) was developed at Bell laboratories in 1966 a
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.45]{PhaseVocoder}
-\caption[Phase Vocoder]{Filter-bank Implementation of the Phase Vocoder}
+\caption[Phase vocoder]{Filter-bank Implementation of the Phase Vocoder}
 \end{center}
 \end{figure}
 There are two main problems with the phase vocoder. First, transients are often very difficult to model accurately. Robel has been working on this problem for a number of years \cite{Robel:2003vh,Robel:2010dp} and made good progress, but notes that it is still an unsolved problem \cite[p. 1]{Robel:2010dp}. Second, the phase vocoder performs poorly on ``inharmonic sounds with deep vibrato'' due to its inability to track frequency components across bins and its difficulty in efficiently modeling noise \cite[p. 13]{Serra:1990dk}. This second problem was the impetus to the development of Spectral Modeling Synthesis (SMS) by Serra and Smith \cite{Serra:1990dk}.
@@ -365,7 +372,7 @@ Klingbeil adds that ``partial tracking becomes particularly difficult in the pre
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.55]{SMS}
-\caption[SMS]{Spectral Modeling Synthesis (SMS)}
+\caption[SMS]{Spectral modeling synthesis (SMS)}
 \end{center}
 \end{figure}
 While there has been less work produced on re-synthesis methods that overlie physical models, and abstract algorithms like FM Synthesis, some interesting research has developed in the last decade.
@@ -388,7 +395,7 @@ The previous discussion of the most popular re-synthesis methods had a common th
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.80]{MetaSynthesis1}
-\caption[The Meta-Synthesis Problem]{The Meta-Synthesis problem}
+\caption[The meta-synthesis problem]{The Meta-Synthesis problem}
 \end{center}
 \end{figure}
 Instead of having to generate and provide enough timbral data to blanket timbre space, Puckette \cite{Puckette:2004zp} proposes an alternative method for designing such a system (see Figure 2.15). First, the author defines an 11-dimensional objective timbre space by segmenting a spectrum's magnitude into 11 bands, calculating the loudness in each, and then transforming the result so that these values are decorrelated \cite[p. 1-2]{Puckette:2004zp}. He then uses a specific synthesizer to generate points in this timbre space by sufficiently blanketing the input parameter space. When a target sound - corresponding to a path in the timbre space - is provided to his system, it re-synthesizes the sound by finding the synthesizer's nearest neighbors (using Euclidean distance) to each point in the target path, determining the \emph{smoothest} trajectory through these nearest neighbors, and mapping this trajectory back to parameter space to determine how the synthesis algorithm can best produce the target \cite[p. 3]{Puckette:2004zp}. 
@@ -400,7 +407,7 @@ This extended version of Puckette's system would also separate the suitability o
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.75]{PucketteMetaSynthesis}
-\caption[Mapping Timbre to Parameters]{Finding the closest parameter mappings in a partially canvassed objective timbre space.}
+\caption[Mapping timbre to parameters]{Finding the closest parameter mappings in a partially canvassed objective timbre space.}
 \end{center}
 \end{figure}
 Loviscach's work on making synthesizer control feel more natural for synthesizers with large parameter spaces provides a solution to this last problem \cite{Loviscach:2009mi}. In his work, Loviscach studies correlations between parameter sets for a given synthesizer based on a database of preset data. If two different parameters are highly correlated over a broad range of parameter presets, then adjusting one will adjust the other \cite[p. 1]{Loviscach:2009mi}. Correlations are found between all pairs of parameters and placed in a two-dimensional field such that highly correlated parameters are placed next to each other. The manipulation of any one parameter will affect all others according to their distance and joint statistics \cite[p. 1]{Loviscach:2009mi}. Thus, assuming that the provided presets for a given synthesizer correspond to a synthesizers natural usage, this system is able to replace a synthesizer's high-dimensional non-intuitive parameter space with a more natural low-dimensional one. Of course, this requires that enough presets exist for each synthesizer so that their parameter correlations can be considered statistically significant. In this case, however, a hybrid system employing techniques from both Puckette's and Loviscach's research could be quite interesting. The major hurdle would be having the enormous amount of training data necessary for both techniques to work well in harmony, making such a system impractical. In theory, however, this hybrid system would allow a composer to provide a target timbre and, in return, would be given a specific algorithm and parameter set that they could then use to explore the surrounding space in a natural way. If further constraints are placed on storage and efficiency, this system would meet the basic requirements of an ideal synthesis tool. However, other authors have suggested that one could do even better than this.
@@ -412,7 +419,7 @@ The research of Carpentier, Tardieu, Harvey, Assayag, and Saint-James exploits t
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.55]{OrchestralMetaSynthesis}
-\caption[Searching for an Appropriate Linear Combination of Orchestral Instruments]{Approximating a complex timbre using a linear combination of orchestral instrumentation.}
+\caption[Searching for an appropriate linear combination of orchestral instruments]{Approximating a complex timbre using a linear combination of orchestral instrumentation.}
 \end{center}
 \end{figure}
 Carpentier et al. designed their system specifically as an auto-orchestration mechanism for given target sounds, constraining their search to a realizable orchestral combination \cite{Carpentier:2010fh}. This constraint need not be applied when combining sound synthesis algorithms. It is also not necessary to consider typical sound synthesis algorithms as \emph{atomic} units, as it is in the acoustic instrument case. By removing this limitation, one may be able to generate better-suited synthesis algorithms for a given target using building blocks at a different level of abstraction. Replacing high-level blocks with the lower-level components that make them up, one would be able to generate solutions at least as fit as any of those generated using the higher-level set, and possibly better \cite[p. 2]{Garcia:2000th}. However, the search space becomes larger as the atoms become lower-level and, therefore, the search itself becomes more difficult. Thus, one must balance the theoretical ability of the system to produce possibly better solutions with the practicality of being able to find one of these solutions. A few studies have attempted to build a system capable of constructing synthesis algorithms, well-suited to a given target, via an intelligent, directed search through synthesis algorithm space \cite{Wehn:1998bh, Garcia:2000th, Garcia:2002cq}. Before being able to discuss this research in any detail, one must familiarize themselves with the underlying search strategy both When and Garcia employ as well as understand why it is optimal for this task.
@@ -423,7 +430,7 @@ An exhaustive search over synthesis space is not possible, no matter how large t
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.7]{FitnessFunction}
-\caption[Fitness Function]{An objective function/surface sitting above synthesis space with its global maximum shown.}
+\caption[Fitness function]{An objective function/surface sitting above synthesis space with its global maximum shown.}
 \end{center}
 \end{figure}
 The artificial intelligence community has developed various intelligent search algorithms to address such problems, which direct the search based on hypotheses about the objective surface's shape (see Figure 2.18), and/or restrict the region of search based on known characteristics of the desired solution \cite[p. 64-108]{Russell:2009ai}.
@@ -431,7 +438,7 @@ The artificial intelligence community has developed various intelligent search a
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.6]{DifferentTopologies}
-\caption[Fitness Surface Topologies]{Three different fitness surfaces: (a) unimodal and smooth, (b) multimodal, but relatively smooth and with a clear global maximum, and (c) multimodal and rough with no clear global maximum.}
+\caption[Fitness surface topologies]{Three different fitness surfaces: (a) unimodal and smooth, (b) multimodal, but relatively smooth and with a clear global maximum, and (c) multimodal and rough with no clear global maximum.}
 \end{center}
 \end{figure}
 If one can assume that the objective surface is unimodal and smooth, then the most efficient search algorithm is called hill-climbing, which simply looks at all neighbors of the current position in the search and moves in the direction of greatest increase in the objective function. However, if the surface is not unimodal, then this algorithm has a chance of converging to a local maximum, which is undesirable. Teller writes that hill-climbing is a fully-exploitative search algorithm, meaning it ``focuses the search in the areas of the search space that have the highest known [objective] values'' \cite[p. 23]{Teller:1998ly}. He explains that ``in search there is sometimes a trade-off between exploration and exploitation'' whereas opposed to exploitation, ``exploration means trying out options that are believed to be locally sub-optimal (in hopes that globally these options will lead to an improved solution)'' \cite[p. 23]{Teller:1998ly}. If no assumptions about the shape of the objective surface can be made, then one must find a good balance between the exploitation and exploration in search so that premature convergence is unlikely to occur. Search strategies with this balance are often employed---and are known to be most productive---in cases where the problem domain is not well understood, and one does not know a priori about the structure of the solution, as is the case with the synthesis problem that we are facing \cite[p. 42]{Vanneschi:2004le}. Thus, it is not a coincidence that variants of genetic algorithms (GA)---a strategy that provides mechanisms to directly control the amounts of exploitation and exploration---have been successfully utilized in many of the parameter estimation studies listed above \cite{Horner:1993il, Johnson:1998sh, Mitchell:2005ez, Riionheimo:2003qo}. The degree to which GAs have helped solve the FM matching problem has led Horner, one of the initial pioneers of FM matching, to proclaim that it has helped push FM matching ``into something of a renaissance period'' \cite[p. 28]{Horner:2003ov}.
@@ -441,7 +448,7 @@ As described in his dissertation on making variants of GAs more efficient, Vanne
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.50]{GASearch}
-\caption[GA Example]{A GA population after: (a) $1$, (b) $10$ (c) $100$, and (d) $1000$ iterations (and optimal solution notated by large red dot).}
+\caption[GA example]{A GA population after: (a) $1$, (b) $10$ (c) $100$, and (d) $1000$ iterations (and optimal solution notated by large red dot).}
 \end{center}
 \end{figure}
 Since it is known that for at least several fixed topology parameter estimation techniques (e.g. FM matching, physical model parameter estimation, granular re-synthesis), the objective surfaces are best searched via genetic algorithms, it is very likely that the objective surface for the more complex problem of simultaneous topology and parameter estimation will also be best searched using genetic algorithms. However, classical genetic algorithms can only be applied when the size and shape of the solution is known beforehand \cite[p. 42]{Vanneschi:2004le}. In the search for an appropriate synthesis algorithm topology, the size and shape of the ultimate solution is a large part of the problem. Research into more sophisticated search methods, which are better able to search over algorithm space is the subject matter of Automatic Programming.
@@ -455,7 +462,7 @@ GP can be thought of as ``variable length, tree-based genetic algorithms'' \cite
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.70]{GraphAsPoint}
-\caption[The Genetic Programming Paradigm]{The common Genetic Programming (GP) setup, where a point in algorithm space is represented by a tree.}
+\caption[The genetic programming paradigm]{The common Genetic Programming (GP) setup, where a point in algorithm space is represented by a tree.}
 \end{center}
 \end{figure}
 There has been relatively little research into genetic programming in the arts compared to the hard sciences (e.g. robotics, circuit design) (Hollady \& Robbins, 2007, p. 1). However, there is no inherent reason why this should be the case. In their paper on human-machine interaction, Moroni, von Zuben, and Manzolli note that ``human-machine interaction in the context of artistic domains [can be] a framework for exploring creativity and producing results that could not be obtained without such interaction'' \cite[p. 185]{Moroni:2002oa}. It is certainly true that a meta-synthesizer would be able to provide a composer with the means to experiment with timbre in ways they would not be able to without it, thus leading them to places of creativity that they would not have been able to explore on their own. However, the first uses of GP in the artistic domain that predated any work on evolving synthesis algorithms were for evolving music-making systems---see \cite{Rowe:NoRead, Spector:1994ij, Johanson:1997gf, Polito:1997ly, Todd:1998tg, Costelloe:2007bv}.
@@ -477,7 +484,7 @@ Wehn was the first researcher to investigate such a system \cite{Wehn:1998bh}. A
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale = 0.6]{SimpleSystem}
-\caption[GP for Sound Synthesis]{A high-level overview of using GP for generating synthesis algorithms.}
+\caption[GP for sound synthesis]{A high-level overview of using GP for generating synthesis algorithms.}
 \end{center}
 \end{figure}
 \\
@@ -539,7 +546,7 @@ The first item is handled using a JavaScript translation layer, where Python tra
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.4]{JSTranslation}
-\caption[Generating a Max Patch Given a Python Tree]{Translation of a Python \emph{MaxPatch} into an equivalent patch in Max via JavaScript.}
+\caption[Generating a Max patch given a Python tree]{Translation of a Python \emph{MaxPatch} into an equivalent patch in Max via JavaScript.}
 \end{center}
 \end{figure}
 \\
@@ -560,7 +567,7 @@ The majority of GP research studies use tree data structures to represent each i
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.7]{RootTree}
-\caption[A Max Patch as a Directed Tree]{An example Max patch represented as a directed tree with the audio signal flowing from patch's terminals towards its root.}
+\caption[A Max patch as a directed tree]{An example Max patch represented as a directed tree with the audio signal flowing from patch's terminals towards its root.}
 \end{center}
 \end{figure}
 \\
@@ -573,7 +580,7 @@ Any Max patch can be easily be represented by a finite set of \emph{directed acy
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.7]{MaxDAGs}
-\caption[A Max Patch as a set of DAGs]{A Max patch and its corresponding representation as a set of DAGs}
+\caption[A Max patch as a set of DAGs]{A Max patch and its corresponding representation as a set of DAGs}
 \end{center}
 \end{figure}
 \\
@@ -581,7 +588,7 @@ In the case that a Max object would exist in a patch with arguments (as pictured
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.7]{MaxDAGsLoadmess}
-\caption[Using loadmess Objects to Provide Parameters to Max]{The same \emph{degrade\texttildelow{}} object in two Max patches (one with arguments and one with loadmess objects).}
+\caption[Using loadmess objects to provide parameters to Max]{The same \emph{degrade\texttildelow{}} object in two Max patches (one with arguments and one with loadmess objects).}
 \end{center}
 \end{figure}
 \\
@@ -589,13 +596,13 @@ Max objects come in a number of flavors with regard to what type of data can flo
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.75]{MaxDAGsSendReceive1}
-\caption[Removing send\texttildelow{} and receive\texttildelow{} Objects]{The original Max patch from Figure 3.4 replaced by its equivalent patch without send\texttildelow{} or receive\texttildelow{} objects.}
+\caption[Removing send\texttildelow{} and receive\texttildelow{} objects]{The original Max patch from Figure 3.4 replaced by its equivalent patch without send\texttildelow{} or receive\texttildelow{} objects.}
 \end{center}
 \end{figure}
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.8]{MaxDAGsSendReceive2}
-\caption[Reducing a Set of DAGs to a Single DAG]{The single DAG representation of the reduced patch in Figure 3.6.}
+\caption[Reducing a set of DAGs to a single DAG]{The single DAG representation of the reduced patch in Figure 3.6.}
 \end{center}
 \end{figure}
 \\
@@ -603,7 +610,7 @@ If there are two or more \emph{dac\texttildelow{}} nodes in the DAG, the signals
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.7]{MaxDAGs2DACs}
-\caption[A Single DAG with Two \emph{dac\texttildelow{}} Objects]{A single DAG representation of a Max patch with two \emph{dac\texttildelow{}} objects.}
+\caption[A single DAG with two \emph{dac\texttildelow{}} objects]{A single DAG representation of a Max patch with two \emph{dac\texttildelow{}} objects.}
 \end{center}
 \end{figure}
 \\
@@ -611,7 +618,7 @@ Thus, there is only difference between the representation that we've determined 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.8]{MaxDAGsCrossedPaths}
-\caption[A DAG with Crossed Paths]{A simple Max patch whose DAG representation has crossed paths and therefore is not a tree.}
+\caption[A DAG with crossed paths]{A simple Max patch whose DAG representation has crossed paths and therefore is not a tree.}
 \end{center}
 \end{figure}
 \\
@@ -1612,7 +1619,7 @@ The results of these tests have characteristics that mirror the last few, which 
 \begin{table}[h!]
 \begin{center}
 \includegraphics[scale=0.6,width=\linewidth]{GOPS_Table1}
-\caption[NSC Values for Tested Genetic Operation Combinations]{NSC values for the tested genetic operation combinations involving Crossover (C), Subtree Mutation (S), Point Mutation (P), and Reproduction (R) over our selected real-world targets.}
+\caption[NSC values for tested genetic operation combinations]{NSC values for the tested genetic operation combinations involving Crossover (C), Subtree Mutation (S), Point Mutation (P), and Reproduction (R) over our selected real-world targets.}
 \end{center}
 \end{table}
 }
@@ -1623,7 +1630,7 @@ Another way to view the data is to look only at NSC rankings per file, rather th
 \begin{table}[h!]
 \begin{center}
 \includegraphics[scale=0.6,width=\linewidth]{GOPS_Table2}
-\caption[NSC Rankings for Tested Genetic Operation Combinations]{NSC rankings for the tested genetic operation combinations involving Crossover (C), Subtree Mutation (S), Point Mutation (P), and Reproduction (R) over our selected real-world targets.}
+\caption[NSC rankings for tested genetic operation combinations]{NSC rankings for the tested genetic operation combinations involving Crossover (C), Subtree Mutation (S), Point Mutation (P), and Reproduction (R) over our selected real-world targets.}
 \end{center}
 \end{table}
 \clearpage
@@ -1642,7 +1649,7 @@ The tests were broken into the following groups: varying SMTD restrictions, vary
 \begin{table}[h!]
 \begin{center}
 \includegraphics[scale=0.6,width=\linewidth]{ResourceLimTable1}
-\caption[Code Bloat Limitation Best-of-Run Values]{The best-of-run fitness values for each variation of code bloat limitation.}
+\caption[Code bloat limitation best-of-run values]{The best-of-run fitness values for each variation of code bloat limitation.}
 \end{center}
 \end{table}
 
@@ -1651,7 +1658,7 @@ The three strongest performers in terms of mean best-of-run fitness over the thr
 \begin{table}[h!]
 \begin{center}
 \includegraphics[scale=0.6,width=\linewidth]{ResourceLimTable2}
-\caption[Code Bloat Limitation Best-of-Run Ranks]{The best-of-run ranks for each variation of code bloat limitation.}
+\caption[Code bloat limitation best-of-run ranks]{The best-of-run ranks for each variation of code bloat limitation.}
 \end{center}
 \end{table}
 
@@ -1675,14 +1682,14 @@ Each pairing of initialization and selection we tested was applied over a run of
 \begin{table}[h!]
 \begin{center}
 \includegraphics[scale=0.6,width=\linewidth]{InitializationTable1}
-\caption[Initialization and Selection Best-of-Run Values]{The best-of-run values for each pairing of initialization and selection methods.}
+\caption[Initialization and selection best-of-run values]{The best-of-run values for each pairing of initialization and selection methods.}
 \end{center}
 \end{table}
 Ranking selection provided better solutions for all types of initialization. Full initialization produced inferior solutions to both grow and ramped half-and-half initialization methods. It can be seen from the mean best-of-run fitness column in Table 5.5 that grow initialization slightly outperformed ramped half-and-half when both used ranking selection. This is also evident in the table of best-of-run ranks below (see Table 5.6).
 \begin{table}[h!]
 \begin{center}
 \includegraphics[scale=0.6,width=\linewidth]{InitializationTable2}
-\caption[Initialization and Selection Best-of-Run Ranks]{The best-of-run ranks for each pairing of initialization and selection methods.}
+\caption[Initialization and selection best-of-run ranks]{The best-of-run ranks for each pairing of initialization and selection methods.}
 \end{center}
 \end{table}
 While either grow and ramped half-and-half initialization methods could be used along with ranking selection, we chose grow based on its slightly better mean best-of-run values in both tables.
@@ -1694,7 +1701,7 @@ These methods were tested by applying them each over an individual run of $200$ 
 \begin{table}[h!]
 \begin{center}
 \includegraphics[scale=0.6,width=\linewidth]{NonStandardSelectionTable}
-\caption[Non-standard Selection Best-of-Run Values]{The best-of-run values for each non-standard selection method compared to best-of-run values for a run using none of them.}
+\caption[Non-standard selection best-of-run values]{The best-of-run values for each non-standard selection method compared to best-of-run values for a run using none of them.}
 \end{center}
 \end{table}
 While PADGP outperformed both SA and IDFF in each test run, it was, on average, outperformed by the system that used none of the non-standard methods. Therefore, we found that for this problem domain these methods did not lead to an optimal system and so were not used in testing going forward.
@@ -1709,7 +1716,7 @@ We tested each object set over an individual run of $200$ generations (with an i
 \begin{table}[h!]
 \begin{center}
 \includegraphics[scale=0.6,width=\linewidth]{ExpansionRestrictionTable}
-\caption[Restriction/Expansion Best-of-Run Values]{The best-of-run values for each object set tested, representing restricted and expanded spaces as compared to the standard ideal space.}
+\caption[Restriction/expansion best-of-run values]{The best-of-run values for each object set tested, representing restricted and expanded spaces as compared to the standard ideal space.}
 \end{center}
 \end{table}
 
