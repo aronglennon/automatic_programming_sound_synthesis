@@ -1,6 +1,6 @@
 \contentsline {subsection}{ABSTRACT}{iii}
 \contentsline {subsection}{ACKNOWLEDGEMENTS}{iv}
-\contentsline {subsection}{LIST OF TABLES}{viii}
+\contentsline {subsection}{LIST OF TABLES}{ix}
 \contentsline {subsection}{LIST OF FIGURES}{ix}
 \contentsline {chapter}{\numberline {I}INTRODUCTION}{1}
 \contentsline {section}{Motivations}{3}
@@ -9,57 +9,57 @@
 \contentsline {section}{Timbre}{7}
 \contentsline {section}{Sound Synthesis}{12}
 \contentsline {section}{Parameter Estimation}{22}
-\contentsline {section}{Meta-synthesis}{30}
-\contentsline {subsection}{Searching for Synthesis Algorithms}{38}
-\contentsline {section}{Summary}{52}
-\contentsline {chapter}{\numberline {III}APPROACH}{54}
-\contentsline {section}{Defining the Synthesis Topology Representation}{54}
-\contentsline {subsection}{Audio-Implementation Systems}{55}
-\contentsline {subsection}{Languages and Interoperability}{56}
-\contentsline {subsection}{Framing as a Genetic Programming Problem}{59}
-\contentsline {section}{Designing the Fitness Function}{69}
-\contentsline {subsection}{Timbre Feature Extraction}{69}
-\contentsline {subsection}{Timbral Similarity}{86}
-\contentsline {section}{Refining Search}{114}
-\contentsline {subsection}{State-of-the-Art Genetic Programming}{114}
-\contentsline {section}{Summary}{122}
-\contentsline {chapter}{\numberline {IV}EXPERIMENTAL DESIGN}{124}
-\contentsline {section}{Timbre Similarity Testing}{126}
-\contentsline {section}{Genetic Operator Variations}{127}
-\contentsline {section}{Target Sound Selection}{132}
-\contentsline {section}{Limiting Code Bloat and Promoting Parsimony}{139}
-\contentsline {section}{Initial Conditions and Selection Methods}{142}
-\contentsline {subsection}{Non-Standard Selection Methods}{148}
-\contentsline {section}{Expanding/Restricting the Searchable Region of Input Space}{152}
-\contentsline {section}{Generalization}{154}
-\contentsline {chapter}{\numberline {V}RESULTS}{159}
-\contentsline {section}{Finding an Optimal Similarity Measure for Time-Varying Timbre}{159}
-\contentsline {subsection}{Global Time Scaling}{160}
-\contentsline {subsection}{Sample Deletion}{161}
-\contentsline {subsection}{Extension of Stable Timbral Content}{163}
-\contentsline {subsection}{Introduction of New Timbral Content}{165}
-\contentsline {subsection}{Subsequence Reordering}{167}
-\contentsline {subsection}{Repetition Insertion}{168}
-\contentsline {subsection}{Looking Back at Our Results}{169}
-\contentsline {section}{Optimizing the Fitness Surface by Varying Genetic Operator Sets}{170}
-\contentsline {subsection}{Problematic Outputs}{171}
-\contentsline {subsection}{Results}{172}
-\contentsline {section}{Investigating Methods for Reducing Code Bloat and Promoting Parsimonious Solutions}{182}
-\contentsline {section}{Testing the Effects of Various Initial Conditions and Selection Mechanisms}{185}
-\contentsline {subsection}{Initial Conditions and Standard Selection Mechanisms}{185}
-\contentsline {subsection}{Non-standard Selection Mechanisms}{187}
-\contentsline {section}{Restricting/Expanding the Search Space}{188}
-\contentsline {subsection}{Analyzing the Best-of-Run Patches and Their Outputs}{190}
-\contentsline {subsubsection}{Feedback Delay}{190}
-\contentsline {subsubsection}{Adaptive Downsampling}{195}
-\contentsline {subsubsection}{Clipping Reverb}{199}
-\contentsline {section}{Measuring Generalization Ability over an Optimized System}{202}
-\contentsline {subsection}{Lion Roar}{203}
-\contentsline {subsection}{Freight Train}{206}
-\contentsline {subsection}{Metal Gong}{210}
-\contentsline {subsection}{Metallic Synth}{213}
-\contentsline {subsection}{Random Analog LFO Reverb Synth}{215}
-\contentsline {chapter}{\numberline {VI}CONCLUSION}{219}
-\contentsline {section}{Limitations}{221}
-\contentsline {section}{Future Work}{222}
-\contentsline {chapter}{BIBLIOGRAPHY}{224}
+\contentsline {section}{Meta-synthesis}{31}
+\contentsline {subsection}{Searching for Synthesis Algorithms}{39}
+\contentsline {section}{Summary}{54}
+\contentsline {chapter}{\numberline {III}APPROACH}{56}
+\contentsline {section}{Defining the Synthesis Topology Representation}{56}
+\contentsline {subsection}{Audio-Implementation Systems}{57}
+\contentsline {subsection}{Languages and Interoperability}{58}
+\contentsline {subsection}{Framing as a Genetic Programming Problem}{61}
+\contentsline {section}{Designing the Fitness Function}{71}
+\contentsline {subsection}{Timbre Feature Extraction}{72}
+\contentsline {subsection}{Timbral Similarity}{90}
+\contentsline {section}{Refining Search}{119}
+\contentsline {subsection}{State-of-the-Art Genetic Programming}{119}
+\contentsline {section}{Summary}{127}
+\contentsline {chapter}{\numberline {IV}EXPERIMENTAL DESIGN}{129}
+\contentsline {section}{Timbre Similarity Testing}{131}
+\contentsline {section}{Genetic Operator Variations}{132}
+\contentsline {section}{Target Sound Selection}{137}
+\contentsline {section}{Limiting Code Bloat and Promoting Parsimony}{145}
+\contentsline {section}{Initial Conditions and Selection Methods}{148}
+\contentsline {subsection}{Non-Standard Selection Methods}{155}
+\contentsline {section}{Expanding/Restricting the Searchable Region of Input Space}{159}
+\contentsline {section}{Generalization}{160}
+\contentsline {chapter}{\numberline {V}RESULTS}{166}
+\contentsline {section}{Finding an Optimal Similarity Measure for Time-Varying Timbre}{166}
+\contentsline {subsection}{Global Time Scaling}{167}
+\contentsline {subsection}{Sample Deletion}{168}
+\contentsline {subsection}{Extension of Stable Timbral Content}{170}
+\contentsline {subsection}{Introduction of New Timbral Content}{173}
+\contentsline {subsection}{Subsequence Reordering}{174}
+\contentsline {subsection}{Repetition Insertion}{176}
+\contentsline {subsection}{Looking Back at Our Results}{177}
+\contentsline {section}{Optimizing the Fitness Surface by Varying Genetic Operator Sets}{178}
+\contentsline {subsection}{Problematic Outputs}{178}
+\contentsline {subsection}{Results}{179}
+\contentsline {section}{Investigating Methods for Reducing Code Bloat and Promoting Parsimonious Solutions}{189}
+\contentsline {section}{Testing the Effects of Various Initial Conditions and Selection Mechanisms}{193}
+\contentsline {subsection}{Initial Conditions and Standard Selection Mechanisms}{193}
+\contentsline {subsection}{Non-standard Selection Mechanisms}{195}
+\contentsline {section}{Restricting/Expanding the Search Space}{196}
+\contentsline {subsection}{Analyzing the Best-of-Run Patches and Their Outputs}{197}
+\contentsline {subsubsection}{Feedback Delay}{198}
+\contentsline {subsubsection}{Adaptive Downsampling}{204}
+\contentsline {subsubsection}{Clipping Reverb}{208}
+\contentsline {section}{Measuring Generalization Ability over an Optimized System}{212}
+\contentsline {subsection}{Lion Roar}{213}
+\contentsline {subsection}{Freight Train}{217}
+\contentsline {subsection}{Metal Gong}{221}
+\contentsline {subsection}{Metallic Synth}{224}
+\contentsline {subsection}{Random Analog LFO Reverb Synth}{226}
+\contentsline {chapter}{\numberline {VI}CONCLUSION}{230}
+\contentsline {section}{Limitations}{232}
+\contentsline {section}{Future Work}{233}
+\contentsline {chapter}{BIBLIOGRAPHY}{235}
