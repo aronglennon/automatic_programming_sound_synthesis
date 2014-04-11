@@ -2642,9 +2642,8 @@ Smith, T.%
 \newblock
 \APACrefYearMonthDay{1981}{}{}.
 \newblock
-\BBOQ{}\APACrefatitle{{\textordfeminine}Identification of Common Molecular
-  Subsequences, {\textordmasculine} J}{{\textordfeminine}identification of
-  common molecular subsequences, {\textordmasculine} j}.\BBCQ{}
+\BBOQ{}\APACrefatitle{Identification of Common Molecular
+  Subsequences}{Identification of common molecular subsequences}.\BBCQ{}
 \newblock
 \APACjournalVolNumPages{Molecular Biology}{147}{}{195--197}.
 \PrintBackRefs{\CurrentBib}

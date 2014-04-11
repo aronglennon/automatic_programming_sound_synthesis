@@ -99,15 +99,15 @@ Warning--No address in Zhang:2006jo
 Warning--No publisher in Zils:2001bd
 You've used 117 entries,
             6361 wiz_defined-function locations,
-            1852 strings with 29847 characters,
-and the built_in function-call counts, 234129 in all, are:
-= -- 30338
+            1852 strings with 29808 characters,
+and the built_in function-call counts, 234104 in all, are:
+= -- 30335
 > -- 1787
-< -- 11200
-+ -- 11188
+< -- 11197
++ -- 11185
 - -- 236
-* -- 14590
-:= -- 41989
+* -- 14589
+:= -- 41982
 add.period$ -- 578
 call.type$ -- 117
 change.case$ -- 731
@@ -116,7 +116,7 @@ cite$ -- 319
 duplicate$ -- 5652
 empty$ -- 8647
 format.name$ -- 2791
-if$ -- 44768
+if$ -- 44765
 int.to.chr$ -- 0
 int.to.str$ -- 234
 missing$ -- 0
@@ -126,9 +126,9 @@ pop$ -- 5388
 preamble$ -- 1
 purify$ -- 560
 quote$ -- 0
-skip$ -- 15046
+skip$ -- 15044
 stack$ -- 0
-substring$ -- 12432
+substring$ -- 12429
 swap$ -- 3130
 text.length$ -- 428
 text.prefix$ -- 0
