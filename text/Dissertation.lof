@@ -26,7 +26,7 @@
 \contentsline {figure}{\numberline {23}{\ignorespaces From Max to Python}}{62}
 \contentsline {figure}{\numberline {24}{\ignorespaces A Max patch as a directed tree}}{64}
 \contentsline {figure}{\numberline {25}{\ignorespaces A Max patch as a set of DAGs}}{65}
-\contentsline {figure}{\numberline {26}{\ignorespaces Using loadmess objects to provide parameters to Max}}{66}
+\contentsline {figure}{\numberline {26}{\ignorespaces Using \textit {loadmess} objects to provide parameters to Max}}{66}
 \contentsline {figure}{\numberline {27}{\ignorespaces Removing send\texttildelow {} and receive\texttildelow {} objects}}{68}
 \contentsline {figure}{\numberline {28}{\ignorespaces Reducing a set of DAGs to a single DAG}}{69}
 \contentsline {figure}{\numberline {29}{\ignorespaces A single DAG with two \textit {dac\texttildelow {}} objects}}{70}
@@ -42,10 +42,10 @@
 \contentsline {figure}{\numberline {39}{\ignorespaces Timbre distance between centers}}{96}
 \contentsline {figure}{\numberline {40}{\ignorespaces Timbre distance between curves}}{97}
 \contentsline {figure}{\numberline {41}{\ignorespaces Timbre distance between time-shifted curves}}{98}
-\contentsline {figure}{\numberline {42}{\ignorespaces Timbre distance between time-warped curves}}{98}
-\contentsline {figure}{\numberline {43}{\ignorespaces Optimal warping path}}{99}
+\contentsline {figure}{\numberline {42}{\ignorespaces Timbre distance between time-warped curves}}{99}
+\contentsline {figure}{\numberline {43}{\ignorespaces Optimal warping path}}{100}
 \contentsline {figure}{\numberline {44}{\ignorespaces Proposed sequence similarity penalties}}{103}
-\contentsline {figure}{\numberline {45}{\ignorespaces Symmetric greedy removal after matching}}{104}
+\contentsline {figure}{\numberline {45}{\ignorespaces Symmetric greedy removal after matching}}{105}
 \contentsline {figure}{\numberline {46}{\ignorespaces Asymmetric greedy removal after matching in both directions}}{106}
 \contentsline {figure}{\numberline {47}{\ignorespaces Finding the optimal subsequence}}{116}
 \contentsline {figure}{\numberline {48}{\ignorespaces Removing the optimal subsequence}}{117}
@@ -67,51 +67,51 @@
 \contentsline {figure}{\numberline {63}{\ignorespaces Fitness-proportionate selection}}{153}
 \contentsline {figure}{\numberline {64}{\ignorespaces Ranking selection}}{154}
 \contentsline {figure}{\numberline {65}{\ignorespaces Tournament selection}}{155}
-\contentsline {figure}{\numberline {66}{\ignorespaces Double tournament selection}}{157}
-\contentsline {figure}{\numberline {67}{\ignorespaces Evolving lion roar time-frequency representation}}{165}
+\contentsline {figure}{\numberline {66}{\ignorespaces Double tournament selection}}{156}
+\contentsline {figure}{\numberline {67}{\ignorespaces Evolving lion roar time-frequency representation}}{164}
 \contentsline {figure}{\numberline {68}{\ignorespaces Evolving freight train time-frequency representation}}{165}
 \contentsline {figure}{\numberline {69}{\ignorespaces Evolving metal gong time-frequency representation}}{166}
-\contentsline {figure}{\numberline {70}{\ignorespaces Evolving metallic synth time-frequency representation}}{167}
+\contentsline {figure}{\numberline {70}{\ignorespaces Evolving metallic synth time-frequency representation}}{166}
 \contentsline {figure}{\numberline {71}{\ignorespaces Random analog LFO reverb time-frequency representation}}{167}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {72}{\ignorespaces Global time scaling results}}{170}
-\contentsline {figure}{\numberline {73}{\ignorespaces Sample deletion results}}{172}
-\contentsline {figure}{\numberline {74}{\ignorespaces Extension of stable timbral content results}}{174}
-\contentsline {figure}{\numberline {75}{\ignorespaces Content introduction results}}{176}
-\contentsline {figure}{\numberline {76}{\ignorespaces Subsequence reordering results}}{178}
-\contentsline {figure}{\numberline {77}{\ignorespaces Repetition insertion results}}{179}
-\contentsline {figure}{\numberline {78}{\ignorespaces $0.75$ Crossover and $0.25$ subtree mutation NSC plots}}{184}
-\contentsline {figure}{\numberline {79}{\ignorespaces $0.75$ Crossover and $0.25$ point mutation NSC plots}}{185}
+\contentsline {figure}{\numberline {72}{\ignorespaces Global time scaling results}}{169}
+\contentsline {figure}{\numberline {73}{\ignorespaces Sample deletion results}}{171}
+\contentsline {figure}{\numberline {74}{\ignorespaces Extension of stable timbral content results}}{173}
+\contentsline {figure}{\numberline {75}{\ignorespaces Content introduction results}}{175}
+\contentsline {figure}{\numberline {76}{\ignorespaces Subsequence reordering results}}{177}
+\contentsline {figure}{\numberline {77}{\ignorespaces Repetition insertion results}}{178}
+\contentsline {figure}{\numberline {78}{\ignorespaces $0.75$ Crossover and $0.25$ subtree mutation NSC plots}}{183}
+\contentsline {figure}{\numberline {79}{\ignorespaces $0.75$ Crossover and $0.25$ point mutation NSC plots}}{184}
 \contentsline {figure}{\numberline {80}{\ignorespaces $0.25$ Crossover and $0.75$ point mutation NSC plots}}{186}
-\contentsline {figure}{\numberline {81}{\ignorespaces $0.5$ Crossover, $0.25$ point mutation, and $0.25$ subtree mutation NSC plots}}{188}
-\contentsline {figure}{\numberline {82}{\ignorespaces $0.5$ Crossover, $0.25$ reproduction, and $0.25$ subtree mutation NSC plots}}{189}
-\contentsline {figure}{\numberline {83}{\ignorespaces $0.25$ Crossover, $0.25$ reproduction, and $0.5$ subtree mutation NSC plots}}{190}
+\contentsline {figure}{\numberline {81}{\ignorespaces $0.5$ Crossover, $0.25$ point mutation, and $0.25$ subtree mutation NSC plots}}{187}
+\contentsline {figure}{\numberline {82}{\ignorespaces $0.5$ Crossover, $0.25$ reproduction, and $0.25$ subtree mutation NSC plots}}{188}
+\contentsline {figure}{\numberline {83}{\ignorespaces $0.25$ Crossover, $0.25$ reproduction, and $0.5$ subtree mutation NSC plots}}{189}
 \contentsline {figure}{\numberline {84}{\ignorespaces Original feedback delay Max patch}}{201}
 \contentsline {figure}{\numberline {85}{\ignorespaces Original feedback delay time-frequency representation}}{202}
-\contentsline {figure}{\numberline {86}{\ignorespaces Feedback delay best-of-run patch}}{205}
-\contentsline {figure}{\numberline {87}{\ignorespaces Best-of-run feedback delay time-frequency representation}}{206}
-\contentsline {figure}{\numberline {88}{\ignorespaces Original adaptive downsampling Max patch}}{207}
-\contentsline {figure}{\numberline {89}{\ignorespaces Original adaptive downsampling time-frequency representation}}{208}
-\contentsline {figure}{\numberline {90}{\ignorespaces Adaptive downsampling best-of-run patch}}{209}
-\contentsline {figure}{\numberline {91}{\ignorespaces Best-of-run adaptive downsampling time-frequency representation}}{210}
-\contentsline {figure}{\numberline {92}{\ignorespaces Zooming in on the best-of-run adaptive downsampling time-frequency representation}}{210}
-\contentsline {figure}{\numberline {93}{\ignorespaces Original clipping reverb Max patch}}{211}
-\contentsline {figure}{\numberline {94}{\ignorespaces Original clipping reverb sawtooth time-frequency representation}}{212}
+\contentsline {figure}{\numberline {86}{\ignorespaces Feedback delay best-of-run patch}}{204}
+\contentsline {figure}{\numberline {87}{\ignorespaces Best-of-run feedback delay time-frequency representation}}{205}
+\contentsline {figure}{\numberline {88}{\ignorespaces Original adaptive downsampling Max patch}}{206}
+\contentsline {figure}{\numberline {89}{\ignorespaces Original adaptive downsampling time-frequency representation}}{207}
+\contentsline {figure}{\numberline {90}{\ignorespaces Adaptive downsampling best-of-run patch}}{208}
+\contentsline {figure}{\numberline {91}{\ignorespaces Best-of-run adaptive downsampling time-frequency representation}}{209}
+\contentsline {figure}{\numberline {92}{\ignorespaces Zooming in on the best-of-run adaptive downsampling time-frequency representation}}{209}
+\contentsline {figure}{\numberline {93}{\ignorespaces Original clipping reverb Max patch}}{210}
+\contentsline {figure}{\numberline {94}{\ignorespaces Original clipping reverb sawtooth time-frequency representation}}{211}
 \contentsline {figure}{\numberline {95}{\ignorespaces Clipping reverb best-of-run patch}}{212}
-\contentsline {figure}{\numberline {96}{\ignorespaces Best-of-run clipping reverb time-frequency representation}}{213}
-\contentsline {figure}{\numberline {97}{\ignorespaces Lion roar best-of-run patch}}{217}
-\contentsline {figure}{\numberline {98}{\ignorespaces Best-of-run evolving lion roar time-frequency representation}}{218}
-\contentsline {figure}{\numberline {99}{\ignorespaces Target evolving lion roar time-frequency representation}}{219}
-\contentsline {figure}{\numberline {100}{\ignorespaces Freight train best-of-run patch}}{221}
-\contentsline {figure}{\numberline {101}{\ignorespaces Best-of-run freight train time-frequency representation}}{222}
-\contentsline {figure}{\numberline {102}{\ignorespaces Target freight train time-frequency representation}}{223}
-\contentsline {figure}{\numberline {103}{\ignorespaces Metal gong best-of-run patch}}{225}
-\contentsline {figure}{\numberline {104}{\ignorespaces Best-of-run metal gong time-frequency representation}}{226}
-\contentsline {figure}{\numberline {105}{\ignorespaces Target metal gong time-frequency representation}}{226}
-\contentsline {figure}{\numberline {106}{\ignorespaces Metallic synth best-of-run patch}}{227}
-\contentsline {figure}{\numberline {107}{\ignorespaces Best-of-run evolving metallic synth time-frequency representation}}{228}
-\contentsline {figure}{\numberline {108}{\ignorespaces Target evolving metallic synth time-frequency representation}}{228}
-\contentsline {figure}{\numberline {109}{\ignorespaces Random analog LFO reverb best-of-run patch}}{230}
-\contentsline {figure}{\numberline {110}{\ignorespaces Best-of-run random analog reverb time-frequency representation}}{231}
-\contentsline {figure}{\numberline {111}{\ignorespaces Target random analog reverb time-frequency representation}}{232}
+\contentsline {figure}{\numberline {96}{\ignorespaces Best-of-run clipping reverb time-frequency representation}}{212}
+\contentsline {figure}{\numberline {97}{\ignorespaces Lion roar best-of-run patch}}{215}
+\contentsline {figure}{\numberline {98}{\ignorespaces Best-of-run evolving lion roar time-frequency representation}}{216}
+\contentsline {figure}{\numberline {99}{\ignorespaces Target evolving lion roar time-frequency representation}}{217}
+\contentsline {figure}{\numberline {100}{\ignorespaces Freight train best-of-run patch}}{218}
+\contentsline {figure}{\numberline {101}{\ignorespaces Best-of-run freight train time-frequency representation}}{219}
+\contentsline {figure}{\numberline {102}{\ignorespaces Target freight train time-frequency representation}}{220}
+\contentsline {figure}{\numberline {103}{\ignorespaces Metal gong best-of-run patch}}{222}
+\contentsline {figure}{\numberline {104}{\ignorespaces Best-of-run metal gong time-frequency representation}}{223}
+\contentsline {figure}{\numberline {105}{\ignorespaces Target metal gong time-frequency representation}}{223}
+\contentsline {figure}{\numberline {106}{\ignorespaces Metallic synth best-of-run patch}}{224}
+\contentsline {figure}{\numberline {107}{\ignorespaces Best-of-run evolving metallic synth time-frequency representation}}{225}
+\contentsline {figure}{\numberline {108}{\ignorespaces Target evolving metallic synth time-frequency representation}}{225}
+\contentsline {figure}{\numberline {109}{\ignorespaces Random analog LFO reverb best-of-run patch}}{227}
+\contentsline {figure}{\numberline {110}{\ignorespaces Best-of-run random analog reverb time-frequency representation}}{228}
+\contentsline {figure}{\numberline {111}{\ignorespaces Target random analog reverb time-frequency representation}}{229}
 \addvspace {10\p@ }
