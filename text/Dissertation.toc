@@ -20,8 +20,7 @@
 \contentsline {section}{Designing the Fitness Function}{73}
 \contentsline {subsection}{Timbre Feature Extraction}{74}
 \contentsline {subsection}{Timbral Similarity}{93}
-\contentsline {section}{Refining Search}{122}
-\contentsline {subsection}{State-of-the-Art Genetic Programming}{122}
+\contentsline {section}{Refining Search Using Recent Advances in Genetic Programming}{122}
 \contentsline {section}{Summary}{130}
 \contentsline {chapter}{\numberline {IV}EXPERIMENTAL DESIGN}{132}
 \contentsline {section}{Timbral Similarity Testing}{134}
