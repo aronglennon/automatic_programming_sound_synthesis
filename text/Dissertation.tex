@@ -72,6 +72,8 @@ New York University\\
 2014\\
 \end{center}
 \end{titlepage}
+\begin{flushleft}				% generates left-aligned paragraphs
+\setlength{\parindent}{30pt}	% This starts every paragraph with an indent
 
 \begin{copyrightpage}
 \thispagestyle{empty}
@@ -82,31 +84,23 @@ Copyright \copyright{} 2014 Aron Glennon
 \end{center}
 \vspace*{\fill}
 \end{copyrightpage}
+\clearpage
 \pagenumbering{roman}			% roman numbering until introduction	
 \doublespacing
-% Abstract
-  \titlespacing*{\chapter}
-  {0pt}{40pt}{40pt}
-\renewcommand\abstractname{\normalfont \large ABSTRACT}
-\begin{abstract}
-\thispagestyle{plain}
-\setcounter{page}{3}
-\addcontentsline{toc}{subsection}{ABSTRACT}
-\vspace{10pt}
-\hspace*{\parindent}The advent of the computer has provided composers with the ability to produce absolutely any sonic material within the human range of hearing. However, this power comes with a fundamental caveat: the composer must communicate to the computer what sonic material they are interested in generating, and this process is a non-trivial task. It is primarily the case that music composition software is written to provide an interface to the composer that defines boundaries within which the composer may generate material. While these interfaces have proven effective in producing a large variety of material, the paradigm of software developers providing specific boundaries for the composer to work within is not ideal and certainly not the only possibility. 
-
-The motivation of this research is to explore a different paradigm, where the composer communicates to the software exactly what sort of timbral material they are interested in generating and the software produces an appropriate interface to help them realize that. It is based on the idea that the most natural way for the composer to communicate with a computer is via describing by example.
-
-The proposed system accepts a short audio file with timbral content that the composer wishes to begin working with, finds a synthesis algorithm able to produce like timbres via an intelligent search algorithm, and constructs that algorithm within the Max visual programming environment for the composer to use. An appropriate intelligent search method and parameterization is proposed, which includes a definition of a timbral sequence similarity measure used to assess individual algorithms and steer the search path through synthesis algorithm space.
-\end{abstract}
 
 % Acknowledgements
 \renewcommand\abstractname{\normalfont \large ACKNOWLEDGEMENTS}
-\begin{abstract}
+\newgeometry{top = 2.0in}
+\doublespacing
 \thispagestyle{plain}
-\setcounter{page}{4}
+\setcounter{page}{3}
 \addcontentsline{toc}{subsection}{ACKNOWLEDGEMENTS}
-\vspace{10pt}
+\begingroup
+\begin{center}
+    \fontsize{14pt}{17pt}\selectfont
+    ACKNOWLEDGEMENTS
+\end{center}
+\endgroup
 \hspace*{\parindent}This work could not have been completed without the patience and support of many different individuals. I would like to specifically thank:
 
 My advisor Prof. Robert Rowe for providing me with the appropriate amount of freedom to follow my instincts when they were strong and the appropriate amount of guidance when I led myself to forks in the road.
@@ -119,15 +113,17 @@ Kyle Needham and Ryan Glennon for cultivating my interest in music in the first 
 
 My peers in the NYU Music Technology doctoral program, but specifically Jon Forsyth and Eric Humphrey: Jon, for all of the conversations we had that had nothing to do with the PhD process, Music Tech, MIR, or Machine Learning; Eric, for all of the conversations that did.
 
-Bill Lord, Mason Smith, Michael Cagliuso, David Leveroni, Mariel Matero, and Andy Melnyk: Without the parts of my life that made me feel like a normal human being, I couldn't have completed a task that feels so not-normal.
+Bill Lord, Mason Smith, Michael Cagliuso, David Leveroni, Mariel Matero, and Andy Melnyk: Without the parts of my life that made me feel like a normal human being, \newgeometry{top = 1.25in}\doublespacing
+\setlength{\parindent}{0pt}	% This starts every paragraph with an indent
+I couldn't have completed a task that feels so not-normal.
+\setlength{\parindent}{30pt}	% This starts every paragraph with an indent
 
 My former DST students: Thank you for convincing me that academia is where I ultimately belong.
 
 My parents, parents-in-law, sisters- and brother-in-law, and the rest of my friends and family for always reminding me of what matters most in life.
 
 Most importantly, my wife Lauren, and my children Henry, Jack, and Charles. I could write ten dissertations and still not be able to fully explore the complexity nor explain the true gravity of my love for you.
-\end{abstract}
-
+\clearpage
 % In Memory of
 \begin{center}
 \vspace*{\fill}
@@ -141,7 +137,7 @@ In memory of Marguerite Danico (1926-2009)\\ and Bruce Singleton (1971-2011)
 \setcounter{secnumdepth}{0}	% level of sections that are numbered
 
 \selectfont			
-\setcounter{page}{6}
+\setcounter{page}{5}
 % list doc, figures, tables
 \titleformat{\chapter}[display]
 
@@ -150,12 +146,11 @@ In memory of Marguerite Danico (1926-2009)\\ and Bruce Singleton (1971-2011)
 
 \doublespacing
 
-\newpage
 \renewcommand*\listtablename{LIST OF TABLES}
 \addcontentsline{toc}{subsection}{LIST OF TABLES}
 \listoftables
 
-
+\cleardoublepage
 \renewcommand*\listfigurename{LIST OF FIGURES}
 \addcontentsline{toc}{subsection}{LIST OF FIGURES} 
 \listoffigures
@@ -163,10 +158,6 @@ In memory of Marguerite Danico (1926-2009)\\ and Bruce Singleton (1971-2011)
 % we define QuarterPage for the beginning of all chapters
 \newlength{\QuarterPage}
 \setlength{\QuarterPage}{1.0in}
-
-\begin{flushleft}				% generates left-aligned paragraphs
-\setlength{\parindent}{30pt}	% This starts every paragraph with an indent
-
 				
 \vspace*{\QuarterPage}
 \newpage
@@ -1932,7 +1923,7 @@ This should be compared to the target sound's time-frequency representation (sho
 
 There are a few important things to notice when analyzing these representations. First, the wide-band energy bursts observed in the target time-frequency representation were not captured by the best-of-run patch. Also, the best-of-run timbre is relatively constant outside of very short time scales, whereas the target's timbre evolves slowly over time. 
 
-We were able to show, using contrived targets with repetitive but distinct timbral variation, that the system is able to capture timbral evolution on short time scales. The evolving lion roar target is the first example we've tested with significant variation over a much longer time scale. It seems that the system does not do as well capturing evolution on this level. This is likely due to the limitations of the object set provided to the system for these generalizations tests. Specifically, the object set only contains objects which either generate or process signal data and mostly rely on LFOs to produce timbral variation over non-local timescales. Given the results from this test, it is clear that the object set would benefit from envelope objects that are able to produce non-periodic and slowly evolving timbral phenomena. The system as currently constructed is not able to work objects of this type in Max and incorporating such objects would cause significant changes in the codebase. Therefore, we leave this to future work.
+We were able to show, using contrived targets with repetitive but distinct timbral variation, that the system is able to capture timbral evolution on short time scales. The evolving lion roar target is the first example we've tested with significant variation over a much longer time scale. It seems that the system does not do as well capturing evolution on this level. One could segment trajectories and find optimal parameterizations to each for every topology tested, but this would result in the problem that Puckette faced in interpolating between parameter sets \cite{Puckette:2004zp}. Instead, one would ideally want to enforce the `interpolation' within the search process. However, this is not currently possible given the limitations of the object set provided to the system. Specifically, the object set only contains objects which either generate or process signal data and mostly rely on LFOs to produce timbral variation over non-local timescales. Given the results from this test, it is clear that the object set would benefit from envelope objects that are able to produce non-periodic and slowly evolving timbral phenomena. The system as currently constructed is not able to work with objects of this type in Max and incorporating such objects would cause significant changes in the codebase. Therefore, we leave this to future work.
 
 \subsection{Freight Train}
 The best-of-run patch achieved a timbral similarity score of $0.971$. The patch is shown in Figure 100 and the accompanying time-frequency representation of its output can be seen in Figure 101.
@@ -2065,7 +2056,9 @@ A second limitation on this study is a consequence of the solution to the first.
 \section{Future Work}
 This study only cracks the surface of what can and should be done to achieve an optimal meta-synthesis system. Aside from finding solutions to the aforementioned limitations (most notably, the runtime of a single system test), the generalization tests show that there is much work to be done to produce solutions that capture the timbral evolution of targets with distinct multi-scale evolutions.
 
-One of the most pressing needs for the system is the ability for it to be able to use non-signal processing Max objects to construct patches (e.g. envelope-producing objects). This improvement would require an update to the syntactic rules enforced when both generating patches and having them undergo genetic mutation and crossover. The system would also benefit from event structuring within Max, such that envelope and other control-rate messages could be sent at specific points in time rather than getting sent only at the beginning of the audio processing (as \textit{loadmess} messages currently do).
+One of the most pressing needs for the system is the ability for it to be able to use non-signal processing Max objects to construct patches (e.g. envelope-producing objects). This improvement would require an update to the syntactic rules enforced when both generating patches and having them undergo genetic mutation and crossover. It would likely also require a regularization term in the fitness function that penalizes patches whose envelope functions are too complex (and therefore run the risk of overfitting the targets). 
+
+The system would also benefit from event structuring within Max, such that envelope and other control-rate messages could be sent at specific points in time rather than getting sent only at the beginning of the audio processing (as \textit{loadmess} messages currently do).
 
 Another interesting path for investigation is reformulating the fitness function to measure timbral sequence similarity on multiple temporal scales, which could be done by applying SIC-DPLA on different feature sequences, each with a different temporal resolution, and then combining similarity measures to produce an overall score.
 

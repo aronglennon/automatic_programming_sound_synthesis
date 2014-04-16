@@ -1,0 +1,65 @@
+% Dissertation
+% 06/28/2013
+% (Use \include{filename} in diss file
+
+\documentclass[12pt]{report} 	% report used for dissertations
+
+\usepackage{anysize} 		% allows me to set margins
+\usepackage{indentfirst}
+\usepackage{apacite}		% for apa style
+\usepackage{graphicx}		% for graphics
+\usepackage{times}
+\usepackage{mathtools}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{afterpage}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage[normalem]{ulem}
+
+\titleformat{\chapter}[display]
+  {\normalfont\fontfamily{ptm}\fontsize{14}{17}\selectfont\filcenter}{CHAPTER \thechapter}{0pt}{}
+
+\usepackage{chngcntr}
+\renewcommand\thechapter{\Roman{chapter}}
+
+%\marginsize{1.5in}{1.5in}{1.25in}{1.25in}	% left, right, top, bottom
+\usepackage[paperwidth=8.5in, paperheight=11in]{geometry}
+\geometry{top = 0.5in, left = 1.5in, right = 1.5in, bottom=1.25in, footskip=0.5in}
+\begin{document}
+\pagenumbering{roman}
+
+\doublespacing
+\vspace{20pt}
+% Acknowledgements
+\renewcommand\abstractname{\normalfont \large ACKNOWLEDGEMENTS}
+\begin{abstract}
+\thispagestyle{plain}
+\setcounter{page}{3}
+\addcontentsline{toc}{subsection}{ACKNOWLEDGEMENTS}
+\vspace{10pt}
+\begin{flushleft}				% generates left-aligned paragraphs
+\setlength{\parindent}{30pt}	% This starts every paragraph with an indent
+
+
+\hspace*{\parindent}This work could not have been completed without the patience and support of many different individuals. I would like to specifically thank:
+
+My advisor Prof. Robert Rowe for providing me with the appropriate amount of freedom to follow my instincts when they were strong and the appropriate amount of guidance when I led myself to forks in the road.
+
+My adopted advisor (though I'm not sure who adopted who) Prof. Juan Bello for always pushing me to do more, for always being there to talk through even the most wild ideas, and for nurturing my interest in both Music Information Retrieval and Machine Learning. While I always looked to Juan for advice and viewed him as a mentor, I always felt that he was more of a friend than anything.
+
+Adam Rokhsar for the almost-daily conversations about what I was really after and why I had chosen to pursue it via academia, and for the constant reminders (sometimes verbal, sometimes through collaboration) that I am first and foremost a composer.
+
+Kyle Needham and Ryan Glennon for cultivating my interest in music in the first place. Whenever I hear something new that I think will change the world, I always wonder what you both would think of it.
+
+My peers in the NYU Music Technology doctoral program, but specifically Jon Forsyth and Eric Humphrey: Jon, for all of the conversations we had that had nothing to do with the PhD process, Music Tech, MIR, or Machine Learning; Eric, for all of the conversations that did.
+
+Bill Lord, Mason Smith, Michael Cagliuso, David Leveroni, Mariel Matero, and Andy Melnyk: Without the parts of my life that made me feel like a normal human being, I couldn't have completed a task that feels so not-normal.
+
+My former DST students: Thank you for convincing me that academia is where I ultimately belong.
+
+My parents, parents-in-law, sisters- and brother-in-law, and the rest of my friends and family for always reminding me of what matters most in life.
+
+Most importantly, my wife Lauren, and my children Henry, Jack, and Charles. I could write ten dissertations and still not be able to fully explore the complexity nor explain the true gravity of my love for you.
+\end{abstract}
+\end{document}
