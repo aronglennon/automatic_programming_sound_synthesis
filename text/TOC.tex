@@ -1,0 +1,213 @@
+% Dissertation
+% 06/28/2013
+% (Use \include{filename} in diss file
+
+\documentclass[12pt]{report} 	% report used for dissertations
+
+\usepackage{anysize} 		% allows me to set margins
+\usepackage{indentfirst}
+\usepackage{apacite}		% for apa style
+\usepackage{graphicx}		% for graphics
+\usepackage{times}
+\usepackage{mathtools}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{afterpage}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage[normalem]{ulem}
+\pagenumbering{roman}			% roman numbering until introduction	
+\setcounter{page}{6}
+\titleformat{\chapter}[display]
+  {\normalfont\fontfamily{ptm}\fontsize{14}{17}\selectfont\filcenter}{CHAPTER \thechapter}{0pt}{}
+  \titlespacing*{\chapter}
+  {0pt}{28pt}{40pt}
+\titleformat{\section}
+  {\normalfont\fontfamily{ptm}\fontsize{14}{17}\selectfont}{\thesubsection}{1em}{\uline}
+\titleformat{\subsection}
+  {\normalfont\fontfamily{ptm}\fontsize{14}{17}\selectfont\filcenter}{\thesubsubsection}{1em}{\uline}
+ \titleformat{\subsubsection}
+  {\normalfont\fontfamily{ptm}\fontsize{14}{17}\selectfont}{\thesubsubsection}{1em}{}
+
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}
+\numberwithin{equation}{chapter}
+
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+\counterwithout{equation}{chapter}
+
+\renewcommand\thechapter{\Roman{chapter}}
+
+%\marginsize{1.5in}{1.5in}{1.25in}{1.25in}	% left, right, top, bottom
+\usepackage[paperwidth=8.5in, paperheight=11in]{geometry}
+\geometry{top = 1.25in, left = 1.5in, right = 1.5in, bottom=1.25in, footskip=0.5in}
+\begin{document}
+
+\newgeometry{top=2.0in}
+
+\begingroup
+\begin{center}
+    \fontsize{14pt}{17pt}\selectfont
+    TABLE OF CONTENTS
+\end{center}
+\endgroup
+\vspace{36pt}
+\\
+\\
+\noindent ACKNOWLEDGEMENTS \hfill iii
+\\
+\\
+LIST OF TABLES \hfill ix
+\\
+\\
+LIST OF FIGURES \hfill x
+\\
+\\
+CHAPTER
+\\
+\\
+\indent \indent I \indent INTRODUCTION \hfill 1
+\\
+\indent \indent \indent \indent Motivations \hfill 3
+\\
+\indent \indent \indent \indent Overview \hfill 4
+\\
+\\
+\indent \indent II \hspace{11pt} PRIOR WORK \hfill 6
+\\
+\\
+\indent \indent \indent \indent Timbre \hfill 6
+\\
+\indent \indent \indent \indent Sound Synthesis \hfill 11
+\\
+\indent \indent \indent \indent Parameter Estimation \hfill 21
+\\
+\indent \indent \indent \indent Meta-Synthesis \hfill 30
+\\
+\indent \indent \indent \indent \indent Searching for Synthesis Algorithms \hfill 38 \\
+\indent \indent \indent \indent Summary \hfill 53
+\\
+\\
+\indent \indent III \hspace{6pt}  APPROACH \hfill 55
+\\
+\\
+\indent \indent \indent \indent Defining the Synthesis Topology Representation \hfill 55
+\\
+\indent \indent \indent \indent \indent Audio-Implementation Systems \hfill 56
+\\
+\indent \indent \indent \indent \indent Languages and Iteroperability \hfill 57
+\\
+\indent \indent \indent \indent \indent Framing as a Genetic Programming Problem \hfill 60
+\\
+\indent \indent \indent \indent Designing the Fitness Function \hfill 70
+\\
+\indent \indent \indent \indent \indent Timbre Feature Extraction \hfill 71
+\\
+\indent \indent \indent \indent \indent Timbre Similarity \hfill 89
+\\
+\indent \indent \indent \indent Refining Search Using State-of-theArt Genetic Programming \hfill 117
+\\
+\indent \indent \indent \indent Summary \hfill 125
+\\
+\\
+\strut\hfill continued
+\newgeometry{top = 1.25in}
+\\
+\\
+\\
+\indent \indent IV \hspace{6pt}  EXPERIMENTAL DESIGN \hfill 127
+\\
+\\
+\indent \indent \indent \indent Timbre Similarity Testing \hfill 129
+\\
+\indent \indent \indent \indent Genetic Operator Variations \hfill 130
+\\
+\indent \indent \indent \indent Target Sound Selection \hfill 136
+\\
+\indent \indent \indent \indent Limiting Code Bloat and Promoting Parsimony \hfill 142
+\\
+\indent \indent \indent \indent Initial Conditions and Selection Methods \hfill 145
+\\
+\indent \indent \indent \indent \indent Non-Standard Selection Methods \hfill 152
+\\
+\indent \indent \indent \indent Expanding/Restricting the Searchable Region of Input Space \hfill 156
+\\
+\indent \indent \indent \indent Generalization \hfill 157
+\\
+\\
+\indent \indent V \hspace{10pt}  RESULTS \hfill 162
+\\
+\\
+\indent \indent \indent \indent Finding an Optimal Similarity Measure for Time-Varying 
+\\ 
+\indent \indent \indent \indent \indent Timbre \hfill 162
+\\
+\indent \indent \indent \indent \indent Global Time Scaling \hfill 163
+\\
+\indent \indent \indent \indent \indent Sample Deletion \hfill 164
+\\
+\indent \indent \indent \indent \indent Extension of Stable Timbral Content  \hfill 166
+\\
+\indent \indent \indent \indent \indent Introduction of New Timbral Content \hfill 169
+\\
+\indent \indent \indent \indent \indent Subsequence Reordering \hfill 170
+\\
+\indent \indent \indent \indent \indent Repetition Insertion \hfill 172
+\\
+\indent \indent \indent \indent \indent Looking Back at Our Results \hfill 173
+\\
+\indent \indent \indent \indent Optimizing the Fitness Surface by Varying Genetic Operator \\
+\indent \indent \indent \indent  \indent Sets \hfill 174
+\\
+\indent \indent \indent \indent \indent Problematic Outputs \hfill 174
+\\
+\indent \indent \indent \indent \indent Results \hfill 176
+\\
+\indent \indent \indent \indent Investigating Methods for Reducing Code Bloat and Promoting \\ \indent \indent \indent \indent \indent Parsimonious Solutions \hfill 185
+\\
+\indent \indent \indent \indent Testing the Effects of Various Initial Conditions and Selection \\ \indent \indent \indent \indent  \indent Mechanisms \hfill 189
+\\
+\indent \indent \indent \indent \indent Initial Conditions and Standard Selection Mechanisms \hfill 189
+\\
+\indent \indent \indent \indent \indent Non-Standard Selection Mechanisms \hfill 191
+\\
+\indent \indent \indent \indent Restricting/Expanding the Search Space \hfill 192
+\\
+\indent \indent \indent \indent \indent Analyzing the Best-of-Run Patches and Their Outputs \hfill 194
+\\
+\indent \indent \indent \indent \indent \indent Feedback Delay \hfill 194
+\\
+\indent \indent \indent \indent \indent \indent Adaptive Downsampling \hfill 199
+\\
+\indent \indent \indent \indent \indent \indent Clipping Reverb \hfill 204
+\\
+\indent \indent \indent \indent Measuring Generalization Ability over an Optimized System \hfill 207
+\\
+\indent \indent \indent \indent \indent Lion Roar \hfill 208
+\\
+\indent \indent \indent \indent \indent Freight Train \hfill 211
+\\
+\\
+\strut\hfill continued
+\\
+\indent \indent \indent \indent \indent Metal Gong \hfill 215
+\\
+\indent \indent \indent \indent \indent Metallic Synth \hfill 218
+\\
+\indent \indent \indent \indent \indent Random Analog LFO Reverb Synth \hfill 220
+\\
+\\
+\indent \indent VI \hspace{6pt}  CONCLUSION \hfill 224
+\\
+\\
+\indent \indent \indent \indent Limitations \hfill 226
+\\
+\indent \indent \indent \indent Future Work \hfill 227
+\\
+\\
+BIBLIOGRAPHY \hfill 229
+\clearpage
+
+\end{document}
