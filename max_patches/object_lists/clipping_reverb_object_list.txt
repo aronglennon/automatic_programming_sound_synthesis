@@ -1,7 +1,0 @@
-dac~|signal:0.0:1.0/
-loadmess|/int float bool
-*~|signal:-1.0:1.0'signal float:1.0:100.0/signal
-saw~|signal float:-1.0:50.0/signal
-nw.gverb~|signal:-1.0:1.0'signal float:100:3000.0/signal
-+~|signal:-1.0:1.0'signal float:-1.0:1.0/signal
-sah~|signal:-1.0:1.0'signal:-1.0:1.0/signal

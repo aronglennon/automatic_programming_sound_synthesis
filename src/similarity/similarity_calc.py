@@ -102,7 +102,7 @@ def get_DPLA(features1, features2):
             elif max_index == 1:
                 warp_extension_matrix[i][j] = warp_extension_matrix[i][j-1] + 1
                 path_trace_matrix[i][j] = [i,j-1]
-            # right was chosen
+            # down was chosen
             elif max_index == 2:
                 warp_extension_matrix[i][j] = warp_extension_matrix[i-1][j] + 1
                 path_trace_matrix[i][j] = [i-1,j]
